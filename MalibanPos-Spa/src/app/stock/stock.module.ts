@@ -13,8 +13,9 @@ import { StockadjustmentdetailComponent } from './stockadjustmentdetail/stockadj
 import { IconSpacerModule } from '../iconspacer.module';
 import { StockadjustmentapproveComponent } from './stockadjustmentapprove/stockadjustmentapprove.component';
 import { StockadjustmentconfirmComponent } from './stockadjustmentconfirm/stockadjustmentconfirm.component';
+import { StocktransferComponent } from './stocktransfer/stocktransfer.component';
 @NgModule({
-  declarations: [AddstockComponent, StocklistComponent, StockadjustmentComponent, StockadjustmentlistComponent, StockadjustmentdetailComponent, StockadjustmentapproveComponent, StockadjustmentconfirmComponent],
+  declarations: [AddstockComponent, StocklistComponent, StockadjustmentComponent, StockadjustmentlistComponent, StockadjustmentdetailComponent, StockadjustmentapproveComponent, StockadjustmentconfirmComponent, StocktransferComponent],
   imports: [
     CommonModule,
     StockRoutingModule,
