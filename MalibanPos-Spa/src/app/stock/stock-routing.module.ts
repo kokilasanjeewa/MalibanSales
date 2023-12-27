@@ -9,6 +9,7 @@ import { StockAdjustmentListResolver } from '../_resolvers/stockadjustmentlist.r
 import { StockadjustmentdetailComponent } from './stockadjustmentdetail/stockadjustmentdetail.component';
 import { StockAdjustmentDetailResolver } from '../_resolvers/stockadjustmentdetail.resolver';
 import { StockadjustmentapproveComponent } from './stockadjustmentapprove/stockadjustmentapprove.component';
+import { StocktransferComponent } from './stocktransfer/stocktransfer.component';
 
 
 const routes: Routes = [
@@ -33,6 +34,10 @@ const routes: Routes = [
     path: 'stockadjustmentdetail/:stockadjustmentHeaderId',
     component: StockadjustmentdetailComponent,
     resolve: { stockadjustmentDetails: StockAdjustmentDetailResolver }
+  },
+  {
+    path: 'stocktransfer',
+    component: StocktransferComponent,
   },
   {
     path: 'stocklist',
