@@ -1,0 +1,7 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item" *ngFor="let value of displayValue; let i = index" [ngClass]="getClassMap(i)"><a [routerLink]="['/',value]" >{{value}}</a></li>
+  </ol>
+</nav>
+
+

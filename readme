@@ -1,0 +1,118 @@
+ bitbucket Q$) / - & /&9uJjGeJ
+
+ app code Anx4JKfEbZPjCMD2hGJk
+
+
+ {
+     "billDate": ,
+     "orderObj": ,
+     "customer": {
+         "number": ,
+         "fullName": ,
+     },
+     "orderDetail": [{
+             "productName": ,
+             "quantity": ,
+             "returnQuantity": ,
+             "salePrice": ,
+         },
+         {
+             "productName": ,
+             "quantity": ,
+             "returnQuantity": ,
+             "salePrice": ,
+         },
+     ],
+     "total": ,
+     "totalQty": ,
+     "length": ,
+     "creditLimit": ,
+     "previousCreditBalance": ,
+     "profit": ,
+ }
+ // Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(myJsonResponse);
+ public class Customer {
+     public int number {
+         get;
+         set;
+     }
+     public string fullName {
+         get;
+         set;
+     }
+ }
+
+ public class OrderDetail {
+     public string productName {
+         get;
+         set;
+     }
+     public int quantity {
+         get;
+         set;
+     }
+     public int returnQuantity {
+         get;
+         set;
+     }
+     public double salePrice {
+         get;
+         set;
+     }
+ }
+
+ public class Root {
+     public string billDate {
+         get;
+         set;
+     }
+     public int orderObj {
+         get;
+         set;
+     }
+     public Customer customer {
+         get;
+         set;
+     }
+     public List < OrderDetail > orderDetail {
+         get;
+         set;
+     }
+     public double total {
+         get;
+         set;
+     }
+     public int totalQty {
+         get;
+         set;
+     }
+     public int length {
+         get;
+         set;
+     }
+     public double creditLimit {
+         get;
+         set;
+     }
+     public double previousCreditBalance {
+         get;
+         set;
+     }
+     public double profit {
+         get;
+         set;
+     }
+ }
+ /*  changeBranch() {
+    this.suppliers = this.commonService.getListByLocation(this.addPOForm.get('branchLocationId').value, 'Common', 'getallsupplier');
+  } */
+/*   getBranches(){
+    this.commonService.getList('Common', 'getallbranch').subscribe(data => {
+      const mapBranches=this.commonService.getMapUserBranchLocations().length >0 ?  this.commonService.getMapUserBranchLocations() : this.commonService.getUserBranchLocationId();
+      const branches = mapBranches.length >1 ?
+      data.filter(array => mapBranches.some(filter => filter == array.branchLocationId))
+      : data.filter(d => d.branchLocationId==this.commonService.getUserBranchLocationId());
+      this.branches =branches;
+    });
+  } */
+  https://www.sqlservertutorial.net/

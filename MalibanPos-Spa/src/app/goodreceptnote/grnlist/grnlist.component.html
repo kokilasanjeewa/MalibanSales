@@ -1,0 +1,279 @@
+<!--main container start-->
+<div class="main-container">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="#">Home</a></li>
+      <li class="breadcrumb-item">
+        <a [routerLink]="['/grn/creategrn']">Good Receipt</a>
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">
+        <a [routerLink]="['/grn/grnlist']">Good Receipt List</a>
+      </li>
+    </ol>
+  </nav>
+  <div class="container-fluid" style="overflow: hidden">
+    <h6>
+      Good Receipt List
+      <a
+        href="#"
+        class=""
+        [routerLink]="['../creategrn']"
+        *appHasClaim="'CanAccessAddGoodReceipt'"
+      >
+        <i class="fa fa-plus-circle fa-lg" aria-hidden="true"></i>
+      </a>
+    </h6>
+    <div
+      *ngIf="listData != null && listData.data?.length > 0"
+      class="row clearfix"
+    >
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+          <div class="body">
+            <div class="table-responsive-md">
+              <div class="example-container mat-elevation-z8">
+                <input
+                  class="form-control"
+                  type="text"
+                  (keydown.enter)="applyFilter($event)"
+                  placeholder="Search"
+                />
+                <div
+                  class="example-loading-shade"
+                  *ngIf="isLoadingResults || isRateLimitReached"
+                >
+                  <div
+                    class="example-rate-limit-reached"
+                    *ngIf="isRateLimitReached"
+                  >
+                    Tutions API rate limit has been reached. It will be reset in
+                    one minute.
+                  </div>
+                </div>
+                <div class="example-table-container">
+                  <table
+                    mat-table
+                    [dataSource]="listData"
+                    class="example-table"
+                    matSort
+                    matSortActive="regDate"
+                    matSortDisableClear
+                    matSortDirection="desc"
+                  >
+                    <!-- User Name Column -->
+                    <ng-container matColumnDef="id">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                        Seq
+                      </th>
+                      <td mat-cell *matCellDef="let row; let i = index">
+                        {{ i + 1 }}
+                      </td>
+                    </ng-container>
+                    <div>
+                      <!--                                             <ng-container matColumnDef="goodReceptNoteHeaderFactoryId">
+                                                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                                    GRN#
+                                                </th>
+                                                <td mat-cell *matCellDef="let row">
+                                                    {{ row?.goodReceptNoteHeaderFactoryId }}
+                                                </td>
+                                            </ng-container> -->
+                    </div>
+                    <div style="display: none">
+                      <ng-container matColumnDef="goodReceptNoteHeaderId">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                          Global GRN#
+                        </th>
+                        <td mat-cell *matCellDef="let row">
+                          {{ row?.goodReceptNoteHeaderId }}
+                        </td>
+                      </ng-container>
+                    </div>
+                    <div style="display: none">
+                      <ng-container matColumnDef="goodReceptNoteReferenceNo">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                          Factory GRN#
+                        </th>
+                        <td mat-cell *matCellDef="let row">
+                          {{ row?.goodReceptNoteReferenceNo }}
+                        </td>
+                      </ng-container>
+                    </div>
+                    <!-- User Name Column -->
+                    <ng-container matColumnDef="supplierInvoiceId">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                        Invoice ID
+                      </th>
+                      <td mat-cell *matCellDef="let row">
+                        {{ row?.supplierInvoiceId }}
+                      </td>
+                    </ng-container>
+                    <!-- User Name Column -->
+                    <ng-container matColumnDef="freeItemsTotalCost">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                        Free Items Cost
+                      </th>
+                      <td mat-cell *matCellDef="let row">
+                        {{ row?.freeItemsTotalCost }}
+                      </td>
+                    </ng-container>
+                    <!-- User Id Column -->
+                    <ng-container matColumnDef="totalCost">
+                      <th mat-header-cell *matHeaderCellDef>Total</th>
+                      <td mat-cell *matCellDef="let row">
+                        {{ row?.totalCost }}
+                      </td>
+                    </ng-container>
+
+                    <!-- Email Address Column -->
+                    <ng-container matColumnDef="supplierInvoiceDate">
+                      <th mat-header-cell *matHeaderCellDef>Invoice Date</th>
+                      <td mat-cell *matCellDef="let row">
+                        {{ row?.supplierInvoiceDate | date : "mediumDate" }}
+                      </td>
+                    </ng-container>
+                    <ng-container matColumnDef="totalDiscountAmount">
+                      <th mat-header-cell *matHeaderCellDef>Discount</th>
+                      <td mat-cell *matCellDef="let row">
+                        {{ row?.totalDiscountAmount }}
+                      </td>
+                    </ng-container>
+                    <ng-container matColumnDef="supplier">
+                      <th mat-header-cell *matHeaderCellDef>Supplier</th>
+                      <td mat-cell *matCellDef="let row">
+                        {{ row?.supplier.supplierName }}
+                      </td>
+                    </ng-container>
+                    <ng-container matColumnDef="store">
+                      <th mat-header-cell *matHeaderCellDef>Store</th>
+                      <td mat-cell *matCellDef="let row">
+                        {{ row?.store }}
+                      </td>
+                    </ng-container>
+                    <ng-container matColumnDef="purchaseOrderHeader">
+                      <th mat-header-cell *matHeaderCellDef>PO</th>
+                      <td mat-cell *matCellDef="let row">
+                        {{ row?.purchaseOrderHeader?.poDate }}
+                      </td>
+                    </ng-container>
+                    <ng-container matColumnDef="createdBy">
+                      <th mat-header-cell *matHeaderCellDef>Created By</th>
+                      <td mat-cell *matCellDef="let row">
+                        {{ row?.createdBy }}
+                      </td>
+                    </ng-container>
+
+                    <!-- Email Address Column -->
+                    <ng-container matColumnDef="createDate">
+                      <th mat-header-cell *matHeaderCellDef>Create Date</th>
+                      <td mat-cell *matCellDef="let row">
+                        {{ row?.createDate | date : "mediumDate" }}
+                      </td>
+                    </ng-container>
+                    <!-- Created Action Column -->
+                    <ng-container matColumnDef="action">
+                      <th mat-header-cell *matHeaderCellDef>Action</th>
+                      <td mat-cell *matCellDef="let row">
+                           <a href="#" class="" [routerLink]="['../editgrn', row?.goodReceptNoteHeaderId]"  *appHasClaim="'CanAccessEditGoodReceipt'">
+                                  <i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i>
+
+                                </a>
+                        <a
+                          href="#"
+                          class=""
+                          [routerLink]="[
+                            '../goodreceptnotereport',
+                            row?.goodReceptNoteHeaderId
+                          ]"
+                        >
+                          <i class="fa fa-th fa-lg" aria-hidden="true"></i>
+                        </a>
+                        <!--           <a href="#" class="" [routerLink]="['../deletegrn', row?.goodReceptNoteHeaderId]">
+                                  <i class="fa fa-trash fa-lg" aria-hidden="true"></i>
+                                </a> -->
+                      </td>
+                    </ng-container>
+                    <ng-container matColumnDef="loading">
+                      <td mat-footer-cell *matFooterCellDef colspan="12">
+                        Loading ......
+                      </td>
+                    </ng-container>
+                    <ng-container matColumnDef="unloading">
+                      <td mat-footer-cell *matFooterCellDef colspan="12">
+                        Data not found ......
+                      </td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr
+                      mat-row
+                      *matRowDef="let row; columns: displayedColumns"
+                    ></tr>
+                    <tr
+                      mat-footer-row
+                      *matFooterRowDef="['loading']"
+                      [ngClass]="{ hide: listData !== null }"
+                    ></tr>
+                    <tr
+                      mat-footer-row
+                      *matFooterRowDef="['unloading']"
+                      [ngClass]="{
+                        hide: !(listData != null && listData.data.length)
+                      }"
+                    ></tr>
+                  </table>
+                </div>
+                <div style="float: right">
+                  <!--  <mat-paginator [length]="100"
+                            [pageSize]="10"
+                            [pageSizeOptions]="[5, 10, 25, 100]">
+              </mat-paginator> -->
+
+                  <pagination
+                    [itemsPerPage]="pagination?.itemsPerPage"
+                    [boundaryLinks]="true"
+                    [maxSize]="10"
+                    [(ngModel)]="pagination.currentPage"
+                    [totalItems]="pagination?.totalItems"
+                    previousText="&lsaquo;"
+                    nextText="&rsaquo;"
+                    firstText="&laquo;"
+                    lastText="&raquo;"
+                    (pageChanged)="pageChanged($event)"
+                    *ngIf="listData != null && listData.data?.length > 0"
+                  >
+                  </pagination>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--       User Roles Column
+                              <ng-container matColumnDef="isProcess">
+                                <th mat-header-cell *matHeaderCellDef>Process</th>
+                                <td mat-cell *matCellDef="let row">
+                                  <i *ngIf="row?.isProcess" class="fa fa-check-square-o" aria-hidden="true"></i>
+                                  <i *ngIf="!row?.isProcess" class="fa fa-minus-square-o" aria-hidden="true"></i>
+                                </td>
+                              </ng-container>
+                               User Roles Column
+                              <ng-container matColumnDef="isComfirm">
+                                <th mat-header-cell *matHeaderCellDef>Comfirm</th>
+                                <td mat-cell *matCellDef="let row"><i *ngIf="row?.isComfirm" class="fa fa-check-square-o"
+                                    aria-hidden="true"></i>
+                                  <i *ngIf="!row?.isComfirm" class="fa fa-minus-square-o" aria-hidden="true"></i>
+                                </td>
+                              </ng-container>
+                               User Roles Column
+                              <ng-container matColumnDef="approvedBy">
+                                <th mat-header-cell *matHeaderCellDef>Approved By</th>
+                                <td mat-cell *matCellDef="let row"> row?.approvedBy </td>
+                              </ng-container>
+                               User Roles Column
+                              <ng-container matColumnDef="authorizedBy">
+                                <th mat-header-cell *matHeaderCellDef>Authorized By</th>
+                                <td mat-cell *matCellDef="let row"> row?.authorizedBy </td>
+                              </ng-container> -->

@@ -1,0 +1,19 @@
+.invalid-feedback {
+  color: #dc3545;
+  font-size: 95%;
+  display: block;
+  width: 100%;
+  padding: 0px 0px 0px 10px;
+  position: absolute;
+}
+.form-group.col-md-12.image {
+  margin-top: 1px;
+}
+.is-invalid {
+  background-color: #dc3545;
+}
+.search.fa.fa-search-plus.fa-lg{
+  color: #48a2ff;
+  padding: 5px;
+  font-size: 20px;
+}

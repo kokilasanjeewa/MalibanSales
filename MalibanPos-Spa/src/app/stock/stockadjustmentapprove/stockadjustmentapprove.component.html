@@ -1,0 +1,153 @@
+<!--main container start-->
+<div class="main-container">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a [routerLink]="['/dashboard']">Home</a></li>
+      <li class="breadcrumb-item">
+        <a [routerLink]="['/stock/stockadjustmentlist']">Stock Adjustment List</a>
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">
+        <a [routerLink]="['/stock/stockadjustment']">Stock Adjustment</a>
+      </li>
+    </ol>
+  </nav>
+  <div class="container-fluid">
+    <div class="row mb-1 mt-2">
+      <div class="col-sm-2">
+        <h6>Stock Adjustment Approve</h6>
+      </div>
+      <div class="col-sm-4"></div>
+      <div class="col-sm-2"></div>
+      <div class="col-sm-2"></div>
+      <div class="col-sm-2 text-right align-middle">
+        <button [disabled]="!addSAForm.valid" (click)="saAdd()" type="submit"
+          class="btn btn-outline-primary btn-sm my-1 mr-3 text-primary">
+          Save
+        </button>
+        <button type="reset" class="btn btn-outline-danger btn-sm my-1 text-danger" (click)="clear()">
+          Clear
+        </button>
+      </div>
+    </div>
+    <hr />
+    <form [formGroup]="addSAForm" (ngSubmit)="saAdd()">
+      <div class="form-group row">
+        <label for="inputEmail3" class="col-sm-3 col-form-label">Stock
+          Adjustment Date</label>
+        <div class="col-sm-3">
+          <input readonly type="date" class="form-control" [formControlName]="'stockAdjustmentDate'" id placeholder />
+          <div class="invalid-feedback" *ngIf="
+              f.stockAdjustmentDate.touched &&
+              f.stockAdjustmentDate.hasError('required')
+            ">
+            Stock Adjustment Date is required.
+          </div>
+        </div>
+        <label for="inputEmail3" class="col-sm-3 col-form-label">Adjustment Type</label>
+        <div class="col-sm-3">
+          <select [formControlName]="'adjustmentTypeId'" class="form-control" id="exampleFormControlSelect2">
+            <option selected value disabled>
+              Please choose a adjustment type..
+            </option>
+            <option *ngFor="let adjustmenttype of adjustmenttypes | async" [value]="adjustmenttype.adjustmentTypeId">
+              {{ adjustmenttype.adjustmentName }}
+            </option>
+          </select>
+          <div class="invalid-feedback" *ngIf="
+              f.adjustmentTypeId.touched &&
+              f.adjustmentTypeId.hasError('required')
+            ">
+            Please choose a adjustment type.
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputEmail3" class="col-sm-3 col-form-label">Branch Location</label>
+        <div class="col-sm-3">
+          <select [formControlName]="'branchLocationId'" class="form-control" id="exampleFormControlSelect2">
+            <option selected value disabled>Please choose a branch..</option>
+            <option *ngFor="let branch of branches" [value]="branch.branchLocationId">
+              {{ branch.branchCode }}
+            </option>
+          </select>
+          <div class="invalid-feedback" *ngIf="
+              f.branchLocationId.touched &&
+              f.branchLocationId.hasError('required')
+            ">
+            Please choose a branch.
+          </div>
+        </div>
+        <label for="inputEmail3" class="col-sm-3 col-form-label">Stock Taken
+          Date</label>
+        <div class="col-sm-3">
+          <input type="date" class="form-control" [formControlName]="'stockTakenDate'" id placeholder />
+          <div class="invalid-feedback" *ngIf="
+              f.stockTakenDate.touched && f.stockTakenDate.hasError('required')
+            ">
+            Stock Taken Date is required.
+          </div>
+        </div>
+      </div>
+    </form>
+    <div class="table-responsive-md ml-3">
+      <table class="table table-sm table-striped table-hover">
+        <thead>
+          <tr>
+            <th class="center">#</th>
+            <th class="text-left">Product Code</th>
+            <th class="text-left">Product Name</th>
+            <th class="right">Colour</th>
+            <th class="right">Size</th>
+            <th class="right">Expiry Date</th>
+            <th class="center">Quantity</th>
+            <th class="center">Status</th>
+            <th class="center">Cost Price</th>
+            <th class="center">Sale Price</th>
+            <th class="center">MRP</th>
+            <th class="right">Total</th>
+          </tr>
+        </thead>
+        <tbody style="overflow-y: scroll">
+          <tr *ngFor="let line of lines; let i = index">
+            <td class="center">{{ i + 1 }}</td>
+            <td class="text-left">{{ line.product?.barcode }}</td>
+            <td class="text-left">{{ line.product.productName }}</td>
+            <td class="center">{{ line.product.color }}</td>
+            <td class="right">{{ line.product.size }}</td>
+            <td class="right">
+              {{ line.productExpireDate | date : "mediumDate" }}
+            </td>
+            <td class="right">{{ line.adjustmentQuantity }}</td>
+            <td class="right">
+              <select [(ngModel)]="line.cApprovalType" class="form-control1" id="exampleFormControlSelect2" (change)="
+                  updateApprovel(
+                    $event,
+                    line?.barcode,
+                    line.priceId,
+                    line?.transactionDetailId
+                  )
+                ">
+                <option selected disabled>Select Status</option>
+                <option *ngFor="let cApprovalType of cApprovalTypes" [value]="cApprovalType.id">
+                  {{ cApprovalType.name }}
+                </option>
+              </select>
+            </td>
+            <td class="right">
+              {{ line.costPrice | currency : "LKR" : "Rs." }}
+            </td>
+            <td class="right">
+              {{ line.price.salePrice | currency : "LKR" : "Rs." }}
+            </td>
+            <td class="right">
+              {{ line.price.maximumRetailPrice | currency : "LKR" : "Rs." }}
+            </td>
+            <td class="right">
+              {{ line?.stockAdjustmentTotal | currency : "LKR" : "Rs." }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

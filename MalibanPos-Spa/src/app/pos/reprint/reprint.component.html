@@ -1,0 +1,159 @@
+<!--main container start-->
+<div class="main-container">
+    <div id="invoice-POS">
+        <button class="btn btn-outline-light mx-auto d-block text-light bg-dark d-print-none" (click)="PrintPage()"><i
+      class="fas fa-print"></i> Print</button>
+        <div class="center" id="top">
+            <!--Logo Info <div class="logo"></div> if you need please uncomment-->
+            <div class="info">
+                <h2 style="text-align: center;">EAM Maliban Textiles</h2>
+            </div>
+            <!--End Info-->
+        </div>
+        <!--End InvoiceTop-->
+
+        <!--    <div id="mid">
+      <div class="info">
+        <p>
+          No : 261 SiriDhamma Mawatha,Colombo-10.<br>
+          Email : general.tr@maliban.com<br>
+          Phone : 0112688000<br>
+        </p>
+      </div>
+    </div> -->
+        <hr>
+        <div class="customer">
+            <h2>Date: <span>{{billDate | date:'dd-MM-yyyy hh:mm:ss a':'+0530'}}</span><span class="bill">Bill N0:
+          {{orderObj}}</span></h2>
+            <h2>Customer Id: <span>{{customer.number}}</span></h2>
+            <h2>Customer Name: <span>{{customer.fullName}}</span></h2>
+            <!-- <h2>Cashier Name: <span>{{cashierName}}</span></h2> -->
+        </div>
+        <!--End Invoice Mid-->
+        <div id="bot">
+            <div id="table">
+                <table class="table">
+                    <tr class="tabletitle" style="padding: 0px !important;">
+                        <td class="item">
+                            <h3>Item</h3>
+                        </td>
+                        <td class="item text-center">
+                            <h3>Qty</h3>
+                        </td>
+                        <td class="item text-center">
+                            <h3>Price</h3>
+                        </td>
+                        <td class="item text-center">
+                            <h3>Total</h3>
+                        </td>
+                    </tr>
+                    <tr class="service" *ngFor="let  receiptDetail of receiptDetails">
+                        <td class="tableitem">
+                            <p class="itemtext">{{receiptDetail.product.productName}}</p>
+                        </td>
+                        <td class="tableitem text-center">
+                            <p class="itemtext">{{receiptDetail.quantity-receiptDetail.returnQuantity}}</p>
+                        </td>
+                        <td class="tableitem text-center">
+                            <p class="itemtext">{{receiptDetail.price.salePrice | currency:'LKR':'Rs.'}}</p>
+                        </td>
+                        <td class="tableitem text-center">
+                            <p class="itemtext">
+                                {{(receiptDetail.quantity-receiptDetail.returnQuantity) * receiptDetail.price.salePrice | currency:'LKR':'Rs.'}}
+                            </p>
+                        </td>
+                    </tr>
+
+                    <tr class="service">
+                        <!--          <td colspan="4" class="tableitem">
+              <p style="font-size: 0.8rem;text-align: left;padding: 0px 0px 0px 0px;font-weight: 600;">Gross
+                Amount:<span
+                  style="margin-left: 10px;font-weight: 300;text-align: right;float: right;">{{total | currency:'LKR':'Rs.'}}</span>
+              </p>
+            </td> -->
+                    </tr>
+                    <tr class="service">
+                        <td colspan="4" class="tableitem">
+                            <p style="font-size: 0.8rem;text-align: left;font-weight: 600;">Net Amount:<span style="margin-left: 10px;font-weight: 300;text-align: right;float: right;">{{total | currency:'LKR':'Rs.'}}</span>
+                            </p>
+                        </td>
+                    </tr>
+                    <tr class="service">
+                        <td colspan="4" class="tableitem">
+                            <p style="font-size: 0.8rem;text-align: left;font-weight: 600;">Number of Items/Qty Sold:<span *ngIf="length>0" style="margin-left: 10px;font-weight: 300;text-align: right;float: right;">
+                  {{receiptDetails.length}}\{{totalQty}}</span>
+                            </p>
+                        </td>
+                    </tr>
+                    <!--    <tr class="service">
+            <td colspan="4" class="tableitem">
+              <p style="font-size: 0.8rem;text-align: left;padding: 0px 0px 0px 0px;font-weight: 600;">This Bill
+                Credit:<span
+                  style="margin-left: 10px;font-weight: 300;text-align: right;float: right;">{{total | currency:'LKR':'Rs.'}}</span>
+              </p>
+            </td>
+          </tr>-->
+                    <tr class="service">
+                        <td colspan="4" class="tableitem">
+                            <p style="font-size: 0.8rem;text-align: left;padding: 0px 0px 0px 0px;font-weight: 600;">Your Credit Balance:
+                                <span style="margin-left: 10px;font-weight: 300;text-align: right;float: right;">Rs. {{(customer.paymentId==1 ?customer.creditLimit-customer.creditBalance:customer.cashLimit-customer.cashBalance) | number:'1.2-2'}}</span>
+                            </p>
+                        </td>
+                    </tr>
+                    <tr class="service">
+                        <td colspan="4" class="tableitem">
+                            <p style="font-size: 0.8rem;text-align: left;padding: 0px 0px 0px 0px;font-weight: 600;">Previous Credit:
+                                <span style="margin-left: 10px;font-weight: 300;text-align: right;float: right;">{{customer.paymentId==1 ?customer.previousCreditBalance:customer.previousCashBalance | currency:'LKR':'Rs.'}}</span>
+                            </p>
+                            <!--               customer.creditLimit-customer.creditBalance+total
+ -->
+                        </td>
+                    </tr>
+                    <tr class="service">
+                        <td colspan="4" class="tableitem">
+                            <p style="font-size: 0.8rem;text-align: left;padding: 0px 0px 0px 0px;font-weight: 600;">Total Credit:
+                                <span style="margin-left: 10px;font-weight: 300;text-align: right;float: right;">{{customer.paymentId==1 ?total+customer.previousCreditBalance:total+customer.previousCashBalance | currency:'LKR':'Rs.'}}</span>
+                            </p>
+                        </td>
+                    </tr>
+                    <tr class="service">
+                        <td colspan="4" class="tableitem">
+                            <p style="font-size: 0.8rem;text-align: left;padding: 0px 0px 0px 0px;font-weight: 600;">Your Savings:
+                                <span style="margin-left: 10px;font-weight: 300;text-align: right;float: right;">{{profit-total | currency:'LKR':'Rs.'}}</span>
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <!-- End Table-->
+
+            <!-- Legalcopy Info  please uncomment  -->
+            <div id="legalcopy">
+                <p class="legal"><strong>Thank You Come Again!!!</strong>
+                </p>
+            </div>
+            <!--
+      <form method="post">
+        <button type="submit" class="btn btn-outline-light mx-auto d-block text-light bg-dark d-print-none"><i
+            class="fas fa-arrow-alt-circle-left"></i> Return to Sale</button>
+      </form> -->
+
+
+        </div>
+        <!--End InvoiceBot-->
+    </div>
+    <!--End Invoice-->
+    <!--      <strong>Status: {{status}}</strong>
+  <div>
+      <input [(ngModel)]="ip" type="text" name="ip" placeholder="IP of printer with WebPRNT">
+      <button (click)="connectToWebPrint()">Connect to WebPRNT</button>
+  </div>
+
+  <div>
+      <button (click)="requestUsb()">Connect to USB</button>
+  </div>
+
+  <div>
+      <button (click)="print()" > Print!</button>
+  </div> -->
+</div>

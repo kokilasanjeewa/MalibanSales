@@ -1,0 +1,42 @@
+.card {
+  box-shadow: 2px 2px 4px #ccc;
+}
+
+table {
+  width: 100%;
+}
+td,
+th {
+  width: auto;
+  text-align: center !important;
+}
+i {
+  color: #003554;
+  padding: 10px;
+}
+input {
+  border: 1px solid #fff !important;
+  padding: 5px;
+}
+input[type=text]:focus {
+  border: 3px solid #555;
+}
+table thead tr {
+  border-top: 2px solid white!important;
+}
+table thead tr th {
+  color: #3a3939;
+  letter-spacing: 1px;
+  text-shadow: 2px 2px 4px #ccc;
+  font-size: smaller;
+  width: auto;
+}
+table tbody tr td {
+  font-size: 12px;
+  text-shadow: 2px 2px 4px #ccc;
+}
+td.mat-cell:first-of-type,
+td.mat-footer-cell:first-of-type,
+th.mat-header-cell:first-of-type {
+  display:revert !important;
+}

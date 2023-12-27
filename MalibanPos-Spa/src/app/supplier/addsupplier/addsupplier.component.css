@@ -1,0 +1,18 @@
+
+.invalid-feedback {
+  color: #dc3545;
+  font-size: 95%;
+  display: block;
+  width: 100%;
+  padding: 0px 0px 0px 10px;
+  position: absolute;
+}
+.form-group.col-md-12.image {
+  margin-top: 1px;
+}
+.is-invalid {
+  background-color: #dc3545;
+}
+.custom-file .custom-file-input{
+  height: 32px !important;
+}

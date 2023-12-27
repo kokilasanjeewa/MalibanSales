@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE-edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, Initial-scale=1" />
+    <title>Maliban - Point Of Sale</title>
+    <base href="/" />
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Raleway:100,200,300,400,500,600,700"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400&display=swap"
+      rel="stylesheet"
+    />
+    <!--  Font-awsome -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css"
+    />
+    <link rel="stylesheet" href="./assets/vendor/font/all.min.css" />
+    <link rel="shortcut icon" href="./assets/resource/icon/favicon.ico" />
+    <link rel="stylesheet" href="./assets/vendor/font/font-awesome.min.css" />
+    <!-- Bootstrap Css Framework -->
+    <link rel="stylesheet" href="./assets/vendor/css/bootstrap.css" />
+    <!-- Custom Css -->
+    <link rel="stylesheet" href="./assets/resource/css/stylepos.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body class="mat-typography" id="style-14">
+    <!-- preloader start -->
+    <div id="preloader">
+      <div class="status">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+    <!-- preloader end -->
+
+    <app-root> </app-root>
+    <!-- Jquery Script  -->
+    <script src="./assets/vendor/js/jquery-3.3.1.js"></script>
+    <!-- Custom Script  -->
+    <script src="./assets/resource/js/script.js"></script>
+    <script src="./assets/resource/js/demo.js"></script>
+    <script>
+      $(document).ready(function () {
+        //Page KeyDown Event Binding
+        $(document).keydown(function (e) {
+          if (e.keyCode == 9) var thisTab = $(":focus").attr("tabindex");
+          if (e.keyCode == 9) {
+            if (e.shiftKey) {
+              //Focus previous input
+              if (thisTab == startIndex) {
+                $("." + tabLimitInID)
+                  .find("[tabindex=" + lastIndex + "]")
+                  .focus();
+                return false;
+              }
+            } else {
+              if (thisTab == lastIndex) {
+                $("." + tabLimitInID)
+                  .find("[tabindex=" + startIndex + "]")
+                  .focus();
+                return false;
+              }
+            }
+          }
+        });
+        var setTabindexLimit = function (startIndex, lastIndex, tabContainer) {
+          startIndex = startIndex;
+          lastIndex = lastIndex;
+          tabLimitInID = tabContainer;
+          $("." + tabLimitInID)
+            .find("[tabindex=" + startIndex + "]")
+            .focus();
+        };
+        /*
+                  calling setTabindexLimit function
+                  setting 3 options
+                  #first is start Index Number
+                  #second is last Index Number
+                  #Defining Tabindex Wrapper Selector
+              */
+        setTabindexLimit(4, 10, "dyno-tab-wrap");
+      });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="./assets/resource/js/acquisitions.js"></script>
+  </body>
+</html>

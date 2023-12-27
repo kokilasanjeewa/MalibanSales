@@ -1,0 +1,301 @@
+<!--main container start-->
+<div class="main-container">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a [routerLink]="['/dashboard']">Home</a></li>
+      <li class="breadcrumb-item">
+        <a [routerLink]="['../addsupplierprice']">Add Supplier Price</a>
+      </li>
+      <li class="breadcrumb-item active">
+        <a [routerLink]="['../supplierpricelist']">Supplier Price List</a>
+      </li>
+    </ol>
+  </nav>
+  <div class="container-fluid" style="overflow: hidden">
+    <h6>
+      Supplier Price List
+      <a
+        href="#"
+        class=""
+        [routerLink]="['../addsupplierprice']"
+        *appHasClaim="'CanAccessAddSupplierPrice'"
+      >
+        <i class="fa fa-plus-circle fa-lg" aria-hidden="true"></i>
+      </a>
+    </h6>
+    <div
+      *ngIf="listData != null && listData.data?.length > 0"
+      class="row clearfix"
+    >
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+          <div class="body">
+            <div class="table-responsive-md">
+              <div class="example-container mat-elevation-z8">
+                <div class="row">
+                  <div class="col-md-3">
+                    <ng-select
+                      (clear)="resetCalculations()"
+                      [(ngModel)]="supplierName"
+                      (change)="itemChange()"
+                      style="font-size: x-small !important"
+                      [searchable]="true"
+                      class="custom"
+                      [dropdownPosition]="'bottom'"
+                      placeholder="Search Supplier Name"
+                      [virtualScroll]="true"
+                      tabindex="1"
+                      [clearSearchOnAdd]="true"
+                    >
+                      <ng-option
+                        style="font-size: x-small !important"
+                        [value]="supplier.supplierName"
+                        *ngFor="let supplier of supplierPricesFilter | async"
+                      >
+                        <span style="font-size: x-small">
+                          {{ supplier.supplierName }}</span
+                        >
+                      </ng-option>
+                    </ng-select>
+                  </div>
+                  <div class="col-md-9">
+                    <input
+                      [(ngModel)]="barCode"
+                      class="form-control"
+                      type="text"
+                      (keyup)="applyFilter($event)"
+                      placeholder="Search Product Code/Name"
+                    />
+                  </div>
+                </div>
+                <div
+                  class="example-loading-shade"
+                  *ngIf="isLoadingResults || isRateLimitReached"
+                >
+                  <div
+                    class="example-rate-limit-reached"
+                    *ngIf="isRateLimitReached"
+                  >
+                    Tutions API rate limit has been reached. It will be reset in
+                    one minute.
+                  </div>
+                </div>
+                <div class="example-table-container">
+                  <table
+                    mat-table
+                    [dataSource]="listData"
+                    class="example-table"
+                    matSort
+                    matSortActive="regDate"
+                    matSortDisableClear
+                    matSortDirection="desc"
+                  >
+                    <!-- User Name Column -->
+                    <div>
+                      <ng-container matColumnDef="supplierPriceId">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                          Id
+                        </th>
+                        <td mat-cell *matCellDef="let row">
+                          {{ row?.supplierPriceId }}
+                        </td>
+                      </ng-container>
+                    </div>
+                    <ng-container matColumnDef="id">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                        Seq
+                      </th>
+                      <td mat-cell *matCellDef="let row; let i = index">
+                        {{ i + 1 }}
+                      </td>
+                    </ng-container>
+                    <!-- User Name Column -->
+                    <ng-container matColumnDef="supplier">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                        Supplier
+                      </th>
+                      <td mat-cell *matCellDef="let row">
+                        {{ row?.supplier?.supplierName }}
+                      </td>
+                    </ng-container>
+                    <ng-container matColumnDef="code">
+                      <th mat-header-cell *matHeaderCellDef>Product Code</th>
+                      <td mat-cell *matCellDef="let row">
+                        {{ row?.product?.barcode }}
+                      </td>
+                    </ng-container>
+                    <ng-container matColumnDef="product">
+                      <th mat-header-cell *matHeaderCellDef>Product</th>
+                      <td mat-cell *matCellDef="let row">
+                        {{ row?.product?.productName }}
+                      </td>
+                    </ng-container>
+                    <!-- User Id Column -->
+                    <ng-container matColumnDef="unitPrice">
+                      <th mat-header-cell *matHeaderCellDef>Unit Price</th>
+                      <td mat-cell *matCellDef="let row">
+                        {{ row?.unitPrice }}
+                      </td>
+                    </ng-container>
+                    <!-- User Id Column -->
+                    <ng-container matColumnDef="maximumRetailPrice">
+                      <th mat-header-cell *matHeaderCellDef>MRP</th>
+                      <td mat-cell *matCellDef="let row">
+                        {{ row?.maximumRetailPrice }}
+                      </td>
+                    </ng-container>
+                    <ng-container matColumnDef="profit">
+                      <th mat-header-cell *matHeaderCellDef>Profit</th>
+                      <td mat-cell *matCellDef="let row">
+                        {{ row?.profit }}
+                      </td>
+                    </ng-container>
+                    <!-- User Id Column -->
+                    <ng-container matColumnDef="discountPrice">
+                      <th mat-header-cell *matHeaderCellDef>Discount</th>
+                      <td mat-cell *matCellDef="let row">
+                        {{ row?.discountPrice }}
+                      </td>
+                    </ng-container>
+                    <!-- User Id Column -->
+                    <ng-container matColumnDef="discountPrecentage">
+                      <th mat-header-cell *matHeaderCellDef>Discount%</th>
+                      <td mat-cell *matCellDef="let row">
+                        {{ row?.discountPrecentage }}
+                      </td>
+                    </ng-container>
+                    <!-- User Id Column -->
+                    <ng-container matColumnDef="promotionPrice">
+                      <th mat-header-cell *matHeaderCellDef>Promotion</th>
+                      <td mat-cell *matCellDef="let row">
+                        {{ row?.promotionPrice }}
+                      </td>
+                    </ng-container>
+                    <!-- User Id Column -->
+                    <ng-container matColumnDef="promotionPrecentage">
+                      <th mat-header-cell *matHeaderCellDef>Promotion%</th>
+                      <td mat-cell *matCellDef="let row">
+                        {{ row?.promotionPrecentage }}
+                      </td>
+                    </ng-container>
+                    <!-- User Id Column -->
+                    <ng-container matColumnDef="taxPrecentage">
+                      <th mat-header-cell *matHeaderCellDef>Tax%</th>
+                      <td mat-cell *matCellDef="let row">
+                        {{ row?.taxPrecentage }}
+                      </td>
+                    </ng-container>
+                    <!-- User Id Column -->
+                    <ng-container matColumnDef="taXMethod">
+                      <th mat-header-cell *matHeaderCellDef>Tax Method</th>
+                      <td mat-cell *matCellDef="let row">
+                        {{ row?.taXMethod }}
+                      </td>
+                    </ng-container>
+                    <!-- User Id Column -->
+                    <ng-container matColumnDef="statusType">
+                      <th mat-header-cell *matHeaderCellDef>Status</th>
+                      <td mat-cell *matCellDef="let row">
+                        {{ row?.statusType }}
+                      </td>
+                    </ng-container>
+                    <!-- Email Address Column -->
+                    <ng-container matColumnDef="priceDate">
+                      <th mat-header-cell *matHeaderCellDef>Price Date</th>
+                      <td mat-cell *matCellDef="let row">
+                        {{ row?.priceDate | date : "mediumDate" }}
+                      </td>
+                    </ng-container>
+                    <!-- User Roles Column -->
+                    <ng-container matColumnDef="active">
+                      <th mat-header-cell *matHeaderCellDef>Active</th>
+                      <td mat-cell *matCellDef="let row">
+                        <i
+                          *ngIf="row?.active"
+                          class="fa fa-check-square-o"
+                          aria-hidden="true"
+                        ></i>
+                        <i
+                          *ngIf="!row?.active"
+                          class="fa fa-minus-square-o"
+                          aria-hidden="true"
+                        ></i>
+                      </td>
+                    </ng-container>
+                    <!-- User Roles Column -->
+                    <!--     <ng-container matColumnDef="isDeleted">
+                                            <th mat-header-cell *matHeaderCellDef>Deleted</th>
+                                            <td mat-cell *matCellDef="let row"><i *ngIf="row?.isDeleted" class="fa fa-check-square-o" aria-hidden="true"></i>
+                                                <i *ngIf="!row?.isDeleted" class="fa fa-minus-square-o" aria-hidden="true"></i>
+                                            </td>
+                                        </ng-container> -->
+                    <!-- Created Action Column -->
+                    <!--        <ng-container matColumnDef="action">
+                      <th mat-header-cell *matHeaderCellDef>Action</th>
+                      <td mat-cell *matCellDef="let row">
+                        <a href="#" class="" [routerLink]="['../editsupplier', row?.supplierPriceId]">
+                          <i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i>
+
+                        </a>
+                        <a href="#" class="" [routerLink]="['../purchaseorderdetail', row?.supplierPriceId]">
+                          <i class="fa fa-th fa-lg" aria-hidden="true"></i>
+                        </a>
+                        <a href="#" class="" [routerLink]="['../deletesupplier', row?.supplierPriceId]">
+                          <i class="fa fa-trash fa-lg" aria-hidden="true"></i>
+                        </a>
+
+                      </td>
+                    </ng-container> -->
+                    <ng-container matColumnDef="loading">
+                      <td mat-footer-cell *matFooterCellDef colspan="12">
+                        Loading ......
+                      </td>
+                    </ng-container>
+                    <ng-container matColumnDef="unloading">
+                      <td mat-footer-cell *matFooterCellDef colspan="12">
+                        Data not found ......
+                      </td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr
+                      mat-row
+                      *matRowDef="let row; columns: displayedColumns"
+                    ></tr>
+                    <tr
+                      mat-footer-row
+                      *matFooterRowDef="['loading']"
+                      [ngClass]="{ hide: listData !== null }"
+                    ></tr>
+                    <tr
+                      mat-footer-row
+                      *matFooterRowDef="['unloading']"
+                      [ngClass]="{
+                        hide: !(listData != null && listData.data.length)
+                      }"
+                    ></tr>
+                  </table>
+                </div>
+                <div style="float: right">
+                  <pagination
+                    *ngIf="listData != null && listData.data?.length > 0"
+                    [itemsPerPage]="pagination.itemsPerPage"
+                    [boundaryLinks]="true"
+                    [maxSize]="10"
+                    [(ngModel)]="pagination.currentPage"
+                    [totalItems]="pagination.totalItems"
+                    previousText="&lsaquo;"
+                    nextText="&rsaquo;"
+                    firstText="&laquo;"
+                    lastText="&raquo;"
+                    (pageChanged)="pageChanged($event)"
+                  >
+                  </pagination>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,253 @@
+     <!--main container start-->
+     <div class="main-container">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="#">Home</a></li>
+          <li class="breadcrumb-item"><a [routerLink]="['/customer/customerlist']">Customer List</a></li>
+          <li class="breadcrumb-item"><a [routerLink]="['/customer/mapcustomer']">Customer Map</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Edit Customer</li>
+        </ol>
+      </nav>
+      <div class="container-fluid">
+        <div class="row mb-1 mt-2">
+          <div class="col-sm-2">
+            <h6>Customer Edit</h6>
+          </div>
+          <div class="col-sm-4">
+          </div>
+          <div class="col-sm-2">
+          </div>
+          <div class="col-sm-2">
+ <!--            <button [disabled]="!addorderListForm.valid" type="submit" class="btn-sm btn-primary btn-rounded btn-icon">
+                 <i class="fa fa-envelope-o"></i>
+            </button>
+            <button type="reset" class="btn-sm btn-danger">Clear</button> -->
+          </div>
+          <div class="col-sm-2 text-right align-middle">
+            <button [disabled]="!editCustomerForm.valid" (click)="supplierEdit()" type="submit" class="btn btn-outline-primary btn-sm my-1 mr-3 text-primary">Save</button>
+            <button type="reset" class="btn btn-outline-danger btn-sm my-1 text-danger">Cancel</button>
+          </div>
+          </div>
+          <hr>
+        <form [formGroup]="editCustomerForm" (ngSubmit)="supplierEdit()">
+          <div class="form-row">
+            <div class="form-group col-md-1">
+              <label for="inputPassword4">Number
+                <!-- <span class="notzerovalue">&nbsp;*</span> --></label>
+              <input type="text" class="form-control" [formControlName]="'number'" id="" placeholder="" readonly>
+              <div *ngIf="f.number.touched && f.number.errors" class="invalid-feedback">
+                <!--                     <div *ngIf="f.email.hasError('required')">E-mail is required</div>
+-->
+              </div>
+            </div>
+            <div class="form-group col-md-1">
+              <label for="inputPassword4">Epf Number
+                <!-- <span class="notzerovalue">&nbsp;*</span> --></label>
+              <input type="text" class="form-control" [formControlName]="'ePFNo'" id="" placeholder="" readonly>
+              <div *ngIf="f.ePFNo.touched && f.ePFNo.errors" class="invalid-feedback">
+                <!--                     <div *ngIf="f.email.hasError('required')">E-mail is required</div>
+-->
+              </div>
+            </div>
+            <div class="form-group col-md-4">
+              <label for="ProductCode">Full Name<span class="notzerovalue">&nbsp;*</span></label>
+              <input readonly type="text" class="form-control" [formControlName]="'fullName'" id="" placeholder="">
+              <div *ngIf="f.fullName.touched && f.fullName.errors" class="invalid-feedback">
+                <div *ngIf="f.fullName.hasError('required')">Full Name is required</div>
+              </div>
+            </div>
+            <div class="form-group col-md-2">
+              <label for="exampleFormControlSelect4">Location<span class="notzerovalue">&nbsp;*</span></label>
+              <select [formControlName]="'location'" class="form-control" disabled=""
+              id="exampleFormControlSelect2" >
+              <option selected value="" disabled >Please choose a branch..</option>
+              <option *ngFor="let branch of branches$ | async" [value]="branch.branchCode" >
+                {{ branch.branchCode }}
+              </option>
+            </select>
+              <div class="invalid-feedback" *ngIf="f.location.touched && f.location.hasError('required')">
+                Please choose a location.
+              </div>
+            </div>
+            <div class="form-group col-md-2">
+              <label for="ProductName">Date Of Join<span class="notzerovalue">&nbsp;*</span></label>
+              <input type="date" class="form-control" [formControlName]="'dateOfAppointment'" id="" placeholder="">
+              <div class="invalid-feedback" *ngIf="f.dateOfAppointment.touched && f.dateOfAppointment.hasError('required')">
+                First Name is required.
+              </div>
+            </div>
+            <div class="form-group col-md-2">
+              <label for="ProductDescription">Date Of Resigned<span class="notzerovalue">&nbsp;*</span></label>
+              <input type="date" class="form-control" [formControlName]="'dateResigned'" id="" placeholder="">
+              <div class="invalid-feedback" *ngIf="f.dateResigned.touched && f.dateResigned.hasError('required')">
+                Last Name is required.
+              </div>
+            </div>
+            <div class="form-group col-md-2">
+              <label for="ProductDescription">Date Of Deleted<span class="notzerovalue">&nbsp;*</span></label>
+              <input type="date" class="form-control" [formControlName]="'dateDeleted'" id="" placeholder="">
+              <div class="invalid-feedback" *ngIf="f.dateDeleted.touched && f.dateDeleted.hasError('required')">
+                Last Name is required.
+              </div>
+            </div>
+                  <div class="form-group col-md-2">
+              <label for="inputPassword4">Credit Limit</label>
+              <input type="text" class="form-control" [formControlName]="'creditLimit'" id="" placeholder="">
+            </div>
+            <div class="form-group col-md-2">
+              <label for="inputPassword4">Scheme<span class="notzerovalue">&nbsp;*</span></label>
+              <input type="email" class="form-control" [formControlName]="'scheme'" id="" placeholder="" readonly>
+              <div *ngIf="f.scheme.touched && f.scheme.errors" class="invalid-feedback">
+                <div *ngIf="f.scheme.hasError('required')">E-mail is required</div>
+                <div *ngIf="f.email.hasError('email')">E-mail is invalid</div>
+              </div>
+            </div>
+            <div class="form-group col-md-2">
+              <label for="inputPassword4">SchemeCode<span class="notzerovalue">&nbsp;*</span></label>
+              <input type="email" class="form-control" [formControlName]="'schemeCode'" id="" placeholder="" readonly>
+              <div *ngIf="f.schemeCode.touched && f.schemeCode.errors" class="invalid-feedback">
+                <div *ngIf="f.schemeCode.hasError('required')">E-mail is required</div>
+              </div>
+            </div>
+              <div class="form-group col-md-2">
+              <label for="inputPassword4">CreditBalance<span class="notzerovalue">&nbsp;*</span></label>
+              <input type="text" class="form-control" [formControlName]="'creditBalance'" id="" placeholder="" readonly>
+              <div class="invalid-feedback" *ngIf="f.creditBalance.touched && f.creditBalance.hasError('required')">
+                Credit Balance is required.
+              </div>
+            </div>
+            <div class="form-group col-md-2">
+              <label for="inputPassword4">PreviousCreditBalance<span class="notzerovalue">&nbsp;*</span></label>
+              <input type="text" class="form-control" [formControlName]="'previousCreditBalance'" id="" placeholder="" readonly>
+              <div class="invalid-feedback" *ngIf="f.previousCreditBalance.touched && f.previousCreditBalance.hasError('required')">
+                Address is required.
+              </div>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="inputPassword4">Deleted Reason<span class="notzerovalue">&nbsp;*</span></label>
+              <input type="text" class="form-control" [formControlName]="'deletedReason'" id="" placeholder="">
+              <div class="invalid-feedback" *ngIf="f.deletedReason.touched && f.deletedReason.hasError('maxlength')">
+                Address is required.
+              </div>
+            </div>
+            <div class="form-group col-md-6 image ">
+              <label for="inputPassword4">Upload Image</label>
+              <div class="custom-file">
+                <input type="file" class="custom-file-input" id="inputGroupFile01"
+                  aria-describedby="inputGroupFileAddon01" [formControlName]="'uploadImage'"
+                  (change)="onFileChange($event)">
+                <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+              </div>
+
+            </div>
+            <div class="form-group col-md-12">
+              <div class="form-check">
+                <input class="form-check-input" [formControlName]="'deleted'" type="checkbox" value=""
+                  id="invalidCheck3" [ngClass]="{ 'is-invalid': f.deleted.hasError('required') }">
+                <label class="form-check-label" for="">
+                  Inactive
+                </label>
+                <div class="invalid-feedback" *ngIf="f.deleted.hasError('required')">
+                  Please click checkbox.
+                </div>
+              </div>
+            </div>
+          </div>
+    <!--       <button [disabled]="!editCustomerForm.valid" type="submit" class="btn btn-primary ">Save</button>
+          <button type="reset" class="btn btn-danger">Cancel</button> -->
+          <!--
+          <div class="form-group">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="gridCheck">
+              <label class="form-check-label" for="gridCheck">
+                Check me out
+              </label>
+            </div>
+          </div> -->
+
+        </form>
+      </div>
+    </div>
+    <!--main container end-->
+    <script>
+      var x, i, j, l, ll, selElmnt, a, b, c;
+      /*look for any elements with the class "custom-select":*/
+      x = document.getElementsByClassName("custom-select");
+      l = x.length;
+      for (i = 0; i < l; i++) {
+        selElmnt = x[i].getElementsByTagName("select")[0];
+        ll = selElmnt.length;
+        /*for each element, create a new DIV that will act as the selected item:*/
+        a = document.createElement("DIV");
+        a.setAttribute("class", "select-selected");
+        a.innerHTML = selElmnt.options[selElmnt.selectedIndex].innerHTML;
+        x[i].appendChild(a);
+        /*for each element, create a new DIV that will contain the option list:*/
+        b = document.createElement("DIV");
+        b.setAttribute("class", "select-items select-hide");
+        for (j = 1; j < ll; j++) {
+          /*for each option in the original select element,
+          create a new DIV that will act as an option item:*/
+          c = document.createElement("DIV");
+          c.innerHTML = selElmnt.options[j].innerHTML;
+          c.addEventListener("click", function (e) {
+            /*when an item is clicked, update the original select box,
+            and the selected item:*/
+            var y, i, k, s, h, sl, yl;
+            s = this.parentNode.parentNode.getElementsByTagName("select")[0];
+            sl = s.length;
+            h = this.parentNode.previousSibling;
+            for (i = 0; i < sl; i++) {
+              if (s.options[i].innerHTML == this.innerHTML) {
+                s.selectedIndex = i;
+                h.innerHTML = this.innerHTML;
+                y = this.parentNode.getElementsByClassName("same-as-selected");
+                yl = y.length;
+                for (k = 0; k < yl; k++) {
+                  y[k].removeAttribute("class");
+                }
+                this.setAttribute("class", "same-as-selected");
+                break;
+              }
+            }
+            h.click();
+          });
+          b.appendChild(c);
+        }
+        x[i].appendChild(b);
+        a.addEventListener("click", function (e) {
+          /*when the select box is clicked, close any other select boxes,
+          and open/close the current select box:*/
+          e.stopPropagation();
+          closeAllSelect(this);
+          this.nextSibling.classList.toggle("select-hide");
+          this.classList.toggle("select-arrow-active");
+        });
+      }
+
+      function closeAllSelect(elmnt) {
+        /*a function that will close all select boxes in the document,
+        except the current select box:*/
+        var x, y, i, xl, yl, arrNo = [];
+        x = document.getElementsByClassName("select-items");
+        y = document.getElementsByClassName("select-selected");
+        xl = x.length;
+        yl = y.length;
+        for (i = 0; i < yl; i++) {
+          if (elmnt == y[i]) {
+            arrNo.push(i)
+          } else {
+            y[i].classList.remove("select-arrow-active");
+          }
+        }
+        for (i = 0; i < xl; i++) {
+          if (arrNo.indexOf(i)) {
+            x[i].classList.add("select-hide");
+          }
+        }
+      }
+      /*if the user clicks anywhere outside the select box,
+      then close all select boxes:*/
+      document.addEventListener("click", closeAllSelect);
+
+    </script>

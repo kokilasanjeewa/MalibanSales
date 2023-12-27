@@ -1,0 +1,282 @@
+<!--main container start-->
+<div class="main-container">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a [routerLink]="['/dashboard']">Home</a></li>
+      <li class="breadcrumb-item">
+        <a [routerLink]="['/stock/stockadjustmentlist']">Stock Adjustment List</a>
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">
+        <a [routerLink]="['/stock/stockadjustment']">Stock Adjustment</a>
+      </li>
+    </ol>
+  </nav>
+  <div class="container-fluid">
+    <div class="row mb-1 mt-2">
+      <div class="col-sm-2">
+        <h6>Stock Adjustment</h6>
+      </div>
+      <div class="col-sm-4"></div>
+      <div class="col-sm-2"></div>
+      <div class="col-sm-2">
+        <!--            <button [disabled]="!addorderListForm.valid" type="submit" class="btn-sm btn-primary btn-rounded btn-icon">
+                     <i class="fa fa-envelope-o"></i>
+                </button>
+                <button type="reset" class="btn-sm btn-danger">Clear</button> -->
+      </div>
+      <div class="col-sm-2 text-right align-middle">
+        <button [disabled]="!addSAForm.valid" (click)="saAdd()" type="submit"
+          class="btn btn-outline-primary btn-sm my-1 mr-3 text-primary">
+          Save
+        </button>
+        <button type="reset" class="btn btn-outline-danger btn-sm my-1 text-danger">
+          Cancel
+        </button>
+      </div>
+    </div>
+    <hr />
+    <form [formGroup]="addSAForm" (ngSubmit)="saAdd()">
+      <div class="form-group row">
+        <label for="inputEmail3" class="col-sm-3 col-form-label">Stock Adjustment Date</label>
+        <div class="col-sm-3">
+          <input readonly type="date" class="form-control" [formControlName]="'stockAdjustmentDate'" id placeholder />
+          <div class="invalid-feedback" *ngIf="
+              f.stockAdjustmentDate.touched &&
+              f.stockAdjustmentDate.hasError('required')
+            ">
+            Stock Adjustment Date is required.
+          </div>
+        </div>
+        <label for="inputEmail3" class="col-sm-3 col-form-label">Adjustment Type</label>
+        <div class="col-sm-3">
+          <select [formControlName]="'adjustmentTypeId'" class="form-control" id="exampleFormControlSelect2">
+            <option selected value disabled>
+              Please choose a adjustment type..
+            </option>
+            <option *ngFor="let adjustmenttype of adjustmenttypes | async" [value]="adjustmenttype.adjustmentTypeId">
+              {{ adjustmenttype.adjustmentName }}
+            </option>
+          </select>
+          <div class="invalid-feedback" *ngIf="
+              f.adjustmentTypeId.touched &&
+              f.adjustmentTypeId.hasError('required')
+            ">
+            Please choose a adjustment type.
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputEmail3" class="col-sm-3 col-form-label">Branch Location</label>
+        <div class="col-sm-3">
+          <select [formControlName]="'branchLocationId'" class="form-control" id="exampleFormControlSelect2">
+            <option selected value disabled>Please choose a branch..</option>
+            <option *ngFor="let branch of branches" [value]="branch.branchLocationId">
+              {{ branch.branchCode }}
+            </option>
+          </select>
+          <div class="invalid-feedback" *ngIf="
+              f.branchLocationId.touched &&
+              f.branchLocationId.hasError('required')
+            ">
+            Please choose a branch.
+          </div>
+        </div>
+        <label for="inputEmail3" class="col-sm-3 col-form-label">Stock Taken Date</label>
+        <div class="col-sm-3">
+          <input type="date" class="form-control" [formControlName]="'stockTakenDate'" id placeholder />
+          <div class="invalid-feedback" *ngIf="
+              f.stockTakenDate.touched && f.stockTakenDate.hasError('required')
+            ">
+            Stock Taken Date is required.
+          </div>
+        </div>
+      </div>
+    </form>
+    <form [formGroup]="addsaListForm" (ngSubmit)="itemListAdd()">
+      <div class="form-group row mb-3">
+        <div class="col-2">
+          <input type="text" [formControlName]="'barCode'" class="form-control" (keydown.enter)="add($event)"
+            id="exampleFormControlSelect2" placeholder="Scan Product Code" />
+          <div class="invalid-feedback" *ngIf="f1.barCode.invalid && f1.barCode.touched">
+            <div *ngIf="f1.barCode.errors.required">
+              Search or Scan Product Code.
+            </div>
+          </div>
+        </div>
+        <div class="col-3">
+          <input type="text" [formControlName]="'productName'" class="form-control" placeholder="Product Name" />
+        </div>
+        <!--            <div class="col-md-2">
+                  <ng-select class="custom" [(ngModel)]="selectedCostPrice" [formControlName]="'dCostPrice'"
+                    [virtualScroll]="'true'" placeholder="Price">
+                    <ng-option *ngFor="let item of  items$ | async" [value]="item.dCostPrice">
+                      <span>{{item.dCostPrice}}</span>
+                    </ng-option>
+                  </ng-select>
+                  <span *ngIf="!addsaListForm.get('dCostPrice').valid && addsaListForm.get('dCostPrice').touched">
+                    <span class="danger" *ngIf="addsaListForm.get('dCostPrice').errors['required']">Product is
+                      required</span>
+                  </span>
+                </div> -->
+        <!-- uncomment for select price and productExpireDate -->
+        <!-- <div class="col-2">
+          <select
+            [formControlName]="'supplierPriceId'"
+            class="form-control"
+            id="exampleFormControlSelect2">
+            <option selected value disabled>Price</option>
+            <option
+              *ngFor="let supplierPrice of supplierPrices | async"
+              [value]="supplierPrice.supplierPriceId">
+              {{ supplierPrice.unitPrice }}
+            </option>
+          </select>
+          <div
+            class="invalid-feedback"
+            *ngIf="f1.supplierPriceId.invalid && f1.supplierPriceId.touched">
+            <div *ngIf="f1.supplierPriceId.errors.required">Select Price.</div>
+          </div>
+        </div>
+        <div class="col-2">
+          <input
+            type="date"
+            [formControlName]="'productExpiryDate'"
+            class="form-control"
+            placeholder="Expiry Date" />
+          <span
+            *ngIf="
+              !addsaListForm.get('productExpiryDate').valid &&
+              addsaListForm.get('productExpiryDate').touched
+            ">
+            <span
+              class="danger"
+              *ngIf="
+              addsaListForm.get('productExpiryDate').errors['required']
+              ">Expiry Date is required</span>
+          </span>
+        </div> -->
+        <div class="col-1">
+          <input type="number" [formControlName]="'quantity'" class="form-control" placeholder="Qty" step="0.1" />
+        </div>
+        <div class="col-2">
+          <button [disabled]="!addsaListForm.valid" type="submit"
+            class="btn btn-outline-primary btn-sm mr-2 text-primary">
+            Add
+          </button>
+          <button type="reset" class="btn btn-outline-danger btn-sm text-danger">
+            Clear
+          </button>
+        </div>
+        <div class="col-3" *appHasClaim="'CanAccessUploadStockAdjustment'">
+          <div class="custom-file">
+            <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01"
+              (change)="onFileChange($event)" required />
+            <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+          </div>
+        </div>
+        <div class="col-1" *appHasClaim="'CanAccessUploadStockAdjustment'">
+          <button class="btn btn-outline-primary btn-sm text-primary" (click)="uploadExcel()">
+            Upload
+          </button>
+        </div>
+      </div>
+    </form>
+
+    <div class="table-responsive-md ml-3">
+      <table class="table table-sm table-striped table-hover">
+        <thead>
+          <tr>
+            <th class="center">#</th>
+            <th class="text-left">Product Code</th>
+            <th class="text-left">Product Name</th>
+            <th class="right">Colour</th>
+            <th class="right">Size</th>
+            <th class="right">Expiry Date</th>
+            <th class="center">Quantity</th>
+            <th class="center">Cost Price</th>
+            <th class="center">Sale Price</th>
+            <th class="center">MRP</th>
+            <th class="right">Total</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody style="overflow-y: scroll">
+          <tr *ngFor="let line of lines; let i = index">
+            <td class="center">{{ i + 1 }}</td>
+            <td class="text-left">{{ line.product?.barcode }}</td>
+            <td class="text-left">{{ line.product.productName }}</td>
+            <td class="center">{{ line.product.color }}</td>
+            <td class="right">{{ line.product.size }}</td>
+            <td class="right">
+              {{ line.productExpireDate | date : "mediumDate" }}
+            </td>
+            <td class="right">{{ line.adjustmentQuantity }}</td>
+            <!--              <td class="right">
+                      <select  class="form-control1" id="exampleFormControlSelect2" (change)="updateApprovel(
+                        $event,
+                        line?.product.barcode,
+                        line?.purchaseOrderHeaderId,
+                        line?.supplierPriceId
+                      )">
+                        <option selected value="" disabled>Select Status</option>
+                        <option *ngFor="let cApprovalType of cApprovalTypes"
+                          [value]="cApprovalType.id">
+                          {{ cApprovalType.name }}
+                        </option>
+                      </select>
+                    </td> -->
+            <td class="right">
+              {{ line.costPrice | currency : "LKR" : "Rs." }}
+            </td>
+            <td class="right">
+              {{ line.price.salePrice | currency : "LKR" : "Rs." }}
+            </td>
+            <td class="right">
+              {{ line.price.maximumRetailPrice | currency : "LKR" : "Rs." }}
+            </td>
+            <td class="right">
+              {{ line?.stockAdjustmentTotal | currency : "LKR" : "Rs." }}
+            </td>
+            <td>
+              <i class="fa fa-trash-o" (click)="remove(line.product?.barcode, line?.price.salePrice)"></i>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- <div class="row">
+              <div class="col-lg-4 col-sm-5 ml-auto">
+                <table class="table table-clear">
+                  <tbody>
+                    <tr>
+                      <td class="right">
+                        <strong>Subtotal</strong>
+                      </td>
+                      <td class="right">{{subtotal | currency:'LKR':'Rs.'}}</td>
+                    </tr>
+                    <tr>
+                      <td class="left">
+                        <strong>Discount (%)</strong>
+                      </td>
+                      <td class="right">{{discount | currency:'LKR':'Rs.'}}</td>
+                    </tr>
+                    <tr>
+                      <td class="left">
+                        <strong>VAT (12.5%)</strong>
+                      </td>
+                      <td class="right">{{subtotal*0 | currency:'LKR':'Rs.'}}</td>
+                    </tr>
+                    <tr>
+                      <td class="left">
+                        <strong>Total</strong>
+                      </td>
+                      <td class="right">
+                        <strong>{{total+subtotal*0 | currency:'LKR':'Rs.'}}</strong>
+                      </td>
+                    </tr>
+                   </tbody>
+                </table>
+              </div>
+            </div> -->
+  </div>
+</div>

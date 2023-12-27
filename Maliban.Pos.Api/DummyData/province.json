@@ -1,0 +1,57 @@
+{"ProvinceData": [{
+  "CreatedBy": "Administrator",
+  "ProvinceCode": 1,
+  "ProvinceNameEn": "Western",
+  "ProvinceNameSl": "බස්නාහිර",
+  "ProvinceNameTm": "மேல்"
+}, {
+  "CreatedBy": "Administrator",
+  "ProvinceCode": 2,
+  "ProvinceNameEn": "Central",
+  "ProvinceNameSl": "මධ්‍යම",
+  "ProvinceNameTm": "மத்திய"
+}, {
+  "CreatedBy": "Administrator",
+  "ProvinceCode": 3,
+  "ProvinceNameEn": "Southern",
+  "ProvinceNameSl": "දකුණු",
+  "ProvinceNameTm": "தென்"
+}, {
+  "CreatedBy": "Administrator",
+  "ProvinceCode": 4,
+  "ProvinceNameEn": "North Western",
+  "ProvinceNameSl": "වයඹ",
+  "ProvinceNameTm": "வட மேல்"
+}, {
+  "CreatedBy": "Administrator",
+  "ProvinceCode": 5,
+  "ProvinceNameEn": "Sabaragamuwa",
+  "ProvinceNameSl": "සබරගමුව",
+  "ProvinceNameTm": "சபரகமுவ"
+}, {
+  "CreatedBy": "Administrator",
+  "ProvinceCode": 6,
+  "ProvinceNameEn": "Eastern",
+  "ProvinceNameSl": "නැගෙනහිර",
+  "ProvinceNameTm": "கிழக்கு"
+},
+{
+  "CreatedBy": "Administrator",
+  "ProvinceCode": 7,
+  "ProvinceNameEn": "Uva",
+  "ProvinceNameSl": "ඌව",
+  "ProvinceNameTm": "ஊவா"
+}, {
+  "CreatedBy": "Administrator",
+  "ProvinceCode": 8,
+  "ProvinceNameEn": "North Central",
+  "ProvinceNameSl": "උතුරු මැද",
+  "ProvinceNameTm": "வட மத்திய"
+}, {
+  "CreatedBy": "Administrator",
+  "ProvinceCode": 9,
+  "ProvinceNameEn": "Northern",
+  "ProvinceNameSl": "උතුරු",
+  "ProvinceNameTm": "வட"
+}
+]}

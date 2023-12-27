@@ -1,0 +1,192 @@
+<!--main container start-->
+<div class="main-container">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="#">Home</a></li>
+      <li class="breadcrumb-item"><a href="#">Product</a></li>
+      <li class="breadcrumb-item">
+        <a [routerLink]="['/product/addproduct']">Add Product </a>
+      </li>
+      <li class="breadcrumb-item">
+        <a [routerLink]="['/product/productlist']">Product List</a>
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">Edit Product</li>
+    </ol>
+  </nav>
+  <div class="container-fluid">
+    <div class="row mb-1 mt-2">
+      <div class="col-sm-2">
+        <h6>Edit Product</h6>
+      </div>
+      <div class="col-sm-4"></div>
+      <div class="col-sm-2"></div>
+      <div class="col-sm-2"></div>
+      <div class="col-sm-2 text-right align-middle">
+        <button [disabled]="!editProductForm.valid" (click)="productEdit()"
+          type="submit"
+          class="btn btn-outline-primary btn-sm my-1 mr-3 text-primary">
+          Save
+        </button>
+        <button type="reset"
+          class="btn btn-outline-danger btn-sm my-1 text-danger">
+          Cancel
+        </button>
+      </div>
+    </div>
+    <hr />
+    <form [formGroup]="editProductForm" (ngSubmit)="productEdit()">
+      <div class="form-row">
+        <div class="form-group col-md-2">
+          <label for="ProductCode">Product Code<span
+              class="notzerovalue">&nbsp;*</span></label>
+          <input type="text" class="form-control" [formControlName]="'barcode'"
+            readonly />
+        </div>
+        <div class="form-group col-md-4">
+          <label for="ProductName">Product Name<span
+              class="notzerovalue">&nbsp;*</span></label>
+          <input type="text" class="form-control"
+            [formControlName]="'productName'" readonly />
+        </div>
+        <div class="form-group col-md-6">
+          <label for="ProductDescription">Product Description</label>
+          <input type="text" class="form-control"
+            [formControlName]="'productDescription'" />
+        </div>
+        <div class="form-group col-md-2">
+          <label for="inputEmail4">Expiry Date<span
+              class="notzerovalue">&nbsp;*</span></label>
+          <input type="date" class="form-control"
+            [formControlName]="'expireDate'" />
+        </div>
+        <div class="form-group col-md-2">
+          <label for="Brand">Brand<span
+              class="notzerovalue">&nbsp;*</span></label>
+          <select [formControlName]="'brandId'" class="form-control"
+            id="brandId">
+            <option selected value disabled>Select Band ..</option>
+            <option *ngFor="let brand of brands | async"
+              [value]="brand.brandId">
+              {{ brand.brandName }}
+            </option>
+          </select>
+          <div class="invalid-feedback"
+            *ngIf="f.brandId.touched && f.brandId.hasError('required')">
+            Please choose a Brand.
+          </div>
+        </div>
+        <div class="form-group col-md-2">
+          <label for="UOM">UOM<span class="notzerovalue">&nbsp;*</span></label>
+          <select class="form-control" [formControlName]="'unitOfMeasurementId'"
+            id="unitOfMeasurementId">
+            <option selected value disabled>Select UOM ..</option>
+            <option *ngFor="let uom of uoms | async"
+              [value]="uom.unitOfMeasurementId">
+              {{ uom.uom }}
+            </option>
+          </select>
+          <div class="invalid-feedback" *ngIf="
+              f.unitOfMeasurementId.touched &&
+              f.unitOfMeasurementId.hasError('required')
+            ">
+            Please choose a UOM.
+          </div>
+        </div>
+
+        <div class="form-group col-md-2">
+          <label for="Vendor">Vendor<span
+              class="notzerovalue">&nbsp;*</span></label>
+          <select class="form-control" [formControlName]="'vendorId'"
+            id="exampleFormControlSelect2">
+            <option selected value disabled>Select Vendor ..</option>
+            <option *ngFor="let vendor of vendors | async"
+              [value]="vendor.vendorId">
+              {{ vendor.vendorName }}
+            </option>
+          </select>
+          <div class="invalid-feedback"
+            *ngIf="f.vendorId.touched && f.vendorId.hasError('required')">
+            Please choose a Vendor.
+          </div>
+        </div>
+        <div class="form-group col-md-2">
+          <label for="Category">Category</label>
+          <select class="form-control" [formControlName]="'categoryId'"
+            id="categoryId">
+            <option selected value disabled>Select Category ..</option>
+            <option *ngFor="let category of categories | async"
+              [value]="category.categoryId">
+              {{ category.categoryName }}
+            </option>
+          </select>
+          <div class="invalid-feedback"
+            *ngIf="f.categoryId.touched && f.categoryId.hasError('required')">
+            Please choose a Category.
+          </div>
+        </div>
+        <div class="form-group col-md-2">
+          <label for="SubCategory">SubCategory</label>
+          <select class="form-control" [formControlName]="'subCategoryId'"
+            id="subCategoryId">
+            <option selected value disabled>Select SubCategory ..</option>
+            <option *ngFor="let subcategory of subcategories | async"
+              [value]="subcategory.subCategoryId">
+              {{ subcategory.subCategoryName }}
+            </option>
+          </select>
+          <div class="invalid-feedback" *ngIf="
+              f.subCategoryId.touched && f.subCategoryId.hasError('required')
+            ">
+            Please choose a SubCategory.
+          </div>
+        </div>
+        <div class="form-group col-md-2">
+          <label for="inputPassword4">Weight</label>
+          <input type="number" class="form-control"
+            [formControlName]="'unitWeight'" />
+        </div>
+        <div class="form-group col-md-2">
+          <label for="inputPassword4">Size</label>
+          <input type="text" class="form-control" [formControlName]="'size'" />
+        </div>
+        <div class="form-group col-md-2">
+          <label for="inputEmail4">Colour</label>
+          <input type="text" class="form-control" [formControlName]="'color'" />
+        </div>
+        <div class="form-group col-md-2">
+          <label for="inputEmail4">Length</label>
+          <input type="text" class="form-control"
+            [formControlName]="'length'" />
+        </div>
+        <div class="form-group col-md-2">
+          <label for="inputPassword4">Width</label>
+          <input type="text" class="form-control" [formControlName]="'width'" />
+        </div>
+        <div class="form-group col-md-2">
+          <label for="inputPassword4">Height</label>
+          <input type="password" class="form-control"
+            [formControlName]="'height'" />
+        </div>
+        <div class="form-group col-md-12 image">
+          <label for="inputPassword4">Upload Product Image</label>
+          <div class="custom-file">
+            <input type="file" class="custom-file-input" id="inputGroupFile01"
+              aria-describedby="inputGroupFileAddon01"
+              (change)="onFileChange($event)" />
+            <label class="custom-file-label" for="inputGroupFile01">Choose
+              file</label>
+          </div>
+        </div>
+        <div class="form-group col-md-12">
+          <input value [formControlName]="'active'"
+            [ngClass]="{ 'is-invalid': f.active.hasError('required') }"
+            class="custom-checkbox-general" type="checkbox" id="active" />
+          <label for="active">Active</label>
+          <div class="invalid-feedback" *ngIf="f.active.hasError('required')">
+            Please click checkbox.
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

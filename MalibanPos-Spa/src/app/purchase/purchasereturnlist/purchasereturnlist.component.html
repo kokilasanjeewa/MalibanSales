@@ -1,0 +1,218 @@
+<!--main container start-->
+<div class="main-container">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a [routerLink]="['/dashboard']">Home</a></li>
+      <li class="breadcrumb-item">
+        <a [routerLink]="['/purchase/purchasereturn']"
+          >Create Purchase Return</a
+        >
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">
+        <a href="#">Purchase Return List</a>
+      </li>
+    </ol>
+  </nav>
+  <div class="container-fluid" style="overflow: hidden">
+    <h6>
+      Purchase Return List
+      <a
+        class=""
+        [routerLink]="['../purchasereturn']"
+        *appHasClaim="'CanAccessAddPurchaseReturn'"
+      >
+        <i class="fa fa-plus-circle fa-lg" aria-hidden="true"></i>
+      </a>
+    </h6>
+    <div class="row clearfix">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+          <div class="body">
+            <div class="table-responsive-md">
+              <div class="example-container mat-elevation-z8">
+                <input
+                  class="form-control"
+                  type="text"
+                  (keydown.enter)="applyFilter($event)"
+                  placeholder="Search"
+                />
+                <div
+                  class="example-loading-shade"
+                  *ngIf="isLoadingResults || isRateLimitReached"
+                >
+                  <div
+                    class="example-rate-limit-reached"
+                    *ngIf="isRateLimitReached"
+                  >
+                    Tutions API rate limit has been reached. It will be reset in
+                    one minute.
+                  </div>
+                </div>
+                <div class="example-table-container">
+                  <table
+                    mat-table
+                    [dataSource]="listData"
+                    class="example-table"
+                    matSort
+                    matSortActive="regDate"
+                    matSortDisableClear
+                    matSortDirection="desc"
+                  >
+                    <!-- User Name Column -->
+                    <div>
+                      <ng-container matColumnDef="purchaseReturnHeaderId">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                          PR#
+                        </th>
+                        <td mat-cell *matCellDef="let row">
+                          {{ row?.purchaseReturnHeaderId }}
+                        </td>
+                      </ng-container>
+                    </div>
+                    <ng-container matColumnDef="id">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                        Seq
+                      </th>
+                      <td mat-cell *matCellDef="let row; let i = index">
+                        {{ i + 1 }}
+                      </td>
+                    </ng-container>
+                    <!-- User Name Column -->
+                    <ng-container matColumnDef="supplier">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                        Supplier
+                      </th>
+                      <td mat-cell *matCellDef="let row">
+                        {{ row?.supplier?.supplierName }}
+                      </td>
+                    </ng-container>
+                    <!-- User Name Column -->
+                    <ng-container matColumnDef="returnReason">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                        Return Reason
+                      </th>
+                      <td mat-cell *matCellDef="let row">
+                        {{ row?.returnReason?.returnType }}
+                      </td>
+                    </ng-container>
+                    <!-- User Id Column -->
+                    <ng-container matColumnDef="purchaseReturnAmount">
+                      <th mat-header-cell *matHeaderCellDef>
+                        Purchase Return Amount
+                      </th>
+                      <td mat-cell *matCellDef="let row">
+                        {{ row?.purchaseReturnAmount }}
+                      </td>
+                    </ng-container>
+                    <ng-container matColumnDef="description">
+                      <th mat-header-cell *matHeaderCellDef>Description</th>
+                      <td mat-cell *matCellDef="let row">
+                        {{ row?.description }}
+                      </td>
+                    </ng-container>
+                    <!-- Email Address Column -->
+                    <ng-container matColumnDef="purchaseReturnDate">
+                      <th mat-header-cell *matHeaderCellDef>
+                        Purchase Return Date
+                      </th>
+                      <td mat-cell *matCellDef="let row">
+                        {{ row?.purchaseReturnDate | date : "mediumDate" }}
+                      </td>
+                    </ng-container>
+                    <!-- Created Action Column -->
+                    <ng-container matColumnDef="action">
+                      <th mat-header-cell *matHeaderCellDef>Action</th>
+                      <td mat-cell *matCellDef="let row">
+                        <a
+                          href="#"
+                          class=""
+                          [routerLink]="[
+                            '../editsupplier',
+                            row?.purchaseReturnHeaderId
+                          ]"
+                        >
+                          <i
+                            class="fa fa-pencil-square-o fa-lg"
+                            aria-hidden="true"
+                          ></i>
+                        </a>
+                        <a
+                          href="#"
+                          class=""
+                          [routerLink]="[
+                            '../purchasereturnreport',
+                            row?.purchaseReturnHeaderId
+                          ]"
+                        >
+                          <i class="fa fa-th fa-lg" aria-hidden="true"></i>
+                        </a>
+                        <a
+                          href="#"
+                          class=""
+                          [routerLink]="[
+                            '../deletesupplier',
+                            row?.purchaseReturnHeaderId
+                          ]"
+                        >
+                          <i class="fa fa-trash fa-lg" aria-hidden="true"></i>
+                        </a>
+                      </td>
+                    </ng-container>
+                    <ng-container matColumnDef="loading">
+                      <td mat-footer-cell *matFooterCellDef colspan="12">
+                        Loading ......
+                      </td>
+                    </ng-container>
+                    <ng-container matColumnDef="unloading">
+                      <td mat-footer-cell *matFooterCellDef colspan="12">
+                        Data not found ......
+                      </td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr
+                      mat-row
+                      *matRowDef="let row; columns: displayedColumns"
+                    ></tr>
+                    <tr
+                      mat-footer-row
+                      *matFooterRowDef="['loading']"
+                      [ngClass]="{ hide: listData !== null }"
+                    ></tr>
+                    <tr
+                      mat-footer-row
+                      *matFooterRowDef="['unloading']"
+                      [ngClass]="{
+                        hide: !(listData != null && length > 0)
+                      }"
+                    ></tr>
+                  </table>
+                </div>
+                <div style="float: right">
+                  <!--  <mat-paginator [length]="100"
+                          [pageSize]="10"
+                          [pageSizeOptions]="[5, 10, 25, 100]">
+            </mat-paginator> -->
+
+                  <pagination
+                    [itemsPerPage]="pagination?.itemsPerPage"
+                    [boundaryLinks]="true"
+                    [maxSize]="10"
+                    [(ngModel)]="pagination.currentPage"
+                    [totalItems]="pagination?.totalItems"
+                    previousText="&lsaquo;"
+                    nextText="&rsaquo;"
+                    firstText="&laquo;"
+                    lastText="&raquo;"
+                    (pageChanged)="pageChanged($event)"
+                    *ngIf="length > 0"
+                  >
+                  </pagination>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

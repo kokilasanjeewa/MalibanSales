@@ -1,0 +1,194 @@
+{
+"DistrictData": [{
+  "CreatedBy": "Administrator",
+  "ProvinceCode": 1,
+  "DistrictCode": 10,
+  "DistrictNameEn": "Kalutara",
+  "DistrictNameSl": "කළුතර",
+  "DistrictNameTm": "களுத்துறை"
+},
+{
+  "CreatedBy": "Administrator",
+  "ProvinceCode": 1,
+  "DistrictCode": 5,
+  "DistrictNameEn": "Colombo",
+  "DistrictNameSl": "කොළඹ",
+  "DistrictNameTm": "கொழும்பு"
+},
+{
+  "CreatedBy": "Administrator",
+  "ProvinceCode": 1,
+  "DistrictCode": 7,
+  "DistrictNameEn": "Gampaha",
+  "DistrictNameSl": "ගම්පහ",
+  "DistrictNameTm": "கம்பஹா"
+},
+{
+  "CreatedBy": "Administrator",
+  "ProvinceCode": 2,
+  "DistrictCode": 11,
+  "DistrictNameEn": "Kandy",
+  "DistrictNameSl": "මහනුවර",
+  "DistrictNameTm": "கண்டி"
+},
+{
+  "CreatedBy": "Administrator",
+  "ProvinceCode": 2,
+  "DistrictCode": 16,
+  "DistrictNameEn": "Matale",
+  "DistrictNameSl": "මාතලේ",
+  "DistrictNameTm": "மாத்தளை"
+},
+{
+  "CreatedBy": "Administrator",
+  "ProvinceCode": 2,
+  "DistrictCode": 20,
+  "DistrictNameEn": "Nuwara Eliya",
+  "DistrictNameSl": "නුවර එළිය",
+  "DistrictNameTm": "நுவரேலியா"
+},
+{
+  "CreatedBy": "Administrator",
+  "ProvinceCode": 3,
+  "DistrictCode": 17,
+  "DistrictNameEn": "Matara",
+  "DistrictNameSl": "මාතර",
+  "DistrictNameTm": "மாத்தறை"
+},
+{
+  "CreatedBy": "Administrator",
+  "ProvinceCode": 3,
+  "DistrictCode": 6,
+  "DistrictNameEn": "Galle",
+  "DistrictNameSl": "ගාල්ල",
+  "DistrictNameTm": "காலி"
+},
+{
+  "CreatedBy": "Administrator",
+  "ProvinceCode": 3,
+  "DistrictCode": 8,
+  "DistrictNameEn": "Hambantota",
+  "DistrictNameSl": "හම්බන්තොට",
+  "DistrictNameTm": "அம்பாந்தோட்டை"
+},
+{
+  "CreatedBy": "Administrator",
+  "ProvinceCode": 4,
+  "DistrictCode": 14,
+  "DistrictNameEn": "Kurunegala",
+  "DistrictNameSl": "කුරුණෑගල",
+  "DistrictNameTm": "குருணாகல்"
+},
+{
+  "CreatedBy": "Administrator",
+  "ProvinceCode": 4,
+  "DistrictCode": 22,
+  "DistrictNameEn": "Puttalam",
+  "DistrictNameSl": "පුත්තලම",
+  "DistrictNameTm": "புத்தளம்"
+},
+{
+  "CreatedBy": "Administrator",
+  "ProvinceCode": 5,
+  "DistrictCode": 12,
+  "DistrictNameEn": "Kegalle",
+  "DistrictNameSl": "කෑගල්ල",
+  "DistrictNameTm": "கேகாலை"
+},
+{
+  "CreatedBy": "Administrator",
+  "ProvinceCode": 5,
+  "DistrictCode": 23,
+  "DistrictNameEn": "Ratnapura",
+  "DistrictNameSl": "රත්නපුර",
+  "DistrictNameTm": "இரத்தினபுரி"
+},
+{
+  "CreatedBy": "Administrator",
+  "ProvinceCode": 6,
+  "DistrictCode": 1,
+  "DistrictNameEn": "Ampara",
+  "DistrictNameSl": "අම්පාර",
+  "DistrictNameTm": "அம்பாறை"
+},
+{
+  "CreatedBy": "Administrator",
+  "ProvinceCode": 6,
+  "DistrictCode": 4,
+  "DistrictNameEn": "Batticaloa",
+  "DistrictNameSl": "මඩකලපුව",
+  "DistrictNameTm": "மட்டக்களப்பு"
+},
+{
+  "CreatedBy": "Administrator",
+  "ProvinceCode": 6,
+  "DistrictCode": 24,
+  "DistrictNameEn": "Trincomalee",
+  "DistrictNameSl": "ත්‍රිකුණාමලය",
+  "DistrictNameTm": "திருகோணமலை"
+},
+{
+  "CreatedBy": "Administrator",
+  "ProvinceCode": 7,
+  "DistrictCode": 3,
+  "DistrictNameEn": "Badulla",
+  "DistrictNameSl": "බදුල්ල",
+  "DistrictNameTm": "பதுளை"
+}, {
+  "CreatedBy": "Administrator",
+  "ProvinceCode": 7,
+  "DistrictCode": 18,
+  "DistrictNameEn": "Monaragala",
+  "DistrictNameSl": "මොණරාගල",
+  "DistrictNameTm": "மொணராகலை"
+}, {
+  "CreatedBy": "Administrator",
+  "ProvinceCode": 8,
+  "DistrictCode": 2,
+  "DistrictNameEn": "Anuradhapura",
+  "DistrictNameSl": "අනුරාධපුරය",
+  "DistrictNameTm": "அனுராதபுரம்"
+}, {
+  "CreatedBy": "Administrator",
+  "ProvinceCode": 8,
+  "DistrictCode": 21,
+  "DistrictNameEn": "Polonnaruwa",
+  "DistrictNameSl": "පොළොන්නරුව",
+  "DistrictNameTm": "பொலன்னறுவை"
+}, {
+  "CreatedBy": "Administrator",
+  "ProvinceCode": 9,
+  "DistrictCode": 9,
+  "DistrictNameEn": "Jaffna",
+  "DistrictNameSl": "යාපනය",
+  "DistrictNameTm": "யாழ்ப்பாணம்"
+}, {
+  "CreatedBy": "Administrator",
+  "ProvinceCode": 9,
+  "DistrictCode": 13,
+  "DistrictNameEn": "Kilinochchi",
+  "DistrictNameSl": "කිලිනොච්චිය",
+  "DistrictNameTm": "கிளிநொச்சி"
+}, {
+  "CreatedBy": "Administrator",
+  "ProvinceCode": 9,
+  "DistrictCode": 15,
+  "DistrictNameEn": "Mannar",
+  "DistrictNameSl": "මන්නාරම",
+  "DistrictNameTm": "மன்னார்"
+}, {
+  "CreatedBy": "Administrator",
+  "ProvinceCode": 9,
+  "DistrictCode": 25,
+  "DistrictNameEn": "Vavuniya",
+  "DistrictNameSl": "වව්නියාව",
+  "DistrictNameTm": "வவுனியா"
+}, {
+  "CreatedBy": "Administrator",
+  "ProvinceCode": 9,
+  "DistrictCode": 19,
+  "DistrictNameEn": "Mullaitivu",
+  "DistrictNameSl": "මුලතිව්",
+  "DistrictNameTm": "முல்லைத்தீவு"
+}
+]}

@@ -1,0 +1,18 @@
+<div class="cookiesContent" id="cookiesPopup">
+  <button class="close" (click)="close()">✖</button>
+  <img src="../assets/resource/images/logo/Web-Logo-4.png" alt="solo-svg" />
+  <p>PAY WITH SOLO AT</p>
+  <form class="form-inline" [formGroup]="addPaymentForm" (ngSubmit)="onAddPay()">
+     <div class="form-group mx-sm-3 mb-2">
+      <label for="paymentReferenceId" class="sr-only">Payment Reference#</label>
+      <input [formControlName]="'paymentReferenceId'" [(ngModel)]="paidpaymentReferenceId" type="text" class="form-control form-control-lg" id="paymentReferenceId" placeholder="Payment Reference#">
+      <div *ngIf="f.paymentReferenceId.touched && f.paymentReferenceId.errors" class="invalid-feedback">
+        <div *ngIf="f.paymentReferenceId.hasError('required')">Payment Reference is required</div>
+        <div *ngIf="f.paymentReferenceId.hasError('minlength')">At least 12 characters</div>
+        <div *ngIf="f.paymentReferenceId.hasError('maxlength')">Max 12 characters</div>
+      </div>
+    </div>
+  </form>
+  <button [disabled]="!addPaymentForm.valid" (click)=" onAddPay()" class="accept" type="submit">Pay</button>
+</div>
+

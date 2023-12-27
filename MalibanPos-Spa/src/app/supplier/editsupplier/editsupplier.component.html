@@ -1,0 +1,278 @@
+<!--main container start-->
+<div class="main-container">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a [routerLink]="['/dashboard']">Home</a></li>
+      <li class="breadcrumb-item">
+        <a [routerLink]="['/supplier/supplierlist']">Supplier List</a>
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">Edit Supplier</li>
+    </ol>
+  </nav>
+  <div class="container-fluid">
+    <div class="row mb-1 mt-2">
+      <div class="col-sm-2">
+        <h6>Supplier Edit</h6>
+      </div>
+      <div class="col-sm-4"></div>
+      <div class="col-sm-2"></div>
+      <div class="col-sm-2"></div>
+      <div class="col-sm-2 text-right align-middle">
+        <button [disabled]="!editSupplierForm.valid" (click)="supplierEdit()" type="submit"
+          class="btn btn-outline-primary btn-sm my-1 mr-3 text-primary">
+          Save
+        </button>
+        <button type="reset" class="btn btn-outline-danger btn-sm my-1 text-danger">
+          Cancel
+        </button>
+      </div>
+    </div>
+    <hr />
+    <form [formGroup]="editSupplierForm" (ngSubmit)="supplierEdit()">
+      <div class="form-row">
+        <div class="form-group col-md-2">
+          <label for="inputPassword4">BR# </label>
+          <input type="text" class="form-control" [formControlName]="'brno'" id placeholder />
+          <div *ngIf="f.brno.touched && f.brno.errors" class="invalid-feedback"></div>
+        </div>
+        <div class="form-group col-md-4">
+          <label for="ProductCode">Supplier Company Name<span class="notzerovalue">&nbsp;*</span></label>
+          <input readonly type="text" class="form-control" [formControlName]="'companyname'" id placeholder />
+          <div *ngIf="f.companyname.touched && f.companyname.errors" class="invalid-feedback">
+            <div *ngIf="f.companyname.hasError('required')">
+              Company Name is required
+            </div>
+          </div>
+        </div>
+        <div class="form-group col-md-2">
+          <label for="exampleFormControlSelect4">Title<span class="notzerovalue">&nbsp;*</span></label>
+          <select [formControlName]="'titleId'" class="form-control" id="exampleFormControlSelect2">
+            <option selected value disabled>Please choose a title..</option>
+            <option *ngFor="let title of titles | async" [value]="title.titleId">
+              {{ title.titleName }}
+            </option>
+          </select>
+          <div class="invalid-feedback" *ngIf="f.titleId.touched && f.titleId.hasError('required')">
+            Please choose a title.
+          </div>
+        </div>
+        <div class="form-group col-md-2">
+          <label for="ProductName">First Name<span class="notzerovalue">&nbsp;*</span></label>
+          <input type="text" class="form-control" [formControlName]="'firstname'" id placeholder />
+          <div class="invalid-feedback" *ngIf="f.firstname.touched && f.firstname.hasError('required')">
+            First Name is required.
+          </div>
+        </div>
+        <div class="form-group col-md-2">
+          <label for="ProductDescription">Last Name<span class="notzerovalue">&nbsp;*</span></label>
+          <input type="text" class="form-control" [formControlName]="'lastname'" id placeholder />
+          <div class="invalid-feedback" *ngIf="f.lastname.touched && f.lastname.hasError('required')">
+            Last Name is required.
+          </div>
+        </div>
+        <div class="form-group col-md-2">
+          <label for="inputEmail4">Mobile<span class="notzerovalue">&nbsp;*</span></label>
+          <input type="text" class="form-control" [formControlName]="'mobile'" id placeholder />
+          <div *ngIf="f.mobile.touched && f.mobile.errors" class="invalid-feedback">
+            <div *ngIf="f.mobile.hasError('required')">Mobile is required</div>
+            <div *ngIf="f.mobile.hasError('maxlength')">
+              Cann't exceed 12 characters
+            </div>
+            <div *ngIf="f.mobile.hasError('minlength')">
+              Mobile number must be at lease 10 characters
+            </div>
+            <div *ngIf="f.mobile.hasError('pattern')">
+              Mobile number not valid.
+            </div>
+          </div>
+        </div>
+        <div class="form-group col-md-2">
+          <label for="inputPassword4">Fax</label>
+          <input type="text" class="form-control" [formControlName]="'fax'" id placeholder />
+        </div>
+        <div class="form-group col-md-2">
+          <label for="inputPassword4">E-mail<span class="notzerovalue">&nbsp;*</span></label>
+          <input type="email" class="form-control" [formControlName]="'email'" id placeholder />
+          <div *ngIf="f.email.touched && f.email.errors" class="invalid-feedback">
+            <div *ngIf="f.email.hasError('required')">E-mail is required</div>
+            <div *ngIf="f.email.hasError('email')">E-mail is invalid</div>
+          </div>
+        </div>
+        <div class="form-group col-md-2">
+          <label for="exampleFormControlSelect2">Province<span class="notzerovalue">&nbsp;*</span></label>
+          <select [formControlName]="'provinceId'" class="form-control" id="exampleFormControlSelect3"
+            (change)="changeProvince($event)">
+            <option selected value disabled>Select Province ..</option>
+            <option *ngFor="let province of provinces | async" [value]="province.provinceId">
+              {{ province.provinceNameEn }}
+            </option>
+          </select>
+          <div class="invalid-feedback" *ngIf="f.provinceId.touched && f.provinceId.hasError('required')">
+            Please choose a province.
+          </div>
+        </div>
+        <div class="form-group col-md-2">
+          <label for="exampleFormControlSelect2">District<span class="notzerovalue">&nbsp;*</span></label>
+          <select (change)="changeDistricts($event)" [formControlName]="'districtId'" class="form-control"
+            id="exampleFormControlSelect2">
+            <option selected value disabled>Select District ..</option>
+            <option *ngFor="let district of districts | async" [value]="district.districtId">
+              {{ district.districtNameEn }}
+            </option>
+          </select>
+          <div class="invalid-feedback" *ngIf="f.districtId.touched && f.districtId.hasError('required')">
+            Please choose a district.
+          </div>
+        </div>
+        <div class="form-group col-md-2">
+          <label for="exampleFormControlSelect4">City<span class="notzerovalue">&nbsp;*</span></label>
+          <select [formControlName]="'cityId'" class="form-control" id="exampleFormControlSelect2">
+            <option selected value disabled>Select City ..</option>
+            <option *ngFor="let city of cities | async" [value]="city.cityId">
+              {{ city.cityNameEn }}
+            </option>
+          </select>
+          <div class="invalid-feedback" *ngIf="f.cityId.touched && f.cityId.hasError('required')">
+            Please choose a city.
+          </div>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="inputPassword4">Address<span class="notzerovalue">&nbsp;*</span></label>
+          <input type="text" class="form-control" [formControlName]="'address1'" id placeholder />
+          <div class="invalid-feedback" *ngIf="f.address1.touched && f.address1.hasError('required')">
+            Address is required.
+          </div>
+        </div>
+        <div class="form-group col-md-3">
+          <label for="exampleFormControlSelect4">Type of Goods<span class="notzerovalue">&nbsp;*</span></label>
+          <select [formControlName]="'typeofgood'" class="form-control" id="exampleFormControlSelect2">
+            <option selected value disabled>Select Type ..</option>
+            <option *ngFor="let good of typeofGoods | async" [value]="good.typeofGoodId">
+              {{ good.typeofGoods }}
+            </option>
+          </select>
+          <div class="invalid-feedback" *ngIf="f.typeofgood.touched && f.typeofgood.hasError('required')">
+            Please choose a Type.
+          </div>
+        </div>
+        <div class="form-group col-md-3">
+          <label for="exampleFormControlSelect4">Payment Method<span class="notzerovalue">&nbsp;*</span></label>
+          <select [formControlName]="'paymentmethod'" class="form-control" id="exampleFormControlSelect2">
+            <option selected value disabled>Select Method ..</option>
+            <option *ngFor="let payment of paymentMethod | async" [value]="payment.paymentMethodId">
+              {{ payment.methodType }}
+            </option>
+          </select>
+          <div class="invalid-feedback" *ngIf="
+              f.paymentmethod.touched && f.paymentmethod.hasError('required')
+            ">
+            Please choose a Method.
+          </div>
+        </div>
+        <div class="form-group col-md-12 image">
+          <label for="inputPassword4">Upload Product Image</label>
+          <div class="custom-file">
+            <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01"
+              [formControlName]="'uploadImage'" (change)="onFileChange($event)" />
+            <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+          </div>
+        </div>
+        <div class="form-group col-md-12">
+          <input value [formControlName]="'active'" [ngClass]="{ 'is-invalid': f.active.hasError('required') }"
+            class="custom-checkbox-general" type="checkbox" id="active" />
+          <label for="active">Active</label>
+          <div class="invalid-feedback" *ngIf="f.active.hasError('required')">
+            Please click checkbox.
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<!--main container end-->
+<script>
+  var x, i, j, l, ll, selElmnt, a, b, c;
+  /*look for any elements with the class "custom-select":*/
+  x = document.getElementsByClassName("custom-select");
+  l = x.length;
+  for (i = 0; i < l; i++) {
+    selElmnt = x[i].getElementsByTagName("select")[0];
+    ll = selElmnt.length;
+    /*for each element, create a new DIV that will act as the selected item:*/
+    a = document.createElement("DIV");
+    a.setAttribute("class", "select-selected");
+    a.innerHTML = selElmnt.options[selElmnt.selectedIndex].innerHTML;
+    x[i].appendChild(a);
+    /*for each element, create a new DIV that will contain the option list:*/
+    b = document.createElement("DIV");
+    b.setAttribute("class", "select-items select-hide");
+    for (j = 1; j < ll; j++) {
+      /*for each option in the original select element,
+      create a new DIV that will act as an option item:*/
+      c = document.createElement("DIV");
+      c.innerHTML = selElmnt.options[j].innerHTML;
+      c.addEventListener("click", function (e) {
+        /*when an item is clicked, update the original select box,
+        and the selected item:*/
+        var y, i, k, s, h, sl, yl;
+        s = this.parentNode.parentNode.getElementsByTagName("select")[0];
+        sl = s.length;
+        h = this.parentNode.previousSibling;
+        for (i = 0; i < sl; i++) {
+          if (s.options[i].innerHTML == this.innerHTML) {
+            s.selectedIndex = i;
+            h.innerHTML = this.innerHTML;
+            y = this.parentNode.getElementsByClassName("same-as-selected");
+            yl = y.length;
+            for (k = 0; k < yl; k++) {
+              y[k].removeAttribute("class");
+            }
+            this.setAttribute("class", "same-as-selected");
+            break;
+          }
+        }
+        h.click();
+      });
+      b.appendChild(c);
+    }
+    x[i].appendChild(b);
+    a.addEventListener("click", function (e) {
+      /*when the select box is clicked, close any other select boxes,
+      and open/close the current select box:*/
+      e.stopPropagation();
+      closeAllSelect(this);
+      this.nextSibling.classList.toggle("select-hide");
+      this.classList.toggle("select-arrow-active");
+    });
+  }
+
+  function closeAllSelect(elmnt) {
+    /*a function that will close all select boxes in the document,
+    except the current select box:*/
+    var x,
+      y,
+      i,
+      xl,
+      yl,
+      arrNo = [];
+    x = document.getElementsByClassName("select-items");
+    y = document.getElementsByClassName("select-selected");
+    xl = x.length;
+    yl = y.length;
+    for (i = 0; i < yl; i++) {
+      if (elmnt == y[i]) {
+        arrNo.push(i);
+      } else {
+        y[i].classList.remove("select-arrow-active");
+      }
+    }
+    for (i = 0; i < xl; i++) {
+      if (arrNo.indexOf(i)) {
+        x[i].classList.add("select-hide");
+      }
+    }
+  }
+  /*if the user clicks anywhere outside the select box,
+  then close all select boxes:*/
+  document.addEventListener("click", closeAllSelect);
+</script>

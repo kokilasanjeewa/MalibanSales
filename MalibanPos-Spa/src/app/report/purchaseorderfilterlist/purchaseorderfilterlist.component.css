@@ -1,0 +1,7 @@
+@import '../report.css';
+.table thead tr td{
+  color: var(--tabletext);
+  border: 1px solid #fff;
+  font-weight: 700;
+  font-size: x-small;
+}

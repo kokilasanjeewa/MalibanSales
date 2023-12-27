@@ -1,0 +1,182 @@
+<!--main container start-->
+<div class="main-container">
+  <nav aria-label="breadcrumb" class="d-print-none">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a [routerLink]="['/dashboard']">Home</a></li>
+      <li class="breadcrumb-item">
+        <a [routerLink]="['/report/viewreport']">Report List</a>
+      </li>
+      <li class="breadcrumb-item active">
+        <a [routerLink]="['/report/purchaseorderfilterlist']">PO List</a>
+      </li>
+    </ol>
+  </nav>
+  <div class="container-fluid">
+    <h6>Purchase Order List</h6>
+    <form [formGroup]="poListReportForm" (ngSubmit)="submitForm()" class="d-print-none">
+      <div class="form-row">
+        <label for="branchLocationId" class="col-sm-2 col-form-label col-form-label-sm">Branch<span
+            class="notzerovalue">&nbsp;*</span></label>
+        <div class="form-group col-sm-2">
+          <select [formControlName]="'branchLocationId'" class="form-control" id="exampleFormControlSelect2">
+            <option value disabled selected hidden>Select a branch</option>
+
+            <option *ngFor="let branch of branches" [value]="branch?.branchLocationId">
+              {{ branch?.branchCode }}
+            </option>
+          </select>
+          <div class="invalid-feedback" *ngIf="
+              f.branchLocationId.touched &&
+              f.branchLocationId.hasError('required')
+            ">
+            Branch is required.
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <label for="filterby" class="col-sm-2 col-form-label col-form-label-sm">Filter
+          By<span class="notzerovalue">&nbsp;*</span></label>
+        <div class="form-group col-sm-2">
+          <select [formControlName]="'filterby'" style="height: 36px" class="form-control pt-1 pb-1" id="filterby"
+            aria-placeholder="FilterBy" (change)="changeFilterBY()" required>
+            <option value disabled selected hidden>Choose a filter by</option>
+            <option *ngFor="let filter of filters" [value]="filter?.Id">
+              {{ filter?.Name }}
+            </option>
+          </select>
+          <div class="invalid-feedback" *ngIf="f.filterby.touched && f.filterby.hasError('required')">
+            Filter by is required.
+          </div>
+        </div>
+        <div class="form-group col-sm-3" *ngIf="filterId == 1">
+          <ng-select [(ngModel)]="supplierId" [formControlName]="'supplierId'" [virtualScroll]="'true'"
+            placeholder="Search/Select Supplier Name">
+            <ng-option *ngFor="let supplier of suppliers | async" [value]="supplier?.supplierId">
+              <span>{{ supplier?.supplierName }}</span>
+            </ng-option>
+          </ng-select>
+        </div>
+        <div class="form-group col-sm-3" *ngIf="filterId == 2">
+          <ng-select [(ngModel)]="productId" [formControlName]="'productId'" [virtualScroll]="'true'"
+            placeholder="Search/Select Product Name">
+            <ng-option *ngFor="let product of products | async" [value]="product.productId">
+              <span>{{ product.productName }}</span>
+            </ng-option>
+          </ng-select>
+        </div>
+        <label for="pofrmDate" class="col-sm-1 col-form-label col-form-label-sm" *ngIf="filterId == 3">
+          Date From<span class="notzerovalue">&nbsp;*</span></label>
+        <div class="form-group col-sm-2" *ngIf="filterId == 3">
+          <input type="date" class="form-control" [formControlName]="'pofrmDate'" id placeholder="From Date" />
+          <div class="invalid-feedback" *ngIf="f.pofrmDate.touched && f.pofrmDate.hasError('required')">
+            From date is required.
+          </div>
+        </div>
+        <label for="potoDate" class="col-sm-1 col-form-label col-form-label-sm" *ngIf="filterId == 3">
+          Date To<span class="notzerovalue">&nbsp;*</span></label>
+        <div class="form-group col-sm-2" *ngIf="filterId == 3">
+          <input type="date" class="form-control" [formControlName]="'potoDate'" id placeholder="To Date" />
+          <div class="invalid-feedback" *ngIf="f.potoDate.touched && f.potoDate.hasError('required')">
+            To date is required.
+          </div>
+        </div>
+        <label for="deliveryfrmDate" class="col-sm-1 col-form-label col-form-label-sm" *ngIf="filterId == 4">From
+          Date<span class="notzerovalue">&nbsp;*</span></label>
+        <div class="form-group col-sm-2" *ngIf="filterId == 4">
+          <input type="date" class="form-control" [formControlName]="'deliveryfrmDate'" id placeholder="From Date" />
+          <div class="invalid-feedback" *ngIf="
+              f.deliveryfrmDate.touched &&
+              f.deliveryfrmDate.hasError('required')
+            ">
+            From date is required.
+          </div>
+        </div>
+        <label for="deliverytoDate" class="col-sm-1 col-form-label col-form-label-sm" *ngIf="filterId == 4">TO Date<span
+            class="notzerovalue">&nbsp;*</span></label>
+        <div class="form-group col-sm-2" *ngIf="filterId == 4">
+          <input type="date" class="form-control" [formControlName]="'deliverytoDate'" id placeholder="To Date" />
+          <div class="invalid-feedback" *ngIf="
+              f.deliverytoDate.touched && f.deliverytoDate.hasError('required')
+            ">
+            To date is required.
+          </div>
+        </div>
+        <div class="form-group col-sm-2">
+          <button class="btn btn-outline-primary btn-lg mr-2 text-primary" [disabled]="!poListReportForm.valid"
+            type="submit" (click)="submitForm()">
+            View
+          </button>
+          <button class="btn btn-outline-success btn-lg text-success" [disabled]="!poListReportForm.valid"
+            type="button">
+            Download
+          </button>
+        </div>
+      </div>
+    </form>
+    <div class="table-responsive-md ml-3">
+      <table class="table table-striped" border="1">
+        <thead>
+       <tr style="background-color: var(--maintheme2); font-weight: 700">
+          <td class="center">#</td>
+          <td class="center">Branch</td>
+          <td class="center">PO #</td>
+          <td class="center">GRN #</td>
+          <td class="center">Status</td>
+          <td class="center" border="1">Supplier</td>
+          <td class="center">PO Date</td>
+          <td class="center">Delivery Date</td>
+          <td class="center">Product Code</td>
+          <td class="center">Product Name</td>
+          <td class="center">PO Quantity</td>
+          <td class="center">GRN Quantity</td>
+          <td class="center">Price Margin%</td>
+          <td class="center">Vat%</td>
+          <td class="center">Supplier Unit Cost</td>
+          <td class="center">Stock Unit Cost</td>
+          <td class="center">Retail Price</td>
+          <td class="center">Sale Price</td>
+          <td class="center">Total</td>
+        </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let sale of poListDetails; let i = index">
+            <td class="center">{{ i + 1 }}</td>
+            <td class="center">{{ sale.branchCode }}</td>
+            <td class="center">{{ sale.poNumber }}</td>
+            <td class="center">{{ sale.goodReceptNoteNumber }}</td>
+            <td class="center">{{ sale.status }}</td>
+            <td class="center">{{ sale.supplierName }}</td>
+            <td class="center">
+              {{ sale.poCreatedDate | date : "mediumDate" }}
+            </td>
+            <td class="center">
+              {{ sale.deliveryDate | date : "mediumDate" }}
+            </td>
+            <td class="center">{{ sale.productCode }}</td>
+            <td class="center">{{ sale.productName }}</td>
+            <td class="center">{{ sale.poQuantity }}</td>
+            <td class="center">{{ sale.goodReceiptQuantity }}</td>
+            <td class="center">{{ sale.pricePrecentage }}</td>
+            <td class="center">{{ sale.vatPrecentage }}</td>
+
+            <td class="center">
+              {{ sale.unitCost | currency : "LKR" : "Rs." }}
+            </td>
+            <td class="center">
+              {{ sale.dCostPrice | currency : "LKR" : "Rs." }}
+            </td>
+            <td class="center">
+              {{ sale.maximumRetailPrice | currency : "LKR" : "Rs." }}
+            </td>
+            <td class="center">
+              {{ sale.dSalePrice | currency : "LKR" : "Rs." }}
+            </td>
+            <td class="center">
+              {{ sale.total | currency : "LKR" : "Rs." }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

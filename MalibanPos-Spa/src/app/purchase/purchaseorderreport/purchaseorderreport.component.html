@@ -1,0 +1,185 @@
+<!--main container start-->
+<div class="main-container">
+  <nav aria-label="breadcrumb" class="d-print-none">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="#">Home</a></li>
+      <li class="breadcrumb-item">
+        <a [routerLink]="['/purchase/purchaseorderlist']">PurchaseOrder List</a>
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">
+        <a target="_self">PurchaseOrder Report</a>
+      </li>
+    </ol>
+  </nav>
+  <div class="container-fluid" id="invoice-POS1">
+    <div id="ui-view" data-select2-id="ui-view">
+      <div class="card">
+        <div class="card-header">
+          <strong>Purchase Order: </strong>
+          <strong>{{ purchaseOrderHeader?.purchaseOrderReferenceNo }}</strong>
+          <a class="btn btn-sm btn-secondary float-right mr-1 d-print-none" href="#"
+            onclick="window.print();return false" data-abc="true">
+            <i class="fa fa-print"></i> Print</a>
+          <a class="btn btn-sm btn-info float-right mr-1 d-print-none" href="#" data-abc="true">
+            <i class="fa fa-save"></i> Save</a>
+        </div>
+        <div class="card-body">
+          <div class="row mb-4">
+            <div class="col-sm-4">
+              <h6 class="mb-3">From:</h6>
+              <div>
+                <img style="height: 50px" src="../../../assets/resource/images/logo/logo.png" alt="Company Logo" />
+                <br />
+                <strong>Company: {{ branchLocation?.branchName }}</strong>
+              </div>
+              <div>Address: {{ branchLocation?.address }}</div>
+              <div>Email: {{'general@maliban.com'}}</div>
+              <div>Phone: {{ branchLocation?.contactNumbers }}</div>
+              <div>Fax: {{ branchLocation?.contactNumbers }}</div>
+            </div>
+            <div class="col-sm-4">
+              <h6 class="mb-3">To:</h6>
+              <div>
+                <strong>Supplier: {{ supplier?.supplierName }}</strong>
+              </div>
+              <div>{{ supplier?.address1 }}</div>
+              <div>Email: {{ supplier?.email }}</div>
+              <div>Phone: {{ supplier?.phone }}</div>
+              <div>Fax: {{ supplier?.fax }}</div>
+            </div>
+            <div class="col-sm-4">
+              <h6 class="mb-3">Details:</h6>
+              <div>
+                PO:<strong>
+                  {{ purchaseOrderHeader?.purchaseOrderReferenceNo }}</strong>
+              </div>
+              <div>Date: {{ purchaseOrderHeader?.poDate | date }}</div>
+              <div>
+                Delivery Date: {{ purchaseOrderHeader?.deliveryDate | date }}
+              </div>
+              <!--<div>VAT: NYC09090390</div><div><strong>SWIFT code: 99 8888 7777 6666 5555</strong></div> -->
+            </div>
+          </div>
+          <div class="table-responsive-sm">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th class="center">#</th>
+                  <th>Product Code</th>
+                  <th>Product Name</th>
+                  <th class="right">Expiry Date</th>
+                  <th class="center">Quantity</th>
+                  <th class="right">Unit Cost</th>
+                  <th class="right">Retail Price</th>
+                  <th class="right">Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let line of lines; let i = index">
+                  <td class="center">{{ i + 1 }}</td>
+                  <td class="left">{{ line.product.barcode }}</td>
+                  <td class="left">{{ line.product.productName }}</td>
+                  <td class="left">
+                    {{ line.productExpiryDate | date : "mediumDate" }}
+                  </td>
+                  <td class="center">{{ line.quantity }}</td>
+                  <td class="right">Rs.{{ line.supplierPrice?.unitPrice }}</td>
+                  <td class="right">
+                    Rs.{{ line.supplierPrice?.maximumRetailPrice }}
+                  </td>
+                  <td class="center">
+                    Rs.{{
+                    line.quantity * line.supplierPrice?.unitPrice
+                    | number : "1.3-6"
+                    }}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="row">
+            <!--<div class="col-lg-4 col-sm-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</div> -->
+            <div class="col-lg-4 col-sm-5 ml-auto">
+              <table class="table table-clear">
+                <tbody>
+                  <tr>
+                    <td class="left">
+                      <strong>Subtotal</strong>
+                    </td>
+                    <td class="right">
+                      {{
+                      purchaseOrderHeader?.purchaseAmount
+                      | currency : "Rs. " : "symbol"
+                      }}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="left">
+                      <strong>Discount (%)</strong>
+                    </td>
+                    <td class="right">Rs 0.00</td>
+                  </tr>
+                  <tr>
+                    <td class="left">
+                      <strong>VAT (15%)</strong>
+                    </td>
+                    <td class="right">Rs 0.00</td>
+                  </tr>
+                  <tr>
+                    <td class="left">
+                      <strong>NBT (2%)</strong>
+                    </td>
+                    <td class="right">Rs 0.00</td>
+                  </tr>
+                  <tr>
+                    <td class="left">
+                      <strong>Total</strong>
+                    </td>
+                    <td class="right">
+                      <strong>{{
+                        purchaseOrderHeader?.purchaseAmount
+                        | currency : "Rs. " : "symbol"
+                        }}</strong>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <!--  <a class="btn btn-success" href="#" data-abc="true"><i class="fa fa-usd"></i> Proceed to Payment</a> -->
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <h6 class="mb-3">
+                Prepared By:
+                {{
+                purchaseOrderHeader?.createdBy?.split("@")[0].toUpperCase()
+                }}
+              </h6>
+            </div>
+            <div class="col-md-4">
+              <h6 class="mb-3">
+                Approved By:
+                {{
+                purchaseOrderHeader?.approvedBy?.split("@")[0].toUpperCase()
+                }}
+              </h6>
+            </div>
+            <div class="col-md-4">
+              <h6 class="mb-3 float-left">Authorized Signatory:</h6>
+              <span class="float-left"><img style="height: 62px; width: 142px; rotate: -15deg"
+                  *ngIf="purchaseOrderHeader?.isDeleted" src="../../../assets/resource/images/logo/cancelled.png"
+                  alt="Company Logo" /></span>
+              <div *ngIf="!purchaseOrderHeader?.isDeleted">
+                <span class="float-left"><img style="height: 62px; width: 142px" *ngIf="purchaseOrderHeader?.isApprove"
+                    src="../../../assets/resource/images/logo/png_approved_52566.png" alt="Company Logo" /></span>
+                <span class="float-left"><img style="height: 62px; width: 142px" *ngIf="!purchaseOrderHeader?.isApprove"
+                    src="../../../assets/resource/images/logo/png_rejectedd_52566.png" alt="Company Logo" /></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--<div id="print-foot" class="float-right"><span>Page: </span></div> -->
+    </div>
+  </div>
+</div>

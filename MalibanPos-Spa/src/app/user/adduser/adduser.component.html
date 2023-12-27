@@ -1,0 +1,80 @@
+<div style="height: auto; overflow-y: scroll" id="style-14" class="register-page">
+  <div class="container-fluid">
+    <h6>Add User</h6>
+    <form [formGroup]="registerForm" (ngSubmit)="signup()">
+      <div class="form-group">
+        <div class="col-md-12">
+        <label for="examplefirstName">First Name</label>
+         <input [ngClass]="{ 'is-invalid': f.firstName.invalid && (f.firstName.touched && f.firstName.errors),'is-valid':f.firstName.valid && (f.firstName.touched && f.firstName.dirty) } || registerForm.hasError('required')"  type="text" class="form-control" [formControlName]="'firstName'" id="examplefirstName" aria-describedby="emailHelp" placeholder="Enter First Name">
+        <div *ngIf="f.firstName.touched && f.firstName.errors" class="invalid-feedback">
+          <div *ngIf="f.firstName.hasError('required')">First Name is required</div>
+        </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-md-12">
+        <label for="examplelastName">Last Name</label>
+        <input [ngClass]="{ 'is-invalid': f.lastName.invalid && (f.lastName.touched && f.lastName.errors),'is-valid':f.lastName.valid && (f.lastName.touched && f.lastName.dirty) } || registerForm.hasError('required')" type="text" class="form-control" [formControlName]="'lastName'" id="examplelastName" aria-describedby="emailHelp" placeholder="Enter Last Name">
+        <div *ngIf="f.lastName.touched && f.lastName.errors" class="invalid-feedback">
+          <div *ngIf="f.lastName.hasError('required')">Last Name is required</div>
+        </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-md-12">
+        <label for="email">E-Mail</label>
+        <input  [ngClass]="{ 'is-invalid': f.email.invalid && (f.email.touched && f.email.errors),'is-valid':f.email.valid && (f.email.touched && f.email.dirty) } || registerForm.hasError('required')" type="email" class="form-control" [formControlName]="'email'" id="exampleemail" aria-describedby="email" placeholder="Enter E-Mail">
+        <div *ngIf="f.email.touched && f.email.errors" class="invalid-feedback">
+          <div *ngIf="f.email.hasError('required')">E-Mail is required</div>
+          <div *ngIf="f.email.hasError('email')">E-mail is invalid</div>
+        </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-md-12">
+        <label for="branchLocationId">Branch Location</label>
+        <select [formControlName]="'branchLocationId'" class="form-control"
+        id="exampleFormControlSelect2">
+        <option selected value="" disabled >Please choose a branch..</option>
+        <option *ngFor="let branch of branches$ | async | filter:branchCode:'branchCode'" [value]="branch.branchLocationId" >
+          {{ branch.branchCode }}
+        </option>
+      </select>
+      <div class="invalid-feedback" *ngIf="f.branchLocationId.touched && f.branchLocationId.hasError('required') ">
+        Please choose a branch.
+      </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-md-12">
+        <label for="password">Password</label>
+        <input [ngClass]="{ 'is-invalid': f.password.invalid && (f.password.touched && f.password.errors),'is-valid':f.password.valid && (f.password.touched && f.password.dirty) } || registerForm.hasError('required')" type="password" class="form-control" [formControlName]="'password'" id="examplepassword" aria-describedby="password" placeholder="Enter Password">
+        <div *ngIf="f.password.touched && f.password.errors" class="invalid-feedback">
+          <div *ngIf="f.password.errors.required">Password is required</div>
+          <div *ngIf="f.password.hasError('minlength')">Password must be at lease 6 characters
+          </div>
+          <div *ngIf="f.password.hasError('maxlength')">Password cannot exceed 20 characters</div>
+        </div>
+      </div>
+      </div>
+      <div class="form-group">
+         <div class="col-md-12">
+        <label for="confirmPassword">Confirm Password</label>
+        <input type="password" class="form-control" [formControlName]="'confirmPassword'" id="exampleconfirmPassword" aria-describedby="confirmPassword" placeholder="Enter Confirm Password">
+        <div *ngIf="f.confirmPassword.touched && f.confirmPassword.errors || registerForm.hasError('mismatch')"
+        class="invalid-feedback">
+        <div *ngIf="f.confirmPassword.hasError('required')">Confirm Password is required</div>
+        <div *ngIf="registerForm.hasError('mismatch')"> Password is mismatched</div>
+      </div>
+      </div>
+      </div>
+      <div class="form-group">
+        <div class="col-md-12">
+      <button type="submit" class="btn btn-primary" [disabled]="!registerForm.valid">Add</button>
+      <button type="reset" class="btn btn-danger">Clear</button>
+
+        </div>
+      </div>
+    </form>
+  </div>
+  </div>

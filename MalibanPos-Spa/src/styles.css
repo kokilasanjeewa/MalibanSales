@@ -1,0 +1,310 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+@import '../node_modules/font-awesome/css/font-awesome.min.css';
+@import '../node_modules/alertifyjs/build/css/alertify.min.css';
+@import '../node_modules/alertifyjs/build/css/themes/bootstrap.min.css';
+@import "../src/assets/resource/css/form.css";
+@import "~@ng-select/ng-select/themes/default.theme.css";
+:root {
+  --maintheme2sub:#1a91cc;
+  --maintheme:#2882ff;
+  --maintheme1:#3d4755;
+  --maintheme3sub:#2882ff;
+  --maintheme2:#0a8cd2;
+  --maintheme3:#23B363;
+  --maintheme4:#051923;
+  --tabletext:#d3d2d2;
+
+}
+html,
+body {
+    height: auto;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    zoom: 88%;
+}
+.hide {
+    display: none;
+}
+
+.btn-tbl-info {
+    border-radius: 50% !important;
+    background-color: #ee6e73;
+    padding: 6px !important;
+    height: 28px;
+    margin: 2px;
+    color: #fff;
+    box-shadow: 0px 5px 25px 0px rgba(0, 0, 0, 0.2) !important;
+}
+
+.btn-tbl-info .material-icons {
+    font-size: 16px !important;
+}
+
+.btn-tbl-info:hover {
+    background-color: #ff9600;
+    color: #fff;
+}
+
+.btn-tbl-info:focus {
+    background-color: #ff9600;
+}
+
+.example-container.mat-elevation-z8 {
+    overflow: hidden;
+}
+
+.mat-footer-cell,
+.mat-footer-row {
+    justify-content: center;
+    text-align: center;
+    color: rgba(0, 0, 0, 0.4)
+}
+
+.mat-column-uid,
+.mat-column-id,
+.mat-column-instituteName,
+.mat-column-className,
+.mat-column-greade,
+.mat-column-subjectName,
+.mat-column-subject,
+.mat-column-supplierName,
+.mat-column-regDate,
+.mat-column-action.mat-header-cell {
+    color: #030202;
+    letter-spacing: 1px;
+    text-shadow: 2px 2px 4px #ccc;
+    font-size: medium;
+}
+
+.mat-column-action.mat-header-cell {
+    text-align: center;
+}
+td.mat-cell:last-of-type {
+    text-align: center;
+}
+td.mat-cell:first-of-type,
+td.mat-footer-cell:first-of-type,
+th.mat-header-cell:first-of-type {
+    display: none;
+    text-align: center;
+}
+
+th.mat-header-cell,
+td.mat-cell,
+td.mat-footer-cell {
+    border-bottom: 1px solid #ccc;
+    font-size: 14px;
+}
+th.mat-header-cell{
+  text-align: center !important;
+  font-weight: bolder;
+}
+.mat-sort-header-container {
+    justify-content: center !important;
+}
+.btn-tbl-info {
+    border-radius: 50% !important;
+    background-color: #ee6e73;
+    padding: 6px !important;
+    height: 28px;
+    margin: 2px;
+    color: #fff;
+    box-shadow: 0px 5px 25px 0px rgba(0, 0, 0, 0.2) !important;
+}
+
+.example-full-width {
+    width: 300px;
+    border-bottom: 1px solid #ccc;
+    padding: 5px;
+    float: right;
+}
+ul.options{
+  display: none !important;
+}
+div.styledSelect{
+    display: none !important;
+}
+.mat-paginator-icon {
+  color: var(--maintheme2) !important;
+      border-color: transparent;
+    text-shadow: 2px 2px 4px #000000;
+}
+.pagination li {}
+
+.page-link {
+    color: #ffffff !important;
+    text-shadow: 2px 2px 4px #ffffff;
+    background-color: var(--maintheme2);
+    margin-left: 2px;
+    margin-right: 2px;
+}
+
+.page-item.active .page-link {
+    background-color: var(--maintheme)!important;
+}
+
+.page-link:hover {
+    color: #ffffff !important;
+    text-shadow: 2px 2px 4px #ffffff;
+    background-color: #2f343a;
+}
+
+.toast-success {
+    text-align: center !important;
+    padding: 8px 12px 8px 12px !important;
+}
+
+.toast-error {
+    text-align: center !important;
+    padding: 8px 12px 8px 12px !important;
+}
+
+.toast-info {
+    text-align: center !important;
+    padding: 8px 12px 8px 12px !important;
+}
+
+.fa-trash-o {
+    color: #fa0303;
+    text-shadow: 2px 2px 4px #ccc;
+    cursor: pointer;
+    padding-right: 5px;
+}
+
+.modal-backdrop {
+  width: 100% !important;
+  height: 100% !important;
+}
+.form-check-input {
+  /* Change the size */
+  width: 20px;
+  height: 20px;
+}
+
+.custom-checkbox-general {
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+}
+
+.custom-checkbox-general + label {
+  display: inline-flex;
+  align-items: center;
+  user-select: none;
+}
+
+.custom-checkbox-general + label::before {
+  content: '';
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  flex-shrink: 0;
+  flex-grow: 0;
+  border: 1px solid #3c3c3c;
+  border-radius: 0.25em;
+  margin-right: 0.5em;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 50% 50%;
+}
+
+.custom-checkbox-general:checked + label::before {
+  border-color: var(--maintheme3);
+  background-color: var(--maintheme2);
+  background-image: url("./assets/resource/svg/download.svg");
+}
+
+.custom-checkbox-general:not(:disabled):not(:checked) + label:hover::before {
+  border-color: var(--maintheme);
+}
+
+.custom-checkbox-general:not(:disabled):active + label::before {
+  background-color:var(--maintheme);
+}
+
+.custom-checkbox-general:focus + label::before {
+  box-shadow: 0 0 0 0.2rem var(--tabletext);
+}
+
+.custom-checkbox-general:focus:not(:checked) + label::before {
+  border-color: #c3c3c3;
+}
+
+.custom-checkbox-general:disabled + label::before {
+  background-color: black;
+}
+
+@media print {
+    .wrapper .header {
+        display: none !important;
+        top: -70px !important;
+    }
+    .wrapper .sidebar {
+        display: none !important;
+        top: 0px !important;
+        width: 0px !important;
+        height: 0px !important;
+    }
+    .main-container #invoice-POS {
+        color: #057dfa;
+        position: fixed !important;
+        top: 0px !important;
+        left: 0px !important;
+    }
+    .main-container #invoice-POS1 {
+        color: #057dfa;
+        position: static !important;
+        top: 0px !important;
+        left: 0px !important;
+    }
+    @page {
+        @bottom-right {
+            content: counter(page) " of " counter(pages);
+        }
+    }
+    @page :left {
+        margin-left: 0.5cm;
+        margin-right: 1.0cm;
+    }
+    @page :right {
+        margin-left: 0.5cm;
+        margin-right: 1.0cm;
+    }
+}
+
+@page {
+    @bottom-right {
+        content: counter(page) " of " counter(pages);
+    }
+}
+
+@page :left {
+    margin-left: 0.5cm;
+    margin-right: 1.0cm;
+}
+
+@page :right {
+    margin-left: 0.5cm;
+    margin-right: 1.0cm;
+}
+
+.ng-select.custom {
+    border: 0px;
+    min-height: 0px;
+    border-radius: 0;
+}
+
+.ng-select.custom .ng-select-container {
+    min-height: 0px;
+    border-radius: 0;
+}
+
+.ng-select.ng-select-single .ng-select-container {
+    height: 33px;
+
+}

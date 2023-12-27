@@ -1,0 +1,7 @@
+@import '../report.css';
+.table thead tr td {
+  background-color: var(--maintheme2);
+  color: var(--tabletext);
+  font-weight: 700;
+  border: 1px solid var(--tabletext);
+}

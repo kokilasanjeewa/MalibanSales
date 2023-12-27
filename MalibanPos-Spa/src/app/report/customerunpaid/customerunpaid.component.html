@@ -1,0 +1,101 @@
+<!--main container start-->
+<div class="main-container">
+  <nav aria-label="breadcrumb" class="d-print-none">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a [routerLink]="['/dashboard']">Home</a></li>
+        <li class="breadcrumb-item"><a [routerLink]="['/report/viewreport']">Report List</a></li>
+          <li class="breadcrumb-item active"><a [routerLink]="['/report/customer']">Customer Deduction</a></li>
+      </ol>
+  </nav>
+  <div class="container-fluid">
+      <h6>Customer Unpaid Report</h6>
+      <form [formGroup]="customerReportForm" (ngSubmit)="customerAdd()" class="d-print-none">
+          <div class="form-row">
+              <label for="Scheme" class="col-sm-1 col-form-label col-form-label-sm">Scheme<span
+        class="notzerovalue">&nbsp;*</span></label>
+              <div class="form-group col-sm-1">
+                  <select [formControlName]="'schemeCode'" class="form-control" id="exampleFormControlSelect2">
+            <option selected value="" disabled>Select a scheme..</option>
+<!--            <option  [value]="4">
+              All</option> -->
+            <option *ngFor="let scheme of schemes | async" [value]="scheme.schemeCode">
+              {{scheme.scheme}}</option>
+          </select>
+              </div>
+              <label for="ProductCode" class="col-sm-1 col-form-label col-form-label-sm">From Date<span
+          class="notzerovalue">&nbsp;*</span></label>
+              <div class="form-group col-sm-2">
+                  <input type="date" class="form-control" [formControlName]="'frmDate'" id="" placeholder="From Date">
+                  <div class="invalid-feedback" *ngIf="f.frmDate.touched && f.frmDate.hasError('required')">
+                      From date is required.
+                  </div>
+              </div>
+              <label for="ProductCode" class="col-sm-1 col-form-label col-form-label-sm">To Date<span
+          class="notzerovalue">&nbsp;*</span></label>
+              <div class="form-group col-sm-2">
+                  <input type="date" class="form-control" [formControlName]="'toDate'" id="" placeholder="To Date">
+                  <div class="invalid-feedback" *ngIf="f.toDate.touched && f.toDate.hasError('required')">
+                      To date is required.
+                  </div>
+              </div>
+      <!--         <div class="form-group col-sm-1">
+                  <div class="form-check mt-1">
+                      <input class="form-check-input" [formControlName]="'active'" type="checkbox" value="" id="invalidCheck3" [ngClass]="{ 'is-invalid': f.active.hasError('required') }">
+                      <label class="form-check-label mt-1" for="">
+            Paid
+          </label>
+                      <div class="invalid-feedback" *ngIf="f.active.hasError('required')">
+                          Please click checkbox.
+                      </div>
+                  </div>
+              </div> -->
+              <div class="form-group col-sm-3 text-center">
+                  <button class="btn btn-outline-primary btn-sm mr-2 text-primary" [disabled]="!customerReportForm.valid" type="submit">View</button>
+                  <button class="btn btn-outline-danger btn-sm mr-2 text-danger" type="button" [disabled]="!customerReportForm.valid" *appHasClaim="'CanAccessCustomerDeductionProcess'" (click)="customerpayment()">Process</button>
+                  <button class="btn btn-outline-success btn-sm text-success" [disabled]="!customerReportForm.valid" type="button" (click)="customerexcel()">Download</button>
+              </div>
+          </div>
+      </form>
+      <div class="table-responsive-md ml-3">
+          <table class="table table-striped">
+              <thead>
+                  <tr>
+                      <th class="center">#</th>
+                      <th>Customer Id</th>
+                      <th>Full Name</th>
+                      <th>Monthly Credit Limit</th>
+                      <th>Deduction</th>
+                      <!--             <th class="text-left">Product Name</th>
+          <th class="center">Quantity</th> -->
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr *ngFor="let customer of customerDetail ; let i=index">
+                      <td class="center">{{i+1}}</td>
+                      <td class="center">{{customer.customerId}}</td>
+                      <td class="center">{{customer.fullName}}</td>
+                      <td class="center">{{customer.basicSalary | currency:'LKR':'Rs.'}}</td>
+                      <td class="center">{{customer.total | currency:'LKR':'Rs.'}}</td>
+                  </tr>
+              </tbody>
+          </table>
+      </div>
+      <div class="row">
+          <div class="col-md-2 ml-auto">
+              <table class="table table-clear">
+                  <tbody>
+                      <tr style="position: absolute;">
+                          <td class="left">
+                              <strong>Total</strong>
+                          </td>
+                          <td class="right">
+                              <strong>{{total | number:'1.2-2'}}</strong>
+                          </td>
+                      </tr>
+                  </tbody>
+              </table>
+          </div>
+      </div>
+  </div>
+</div>
+

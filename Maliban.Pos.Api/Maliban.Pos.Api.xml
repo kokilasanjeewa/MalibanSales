@@ -1,0 +1,1371 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Maliban.Pos.Api</name>
+    </assembly>
+    <members>
+        <member name="M:Maliban.Pos.Api.Controllers.AuthController.Register(Maliban.Pos.Api.Dtos.UserForRegisterDto)">
+            <summary>
+            User Registration  a specific username and password.
+            </summary> 
+            <param name="register"></param> 
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.AuthController.ChangePassword(Maliban.Pos.Api.Dtos.UserForChangePasswordDto)">
+            <summary>
+            User forgot password  a specific username.
+            </summary> 
+            <param name="changepassword"></param> 
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.AuthController.ConfirmEmail(Maliban.Pos.Api.Dtos.UserForConfirmEmailDto)">
+            <summary>
+            User confirm email with a specific username and password.
+            </summary> 
+            <param name="confirmemail"></param>    
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.AuthController.SendConfirmEmail(Maliban.Pos.Api.Dtos.UserForSendConfirmEmailDto)">
+            <summary>
+            User forgot password  a specific username.
+            </summary> 
+            <param name="sendconfirmemail"></param> 
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.AuthController.Login(Maliban.Pos.Api.Dtos.UserForLogInDto)">
+            <summary>
+            User Login  a specific username and password.
+            </summary> 
+            <param name="login"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.AuthController.Logout">
+            <summary>
+            User log out .
+            </summary> 
+            <param name="logout"></param> 
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.AuthController.Verifyemail(System.String)">
+            <summary>
+            Email Verify .
+            </summary> 
+            <param name="{username}{username}"></param> 
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.AuthController.GetAllUsers(System.Boolean,Maliban.Pos.Api.Helper.UserParams,System.Int32)">
+            <summary>
+            Get Users 
+            </summary>
+            <param name="getallusers"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.BinController.GetAllBins(System.Boolean,Maliban.Pos.Api.Helper.UserParams)">
+            <summary>
+            Get Bins 
+            </summary>
+            <param name="getallbins"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.BinController.GetBinById(System.Nullable{System.Int32})">
+            <summary>
+            Get Bin By Id 
+            </summary>
+            <param name="{id}{id}"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.BinController.DeleteBinByBinId(System.Nullable{System.Int32})">
+            <summary>
+            Delete Bin By id 
+            </summary>
+            <param name="{id}{id}"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.BinController.CreateBin(Maliban.Pos.Api.Dtos.CreateBinDto)">
+            <summary>
+            Create Bin.
+            </summary> 
+            <param name="createbn"></param> 
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.BinController.UpdateBin(System.Nullable{System.Int32},Maliban.Pos.Api.Dtos.UpdateBinDto)">
+            <summary>
+            Update Bin.
+            </summary> 
+            <param name="{id}{id}"></param> 
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.BranchLocationController.GetAllBranchLocations(System.Boolean,Maliban.Pos.Api.Helper.UserParams)">
+            <summary>
+            Get BranchLocations 
+            </summary>
+            <param name="getallbranchlocations"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.BranchLocationController.GetBranchLocationByBranchLocationId(System.Nullable{System.Int32})">
+            <summary>
+            Get Product By BarCode 
+            </summary>
+            <param name="{id}{id}"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.BranchLocationController.DeleteBranchLocationByBranchLocationId(System.Nullable{System.Int32})">
+            <summary>
+            Delete BranchLocation By id 
+            </summary>
+            <param name="{id}{id}"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.BranchLocationController.CreateBranchLocation(Maliban.Pos.Api.Dtos.CreateBranchLocationDto)">
+            <summary>
+            Create BranchLocation.
+            </summary> 
+            <param name="createbranchlocation"></param> 
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.BranchLocationController.UpdateBranchLocation(System.Nullable{System.Int32},Maliban.Pos.Api.Dtos.UpdateLocationDto)">
+            <summary>
+            Update BranchLocation.
+            </summary> 
+            <param name="{id}{id}"></param> 
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.BrandController.GetAllBrands(System.Boolean,Maliban.Pos.Api.Helper.UserParams)">
+            <summary>
+            Get Brands 
+            </summary>
+            <param name="getallbrands"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.BrandController.GetBrandByBrandId(System.Nullable{System.Int32})">
+            <summary>
+            Get Product By BarCode 
+            </summary>
+            <param name="{id}{id}"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.BrandController.DeleteBrandByBrandId(System.Nullable{System.Int32})">
+            <summary>
+            Delete Brand By id 
+            </summary>
+            <param name="{id}{id}"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.BrandController.CreateBrand(Maliban.Pos.Api.Dtos.CreateBrandDto,Maliban.Pos.Api.Dtos.CreatePhotoUploadDto)">
+            <summary>
+            Create Brand.
+            </summary> 
+            <param name="createbrand"></param> 
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.BrandController.UpdateBrand(System.Nullable{System.Int32},Maliban.Pos.Api.Dtos.UpdateBrandDto)">
+            <summary>
+            Update Brand.
+            </summary> 
+            <param name="{id}{id}"></param> 
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.CategoryController.GetAllCategorys(System.Boolean,Maliban.Pos.Api.Helper.UserParams)">
+            <summary>
+            Get Categorys 
+            </summary>
+            <param name="getallcategorys"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.CategoryController.GetCategoryByCategoryId(System.Nullable{System.Int32})">
+            <summary>
+            Get Product By BarCode 
+            </summary>
+            <param name="{id}{id}"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.CategoryController.DeleteCategoryByCategoryId(System.Nullable{System.Int32})">
+            <summary>
+            Delete Category By id 
+            </summary>
+            <param name="{id}{id}"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.CategoryController.CreateCategory(Maliban.Pos.Api.Dtos.CreateCategoryDto,Maliban.Pos.Api.Dtos.CreatePhotoUploadDto)">
+            <summary>
+            Create Category.
+            </summary> 
+            <param name="createcategory"></param> 
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.CategoryController.UpdateCategory(System.Nullable{System.Int32},Maliban.Pos.Api.Dtos.UpdateCategoryDto)">
+            <summary>
+            Update Category.
+            </summary> 
+            <param name="{id}{id}"></param> 
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.CommonController.GetAllPrn(System.Boolean,System.Nullable{System.Int32},System.DateTime,System.DateTime)">
+            <summary>
+            Get All Branches 
+            </summary>
+            <param name="getallprn"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.CommonController.GetAllScheme(System.Boolean)">
+            <summary>
+            Get All Scheme
+            </summary>
+            <param name="getallscheme"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.CommonController.GetAllGrn(System.Boolean,System.Nullable{System.Int32},System.DateTime,System.DateTime)">
+            <summary>
+            Get All Branches 
+            </summary>
+            <param name="getallgrn"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.CommonController.GetAllSaleReturn(System.Boolean,System.Nullable{System.Int32},System.DateTime,System.DateTime)">
+            <summary>
+            Get All Branches 
+            </summary>
+            <param name="getallsalereturn"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.CommonController.GetAllStockAdjustment(System.Boolean,System.Nullable{System.Int32},System.DateTime,System.DateTime)">
+            <summary>
+            Get All Branches 
+            </summary>
+            <param name="getallstockadjustment"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.CommonController.GetAllBranch(System.Boolean)">
+            <summary>
+            Get All Branches 
+            </summary>
+            <param name="getallbranch"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.CommonController.GetAllReturnType(System.Boolean)">
+            <summary>
+            Get All Branches 
+            </summary>
+            <param name="getallreturntype"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.CommonController.GetAllRole(System.Boolean,System.Int32)">
+            <summary>
+            Get All Role 
+            </summary>
+            <param name="getallrole"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.CommonController.GetAllReport(System.Boolean)">
+            <summary>
+            Get All Branches 
+            </summary>
+            <param name="getallreport"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.CommonController.GetBranch(System.Boolean,System.Nullable{System.Int32})">
+            <summary>
+            Get All Branches 
+            </summary>
+            <param name="getbranch"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.CommonController.GetAllPO(System.Boolean,System.Nullable{System.Int32},System.DateTime,System.DateTime)">
+            <summary>
+            Get All PO's 
+            </summary>
+            <param name="getallpo"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.CommonController.GetAllPurchaseRequest(System.Boolean,System.Nullable{System.Int32})">
+            <summary>
+            Get All PO's 
+            </summary>
+            <param name="getallpurchaserequest"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.CommonController.GetAllDistrict(System.Boolean,System.String)">
+            <summary>
+            Get All District 
+            </summary>
+            <param name="getalldistrict"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.CommonController.GetAllCities(System.Boolean,System.String)">
+            <summary>
+            Get All Cities 
+            </summary>
+            <param name="getallcities"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.CommonController.GetAllProvinces(System.Boolean)">
+            <summary>
+            Get All Provinces 
+            </summary>
+            <param name="getallprovinces"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.CommonController.GetAllCountries(System.Boolean)">
+            <summary>
+            Get AllCountries 
+            </summary>
+            <param name="getallcountries"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.CommonController.GetAllTitle(System.Boolean)">
+            <summary>
+            Get All Titles
+            </summary>
+            <param name="getalltitle"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.CommonController.GetAllTypeofGoods(System.Boolean)">
+            <summary>
+            Get All TypeofGoods
+            </summary>
+            <param name="getalltypeofgoods"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.CommonController.GetAllProduct(System.Boolean)">
+            <summary>
+            Get All TypeofGoods
+            </summary>
+            <param name="getallproduct"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.CommonController.GetAllStock(System.Boolean)">
+            <summary>
+            Get All Stocks
+            </summary>
+            <param name="getallstock"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.CommonController.GetAllStockDetails(System.Boolean,System.Int32,System.String)">
+            <summary>
+            Get Stock Details 
+            </summary>
+            <param name="getallstockdetail"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.CommonController.GetAllCustomerDetails(System.Boolean,System.Int32,System.String)">
+            <summary>
+            Get Stock Details 
+            </summary>
+            <param name="getallcustomerdetail"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.CommonController.GetAllPaymentMethod(System.Boolean)">
+            <summary>
+            Get All Payment Methods
+            </summary>
+            <param name="getallpaymentmethod"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.CommonController.GetAllAdjustmentType(System.Boolean)">
+            <summary>
+            Get All Payment Methods
+            </summary>
+            <param name="getalladjustmenttype"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.CommonController.GetAllPurchaseReturn(System.Boolean,System.Nullable{System.Int32})">
+            <summary>
+            Get All Payment Methods
+            </summary>
+            <param name="getallpurchasereturn"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.CommonController.GetAllVendor(System.Boolean)">
+            <summary>
+            Get All Vendors 
+            </summary>
+            <param name="getallvendor"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.CommonController.GetAllSupplier(System.Boolean,System.Nullable{System.Int32})">
+            <summary>
+            Get All Suppliers 
+            </summary>
+            <param name="getallsupplier"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.CommonController.GetAllCategory(System.Boolean)">
+            <summary>
+            Get All Category 
+            </summary>
+            <param name="getallcategory"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.CommonController.GetAllSubCategory(System.Boolean)">
+            <summary>
+            Get All SubCategory 
+            </summary>
+            <param name="getallsubcategory"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.CommonController.GetAllUOM(System.Boolean)">
+            <summary>
+            Get All Unit Of Measurement 
+            </summary>
+            <param name="getalluOm"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.CommonController.GetAllBrand(System.Boolean)">
+            <summary>
+            Get All Brand 
+            </summary>
+            <param name="getallbrand"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.CommonController.GetAllDepartment(System.Boolean)">
+            <summary>
+            Get All Brand 
+            </summary>
+            <param name="getalldepartment"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.CommonController.GetAllSection(System.Boolean)">
+            <summary>
+            Get All Section 
+            </summary>
+            <param name="getallsection"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.CommonController.CreateTitle(Maliban.Pos.Api.Dtos.CreateTitleDto)">
+            <summary>
+            Create Title.
+            </summary> 
+            <param name="createtitle"></param> 
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.CommonController.CreateTypeOfGoods(Maliban.Pos.Api.Dtos.CreateTypeofGoodDto)">
+            <summary>
+            Create Title.
+            </summary> 
+            <param name="createtypeofgoods"></param> 
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.CommonController.CreatePaymentMethod(Maliban.Pos.Api.Dtos.CreatePaymentMethodDto)">
+            <summary>
+            Create Title.
+            </summary> 
+            <param name="createpaymentmethod"></param> 
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.CommonController.CreatePayment(Maliban.Pos.Api.Dtos.CreatePaymentDto)">
+            <summary>
+            Create Title.
+            </summary> 
+            <param name="createpayment"></param> 
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.CompanyMasterSettingController.GetAllCompanyMasterSetting(System.Boolean,Maliban.Pos.Api.Helper.UserParams)">
+            <summary>
+            Get Categorys 
+            </summary>
+            <param name="getallcompanymastersetting"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.CompanyMasterSettingController.GetCompanyMasterSetting(System.Nullable{System.Int32})">
+            <summary>
+            Get Product By BarCode 
+            </summary>
+            <param name="{id}{id}"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.CompanyMasterSettingController.DeleteCompanyMasterSetting(System.Nullable{System.Int32})">
+            <summary>
+            Delete Category By id 
+            </summary>
+            <param name="{id}{id}"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.CompanyMasterSettingController.CreateCompanyMasterSetting(Maliban.Pos.Api.Dtos.CompanyMasterSettingDto)">
+            <summary>
+            Create Category.
+            </summary> 
+            <param name="createcompanymastersetting"></param> 
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.CompanyMasterSettingController.UpdateCompanyMasterSetting(System.Nullable{System.Int32},Maliban.Pos.Api.Dtos.UpdateCompanyMasterSettingDto)">
+            <summary>
+            Update Category.
+            </summary> 
+            <param name="{id}{id}"></param> 
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.CustomerController.GetCustomer(System.Nullable{System.Int32})">
+            <summary>
+            Update Customer
+            </summary> 
+            <param name="{id}{id}"></param> 
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.CustomerController.UpdateCustomer(System.Nullable{System.Int32},Maliban.Pos.Api.Dtos.UpdateCustomerDto)">
+            <summary>
+            Update Customer
+            </summary> 
+            <param name="{id}{id}"></param> 
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.CustomerController.GetAllCustomers(System.Boolean,Maliban.Pos.Api.Helper.UserParams,System.Int32)">
+            <summary>
+            Get Customers 
+            </summary>
+            <param name="getallcustomers"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.CustomerController.PostMapEmployeeByEmpCode(Maliban.Pos.Api.Dtos.CreateBranchMapLocation)">
+            <summary>
+            Search Employee By EmpCode 
+            </summary>
+            <param name="postmapemployeebyempcode"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.CustomerController.SearchMapEmployeeByEmpCode(System.Int32)">
+            <summary>
+            Search Employee By EmpCode 
+            </summary>
+            <param name="searchmap/{branchlocationId}/{branchlocationId}"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.CustomerController.SearchEmployeeByEmpCode(System.String,System.String)">
+            <summary>
+            Search Employee By EmpCode 
+            </summary>
+            <param name="search/{branchlocationId}/{empcode}/{branchlocationId}/{empcode}"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.CustomerController.GetEmployeeByEmpCode(System.String,System.Int32)">
+            <summary>
+            Get Employee By EmpCode 
+            </summary>
+            <param name="{branchlocationId}/{empcode}{branchlocationId}/{empcode}"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.CustomerController.GetEmployeeBySaleHeader(System.Int32,System.Int32)">
+            <summary>
+            Get Employee By EmpCode 
+            </summary>
+            <param name="employee/{saleHeaderId}/{branchlocationId}/{saleHeaderId}/{branchlocationId}"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.CustomerController.UploadExcel(Maliban.Pos.Api.Dtos.CreateUploadExcelDto)">
+            <summary>
+             Dummy classstudent upload.
+            </summary>
+            <param name="uploadexcel"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.CustomerController.UpdateLunchToken(Maliban.Pos.Api.Dtos.CreateUploadExcelLunchTokenDto)">
+            <summary>
+              update lunch token to the system
+            </summary>
+            <param name="updatelunchtoken"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.CustomerController.InitialEmployee(Maliban.Pos.Api.Dtos.CreateUploadExcelDto)">
+            <summary>
+             Dummy classstudent initialize to the system
+            </summary>
+            <param name="initialemployee"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.CustomerController.InitialProduct(Maliban.Pos.Api.Dtos.CreateUploadExcelDto)">
+            <summary>
+             Dummy product initialize to the system
+            </summary>
+            <param name="initialproduct"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.CustomerController.InitialProductUpdate(Maliban.Pos.Api.Dtos.CreateUploadExcelDto)">
+            <summary>
+             Dummy product initialize to the system
+            </summary>
+            <param name="initialproductupdate"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.CustomerController.InitialSupplier(Maliban.Pos.Api.Dtos.CreateUploadExcelDto)">
+            <summary>
+             Dummy Supplier initialize to the system
+            </summary>
+            <param name="initialsupplier"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.CustomerController.InitialSupplierProduct(Maliban.Pos.Api.Dtos.CreateUploadExcelDto)">
+            <summary>
+             Dummy Supplier initialize to the system
+            </summary>
+            <param name="initialsupplierproduct"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.CustomerController.InitialSuppierPrice(Maliban.Pos.Api.Dtos.CreateUploadExcelDto)">
+            <summary>
+             Dummy product initialize to the system
+            </summary>
+            <param name="initialsupplierprice"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.CustomerController.InitialPurchaseOrder(Maliban.Pos.Api.Dtos.CreateUploadExcelDto,Maliban.Pos.Api.Dtos.CreatePurchaseOrderHeaderDto)">
+            <summary>
+             Dummy product initialize to the system
+            </summary>
+            <param name="initialpurchaseorder"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.CustomerController.InitialGoodReceipt(Maliban.Pos.Api.Dtos.CreateUploadExcelDto,Maliban.Pos.Api.Dtos.CreateGrnHeaderDto)">
+            <summary>
+             Dummy product initialize to the system
+            </summary>
+            <param name="initialgoodreceipt"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.CustomerController.InitialPriceUpdate(Maliban.Pos.Api.Dtos.CreateUploadExcelDto)">
+            <summary>
+             Dummy product initialize to the system
+            </summary>
+            <param name="initialpriceupdate"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.CustomerMasterSettingController.GetAllCustomerMasterSetting(System.Boolean,Maliban.Pos.Api.Helper.UserParams)">
+            <summary>
+            Get Categorys 
+            </summary>
+            <param name="getallcustomermastersetting"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.CustomerMasterSettingController.GetCustomerMasterSetting(System.Nullable{System.Int32})">
+            <summary>
+            Get Product By BarCode 
+            </summary>
+            <param name="{id}{id}"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.CustomerMasterSettingController.DeleteCustomerMasterSetting(System.Nullable{System.Int32})">
+            <summary>
+            Delete Category By id 
+            </summary>
+            <param name="{id}{id}"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.CustomerMasterSettingController.CreateCustomerMasterSetting(Maliban.Pos.Api.Dtos.CreateCustomerMasterSettingDto)">
+            <summary>
+            Create Category.
+            </summary> 
+            <param name="createcustomermastersetting"></param> 
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.CustomerMasterSettingController.UpdateCustomerMasterSetting(System.Nullable{System.Int32},Maliban.Pos.Api.Dtos.UpdateCustomerMasterSettingDto)">
+            <summary>
+            Update Category.
+            </summary> 
+            <param name="{id}{id}"></param> 
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.DepartmentController.CreateDepartment(Maliban.Pos.Api.Dtos.CreateDepartmentDto)">
+            <summary>
+            Create Vendor.
+            </summary> 
+            <param name="createdepartment"></param> 
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.GrnController.GetAllGoodReceiptHeaders(System.Boolean,Maliban.Pos.Api.Helper.UserParams,System.Int32)">
+            <summary>
+            Get Stocks 
+            </summary>
+            <param name="getallgoodreceiptheaders"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.GrnController.GetGoodReceiptHeader(System.Boolean,System.Int32)">
+            <summary>
+            Get Stocks 
+            </summary>
+            <param name="getgoodreceiptheader/{goodreceiptHeaderId}/{goodreceiptHeaderId}"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.GrnController.GetAllGoodReceiptDetails(System.Boolean,Maliban.Pos.Api.Helper.UserParams,System.Int32)">
+            <summary>
+            Get Stocks 
+            </summary>
+            <param name="getallgoodreceiptdetails"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.GrnController.CreateGrnItemDetailList(Maliban.Pos.Api.Dtos.CreateProductGrnItemDetailDto[])">
+            <summary>
+            Create Member.
+            </summary> 
+            <param name="creategrnitemdetaillist"></param> 
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.GrnController.UpdateGrnItemDetailList(Maliban.Pos.Api.Dtos.CreateProductGrnItemDetailDto[])">
+            <summary>
+            Create Member.
+            </summary> 
+            <param name="updategrnitemdetaillist"></param> 
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.GrnController.CreateGrnItemDetails(Maliban.Pos.Api.Dtos.CreateGrnItemDetailDto)">
+            <summary>
+            Create Member.
+            </summary> 
+            <param name="creategrnitemdetails"></param> 
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.GrnController.UpdateGrnItemQuantity(Maliban.Pos.Api.Dtos.UpdateGrnQuantityDto)">
+            <summary>
+             Create SaleDetailDto.
+            </summary> 
+            <param name="quantity/updategrnitemquantity/updategrnitemquantity"></param> 
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.GrnController.CreateGrnHeader(Maliban.Pos.Api.Dtos.CreateGrnHeaderDto)">
+            <summary>
+            You can call checkout method.Please make sure Saleitem details already exists in the list
+            </summary> 
+            <param name="Check/creategrnheader/creategrnheader"></param> 
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.GrnController.RemoveGoodReceptNoteItemDetails(Maliban.Pos.Api.Dtos.RemoveGrnDetailDto)">
+            <summary>
+            Remove SaleDetailDto.
+            </summary> 
+            <param name="removegoodreceptnoteitemdetails"></param> 
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.GrnController.UpdateGoodReceptNoteItemDetails(Maliban.Pos.Api.Dtos.UpdateGrnDetailDto)">
+            <summary>
+            Remove SaleDetailDto.
+            </summary> 
+            <param name="updategoodreceptnoteitemdetails"></param> 
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.GrnController.DateUpdateGoodReceptNoteItemDetails(Maliban.Pos.Api.Dtos.DateUpdateGrnDetailDto)">
+            <summary>
+            Remove SaleDetailDto.
+            </summary> 
+            <param name="dateupdategoodreceptnoteitemdetails"></param> 
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.GrnController.DiscountUpdateGoodReceptNoteItemDetails(Maliban.Pos.Api.Dtos.DiscountUpdateGrnDetailDto)">
+            <summary>
+            Remove SaleDetailDto.
+            </summary> 
+            <param name="discountupdategoodreceptnoteitemdetails"></param> 
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.GrnController.VatUpdateGoodReceptNoteItemDetails(Maliban.Pos.Api.Dtos.VatUpdateGrnDetailDto)">
+            <summary>
+            Remove SaleDetailDto.
+            </summary> 
+            <param name="vatupdategoodreceptnoteitemdetails"></param> 
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.GrnController.NbtUpdateGoodReceptNoteItemDetails(Maliban.Pos.Api.Dtos.NbtUpdateGrnDetailDto)">
+            <summary>
+            Remove SaleDetailDto.
+            </summary> 
+            <param name="nbtupdategoodreceptnoteitemdetails"></param> 
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.GrnController.GroupDiscountUpdateGoodReceptNoteItemDetails(Maliban.Pos.Api.Dtos.GroupDiscountUpdateGrnDetailDto)">
+            <summary>
+            Remove SaleDetailDto.
+            </summary> 
+            <param name="groupdiscountupdategoodreceptnoteitemdetails"></param> 
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.GrnController.GroupDiscountAmountUpdateGoodReceptNoteItemDetails(Maliban.Pos.Api.Dtos.GroupDiscountAmountUpdateGrnDetailDto)">
+            <summary>
+            Remove SaleDetailDto.
+            </summary> 
+            <param name="groupdiscountamountupdategoodreceptnoteitemdetails"></param> 
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.GrnController.OverWriteStockPriceGoodReceptNoteItemDetails(Maliban.Pos.Api.Dtos.OverWriteStockPriceGrnDetailDto)">
+            <summary>
+            Remove SaleDetailDto.
+            </summary> 
+            <param name="overwritestockpricegoodreceptnoteitemdetails"></param> 
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.GrnController.GetGRNBySupplier(System.Int32,System.Int32)">
+            <summary>
+            Get All GRN 
+            </summary>
+            <param name="getgrnbysupplier"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.GrnController.Clear">
+            <summary>
+            Test .
+            </summary> 
+            <param name="clear"></param> 
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.MenuController.GetMenuByUserId(System.Int32)">
+            <summary>
+            
+            </summary> 
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.PriceController.GetPriceByBarcode(System.Nullable{System.Int32})">
+            <summary>
+            Get Student List Details
+            </summary>
+            <remarks>
+            Note that the key is a GUID and not an integer.
+             
+                POST /Todo
+                {
+                   "key": "0e7ad584-7788-4ab1-95a6-ca0a5b444cbb",
+                   "name": "Item1",
+                   "isComplete": true
+                }
+            
+            </remarks>
+            <param name="{barcode}{barcode}"></param>
+            <returns>A fetched price</returns>
+            <response code="200">Returns the fetched item</response>
+            <response code="404">If the item is null</response> 
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.PriceController.DeletePriceByBarcode(System.Nullable{System.Int32})">
+            <summary>
+            Get Student List Details
+            </summary>
+            <remarks>
+            Note that the key is a GUID and not an integer.
+             
+                POST /Todo
+                {
+                   "key": "0e7ad584-7788-4ab1-95a6-ca0a5b444cbb",
+                   "name": "Item1",
+                   "isComplete": true
+                }
+            
+            </remarks>
+            <param name="{productId}{productId}"></param>
+            <returns>A fetched price</returns>
+            <response code="200">Returns the fetched item</response>
+            <response code="404">If the item is null</response> 
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.PriceController.UpdatePriceByBarcode(System.Int32,Maliban.Pos.Api.Dtos.UpdatePriceDto)">
+            <summary>
+            Update Price By Barcode
+            </summary>
+            <remarks>
+            Note that the key is a GUID and not an integer.
+             
+                Put /Price
+                {
+                   "key": "0e7ad584-7788-4ab1-95a6-ca0a5b444cbb",
+                   "name": "Item1",
+                   "isComplete": true
+                }
+            
+            </remarks>
+            <param name="{barcode}{barcode}">product barcode</param>
+            <returns>A updated price</returns>
+            <response code="200">Returns the fetched item</response>
+            <response code="404">If the item is null</response> 
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.PriceController.CreatePrice(Maliban.Pos.Api.Dtos.CreatePriceDto)">
+            <summary>
+            Create Member.
+            </summary> 
+            <param name="createprice"></param> 
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.PriceController.CreateSupplierPrice(Maliban.Pos.Api.Dtos.CreateSupplierPriceDto)">
+            <summary>
+            Create Member.
+            </summary> 
+            <param name="supplierprice/createsupplierprice/createsupplierprice"></param> 
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Maliban.Pos.Api.Controllers.PriceController.GetProductPriceBySupplierId(System.Nullable{System.Int32},System.Nullable{System.Int32})" -->
+        <!-- Badly formed XML comment ignored for member "M:Maliban.Pos.Api.Controllers.PriceController.GetProductPriceBySupplierProductId(System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32})" -->
+        <!-- Badly formed XML comment ignored for member "M:Maliban.Pos.Api.Controllers.PriceController.DeleteSupplierPrice(Maliban.Pos.Api.Dtos.DeleteSupplierPriceDto)" -->
+        <member name="M:Maliban.Pos.Api.Controllers.ProductController.GetAllProducts(System.Boolean,Maliban.Pos.Api.Helper.UserParams)">
+            <summary>
+            Get Products 
+            </summary>
+            <param name="getallproducts"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.ProductController.GetAllProducts1(System.Boolean,Maliban.Pos.Api.Helper.UserParams)">
+            <summary>
+            Get Products 
+            </summary>
+            <param name="getallproducts1"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.ProductController.GetProductByBarCode(System.String)">
+            <summary>
+            Get Product By BarCode 
+            </summary>
+            <param name="{barcode}{barcode}"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.ProductController.GetProductByName(System.String)">
+            <summary>
+            Get Product By BarCode 
+            </summary>
+            <param name="{barcode}{barcode}"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.ProductController.GetProductById(System.Nullable{System.Int32})">
+            <summary>
+            Get Product By BarCode 
+            </summary>
+            <param name="Id/{id}/{id}"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.ProductController.DeleteProductByBarCode(System.String)">
+            <summary>
+            Delete Product By BarCode 
+            </summary>
+            <param name="{barcode}{barcode}"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.ProductController.CreateProduct(Maliban.Pos.Api.Dtos.CreateProductDto)">
+            <summary>
+            Create Member.
+            </summary> 
+            <param name="createproduct"></param> 
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.ProductController.UpdateProduct(System.Int64,Maliban.Pos.Api.Dtos.UpdateProductDto)">
+            <summary>
+            Update Product.
+            </summary> 
+            <param name="{id}{id}">Update Product</param> 
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.PurchaseController.GetAllPurchaseRequestHeaders(System.Boolean,Maliban.Pos.Api.Helper.UserParams,System.Int32)">
+            <summary>
+            Get Stocks 
+            </summary>
+            <param name="getallpurchaserequestheaders"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.PurchaseController.GetAllPurchaseRequestDetails(System.Boolean,Maliban.Pos.Api.Helper.UserParams,System.Int32)">
+            <summary>
+            Get Stocks 
+            </summary>
+            <param name="getallpurchaserequestdetails"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.PurchaseController.CreatePurchaseRequestItemDetails(Maliban.Pos.Api.Dtos.CreatePurchaseRequestDetailsDto)">
+            <summary>
+             Create SaleDetailDto.
+            </summary> 
+            <param name="createpurchaserequestitemdetails"></param> 
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.PurchaseController.RemovePurchaseRequestItemDetails(Maliban.Pos.Api.Dtos.RemoveSaleDetailDto)">
+            <summary>
+            Remove SaleDetailDto.
+            </summary> 
+            <param name="removepurchaserequestitemdetails"></param> 
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.PurchaseController.CreatePurchaseRequestHeader(Maliban.Pos.Api.Dtos.CreatePurchaseRequestHeaderDto)">
+            <summary>
+            You can call checkout method.Please make sure purchaserequest details already exists in the list
+            </summary> 
+            <param name="Check/createpurchaserequestheader/createpurchaserequestheader"></param> 
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.PurchaseController.Clear">
+            <summary>
+            Test .
+            </summary> 
+            <param name="clear"></param> 
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.PurchaseOrderController.GetAllPurchaseOrderHeaders(System.Boolean,Maliban.Pos.Api.Helper.UserParams,System.Int32)">
+            <summary>
+            Get Stocks 
+            </summary>
+            <param name="getallpurchaseorderheaders"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.PurchaseOrderController.GetPurchaseOrderHeader(System.Boolean,System.Int32)">
+            <summary>
+            Get Stocks 
+            </summary>
+            <param name="getpurchaseorderheader/{purchaseOrderHeaderId}/{purchaseOrderHeaderId}"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.PurchaseOrderController.GetAllPurchaseOrderDetails(System.Boolean,Maliban.Pos.Api.Helper.UserParams,System.Int32)">
+            <summary>
+            Get Stocks 
+            </summary>
+            <param name="getallpurchaseorderdetails"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.PurchaseOrderController.GetPurchaseOrderItemDetails(System.Nullable{System.Int32})">
+            <summary>
+             Get PurchaseOrderItemDetails.
+            </summary> 
+            <param name="Get/{purchaseorderId}/{purchaseorderId}"></param> 
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.PurchaseOrderController.SearchPurchaseOrder(System.Nullable{System.Int32})">
+            <summary>
+             Get PurchaseOrderItemDetails.
+            </summary> 
+            <param name="Search/{purchaseorderId}/{purchaseorderId}"></param> 
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.PurchaseOrderController.CreatePurchaseOrderItemDetails(Maliban.Pos.Api.Dtos.CreatePurchaseOrderDetailsDto)">
+            <summary>
+             Create SaleDetailDto.
+            </summary> 
+            <param name="createpurchaseorderitemdetails"></param> 
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.PurchaseOrderController.CreatePurchaseOrderItemDetailList(Maliban.Pos.Api.Dtos.CreatePurchaseOrderDetailsDto[])">
+            <summary>
+             Create SaleDetailDto.
+            </summary> 
+            <param name="createpurchaseorderitemdetaillist"></param> 
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.PurchaseOrderController.CreatePurchaseOrderHeader(Maliban.Pos.Api.Dtos.CreatePurchaseOrderHeaderDto)">
+            <summary>
+            You can call checkout method.Please make sure purchaserequest details already exists in the list
+            </summary> 
+            <param name="Check/createpurchaseorderheader/createpurchaseorderheader"></param> 
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.PurchaseOrderController.UpdatePurchaseOrderHeader(Maliban.Pos.Api.Dtos.UpdatePurchaseOrderHeaderDto)">
+            <summary>
+            You can call checkout method.Please make sure purchaserequest details already exists in the list
+            </summary> 
+            <param name="update/updatepurchaseorderheader/updatepurchaseorderheader"></param> 
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.PurchaseOrderController.RemovePurchaseOrderItemDetails(Maliban.Pos.Api.Dtos.RemovePurchaseOrderDetailDto)">
+            <summary>
+            Remove SaleDetailDto.
+            </summary> 
+            <param name="removepurchaseorderitemdetails"></param> 
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.PurchaseOrderController.Clear">
+            <summary>
+            Test .
+            </summary> 
+            <param name="clear"></param> 
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.PurchaseReturnController.GetAllPurchaseReturnHeaders(System.Boolean,Maliban.Pos.Api.Helper.UserParams,System.Int32)">
+            <summary>
+            Get Stocks 
+            </summary>
+            <param name="getallpurchasereturnheaders"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.PurchaseReturnController.GetPurchaseReturnHeader(System.Boolean,System.Int32)">
+            <summary>
+            Get Stocks 
+            </summary>
+            <param name="getpurchasereturnheader/{purchaseReturnHeaderId}/{purchaseReturnHeaderId}"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.PurchaseReturnController.GetPurchaseReturnHeaderByGRNId(System.Boolean,System.Int32)">
+            <summary>
+            Get Stocks 
+            </summary>
+            <param name="getpurchasereturnheaderbygrnid/{goodReceiptNoteHeaderId}/{goodReceiptNoteHeaderId}"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.PurchaseReturnController.GetAllPurchaseReturnDetails(System.Boolean,Maliban.Pos.Api.Helper.UserParams,System.Int32)">
+            <summary>
+            Get Stocks 
+            </summary>
+            <param name="getallpurchasereturndetails"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.PurchaseReturnController.GetPurchaseReturnItemDetails(System.Nullable{System.Int32})">
+            <summary>
+             Get PurchaseOrderItemDetails.
+            </summary> 
+            <param name="Get/{purchasereturnId}/{purchasereturnId}"></param> 
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.PurchaseReturnController.SearchPurchaseReturn(System.Nullable{System.Int32})">
+            <summary>
+             Get PurchaseOrderItemDetails.
+            </summary> 
+            <param name="Search/{purchasereturnId}/{purchasereturnId}"></param> 
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.PurchaseReturnController.CreatePurchaseReturnItemDetails(Maliban.Pos.Api.Dtos.CreatePurchaseReturnDetailsDto)">
+            <summary>
+             Create SaleDetailDto.
+            </summary> 
+            <param name="createpurchasereturnitemdetails"></param> 
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.PurchaseReturnController.CreatePurchaseReturnHeader(Maliban.Pos.Api.Dtos.CreatePurchaseReturnHeaderDto)">
+            <summary>
+            You can call checkout method.Please make sure purchaserequest details already exists in the list
+            </summary> 
+            <param name="Check/createpurchasereturnheader/createpurchasereturnheader"></param> 
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.PurchaseReturnController.RemovePurchaseReturnItemDetails(Maliban.Pos.Api.Dtos.RemoveSaleDetailDto)">
+            <summary>
+            Remove SaleDetailDto.
+            </summary> 
+            <param name="removepurchasereturnitemdetails"></param> 
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.PurchaseReturnController.Clear">
+            <summary>
+            Test .
+            </summary> 
+            <param name="clear"></param> 
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.RackController.GetAllRackss(System.Boolean,Maliban.Pos.Api.Helper.UserParams)">
+            <summary>
+            Get Racks 
+            </summary>
+            <param name="getallracks"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.RackController.GetRackById(System.Nullable{System.Int32})">
+            <summary>
+            Get Rack By Id 
+            </summary>
+            <param name="{id}{id}"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.RackController.DeleteRackByRackId(System.Nullable{System.Int32})">
+            <summary>
+            Delete Rack By id 
+            </summary>
+            <param name="{id}{id}"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.RackController.CreateRack(Maliban.Pos.Api.Dtos.CreateRackDto)">
+            <summary>
+            Create Rack.
+            </summary> 
+            <param name="createbrand"></param> 
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.RackController.UpdateRack(System.Nullable{System.Int32},Maliban.Pos.Api.Dtos.UpdateRackDto)">
+            <summary>
+            Update Rack.
+            </summary> 
+            <param name="{id}{id}"></param> 
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.ReportController.GetReportDetails(System.String,System.Int32,Maliban.Pos.Api.Helper.UserParams)">
+            <summary>
+            Get Suppliers 
+            </summary>
+            <param name="getreportdetails"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.ReportController.GetExcelReport(System.String,System.Int32,Maliban.Pos.Api.Helper.UserParams)">
+            <summary>
+            Get Suppliers 
+            </summary>
+            <param name="getexcelreport"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.SaleController.CreateSaleItemDetails(Maliban.Pos.Api.Dtos.CreateSaleDetailDto)">
+            <summary>
+             Create SaleDetailDto.
+            </summary> 
+            <param name="createsaleitemdetails"></param> 
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.SaleController.CreateSaleItemQuantity(Maliban.Pos.Api.Dtos.CreateSaleQuantityDto)">
+            <summary>
+             Create SaleDetailDto.
+            </summary> 
+            <param name="quantity/createsaleitemquantity/createsaleitemquantity"></param> 
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.SaleController.FifoCreateSaleItemQuantity(Maliban.Pos.Api.Dtos.CreateSaleQuantityDto)">
+            <summary>
+             Create SaleDetailDto.
+            </summary> 
+            <param name="fifoquantity/fifocreatesaleitemquantity/fifocreatesaleitemquantity"></param> 
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.SaleController.RemoveSaleItemQuantity(Maliban.Pos.Api.Dtos.RemoveSaleItemQuantityDto)">
+            <summary>
+             Remove Sale Item Quantity.
+            </summary> 
+            <param name="removesaleitemquantity"></param> 
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.SaleController.RemoveSaleItemDetails(Maliban.Pos.Api.Dtos.RemoveSaleDetailDto)">
+            <summary>
+            Remove SaleDetailDto.
+            </summary> 
+            <param name="removesaleitemdetails"></param> 
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.SaleController.CreateSaleHeader(Maliban.Pos.Api.Dtos.CreateSaleHeaderDto)">
+            <summary>
+            You can call checkout method.Please make sure Saleitem details already exists in the list
+            </summary> 
+            <param name="Check/createsaleitem/createsaleitem"></param> 
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.SaleController.CreateSaleReturnHeader(Maliban.Pos.Api.Dtos.CreateSaleReturnHeaderDto)">
+            <summary>
+            You can call checkout method.Please make sure Saleitem details already exists in the list
+            </summary> 
+            <param name="SaleReturn/createsalereturnitem/createsalereturnitem"></param> 
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.SaleController.GetReceiptDetails(System.Nullable{System.Int32})">
+            <summary>
+            You can call checkout method.Please make sure Saleitem details already exists in the list
+            </summary> 
+            <param name="Receipt/{saleHeaderId}/{saleHeaderId}"></param> 
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.SaleController.GetReturnDetails(System.Nullable{System.Int32},System.Int32)">
+            <summary>
+            You can call checkout method.Please make sure Saleitem details already exists in the list
+            </summary> 
+            <param name="Return/{saleHeaderId}/{branchlocationId}/{saleHeaderId}/{branchlocationId}"></param> 
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.SaleController.Clear">
+            <summary>
+            Test .
+            </summary> 
+            <param name="clear"></param> 
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.SectionController.CreateSection(Maliban.Pos.Api.Dtos.CreateSectionDto)">
+            <summary>
+            Create Section.
+            </summary> 
+            <param name="createsection"></param> 
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.StockAdjustmentController.GetAllStockAdjustmentHeaders(System.Boolean,Maliban.Pos.Api.Helper.UserParams,System.Int32)">
+            <summary>
+            Get Stocks 
+            </summary>
+            <param name="getallstockadjustmentheaders"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.StockAdjustmentController.GetAllStockAdjustmentDetails(System.Boolean,Maliban.Pos.Api.Helper.UserParams,System.Int32)">
+            <summary>
+            Get Stocks 
+            </summary>
+            <param name="getallstockadjustmentdetails"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.StockAdjustmentController.CreateStockAdjustmentItemDetails(Maliban.Pos.Api.Dtos.CreateStockAdjustmentDetailDto)">
+            <summary>
+             Create StockAdjustmentDetailDto.
+            </summary> 
+            <param name="createstockadjustmentitemdetails"></param> 
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.StockAdjustmentController.RemoveStockAdjustmentItemQuantity(Maliban.Pos.Api.Dtos.RemoveStockAdjustmentItemQuantityDto)">
+            <summary>
+             Remove StockAdjustment Item Quantity.
+            </summary> 
+            <param name="removestockadjustmentitemquantity"></param> 
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.StockAdjustmentController.RemoveStockAdjustmentItemDetails(Maliban.Pos.Api.Dtos.RemoveStockAdjustmentDetailDto)">
+            <summary>
+            Remove StockAdjustmentDetailDto.
+            </summary> 
+            <param name="removestockadjustmentitemdetails"></param> 
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.StockAdjustmentController.CreateStockAdjustmentHeader(Maliban.Pos.Api.Dtos.CreateStockAdjustmentHeaderDto)">
+            <summary>
+            You can call checkout method.Please make sure StockAdjustmentitem details already exists in the list
+            </summary> 
+            <param name="Check/createstockadjustmentitem/createstockadjustmentitem"></param> 
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.StockAdjustmentController.GetStockAdjustmentDetails(System.Nullable{System.Int32})">
+            <summary>
+            You can call checkout method.Please make sure StockAdjustmentitem details already exists in the list
+            </summary> 
+            <param name="Receipt/{stockadjustmentHeaderId}/{stockadjustmentHeaderId}"></param> 
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.StockAdjustmentController.GetStockAdjustmentItemQuantityByProduct(Maliban.Pos.Api.Dtos.GetStockAdjustmentItemQuantityByProductDto)">
+            <param name="GetStockAdjustmentItemQuantityByProduct"></param> 
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.StockAdjustmentController.Clear">
+            <summary>
+            Test .
+            </summary> 
+            <param name="clear"></param> 
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.StockController.GetAllStocks(System.Boolean,Maliban.Pos.Api.Helper.UserParams,System.Int32)">
+            <summary>
+            Get Stocks 
+            </summary>
+            <param name="getallstocks"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.StockController.GetAllStockDetails(System.Boolean,Maliban.Pos.Api.Helper.UserParams,System.Int32)">
+            <summary>
+            Get Stocks 
+            </summary>
+            <param name="getallstockdetails"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.StoreAreaController.GetAllStoreAreass(System.Boolean,Maliban.Pos.Api.Helper.UserParams)">
+            <summary>
+            Get StoreAreas 
+            </summary>
+            <param name="getallstoreareas"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.StoreAreaController.GetStoreAreaById(System.Nullable{System.Int32})">
+            <summary>
+            Get StoreArea By Id 
+            </summary>
+            <param name="{id}{id}"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.StoreAreaController.DeleteStoreAreaByStoreAreaId(System.Nullable{System.Int32})">
+            <summary>
+            Delete StoreArea By id 
+            </summary>
+            <param name="{id}{id}"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.StoreAreaController.CreateStoreArea(Maliban.Pos.Api.Dtos.CreateStoreAreaDto)">
+            <summary>
+            Create StoreArea.
+            </summary> 
+            <param name="createbrand"></param> 
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.StoreAreaController.UpdateStoreArea(System.Nullable{System.Int32},Maliban.Pos.Api.Dtos.UpdateStoreAreaDto)">
+            <summary>
+            Update StoreArea.
+            </summary> 
+            <param name="{id}{id}"></param> 
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.StoreController.GetAllStores(System.Boolean,Maliban.Pos.Api.Helper.UserParams)">
+            <summary>
+            Get Stores 
+            </summary>
+            <param name="getallstores"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.StoreController.GetStoreById(System.Nullable{System.Int32})">
+            <summary>
+            Get Store By Id 
+            </summary>
+            <param name="{id}{id}"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.StoreController.DeleteStoreByStoreId(System.Nullable{System.Int32})">
+            <summary>
+            Delete Store By id 
+            </summary>
+            <param name="{id}{id}"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.StoreController.CreateStore(Maliban.Pos.Api.Dtos.CreateStoreDto)">
+            <summary>
+            Create Store.
+            </summary> 
+            <param name="createbrand"></param> 
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.StoreController.UpdateStore(System.Nullable{System.Int32},Maliban.Pos.Api.Dtos.UpdateStoreDto)">
+            <summary>
+            Update Store.
+            </summary> 
+            <param name="{id}{id}"></param> 
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.SubCategoryController.GetAllSubCategorys(System.Boolean,Maliban.Pos.Api.Helper.UserParams)">
+            <summary>
+            Get SubCategorys 
+            </summary>
+            <param name="getallsubcategorys"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.SubCategoryController.GetSubCategoryBySubCategoryId(System.Nullable{System.Int32})">
+            <summary>
+            Get Product By BarCode 
+            </summary>
+            <param name="{id}{id}"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.SubCategoryController.GetSubCategoriesByCategoryId(System.Nullable{System.Int32})">
+            <summary>
+            Get Product By BarCode 
+            </summary>
+            <param name="{categoryId}{categoryId}"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.SubCategoryController.DeleteSubCategoryBySubCategoryId(System.Nullable{System.Int32})">
+            <summary>
+            Delete SubCategory By id 
+            </summary>
+            <param name="{id}{id}"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.SubCategoryController.CreateSubCategory(Maliban.Pos.Api.Dtos.CreateSubCategoryDto,Maliban.Pos.Api.Dtos.CreatePhotoUploadDto)">
+            <summary>
+            Create SubCategory.
+            </summary> 
+            <param name="createsubcategory"></param> 
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.SubCategoryController.UpdateSubCategory(System.Nullable{System.Int32},Maliban.Pos.Api.Dtos.UpdateSubCategoryDto)">
+            <summary>
+            Update SubCategory.
+            </summary> 
+            <param name="{id}{id}"></param> 
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.SupplierProductController.GetProductFilterBySupplierId(System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            Get Product By SupplierId 
+            </summary>
+            <param name="FilterProduct/{supplierid}/{branchLocationId}/{supplierid}/{branchLocationId}"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.SupplierProductController.GetProductBySupplierId(System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            Get Product By BarCode 
+            </summary>
+            <param name="{supplierid}/{branchLocationId}{supplierid}/{branchLocationId}"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.SupplierProductController.CreateSupplierProduct(Maliban.Pos.Api.Dtos.CreateSupplierProductDto)">
+            <summary>
+            Create Member.
+            </summary> 
+            <param name="createsupplierproduct"></param> 
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.SupplierProductController.DeleteSupplierProduct(Maliban.Pos.Api.Dtos.DeleteSupplierProductDto)">
+            <summary>
+            Delete SupplierProduct 
+            </summary>
+            <param name="deletesupplierproduct"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.SupplierController.GetAllSuppliers(System.Boolean,Maliban.Pos.Api.Helper.UserParams,System.Int32)">
+            <summary>
+            Get Suppliers 
+            </summary>
+            <param name="getallsuppliers"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.SupplierController.GetSupplierById(System.Nullable{System.Int32})">
+            <summary>
+            Get Supplier By Id 
+            </summary>
+            <param name="{id}{id}"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.SupplierController.DeleteSupplierById(System.Nullable{System.Int32})">
+            <summary>
+            Delete Supplier By id 
+            </summary>
+            <param name="{id}{id}"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.SupplierController.CreateSupplier(Maliban.Pos.Api.Dtos.CreateSupplierDto)">
+            <summary>
+            Create Supplier.
+            </summary> 
+            <param name="createsupplier"></param> 
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.SupplierController.UpdateSupplier(System.Nullable{System.Int32},Maliban.Pos.Api.Dtos.UpdateSupplierDto)">
+            <summary>
+            Update Supplier.
+            </summary> 
+            <param name="{id}{id}"></param> 
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.UnitOfMeasurementController.GetAllUnitOfMeasurements(System.Boolean,Maliban.Pos.Api.Helper.UserParams)">
+            <summary>
+            Get UnitOfMeasurements 
+            </summary>
+            <param name="getallunitOfMeasurements"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.UnitOfMeasurementController.GetUnitOfMeasurementByUnitOfMeasurementId(System.Nullable{System.Int32})">
+            <summary>
+            Get Product By BarCode 
+            </summary>
+            <param name="{id}{id}"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.UnitOfMeasurementController.DeleteUnitOfMeasurementByUnitOfMeasurementId(System.Nullable{System.Int32})">
+            <summary>
+            Delete UnitOfMeasurement By id 
+            </summary>
+            <param name="{id}{id}"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.UnitOfMeasurementController.CreateUnitOfMeasurement(Maliban.Pos.Api.Dtos.CreateUnitOfMeasurementDto)">
+            <summary>
+            Create UnitOfMeasurement.
+            </summary> 
+            <param name="createunitOfMeasurement"></param> 
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.UnitOfMeasurementController.UpdateUnitOfMeasurement(System.Nullable{System.Int32},Maliban.Pos.Api.Dtos.UpdateUnitOfMeasurementDto)">
+            <summary>
+            Update UnitOfMeasurement.
+            </summary> 
+            <param name="{id}{id}"></param> 
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.VendorController.GetAllVendorss(System.Boolean,Maliban.Pos.Api.Helper.UserParams)">
+            <summary>
+            Get Vendors 
+            </summary>
+            <param name="getallvendors"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.VendorController.GetVendorById(System.Nullable{System.Int32})">
+            <summary>
+            Get Vendor By Id 
+            </summary>
+            <param name="{id}{id}"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.VendorController.DeleteVendorByVendorId(System.Nullable{System.Int32})">
+            <summary>
+            Delete Vendor By id 
+            </summary>
+            <param name="{id}{id}"></param>
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.VendorController.CreateVendor(Maliban.Pos.Api.Dtos.CreateVendorDto)">
+            <summary>
+            Create Vendor.
+            </summary> 
+            <param name="createbrand"></param> 
+        </member>
+        <member name="M:Maliban.Pos.Api.Controllers.VendorController.UpdateVendor(System.Nullable{System.Int32},Maliban.Pos.Api.Dtos.UpdateVendorDto)">
+            <summary>
+            Update Vendor.
+            </summary> 
+            <param name="{id}{id}"></param> 
+        </member>
+        <member name="M:Maliban.Pos.Api.Repository.EFShopStockRepository.OverWriteStockDetailPriceAsync(Maliban.Pos.Api.Models.Product,System.Int32,Maliban.Pos.Api.Models.Price)">
+            <summary>
+            Takes two numbers and multiplies them together, returning the result.
+            </summary>
+            <param name="a">The first number to multiply</param>
+            <param name="b">The second number to multiply</param>
+            <returns>The product of the two input numbers</returns>
+        </member>
+    </members>
+</doc>

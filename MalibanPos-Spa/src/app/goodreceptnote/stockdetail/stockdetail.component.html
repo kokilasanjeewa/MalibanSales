@@ -1,0 +1,31 @@
+<!--main container start-->
+<div class="main-container">
+  <div class="table-responsive-md ml-2 mr-2 mt-2 mb-2">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th class="center">#</th>
+          <th class="text-left">Item Code</th>
+          <th class="text-left">Product Name</th>
+          <th class="right">Expiry Date</th>
+          <th class="center">Quantity</th>
+          <th class="center">Cost Price</th>
+          <th class="center">MRP</th>
+          <th class="center">Sale Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of items$ | async; let i = index">
+          <td class="center">{{ i + 1 }}</td>
+          <td class="center">{{ item.barcode }}</td>
+          <td class="text-left">{{ item.productName }}</td>
+          <td class="center">{{ item.productExpireDate }}</td>
+          <td class="center">{{ item.dNetQuantity }}</td>
+          <td class="center">{{ item.dCostPrice }}</td>
+          <td class="center">{{ item.maximumRetailPrice }}</td>
+          <td class="center">{{ item.dSalePrice }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

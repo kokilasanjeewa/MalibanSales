@@ -1,0 +1,489 @@
+<!--main container start-->
+<div class="main-container d-print-none" style="overflow-x: hidden">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="#">Pos</a></li>
+      <li class="breadcrumb-item"><a href="#">Order</a></li>
+      <li class="breadcrumb-item active" aria-current="page">New Order</li>
+    </ol>
+  </nav>
+  <div class="container-fluid mt-4">
+    <div class="row ml-1">
+      <div class="col-md-1" *appHasClaim="'CanAccessCheckoutHNB'">
+        <label for>Payment</label>
+      </div>
+      <div class="col-md-2" *appHasClaim="'CanAccessCheckoutHNB'">
+        <select [(ngModel)]="paymentType" class="form-control"
+          aria-label="paymentType" (change)="changePayment()">
+          <option selected value="1">Credit</option>
+          <option value="2">Card</option>
+        </select>
+      </div>
+      <div class="col-md-2" *ngIf="!isReturnReadonly">
+        <label for><i class="fas fa-search"></i></label>
+        <input id="customer" ngDefaultControl name="customer" #myinput
+          [(ngModel)]="customerNumber" tabindex="0"
+          (keydown.enter)="Customeradd($event)" class="form-control" type="text"
+          placeholder="Customer" />
+        <label class="right-label" for><i class="fa fa-barcode"></i></label>
+      </div>
+
+      <div class="col-md-2" *ngIf="
+          !isReadonly &&
+          ((paymentType == 1 &&
+            total < customer?.creditLimit - customer?.creditBalance) ||
+            (paymentType == 2 &&
+              total < customer?.cashLimit - customer?.cashBalance))
+        ">
+        <input *ngIf="!isReturnReadonly" name="selected" ngDefaultControl
+          [(ngModel)]="selectedItem" tabindex="1"
+          id="scanItemCode" (keydown.enter)="changeBarcode($event)" placeholder
+          class="form-control" type="text"
+          placeholder="Scan Item Code " #myinput1 />
+
+        <!-- <label class="right-label" for=""><i class="fa fa-barcode"></i></label> -->
+      </div>
+      <div class="col-md-2" *ngIf="
+          !isReadonly &&
+          ((paymentType == 1 &&
+            total < customer?.creditLimit - customer?.creditBalance) ||
+            (paymentType == 2 &&
+              total < customer?.cashLimit - customer?.cashBalance))
+        ">
+        <input *ngIf="!isReturnReadonly" step="1" min="0" name="itemQuantity"
+          ngDefaultControl
+          [(ngModel)]="itemQuantity" tabindex="2"
+          (keydown.enter)="itemChange1($event)" id="itemQuantity"
+          class="form-control" type="number" placeholder="Quantity" #myinput2 />
+        <!-- <label class="right-label" for=""><i class="fa fa-barcode"></i></label> -->
+      </div>
+      <div class="col-md-2">
+        <label for><i class="fas fa-search"></i></label>
+        <input name="bill" ngDefaultControl [(ngModel)]="billNumber"
+          tabindex="7" id="billNumber" class="form-control"
+          type="text" placeholder="Bill No:" [readonly]="isReturnReadonly" />
+        <label class="right-label" for><i class="fa fa-barcode"></i></label>
+      </div>
+    </div>
+    <div class="row mt-2" style="width: 100%">
+      <div class="col-md-3" style="padding-right: 0px">
+        <table class="table table-hover" style="
+            border: 4px solid #ccc;
+            box-shadow: -4px 5px 11px 1px rgb(208 214 216);
+          ">
+          <thead>
+            <tr>
+              <th colspan="2">Customer Details</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="height: 40px !important">
+              <td scope="row" class="left-detail"><span>Epf Code</span></td>
+              <td class="text-center">
+                <span style="color: rgb(39, 14, 5); font-weight: bold">{{
+                  customer?.number
+                  }}</span>
+              </td>
+            </tr>
+            <tr style="height: 40px !important">
+              <td scope="row" class="left-detail"><span>Name</span></td>
+              <td class="text-center">
+                <span style="color: rgb(45, 15, 4); font-weight: bold">{{
+                  customer?.fullName
+                  }}</span>
+              </td>
+            </tr>
+            <tr style="height: 40px !important" *ngIf="paymentType == 1">
+              <td scope="row" class="left-detail"><span>Total Debit</span></td>
+              <td class="text-center">
+                <span style="color: rgba(20, 172, 108, 0.87); font-weight: bold"
+                  *ngIf="!isReadonly">Rs
+                  {{ customer?.creditBalance + total | number : "1.2-3"
+                  }}</span>
+              </td>
+
+              <td class="text-center">
+                <span style="color: #271905de; font-weight: bold"
+                  *ngIf="isReadonly">Rs
+                  {{
+                  customer?.creditBalance - returntotal | number : "1.2-3"
+                  }}</span>
+              </td>
+            </tr>
+            <tr style="height: 40px !important" *ngIf="paymentType == 2">
+              <td scope="row" class="left-detail"><span>Total Card</span></td>
+              <td class="text-center">
+                <span style="color: rgba(20, 172, 108, 0.87); font-weight: bold"
+                  *ngIf="!isReadonly">Rs
+                  {{ customer?.cashBalance + total | number : "1.2-3" }}</span>
+              </td>
+
+              <td class="text-center">
+                <span style="color: #1b1102de; font-weight: bold"
+                  *ngIf="isReadonly">Rs
+                  {{
+                  customer?.cashBalance - returntotal | number : "1.2-3"
+                  }}</span>
+              </td>
+            </tr>
+            <tr style="height: 40px !important" *ngIf="paymentType == 1">
+              <td scope="row" class="left-detail"><span>Balance</span></td>
+              <td class="text-center">
+                <span style="color: rgba(20, 172, 108, 0.87); font-weight: bold"
+                  *ngIf="!isReadonly">Rs
+                  {{
+                  customer?.creditLimit - (customer?.creditBalance + total)
+                  | number : "1.2-3"
+                  }}</span>
+                <span style="color: #170e02de; font-weight: bold"
+                  *ngIf="isReadonly">Rs
+                  {{
+                  customer?.creditLimit -
+                  customer?.creditBalance +
+                  returntotal | number : "1.2-3"
+                  }}</span>
+              </td>
+            </tr>
+            <tr style="height: 40px !important" *ngIf="paymentType == 2">
+              <td scope="row" class="left-detail"><span>Card Balance</span></td>
+              <td class="text-center">
+                <span style="color: rgba(20, 172, 108, 0.87); font-weight: bold"
+                  *ngIf="!isReadonly">Rs
+                  {{
+                  customer?.cashLimit - (customer?.cashBalance + total)
+                  | number : "1.2-3"
+                  }}</span>
+                <span style="color: #241703de; font-weight: bold"
+                  *ngIf="isReadonly">Rs
+                  {{
+                  customer?.cashLimit - customer?.cashBalance + returntotal
+                  | number : "1.2-3"
+                  }}</span>
+              </td>
+            </tr>
+            <tr style="height: 40px !important">
+              <td scope="row" class="left-detail">
+                <span>Items/Quantity</span>
+              </td>
+              <td style="
+                  color: rgb(18, 5, 1);
+                  font-weight: bolder;
+                  font-size: larger;
+                  text-align: center;
+                ">
+                {{ count }}
+                <span>/</span>{{ totalQuantity }}
+              </td>
+            </tr>
+            <tr style="height: 40px !important">
+              <td scope="row" class="left-detail"><span>Discount</span></td>
+              <td style="
+                  color: rgb(18, 5, 1);
+                  font-weight: bolder;
+                  font-size: larger;
+                  text-align: center;
+                ">
+                Rs {{ discount | number : "1.2-3" }}
+              </td>
+            </tr>
+            <tr style="height: 40px !important">
+              <td scope="row" class="left-detail"><span>Subtotal</span></td>
+              <td style="
+                  color: rgb(18, 5, 1);
+                  font-weight: bolder;
+                  font-size: larger;
+                  text-align: center;
+                ">
+                Rs {{ subtotal | number : "1.2-3" }}
+              </td>
+            </tr>
+            <tr style="height: 40px !important">
+              <td scope="row" class="left-detail"><span>Total</span></td>
+              <td style="
+                  color: rgb(18, 5, 1);
+                  font-weight: bolder;
+                  font-size: larger;
+                  text-align: center;
+                ">
+                Rs {{ total | number : "1.2-3" }}
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2" style="
+                  color: rgb(18, 5, 1);
+                  font-weight: bolder;
+                  font-size: larger;
+                  text-align: center;
+                ">
+                <div *ngIf="!isReturnReadonly">
+                  <div *appHasClaim="'CanAccessCheckout'">
+                    <button [(ngModel)]="checkdisable" ngDefaultControl
+                      *ngIf="!isReadonly && paymentType == 1"
+                      type="button" (click)="checkout()"
+                      class="btn btn-success checkout" [disabled]="isReadonly"
+                      [disabled]="checkdisable"
+                      [ngClass]="{ clear: checkdisable }"
+                      [disabled]="lines == 0 || !connected">
+                      {{ connected ? "CheckOut" : "Offline" }}
+                    </button>
+                  </div>
+                  <div *appHasClaim="'CanAccessCheckoutHNB'">
+                    <button [(ngModel)]="checkdisable" ngDefaultControl
+                      *ngIf="!isReadonly && paymentType == 2"
+                      type="button" (click)="openModalWithCashComponent()"
+                      class="btn btn-primary cash"
+                      [disabled]="isReadonly" [disabled]="checkdisable"
+                      [ngClass]="{ clear: checkdisable }">
+                      Card
+                    </button>
+                    <button [(ngModel)]="checkdisable" ngDefaultControl
+                      *ngIf="!isReadonly && paymentType == 1"
+                      type="button" (click)="checkout()"
+                      class="btn btn-success checkout" [disabled]="isReadonly"
+                      [disabled]="checkdisable"
+                      [ngClass]="{ clear: checkdisable }">
+                      Credit
+                    </button>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2" style="
+                  color: rgb(18, 5, 1);
+                  font-weight: bolder;
+                  font-size: larger;
+                  text-align: center;
+                ">
+                <div *ngIf="!isReadonly">
+                  <button type="submit" (click)="reprint()"
+                    class="btn btn-warning reprint">
+                    Reprint
+                  </button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2" style="
+                  color: rgb(18, 5, 1);
+                  font-weight: bolder;
+                  font-size: larger;
+                  text-align: center;
+                ">
+                <div>
+                  <button type="submit" (click)="clearCart()"
+                    class="btn btn-danger clear">
+                    Clear
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-md-9" style="padding-left: 0px">
+        <div style="overflow-y: scroll" id="style-14">
+          <table class="table table-hover"
+            style="box-shadow: -4px 5px 11px 1px rgb(208 214 216)">
+            <thead style="padding: 2px !important">
+              <tr style="
+                  border: 2px solid #cdd2d7;
+                  background-clip: padding-box;
+                  padding: 2px;
+                ">
+                <th scope="col">No</th>
+                <th scope="col" style="text-align: left">
+                  Product Details(Name /Weight /Expiry Date)
+                </th>
+                <th scope="col">Stock</th>
+                <th scope="col">Quantity</th>
+                <th scope="col" *ngIf="billActive">Return Quantity</th>
+                <th scope="col">Sale Price(Rs)</th>
+                <th scope="col">Total(Rs)</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="
+                  border: 2px solid #cdd2d7;
+                  background-clip: padding-box;
+                  padding: 2px;
+                  height: 32px !important;
+                " *ngFor="let line of lines | reverse; let i = index"
+                [attr.data-index]="i">
+                <td style="
+                    border: 2px solid #cdd2d7;
+                    background-clip: padding-box;
+                    padding: 2px;
+                  " class="center">
+                  {{ i + 1 }}
+                </td>
+                <td style="
+                    border: 2px solid #cdd2d7;
+                    background-clip: padding-box;
+                    padding: 2px;
+                  " style="width: auto">
+                  <h6 class="product-subtitle">
+                    <span style="color: rgb(3, 4, 3); font-weight: bolder">{{
+                      line.product.productName
+                      }}</span><span
+                      style="color: rgb(6, 8, 6); font-weight: bolder">{{
+                      line.product.unitWeight
+                      }}</span>
+                    <span style="color: rgb(4, 5, 4); font-weight: bolder">{{
+                      line.productExpireDate | date : "mediumDate"
+                      }}</span>
+                  </h6>
+                </td>
+                <td style="
+                    border: 2px solid #cdd2d7;
+                    background-clip: padding-box;
+                    padding: 2px;
+                    color: rgb(3, 4, 3);
+                    font-weight: bolder;
+                    font-size: large;
+                  " class="quantity">
+                  <div class="input-group input-group-md">
+                    <input type="number"
+                      class="form-control fix-rounded-right text-center"
+                      [value]="line.stockQuantity"
+                      readonly />
+                  </div>
+                </td>
+                <td style="
+                    border: 2px solid #cdd2d7;
+                    background-clip: padding-box;
+                    padding: 2px;
+                    color: rgb(3, 4, 3);
+                    font-weight: bolder;
+                    font-size: large;
+                  " class="quantity">
+                  <!-- INPUT QUANTITY FOR RETURN  SCREEN START -->
+                  <div class="input-group input-group-md">
+                    <input *ngIf="line.activeBill" (keydown.enter)="
+                        onChangeEvent(
+                          $event,
+                          line.product.barcode,
+                          line.itemPrice,
+                          line.costPrice,
+                          line.transactionDetailId
+                        )
+                      " type="number"
+                      class="form-control fix-rounded-right text-center"
+                      required
+                      [value]="line.quantity" readonly />
+                    <!-- INPUT QUANTITY FOR RETURN  SCREEN END -->
+                    <!-- INPUT QUANTITY FOR CHECKOUT  SCREEN START -->
+                    <input style="font-size: small; font-weight: bolder"
+                      tabindex="2" *ngIf="!line.activeBill"
+                      (keydown.enter)="
+                        onChangeFifoEvent(
+                          $event,
+                          line.product.barcode,
+                          line.itemPrice,
+                          line.costPrice,
+                          line.transactionDetailId
+                        )
+                      " type="number" step="1" min="0"
+                      class="form-control fix-rounded-right text-center"
+                      required
+                      [value]="line.quantity" #myinputqty />
+                    <div class="invalid-feedback">Please choose a qty.</div>
+                  </div>
+                  <!-- INPUT QUANTITY FOR CHECKOUT  SCREEN END -->
+                </td>
+                <!-- INPUT RETURN QUANTITY FOR RETURN  SCREEN START -->
+
+                <td style="
+                    border: 2px solid #cdd2d7;
+                    background-clip: padding-box;
+                    padding: 2px;
+                    color: rgb(3, 4, 3);
+                    font-weight: bolder;
+                    font-size: large;
+                  " class="quantity" *ngIf="line.activeBill">
+                  <div class="input-group input-group-md">
+                    <input (keydown.enter)="
+                        onChangeEvent(
+                          $event,
+                          line.product.barcode,
+                          line.itemPrice,
+                          line.costPrice,
+                          line.transactionDetailId
+                        )
+                      " type="number"
+                      style="font-size: small; font-weight: bolder" min="1"
+                      class="form-control fix-rounded-right text-center"
+                      required [value]="line.returnQuantity" />
+
+                    <div class="invalid-feedback">
+                      Please choose a username.
+                    </div>
+                  </div>
+                </td>
+                <!-- INPUT RETURN QUANTITY FOR RETURN  SCREEN END -->
+                <td style="
+                    border: 2px solid #cdd2d7;
+                    background-clip: padding-box;
+                    padding: 2px;
+                  " class="price">
+                  {{ line.itemPrice | number : "1.2-3" }}
+                </td>
+                <td style="
+                    border: 2px solid #cdd2d7;
+                    background-clip: padding-box;
+                    padding: 2px;
+                  " class="price">
+                  {{ line.total | number : "1.2-3" }}
+                </td>
+                <td style="
+                    border: 2px solid #cdd2d7;
+                    background-clip: padding-box;
+                    padding: 2px;
+                  " class="remove" *ngIf="!line.activeBill">
+                  <i class="fa fa-trash-o"
+                    (click)="remove(line.product.barcode, line.itemPrice)"></i>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <!--  <div class="row justify-content-center mt-3">
+      <div class="col-md-2">
+        <div *ngIf="!isReturnReadonly">
+          <div *appHasClaim="'CanAccessCheckout'">
+            <button [(ngModel)]="checkdisable" ngDefaultControl *ngIf="!isReadonly && paymentType == 1" type="button"
+              (click)="checkout()" class="btn btn-success checkout" [disabled]="isReadonly" [disabled]="checkdisable"
+              [ngClass]="{ clear: checkdisable }" [disabled]="lines == 0 || !connected">
+              {{ connected ? "CheckOut" : "Offline" }}
+            </button>
+          </div>
+          <div *appHasClaim="'CanAccessCheckoutHNB'">
+            <button [(ngModel)]="checkdisable" ngDefaultControl *ngIf="!isReadonly && paymentType == 2" type="button"
+              (click)="openModalWithCashComponent()" class="btn btn-primary cash" [disabled]="isReadonly"
+              [disabled]="checkdisable" [ngClass]="{ clear: checkdisable }">
+              Card
+            </button>
+            <button [(ngModel)]="checkdisable" ngDefaultControl *ngIf="!isReadonly && paymentType == 1" type="button"
+              (click)="checkout()" class="btn btn-success checkout" [disabled]="isReadonly" [disabled]="checkdisable"
+              [ngClass]="{ clear: checkdisable }">
+              Credit
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <button *ngIf="!isReadonly" type="submit" (click)="reprint()" class="btn btn-warning reprint">
+          Reprint
+        </button>
+      </div>
+      <div class="col-md-2">
+        <button type="submit" (click)="clearCart()" class="btn btn-danger clear">
+          Clear
+        </button>
+      </div>
+    </div> -->
+  </div>
+</div>

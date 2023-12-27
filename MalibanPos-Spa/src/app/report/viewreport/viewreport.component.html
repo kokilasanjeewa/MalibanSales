@@ -1,0 +1,31 @@
+<!--main container start-->
+<div class="main-container">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a [routerLink]="['/dashboard']">Home</a></li>
+      <li class="breadcrumb-item active" aria-current="page"><a [routerLink]="['/report/viewreport']">Report List</a></li>
+    </ol>
+  </nav>
+  <div class="container-fluid">
+    <h6>Report List</h6>
+    <form [formGroup]="addReportForm" (ngSubmit)="reportAdd()">
+      <div class="form-row">
+        <label for="ProductCode" class="col-sm-2 col-form-label col-form-label-sm">Report Name<span
+            class="notzerovalue">&nbsp;*</span></label>
+        <div class="form-group col-sm-4">
+          <select class="form-control" id="exampleFormControlSelect2" [formControlName]="'reportName'">
+            <option selected value="" disabled>Select Report..</option>
+            <option *ngFor="let report of reports | async" [value]="report.reportName">
+              {{report.reportName}}</option>
+          </select>
+          <div class="invalid-feedback" *ngIf="f.reportName.touched && f.reportName.hasError('required')">
+            Please select a report.
+          </div>
+        </div>
+        <div class="form-group col-sm-3">
+          <button class="btn btn-outline-primary btn-sm mr-3 text-primary" [disabled]="!addReportForm.valid" type="submit">View</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

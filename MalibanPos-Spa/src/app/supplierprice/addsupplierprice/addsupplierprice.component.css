@@ -1,0 +1,45 @@
+.invalid-feedback {
+  color: #dc3545;
+  font-size: 95%;
+  display: block;
+  width: 100%;
+  padding: 0px 0px 0px 10px;
+  position: absolute;
+}
+
+.form-group.col-md-12.image {
+  margin-top: 1px;
+}
+
+.is-invalid {
+  background-color: #dc3545;
+}
+.table {
+  box-shadow: 1px 4px 6px 7px var(--tabletext);
+}
+thead {
+  background-color: var(--maintheme2);
+  padding: 10px;
+}
+th {
+  color: #ffffff;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 4px #e7e3e3;
+  border: 1px solid #fff;
+  font-weight: 700;
+  padding: 10px;
+  font-size: small;
+  text-align: center;
+}
+
+td {
+  color: #4b4848;
+  letter-spacing: 1px;
+  font-weight: lighter;
+  font-size: small;
+  padding: 10px;
+  text-justify: newspaper;
+  vertical-align: middle;
+  text-align: center;
+}
+button.ajs-button.ajs-ok {background-color: var(--maintheme2)!important;}

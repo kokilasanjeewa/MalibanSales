@@ -1,0 +1,138 @@
+<!--main container start-->
+<div class="main-container">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a [routerLink]="['/dashboard']">Home</a></li>
+      <li class="breadcrumb-item">
+        <a [routerLink]="['/supplier/supplierlist']">Supplier Product List</a>
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">
+        Add Supplier Product
+      </li>
+    </ol>
+  </nav>
+  <div class="container-fluid">
+    <h6>Add Supplier Product</h6>
+    <form [formGroup]="addRequestForm1" (ngSubmit)="itemListAdd1()">
+      <div class="form-group row">
+        <label for="inputEmail3"
+          class="col-sm-2 col-form-label">BranchLocation</label>
+        <div class="col-sm-3">
+          <select [formControlName]="'branchLocationId'" class="form-control"
+            (click)="changeSupplier()"
+            id="exampleFormControlSelect2">
+            <option selected value disabled>Please choose a branch..</option>
+            <option *ngFor="let branch of branches | async"
+              [value]="branch?.branchLocationId">
+              {{ branch?.branchCode }}
+            </option>
+          </select>
+          <div class="invalid-feedback" *ngIf="
+              f.branchLocationId?.touched &&
+              f.branchLocationId?.hasError('required')
+            ">
+            Please choose a branch.
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputEmail3"
+          class="col-sm-2 col-form-label">Supplier</label>
+        <div class="col-sm-7">
+          <select [formControlName]="'supplierId'" class="form-control"
+            (change)="addSupplier()"
+            id="exampleFormControlSelect2">
+            <option selected value disabled>
+              Please choose a supplier..
+            </option>
+            <option *ngFor="let supplier of suppliers | async"
+              [value]="supplier.supplierId">
+              {{ supplier.supplierName }}
+            </option>
+          </select>
+          <div class="invalid-feedback"
+            *ngIf="f.supplierId.touched && f.supplierId.hasError('required')">
+            Please choose a supplier.
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputEmail3" class="col-sm-2 col-form-label">Search Product
+          Code/Name</label>
+        <div class="col-sm-4">
+          <ng-select (keydown.enter)="$event.preventDefault()"
+            [formControlName]="'productId'" [searchable]="true"
+            class="custom" [dropdownPosition]="'bottom'"
+            placeholder="Search Product Code/Name" [virtualScroll]="true"
+            tabindex="1" [clearSearchOnAdd]="true">
+            <ng-option [value]="product.productId"
+              style="font-size: x-small !important" *ngFor="
+                let product of products
+                  | async
+                  | filter : searchKey : 'productName'
+              ">
+              <span style="font-size: x-small">{{ product.barcode
+                }}&nbsp;&nbsp;&nbsp;&nbsp;</span>
+              <span style="font-size: x-small">{{ product.productName }}</span>
+            </ng-option>
+          </ng-select>
+          <div class="invalid-feedback"
+            *ngIf="f.productId.invalid && f.productId.touched">
+            <div *ngIf="f.productId.errors.required">Select Product Code.</div>
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="row ml-4">
+            <button [disabled]="!addRequestForm1.valid" type="submit"
+              class="btn btn-outline-primary btn-sm mr-3 text-primary">
+              Add
+            </button>
+            <button (click)="clear()" type="reset"
+              class="btn btn-outline-danger btn-sm text-danger">
+              Clear
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+    <div class="table-responsive-md ml-3">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th class="center">#</th>
+            <th class="text-left">Product Code</th>
+            <th class="text-left">Product Name</th>
+            <th class="right">Product Description</th>
+            <th class="right">Colour</th>
+            <th class="right">Size</th>
+            <th class="right">Weight</th>
+            <th class="right">Create Date</th>
+            <th class="right">UOM</th>
+            <th class="center">Expiry Date</th>
+            <th class="center">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let line of supplierproducts; let i = index">
+            <td class="center">{{ i + 1 }}</td>
+            <td class="text-left">{{ line.product.barcode }}</td>
+            <td class="text-left">{{ line.product.productName }}</td>
+            <td class="center">{{ line.product.productDescription }}</td>
+            <td class="center">{{ line.product.size }}</td>
+            <td class="center">{{ line.product.color }}</td>
+            <td class="center">{{ line.product.unitWeight }}</td>
+            <td class="right">{{ line.product.createDate | date }}</td>
+            <td class="right">{{ line.product.unitOfMeasurement?.uOM }}</td>
+            <td class="right">{{ line.product.expiryDate | date }}</td>
+            <td class="right">
+              <i class="fa fa-trash-o" style="color: crimson"
+                (click)="removeProduct(line)"
+                *appHasClaim="'CanAccessRemoveSupplierProduct'"></i>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<!--main container end-->

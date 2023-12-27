@@ -1,0 +1,120 @@
+<!--main container start-->
+<div class="main-container">
+    <nav aria-label="breadcrumb" class="d-print-none">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a [routerLink]="['/dashboard']">Home</a></li>
+          <li class="breadcrumb-item"><a [routerLink]="['/report/viewreport']">Report List</a></li>
+            <li class="breadcrumb-item active"><a [routerLink]="['/report/salereturn']">Sale Return</a></li>
+        </ol>
+    </nav>
+    <!--main section start-->
+
+    <div class="container-fluid">
+        <h6>Sale Return</h6>
+        <form [formGroup]="stockReportForm" (ngSubmit)="stockAdd()" class="d-print-none">
+            <div class="form-row">
+                <label for="ProductCode" class="col-sm-1 col-form-label col-form-label-sm">From Date<span
+            class="notzerovalue"></span></label>
+                <div class="form-group col-sm-1">
+                    <input type="date" class="form-control" [formControlName]="'frmDate'" id="" placeholder="From Date">
+                    <div class="invalid-feedback" *ngIf="f.frmDate.touched && f.frmDate.invalid">
+                        From date is required.
+                    </div>
+                </div>
+                <label for="ProductCode" class="col-sm-1 col-form-label col-form-label-sm">To Date<span
+            class="notzerovalue"></span></label>
+                <div class="form-group col-sm-1">
+                    <input type="date" class="form-control" [formControlName]="'toDate'" id="" placeholder="To Date">
+                    <div class="invalid-feedback" *ngIf="f.toDate.touched && f.toDate.invalid">
+                        To date is required.
+                    </div>
+                </div>
+                <div class="form-group col-sm-1">
+                    <button class="btn btn-outline-info btn-sm text-info" [disabled]="!stockReportForm.valid" type="button" (click)="searchSrn()">Search</button>
+                </div>
+                <label for="ProductCode" class="col-sm-1 col-form-label col-form-label-sm">SaleReturn#<span
+            class="notzerovalue">&nbsp;*</span></label>
+                <div class="form-group col-sm-2">
+                    <select class="form-control" id="exampleFormControlSelect2" [formControlName]="'salereturnId'">
+            <option selected value="" disabled>Select Return NO..</option>
+            <option *ngFor="let salereturn of salereturns | async" [value]="salereturn.customerReturnHeaderId">
+              {{salereturn.customerReturnHeaderId}}</option>
+          </select>
+                    <div class="invalid-feedback" *ngIf="f.salereturnId.touched && f.salereturnId.hasError('required')">
+                        Please select a Id.
+                    </div>
+                </div>
+                <!--       <div class="form-group col-sm-1">
+          <div class="form-check mt-1">
+            <input class="form-check-input" [formControlName]="'active'" type="checkbox" value="" id="invalidCheck3"
+              [ngClass]="{ 'is-invalid': f.active.hasError('required') }">
+            <label class="form-check-label mt-1" for="">
+              Paid
+            </label>
+            <div class="invalid-feedback" *ngIf="f.active.hasError('required')">
+              Please click checkbox.
+            </div>
+          </div>
+        </div> -->
+                <div class="form-group col-sm-4">
+                    <button class="btn btn-outline-primary btn-sm ml-3 mr-2 text-primary" [disabled]="!stockReportForm.valid" type="submit">View</button>
+                    <button class="btn btn-outline-success btn-sm mr-2 text-success" [disabled]="!stockReportForm.valid" type="button" (click)="stockexcel()">Download</button>
+                    <button type="reset" class="btn btn-outline-danger btn-sm text-danger">Clear</button>
+                </div>
+            </div>
+        </form>
+        <div class="table-responsive-md ml-3">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th class="center">#</th>
+                        <th>Product Code</th>
+                        <th>Product Name</th>
+                        <th>Sale Quantity</th>
+                        <th>Return Quantity</th>
+                        <th>Sale Price</th>
+                        <th>Stock Value</th>
+                        <th>Dis%</th>
+                        <th>Dis Amount</th>
+                        <th>Amount</th>
+                        <!--             <th class="text-left">Product Name</th>
+            <th class="center">Quantity</th> -->
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let stock of shopstockDetail ; let i=index">
+                        <td class="center">{{i+1}}</td>
+                        <td class="center">{{stock.itemCode}}</td>
+                        <td class="center">{{stock.productName}}</td>
+                        <td class="center">{{stock.saleQuantity}}</td>
+                        <td class="center">{{stock.returnQTY}}</td>
+                        <td class="center">{{stock.salePrice | currency:'LKR':'Rs.'}}</td>
+                        <td class="center">{{stock.stockValue | currency:'LKR':'Rs.'}}</td>
+                        <td class="center">{{stock.dis | number}}</td>
+                        <td class="center">{{stock.disAmount | currency:'LKR':'Rs.'}}</td>
+                        <td class="center">{{stock.saleValue | currency:'LKR':'Rs.'}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="row">
+            <div class="col-md-2 ml-auto">
+                <table class="table table-clear">
+                    <tbody>
+                        <tr>
+                            <td class="left">
+                                <strong>Total</strong>
+                            </td>
+                            <td class="right">
+                                <strong>{{total | number:'1.2-2'}}</strong>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!--main section end-->
+<!--main container end-->

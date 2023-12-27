@@ -1,0 +1,85 @@
+  <div class="register-page">
+    <div class="form">
+      <div class="formtitle">
+        <div>
+          <img src="../../../assets/resource//images//logo/logo.png" />
+        </div>
+        <p>SignUp</p>
+      </div>
+      <form class="register-form" [formGroup]="registerForm" (ngSubmit)="signup()">
+        <div class="group-form">
+          <label for=""
+            [ngClass]="{ 'is-invalid': f.firstName.invalid && (f.firstName.touched && f.firstName.errors),'is-valid':f.firstName.valid && (f.firstName.touched && f.firstName.dirty) }"><i
+              class="fa fa-user-circle"></i>
+          </label>
+          <input type="text" [formControlName]="'firstName'" placeholder="First Name"
+            [ngClass]="{ 'is-invalid': f.firstName.invalid && (f.firstName.touched && f.firstName.errors),'is-valid':f.firstName.valid && (f.firstName.touched && f.firstName.dirty) }" />
+          <span *ngIf="f.firstName.touched && f.firstName.errors" class="invalid-feedback">
+            <span *ngIf="f.firstName.errors.required">First Name is required</span>
+          </span>
+        </div>
+
+        <div class="group-form">
+          <label for=""><i class="fa fa-user-circle"
+              [ngClass]="{ 'is-invalid': f.lastName.touched && f.lastName.errors }"></i></label>
+          <input type="text" [formControlName]="'lastName'" placeholder="Last Name"
+            [ngClass]="{ 'is-invalid': f.lastName.invalid && (f.lastName.touched && f.lastName.errors),'is-valid':f.lastName.valid && (f.lastName.touched && f.lastName.dirty) }" />
+          <div *ngIf="f.lastName.touched && f.lastName.errors" class="invalid-feedback">
+            <div *ngIf="f.lastName.errors.required">Last Name is required</div>
+          </div>
+        </div>
+        <div class="group-form">
+          <label for=""><i class="fa fa-envelope" [ngClass]="{ 'is-invalid': f.email.touched && f.email.errors }"></i>
+          </label>
+          <input type="email" [formControlName]="'email'" placeholder="E-Mail"
+            [ngClass]="{ 'is-invalid': f.email.invalid && (f.email.touched && f.email.errors),'is-valid':f.email.valid && (f.email.touched && f.email.dirty) }" />
+          <div *ngIf="f.email.touched && f.email.errors" class="invalid-feedback">
+            <div *ngIf="f.email.hasError('required')">E-mail is required</div>
+            <div *ngIf="f.email.hasError('email')">E-mail is invalid</div>
+           
+         </div>
+        </div>
+        <div class="group-form">
+          <label for=""><i class="fa fa-home" [ngClass]="{ 'is-invalid': f.branchLocationId.touched && f.branchLocationId.errors }"></i>
+          </label>
+          <select [formControlName]="'branchLocationId'"
+            [ngClass]="{ 'is-invalid': f.branchLocationId.invalid && (f.branchLocationId.touched && f.branchLocationId.errors),'is-valid':f.branchLocationId.valid && (f.branchLocationId.touched && f.branchLocationId.dirty) }">
+            <option selected [value]="null" disabled >Select Location ..</option>
+            <option *ngFor="let branch of (branches$ | async)" [value]="branch.branchLocationId" >{{branch.branchCode | uppercase}}</option>
+          </select>
+          <div *ngIf="f.branchLocationId.errors" class="invalid-feedback">
+            <div *ngIf="f.branchLocationId.errors.required">Branch is required</div>
+          </div>
+        </div>
+        <div class="group-form">
+          <label for=""><i class="fa fa-key" [ngClass]="{ 'is-invalid': f.password.touched && f.password.errors }"></i>
+          </label>
+          <input type="password" [formControlName]="'password'" placeholder="Password"
+            [ngClass]="{ 'is-invalid': f.password.invalid && (f.password.touched && f.password.errors),'is-valid':f.password.valid && (f.password.touched && f.password.dirty) }" />
+          <div *ngIf="f.password.touched && f.password.errors" class="invalid-feedback">
+            <div *ngIf="f.password.errors.required">Password is required</div>
+            <div *ngIf="f.password.hasError('minlength')">Password must be at lease 6 characters
+            </div>
+            <div *ngIf="f.password.hasError('maxlength')">Password cannot exceed 20 characters</div>
+          </div>
+        </div>
+        <div class="group-form">
+          <label for=""><i class="fa fa-key"
+              [ngClass]="{ 'is-invalid': f.confirmPassword.touched && f.confirmPassword.errors }"></i>
+          </label>
+          <input type="password" [formControlName]="'confirmPassword'" placeholder="Confirm Password"
+            [ngClass]="{ 'is-invalid': f.confirmPassword.invalid && (f.confirmPassword.touched && f.confirmPassword.errors),'is-valid':f.confirmPassword.valid && (f.confirmPassword.touched && f.confirmPassword.dirty) } || registerForm.hasError('mismatch')" />
+          <div *ngIf="f.confirmPassword.touched && f.confirmPassword.errors || registerForm.hasError('mismatch') "
+            class="invalid-feedback">
+            <div *ngIf="f.confirmPassword.hasError('required')">Confirm Password is required</div>
+            <div *ngIf="registerForm.hasError('mismatch')"> Password is mismatched</div>
+          </div>
+        </div>
+        <div class="button-group">
+          <button type="submit" [disabled]="!registerForm.valid">Submit</button>
+          <button class="clear" type="reset">Clear</button>
+        </div>
+        <p class="message">Already registered? <a routerLink="/authentication/signin">SignIn an account </a></p>
+      </form>
+    </div>
+  </div>

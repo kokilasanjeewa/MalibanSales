@@ -1,0 +1,86 @@
+[
+    {
+        "id": 1,
+        "type":"Product"
+    },
+    {
+        "id": 1,
+        "type":"Supplier"
+    }
+    ,
+    {
+        "id": 1,
+        "type":"SupplierProduct"
+    }
+    ,
+    {
+        "id": 1,
+        "type":"SupplierPrice"
+    }
+    ,
+    {
+        "id": 1,
+        "type":"Users"
+    }
+    ,
+    {
+        "id": 1,
+        "type":"Dashboard"
+    }
+    ,
+    {
+        "id": 1,
+        "type":"POS"
+    }
+    ,
+    {
+        "id": 1,
+        "type":"Order"
+    }
+    ,
+    {
+        "id": 1,
+        "type":"Stock"
+    }
+    ,
+    {
+        "id": 1,
+        "type":"Stock Adjustment List"
+    }
+    ,
+    {
+        "id": 1,
+        "type":"Purchase"
+    }
+    ,
+    {
+        "id": 1,
+        "type":"Request"
+    }
+    ,
+    {
+        "id": 1,
+        "type":"Order"
+    }
+    ,
+    {
+        "id": 1,
+        "type":"Return"
+    }
+    ,
+    {
+        "id": 1,
+        "type":"GRN"
+    }
+    ,
+    {
+        "id": 1,
+        "type":"Reports"
+    }
+]
+
+
+
+
+
+

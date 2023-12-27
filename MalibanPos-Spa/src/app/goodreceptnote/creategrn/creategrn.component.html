@@ -1,0 +1,536 @@
+<!--main container start-->
+<div class="main-container">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="#">Home</a></li>
+      <li class="breadcrumb-item">
+        <a [routerLink]="['/grn/grnlist']">Goods Receipt List</a>
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">
+        <a [routerLink]="['/grn/creategrn']">Goods Receipt Note</a>
+      </li>
+    </ol>
+  </nav>
+  <div class="container-fluid">
+    <div class="row mb-1 mt-2">
+      <div class="col-sm-2">
+        <h6>Goods Receipt Note</h6>
+      </div>
+      <div class="col-sm-4"></div>
+      <div class="col-sm-2"></div>
+      <div class="col-sm-2">
+        <!--            <button [disabled]="!addorderListForm.valid" type="submit" class="btn-sm btn-primary btn-rounded btn-icon">
+             <i class="fa fa-envelope-o"></i>
+        </button>
+        <button type="reset" class="btn-sm btn-danger">Clear</button> -->
+      </div>
+      <div class="col-sm-2 text-right align-middle">
+        <button
+          [disabled]="!addGrnForm.valid"
+          (click)="grnAdd()"
+          ngDefaultControl
+          [(ngModel)]="checkdisable"
+          [disabled]="checkdisable"
+          type="submit"
+          class="btn btn-outline-primary btn-sm my-1 mr-3 text-primary"
+        >
+          Save
+        </button>
+        <button
+          (click)="clearCart()"
+          type="reset"
+          class="btn btn-outline-danger btn-sm my-1 text-danger"
+        >
+          Clear
+        </button>
+      </div>
+    </div>
+    <hr />
+    <form [formGroup]="addGrnForm" (ngSubmit)="grnAdd()">
+      <div class="form-group row">
+        <label for="inputEmail3" class="col-sm-3 col-form-label"
+          >Branch Location</label
+        >
+        <div class="col-sm-3">
+          <select
+            [formControlName]="'branchLocationId'"
+            class="form-control"
+            id="exampleFormControlSelect2"
+            readonly="true"
+          >
+            <!--             <option selected value="" disabled>Branch Location</option>
+ -->
+            <option
+              *ngFor="let branch of branches | async"
+              [value]="branch?.branchLocationId"
+            >
+              {{ branch?.branchCode }}
+            </option>
+          </select>
+          <div
+            class="invalid-feedback"
+            *ngIf="
+              f.branchLocationId.touched &&
+              f.branchLocationId.hasError('required')
+            "
+          >
+            Please choose a Branch Location.
+          </div>
+        </div>
+        <label for="inputEmail3" class="col-sm-3 col-form-label"
+          >Purchase Order</label
+        >
+        <div class="col-sm-3">
+          <!--           <select [formControlName]="'purchaseOrderHeaderId'" class="form-control" (change)="changePO($event)"
+            id="exampleFormControlSelect2">
+            <option selected value="" disabled>Please choose a PO..</option>
+            <option *ngFor="let purchaseorder of purchaseorderList  | async"
+              [value]="purchaseorder?.purchaseOrderHeaderId">
+              {{ purchaseorder.purchaseOrderHeaderId }}
+            </option>
+          </select>
+          <div class="invalid-feedback"
+            *ngIf="f.purchaseOrderHeaderId.touched && f.purchaseOrderHeaderId.hasError('required') ">
+            Please choose a PO.
+          </div> -->
+          <ng-select
+            [formControlName]="'purchaseOrderHeaderId'"
+            ngDefaultControl
+            [(ngModel)]="selectedItem"
+            (change)="changePO()"
+          >
+            <ng-option
+              *ngFor="let purchaseorder of purchaseorderList | async"
+              [value]="purchaseorder?.purchaseOrderHeaderId"
+              ><span>{{ purchaseorder?.purchaseOrderHeaderId }}</span>
+            </ng-option>
+          </ng-select>
+          <span
+            *ngIf="
+              !addGrnForm.get('purchaseOrderHeaderId').valid &&
+              addGrnForm.get('purchaseOrderHeaderId').touched
+            "
+          >
+            <span
+              class="danger"
+              *ngIf="addGrnForm.get('purchaseOrderHeaderId').errors['required']"
+              >Purchase Order is required</span
+            >
+          </span>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputEmail3" class="col-sm-3 col-form-label"
+          >Supplier Name</label
+        >
+        <div class="col-sm-3">
+          <!--      <select [formControlName]="'supplierId'" class="form-control" id="exampleFormControlSelect2">
+            <option selected value="" disabled>Supplier Name</option>
+            <option *ngFor="let supplier of suppliers  | async" [value]="supplier.supplierId">
+              {{ supplier.supplierName }}
+            </option>
+          </select>
+          <div class="invalid-feedback" *ngIf="f.supplierId.touched && f.supplierId.hasError('required') ">
+            Please choose a Supplier Name.
+          </div> -->
+          <ng-select [formControlName]="'supplierId'" readonly="true">
+            <ng-option
+              *ngFor="let supplier of suppliers | async"
+              [value]="supplier?.supplierId"
+            >
+              <span>{{ supplier?.supplierName }}</span>
+            </ng-option>
+          </ng-select>
+          <span
+            *ngIf="
+              !addGrnForm.get('supplierId').valid &&
+              addGrnForm.get('supplierId').touched
+            "
+          >
+            <span
+              class="danger"
+              *ngIf="addGrnForm.get('supplierId').errors['required']"
+              >Supplier is required</span
+            >
+          </span>
+        </div>
+        <label for="inputEmail3" class="col-sm-3 col-form-label"
+          >Group Discount Amount</label
+        >
+        <div class="col-sm-3">
+          <input
+            type="number"
+            class="form-control"
+            [formControlName]="'totalDiscountAmount'"
+            id=""
+            placeholder=""
+          />
+          <div
+            class="invalid-feedback"
+            *ngIf="
+              f.totalDiscountAmount.touched &&
+              f.totalDiscountAmount.hasError('required')
+            "
+          >
+            group discount is required.
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputEmail3" class="col-sm-3 col-form-label"
+          >Invoice Number</label
+        >
+        <div class="col-sm-3">
+          <input
+            type="text"
+            class="form-control"
+            [formControlName]="'invoiceId'"
+            id=""
+            placeholder=""
+          />
+          <div
+            class="invalid-feedback"
+            *ngIf="f.invoiceId.touched && f.invoiceId.hasError('required')"
+          >
+            Invoice Number is required.
+          </div>
+        </div>
+        <label for="inputEmail3" class="col-sm-3 col-form-label"
+          >Invoice Date</label
+        >
+        <div class="col-sm-3">
+          <input
+            type="date"
+            class="form-control"
+            [formControlName]="'invoiceDate'"
+            id=""
+            placeholder=""
+          />
+          <div
+            class="invalid-feedback"
+            *ngIf="f.invoiceDate.touched && f.invoiceDate.hasError('required')"
+          >
+            Expected Date is required.
+          </div>
+        </div>
+      </div>
+      <!--    <div class="form-group row">
+        <label for="inputEmail3" class="col-sm-3 col-form-label">Total Bill Amount</label>
+        <div class="col-sm-3">
+          <input type="number" class="form-control" [formControlName]="'totalBillAmount'" id="" placeholder="" />
+          <div class="invalid-feedback" *ngIf="f.totalBillAmount.touched && f.totalBillAmount.hasError('required')">
+            Total Bill Amount is required.
+          </div>
+        </div>
+        <label for="inputEmail3" class="col-sm-3 col-form-label">Group Discount Amount</label>
+        <div class="col-sm-3">
+          <input type="number" class="form-control" [formControlName]="'totalDiscountAmount'" id="" placeholder="" />
+          <div class="invalid-feedback"
+            *ngIf="f.totalDiscountAmount.touched && f.totalDiscountAmount.hasError('required')">
+            Group Discount Amount is required.
+          </div>
+        </div>
+      </div> -->
+      <!--       <div class="row ml-1 mb-2" *ngIf="count > 0">
+        <button [disabled]="!addGrnForm.valid" type="submit" class="btn btn-primary my-1">Send</button>
+        <button type="reset" class="btn btn-danger my-1">Cancel</button>
+      </div> -->
+    </form>
+
+    <div class="table-responsive-md ml-3">
+      <table class="table table-sm table-striped table-hover">
+        <thead>
+          <tr>
+            <th class="center">#</th>
+            <th class="text-left">Product Code</th>
+            <th class="text-left">Product Name</th>
+            <th class="right">Expiry Date</th>
+            <th class="center">In-Stock</th>
+            <th class="center">Quantity</th>
+            <th class="right">Free</th>
+            <th class="center">Price</th>
+            <!--             <th class="center">ST-Price</th>
+ -->
+            <th class="center">MRP</th>
+            <th class="center">Sl-Price%</th>
+            <th class="center">Margin</th>
+            <th class="center">VAT%</th>
+            <!-- disable nbt    <th class="center">NBT%</th> -->
+            <th class="center">Discount%</th>
+            <th class="center">Discount</th>
+            <th class="right">Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let line of lines; let i = index">
+            <td class="center">{{ i + 1 }}</td>
+            <td class="text-left">{{ line.product.barcode }}</td>
+            <td class="text-left">{{ line.product.productName }}</td>
+            <td class="center">
+              <input
+                min="2022-01-02"
+                readonly
+                type="date"
+                [value]="line?.productExpiryDate | date : 'yyyy-MM-dd'"
+                class="form-control1"
+                id="ExpiryDate"
+                aria-describedby="emailHelp"
+                placeholder=""
+                (keydown.enter)="
+                  updateExpiryDate(
+                    $event,
+                    line?.product.barcode,
+                    line?.purchaseOrderHeaderId,
+                    line?.supplierPriceId
+                  )
+                "
+              />
+            </td>
+            <td class="center">
+              {{ line?.dNetQuantity }}
+              <span
+                (click)="openModalWithComponent(line?.product.barcode)"
+                *ngIf="line?.dNetQuantity > 0"
+                >&nbsp;<i
+                  style="color: #48a2fff0; cursor: pointer"
+                  class="fa fa-forward"
+                  aria-hidden="true"
+                  ><a href=""></a
+                ></i>
+              </span>
+            </td>
+            <td class="right">
+              <input
+                [readOnly]="line.itemQuantity==0"
+                type="number"
+                min="0"
+                value="{{ line.itemQuantity }}"
+                class="form-control2"
+                id="exampleInputEmail1"
+                aria-describedby="emailHelp"
+                placeholder=""
+                (keydown.enter)="
+                  quantityUpdate(
+                    $event,
+                    line?.product.barcode,
+                    line?.purchaseOrderHeaderId,
+                    line.supplierPriceId
+                  )
+                "
+              />
+            </td>
+
+            <td class="right">
+              <input
+                type="number"
+                min="0"
+                value="{{ line.freeItemQuantity }}"
+                class="form-control2"
+                id="FreeQuantity"
+                aria-describedby="emailHelp"
+                placeholder=""
+                (keydown.enter)="
+                  freeQuantityUpdate(
+                    $event,
+                    line?.product.barcode,
+                    line?.purchaseOrderHeaderId,
+                    line?.supplierPriceId,
+                    line?.productExpiryDate
+                  )
+                "
+              />
+            </td>
+            <td class="right">
+              {{ line?.supplierPrice.unitPrice | number : "1.2-2" }}
+            </td>
+            <!--             <td class="right"><input type="checkbox" [value]="" class="form-control3" [(ngModel)]="theCheckbox"
+                id="overwritestockprice" aria-describedby="emailHelp" placeholder=""
+                (change)="overwriteStockPrice($event,line.product.barcode,line.purchaseOrderHeaderId)"
+                *ngIf="line.dNetQuantity > 0"></td> -->
+            <!--               line?.supplierPrice.unitPrice | currency:'LKR':'Rs.' -->
+            <td class="center">
+              {{
+                line?.supplierPrice.maximumRetailPrice
+                  | currency : "LKR" : "Rs."
+              }}
+            </td>
+            <td class="right">
+              <input
+                type="number"
+                min="0"
+                max="100"
+                readonly
+                value="{{ line?.pricePrecentage }}"
+                class="form-control2"
+                id="exampleInputEmail1"
+                aria-describedby="emailHelp"
+                placeholder=""
+                (keydown.enter)="
+                  updateDiscountPrice(
+                    $event,
+                    line?.product.barcode,
+                    line?.purchaseOrderHeaderId,
+                    line?.supplierPriceId
+                  )
+                "
+              />
+            </td>
+            <td>{{ line?.supplierPrice.profit | number : "1.2-2" }}</td>
+            <td class="right">
+              <input
+                type="number"
+                min="0"
+                max="100"
+                value="{{ line?.vatPrecentage }}"
+                class="form-control2"
+                id="exampleInputEmail1"
+                aria-describedby="emailHelp"
+                placeholder=""
+                (keydown.enter)="
+                  updateVatPrice(
+                    $event,
+                    line?.product.barcode,
+                    line?.purchaseOrderHeaderId,
+                    line?.supplierPriceId
+                  )
+                "
+              />
+            </td>
+            <!-- disable nbt  <td class="right">
+              <input
+                type="number"
+                min="0"
+                max="100"
+                value="{{ line?.nbtPrecentage }}"
+                class="form-control2"
+                id="exampleInputEmail1"
+                aria-describedby="emailHelp"
+                placeholder=""
+                (keydown.enter)="
+                updateNbtPrice(
+                $event,
+                line?.product.barcode,
+                line?.purchaseOrderHeaderId,
+                line?.supplierPriceId
+                )
+                "
+                />
+            </td> -->
+            <td class="center">
+              <input
+                min="0"
+                max="100"
+                type="number"
+                value="{{ line?.groupDiscountAmount | number : '1.2-2' }}"
+                class="form-control2"
+                id="exampleInputEmail1"
+                aria-describedby="emailHelp"
+                placeholder=""
+                (keydown.enter)="
+                  updateGroupDiscount(
+                    $event,
+                    line?.product.barcode,
+                    line?.purchaseOrderHeaderId,
+                    line?.supplierPriceId
+                  )
+                "
+              />
+            </td>
+            <td class="center">
+              <input
+                type="number"
+                min="0"
+                value="{{
+                  line?.costPrice *
+                    line.itemQuantity *
+                    (line?.groupDiscountAmount / 100)
+                }}"
+                class="form-control1"
+                id="exampleInputEmail1"
+                aria-describedby="emailHelp"
+                placeholder=""
+                (keydown.enter)="
+                  updateGroupDiscountAmount(
+                    $event,
+                    line?.product.barcode,
+                    line?.purchaseOrderHeaderId,
+                    line?.supplierPriceId
+                  )
+                "
+              />
+            </td>
+            <td class="right">
+              {{
+                line?.costPrice * line?.itemQuantity -
+                  line?.costPrice *
+                    line?.itemQuantity *
+                    (line?.groupDiscountAmount / 100)
+                  | currency : "LKR" : "Rs."
+              }}<i
+                class="fa fa-trash-o ml-2"
+                (click)="
+                  remove(
+                    line?.product.barcode,
+                    line?.purchaseOrderHeaderId,
+                    line?.supplierPriceId
+                  )
+                "
+              ></i>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="row">
+      <div class="col-lg-4 col-sm-5 ml-auto">
+        <table class="table table-clear">
+          <tbody>
+            <tr>
+              <td class="right">
+                <strong>Subtotal</strong>
+              </td>
+              <td class="right">
+                {{ subtotal + discount | currency : "LKR" : "Rs." }}
+              </td>
+            </tr>
+            <tr>
+              <td class="left">
+                <strong>Discount</strong>
+              </td>
+              <td class="right">{{ discount | currency : "LKR" : "Rs." }}</td>
+            </tr>
+            <tr>
+              <td class="left">
+                <strong>VAT (15%)</strong>
+              </td>
+              <td class="right">Rs 0.00</td>
+            </tr>
+            <tr>
+              <td class="left">
+                <strong>NBT (2%)</strong>
+              </td>
+              <td class="right">Rs 0.00</td>
+            </tr>
+            <tr>
+              <td class="left">
+                <strong>Total</strong>
+              </td>
+              <td class="right">
+                <strong>{{ subtotal | currency : "LKR" : "Rs." }}</strong>
+              </td>
+            </tr>
+            <!--
+            <tr>
+              <td>
+              </td>
+              <td class="center">
+                <button [disabled]="!addRequestForm.valid" type="submit" class="btn btn-primary">Send</button>
+                <button type="reset" class="btn btn-danger">Cancel</button>
+              </td>
+            </tr> -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

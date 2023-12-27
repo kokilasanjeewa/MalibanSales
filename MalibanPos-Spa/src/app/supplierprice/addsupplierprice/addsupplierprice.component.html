@@ -1,0 +1,215 @@
+<!--main container start-->
+<div class="main-container">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a [routerLink]="['/dashboard']">Home</a></li>
+      <li class="breadcrumb-item">
+        <a [routerLink]="['/supplierprice/supplierpricelist']">Supplier Price
+          List</a>
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">
+        Add Supplier Price
+      </li>
+    </ol>
+  </nav>
+  <div class="container-fluid">
+    <div class="row mb-2 mt-2">
+      <div class="col-sm-2">
+        <h6>Add Supplier Price</h6>
+      </div>
+      <div class="col-sm-4"></div>
+      <div class="col-sm-2"></div>
+      <div class="col-sm-2"></div>
+      <div class="col-sm-2 text-right align-middle">
+        <button [disabled]="!addSupplierPriceForm.valid"
+          (click)="addSupplierPrice()" type="submit"
+          class="btn btn-outline-primary btn-sm my-1 mr-3 text-primary">
+          Save
+        </button>
+        <button type="reset"
+          class="btn btn-outline-danger btn-sm my-1 text-danger">
+          Cancel
+        </button>
+      </div>
+    </div>
+    <hr />
+    <form [formGroup]="addSupplierPriceForm" (ngSubmit)="addSupplierPrice()">
+      <div class="form-group row">
+        <label for="inputEmail3" class="col-sm-1 col-form-label">Branch</label>
+        <div class="col-sm-3">
+          <select [formControlName]="'branchLocationId'" class="form-control"
+            id="exampleFormControlSelect2"
+            (change)="changeBranch()">
+            <option selected value disabled>Please choose a branch..</option>
+            <option *ngFor="let branch of branches | async"
+              [value]="branch.branchLocationId">
+              {{ branch.branchCode }}
+            </option>
+          </select>
+          <div class="invalid-feedback" *ngIf="
+              f.branchLocationId.touched &&
+              f.branchLocationId.hasError('required')
+            ">
+            Please choose a branch.
+          </div>
+        </div>
+        <label for="inputEmail3"
+          class="col-sm-3 col-form-label">Supplier</label>
+        <div class="col-sm-5">
+          <select [formControlName]="'supplierId'" class="form-control"
+            (change)="changeSupplier()"
+            id="exampleFormControlSelect2">
+            <option selected value disabled>
+              Please choose a supplier..
+            </option>
+            <option *ngFor="let supplier of suppliers | async"
+              [value]="supplier.supplierId">
+              {{ supplier.supplierName }}
+            </option>
+          </select>
+          <div class="invalid-feedback"
+            *ngIf="f.supplierId.touched && f.supplierId.hasError('required')">
+            Please choose a supplier.
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputEmail3" class="col-sm-1 col-form-label">Product
+          Code</label>
+        <div class="col-sm-3">
+          <ng-select [(ngModel)]="selectedItem"
+            (change)="changeProduct(selectedItem)"
+            [formControlName]="'productId'"
+            [searchable]="true" class="custom" [dropdownPosition]="'bottom'"
+            placeholder="Search Product Code/Name"
+            [virtualScroll]="true" tabindex="1" [clearSearchOnAdd]="true">
+            <ng-option [value]="product.product.productId"
+              style="font-size: x-small !important"
+              *ngFor="let product of products | async">
+              <span style="font-size: x-small">{{ product.product.barcode
+                }}&nbsp;&nbsp;&nbsp;&nbsp;</span>
+              <span style="font-size: x-small">{{
+                product.product.productName
+                }}</span>
+            </ng-option>
+          </ng-select>
+        </div>
+        <label for="inputEmail3" class="col-sm-3 col-form-label">Product
+          Name</label>
+        <div class="col-sm-5">
+          <input type="text" [formControlName]="'productName'"
+            class="form-control" placeholder="Product Name" />
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputEmail3" class="col-sm-1 col-form-label">Price
+          Date</label>
+        <div class="col-sm-3">
+          <input type="date" class="form-control"
+            [formControlName]="'priceDate'" id placeholder />
+          <div class="invalid-feedback"
+            *ngIf="f.priceDate.touched && f.priceDate.hasError('required')">
+            Price Date is required.
+          </div>
+        </div>
+        <label for="inputEmail3" class="col-sm-1 col-form-label">Cost Price<span
+            class="text-danger">&nbsp;*</span></label>
+        <div class="col-sm-1">
+          <input type="number" step="0.01" class="form-control"
+            [formControlName]="'unitPrice'" id
+            placeholder="Cost Price" />
+          <div class="invalid-feedback"
+            *ngIf="f.unitPrice.touched && f.unitPrice.hasError('required')">
+            Cost Price is required.
+          </div>
+        </div>
+        <label for="inputEmail3" class="col-sm-1 col-form-label">M.R.P<span
+            class="text-danger">&nbsp;*</span></label>
+        <div class="col-sm-1">
+          <input type="number" step="0.01" class="form-control"
+            [formControlName]="'maximumRetailPrice'" id
+            placeholder="MRP" />
+          <div class="invalid-feedback" *ngIf="
+              f.maximumRetailPrice.touched &&
+              f.maximumRetailPrice.hasError('required')
+            ">
+            M.R.P is required.
+          </div>
+          <div class="invalid-feedback" *ngIf="
+              f.maximumRetailPrice.touched &&
+              addSupplierPriceForm.hasError('mismatch')
+            ">
+            The cost is higher than retail price
+          </div>
+        </div>
+        <label for="inputEmail3" class="col-sm-1 col-form-label">Profit<span
+            class="text-danger">&nbsp;*</span></label>
+        <div class="col-sm-1">
+          <input type="text" class="form-control" [formControlName]="'profit'"
+            id placeholder="Profit"
+            (change)="onProfitChange()" />
+          <div class="invalid-feedback"
+            *ngIf="f.profit.touched && f.profit.hasError('required')">
+            Profit is required.
+          </div>
+          <div class="invalid-feedback" *ngIf="
+              f.profit.touched && addSupplierPriceForm.hasError('pmismatch')
+            ">
+            The profit is lower than or equal.
+          </div>
+        </div>
+        <label for="inputEmail3" class="col-sm-1 col-form-label">Sale Price<span
+            class="text-danger">&nbsp;*</span></label>
+        <div class="col-sm-1">
+          <input type="text" readonly class="form-control" [value]="salePrice"
+            id placeholder="Sale Price" />
+        </div>
+      </div>
+    </form>
+    <div class="table-responsive-md ml-3">
+      <table class="table table-md table-striped table-hover">
+        <thead>
+          <tr>
+            <th class="center">#</th>
+            <th class="text-left">Product Code</th>
+            <th class="text-left">Product Name</th>
+            <th class="right">Price Added Date</th>
+            <th class="right">Cost Price</th>
+            <th class="right">Maximum Retail Price</th>
+            <th class="right">Profit</th>
+            <th class="right">Sale Price</th>
+            <th *appHasClaim="'CanAccessRemoveSupplierPrice'" class="center">
+              Action
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let line of supplierprices; let i = index">
+            <td class="center">{{ i + 1 }}</td>
+            <td class="text-left">{{ line.product.barcode }}</td>
+            <td class="text-left">{{ line.product.productName }}</td>
+            <td class="center">{{ line.priceDate | date }}</td>
+            <td class="right">
+              {{ line.unitPrice | currency : "LKR" : "Rs." }}
+            </td>
+            <td class="right">
+              {{ line.maximumRetailPrice | currency : "LKR" : "Rs." }}
+            </td>
+            <td class="right">{{ line.profit | number : "1.3-6" }}</td>
+            <td class="right">
+              {{
+              line.profit == 0
+              ? 0
+              : (line.unitPrice + line.profit | currency : "LKR" : "Rs.")
+              }}
+            </td>
+            <td class="right" *appHasClaim="'CanAccessRemoveSupplierPrice'">
+              <i class="fa fa-trash-o" style="color: crimson"
+                (click)="removePrice(line)"></i>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

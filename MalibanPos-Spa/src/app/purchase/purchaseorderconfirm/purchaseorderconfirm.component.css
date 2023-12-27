@@ -1,0 +1,174 @@
+.invalid-feedback {
+  color: #dc3545;
+  font-size: 95%;
+  display: block;
+  width: 100%;
+  padding: 0px 0px 0px 10px;
+  position: absolute;
+}
+
+.form-group.col-md-12.image {
+  margin-top: 1px;
+}
+
+.is-invalid {
+  background-color: #dc3545;
+}
+thead {
+  background-color: #dfe3e3;
+  padding: 10px;
+}
+th {
+  color: #4b4848;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 4px #e7e3e3;
+  font-weight: bolder;
+  padding: 10px;
+  font-size: x-small;
+  text-align: center;
+}
+
+td {
+  color: #4b4848;
+  letter-spacing: 1px;
+  font-weight: lighter;
+  font-size: x-small;
+  padding: 10px;
+  text-justify: newspaper;
+  vertical-align: middle;
+  text-align: center;
+}
+*,
+*:before,
+*:after {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: roboto, helvetica, arial, san-serif;
+  color: #666;
+  background: #e0e0e0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: inherit;
+}
+
+.hide {
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+.accordion {
+  background: #fff;
+  width: 150px;
+  z-index: 100000002 !important;
+  position: absolute;
+}
+
+.accordion-item {
+  position: relative;
+  width: 100%;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.accordion-item:last-child {
+  border-bottom: none;
+}
+
+.accordion-label {
+  width: 100%;
+  display: block;
+  font-size: 13px;
+  margin-left: 17px;
+  margin-top: 8px;
+}
+
+.accordion-label:hover {
+  cursor: pointer;
+}
+
+.accordion-label:before {
+  content: "";
+  position: absolute;
+  height: 13px;
+  width: 15px;
+  top: 3px;
+  left: 143px;
+  display: inline-block;
+  border-left: 5px solid #999;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+}
+
+input[type="checkbox"]:checked ~ .accordion-label:before {
+  -webkit-transform: rotate(90deg);
+          transform: rotate(90deg);
+}
+
+.accordion-child {
+  margin: 0;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+  opacity: 0;
+  height: 0;
+  -webkit-transform: scale(1, 0);
+          transform: scale(1, 0);
+  -webkit-transform-origin: center top;
+          transform-origin: center top;
+}
+
+input[type="checkbox"]:checked ~ .accordion-child {
+  border: 1px solid #e0e0e0;
+  background: #fff;
+  -webkit-box-shadow: 0 3px 6px 1px rgba(0, 0, 0, 0.16);
+          box-shadow: 0 3px 6px 1px rgba(0, 0, 0, 0.16);
+  padding: 15px;
+  height: auto;
+  opacity: 1;
+  -webkit-transform: scale(1, 1);
+          transform: scale(1, 1);
+}
+.danger{
+  color: red;
+}
+.form-control1 {
+  height: 30px;
+  width: 112px;
+  padding: 5px;
+  border: 1px solid #ced4da;
+}
+.form-control2 {
+  height: 30px;
+  width: 52px;
+  padding: 5px;
+  border: 1px solid #ced4da;
+}
+.form-control3 {
+  height: 13px;
+  width: 13px;
+  padding: 5px;
+  border: 1px solid #ced4da;
+}
+/*# sourceMappingURL=purchaseorder.component.css.map */

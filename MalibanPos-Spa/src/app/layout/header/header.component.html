@@ -1,0 +1,45 @@
+         <!--header menu start-->
+         <div class="header">
+           <div class="header-menu">
+             <div class="title"><span>Maliban Pos</span></div>
+             <div id="slide-bar-btn-nav">
+               <i class="fa fa-bars"></i>
+             </div>
+             <form class="form-inline" [formGroup]="changeBranchForm" >
+              <label for="exampleFormControlSelect4" class="mr-4" style="font-size:x-large ;color: #051923;"><i class="fa fa-home"></i><span class="notzerovalue">&nbsp;*</span></label>
+              <select [formControlName]="'branchLocationId'"  class="form-control" id="exampleFormControlSelect2" (change)="changeBranch()">
+                <option *ngFor="let branch of branches" [value]="branch?.branchLocationId">
+                  {{ branch?.branchCode }}
+                </option>
+              </select>
+              <span class="ml-4" style="font-size:large ;color: #051923;"><i class="fa fa-user-circle"></i>  {{userName}}</span>
+             </form>
+                <ul>
+                 <li><a href="#" class="header-link"><i class="fa fa-search"></i></a></li>
+               <li><a href="#" class="header-link"><i class="fa fa-bell"></i></a><span>1</span></li>
+                <li id="top-sub-menu-profile"  dropdown>
+                 <a class="header-link" dropdownToggle ><i class="fa fa-user-circle"></i></a>
+                  <ul class="top-sub-menu" *ngIf="loggedIn()" >
+                     <li>
+                      <a class="header-link"><i class="fa fa-power-off" (click)="logout()"></i>Logout</a>
+                    </li>
+                    <li>
+                      <a class="header-link"><i class="fas fa-cog"></i>Setting</a>
+                    </li>
+                    <li>
+                      <a class="header-link"><i class="fas fa-info"></i>Ver 1.2.30</a>
+                    </li>
+<!--                     <ul class="top-sub-menu" *dropdownMenu >
+                      <li>
+                        <a class="header-link"><i class="fa fa-power-off" (click)="logout()"></i>Logout</a>
+                      </li>
+                      <li>
+                        <a class="header-link"><i class="fas fa-cog"></i>Setting</a>
+                      </li>
+                    </ul> -->
+                  </ul>
+               </li>
+              </ul>
+           </div>
+         </div>
+         <!--header menu end-->

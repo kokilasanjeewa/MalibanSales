@@ -1,0 +1,57 @@
+<div style="height: auto; overflow-y: scroll" id="style-14">
+    <div class="container-fluid">
+        <h6>Add User Role</h6>
+        <form [formGroup]="canAccessPermissionForm" (ngSubmit)="canAccessPermissionAdd()">
+            <div class="form-group">
+                <div class="col-md-12">
+                    <label for="exampleInputEmail1">Role Name</label>
+                    <!-- <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"> -->
+                    <ng-select [multiple]="true" [formControlName]="'roleNames'" [searchable]="false" class="custom" [dropdownPosition]="'bottom'" placeholder="Search Role " [virtualScroll]="true " tabindex="1 " [clearSearchOnAdd]="true ">
+                        <ng-option [disabled]>Search Role</ng-option>
+                        <ng-option [value]="role.name" *ngFor="let role of roles | async ">
+                            {{ role.name }}
+                        </ng-option>
+                    </ng-select>
+                    <div *ngIf="f.roleNames.touched && f.roleNames.errors " class="invalid-feedback ">
+                        <div *ngIf="f.roleNames.hasError( 'required') ">Role is required</div>
+                    </div>
+                    <!-- <small id="emailHelp " class="form-text text-muted ">We'll never share your email with anyone else.</small> -->
+                </div>
+            </div>
+            <div class="form-group ">
+                <div class="col-md-12 ">
+                    <button type="submit " class="btn btn-primary " [disabled]="!canAccessPermissionForm.valid ">
+            Add
+          </button>
+                    <button type="reset " class="btn btn-danger ">Clear</button>
+                </div>
+            </div>
+        </form>
+        <div class="form-group">
+          <div class="col-md-12">
+        <div class="table-responsive-sm">
+            <table class="table table-sm table-striped">
+                <thead style="background: #48a2ff;">
+                    <tr style="color: #ffffff;font-size: small;">
+                        <th scope="col" class="center">Role Id</th>
+                        <th scope="col" class="text-left">Roole Name</th>
+                        <th scope="col" class="text-left">Roole Description</th>
+                        <th scope="col" class="text-left">Create Date</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let role of userswithroles | async ; let i=index " style="font-size:small ;color: dimgrey;">
+                        <td class="center">{{role.id}}</td>
+                        <td class="text-left">{{role.name}}</td>
+                        <td class="text-left">{{role.description}}</td>
+                        <td class="text-left">{{role.createdDate | date: "mediumDate"}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+          </div>
+        </div>
+    </div>
+
+</div>

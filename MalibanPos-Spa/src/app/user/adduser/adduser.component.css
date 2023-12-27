@@ -1,0 +1,36 @@
+.register-page .form .register-form .group-form label i {
+  position: relative;
+  color: #057dfa;
+  top: 5px;
+  left: 10px;
+}
+
+.register-page .form .group-form label i.is-valid {
+  color: #28a745;
+}
+
+.register-page .form .register-form .invalid-feedback {
+  color: #dc3545;
+  font-size: 70%;
+  display: block;
+  width: 100%;
+}
+.register-page .form input.is-valid {
+  border: 1px solid #28a745;
+}
+.register-page .form input.is-invalid {
+  border: 1px solid #dc3545;
+  margin-bottom: 0px;
+}
+
+.register-page .register-form .group-form label i.is-invalid {
+  color: #dc3545;
+}
+.invalid-feedback {
+  color: #dc3545 !important;
+  font-size: 95%;
+  display: block;
+  width: 100%;
+  padding: 0px 0px 0px 10px;
+  position: absolute;
+}

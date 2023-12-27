@@ -1,0 +1,58 @@
+<div style="height: auto; overflow-y: scroll" id="style-14">
+    <div class="container-fluid">
+        <h6>Add User Permissions</h6>
+        <form [formGroup]="canAccessPermissionForm" (ngSubmit)="canAccessPermissionAdd()">
+            <div class="form-group">
+                <div class="col-md-12">
+                    <label for="exampleInputEmail1">Main Menu</label>
+                    <!-- <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"> -->
+                    <select class="custom-select custom-select-sm" (change)="changeMenu($event)" [formControlName]="'menuId'">
+        <option selected value="" disabled>select menu</option>
+        <option *ngFor="let item of listMenu" [value]="item.mainMenuId">
+          {{item.name}}</option>
+
+      </select>
+                    <div *ngIf="f.menuId.touched && f.menuId.errors" class="invalid-feedback">
+                        <div *ngIf="f.menuId.hasError('required')">Menu is required</div>
+                    </div>
+                    <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-12">
+                    <label for="exampleInputEmail1">Submenu</label>
+                    <!-- <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"> -->
+                    <select class="custom-select custom-select-sm" (change)="changeSubMenu($event)" [formControlName]="'submenuId'">
+        <option selected value="" disabled>select submenu</option>
+        <option *ngFor="let item of listSubMenu" [value]="item.submenuId">
+          {{item.name}}</option>
+      </select>
+                    <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+                    <div *ngIf="f.submenuId.touched && f.submenuId.errors" class="invalid-feedback">
+                        <div *ngIf="f.submenuId.hasError('required')">Submenu is required</div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-12">
+                    <label for="exampleInputEmail1">Access Permissions</label>
+                    <select class="custom-select custom-select-sm" [formControlName]="'submenuitemId'">
+        <option selected value="" disabled>select submenuitem</option>
+
+        <option *ngFor="let item of listSubMenuItem" [value]="item.submenuItemId">
+          {{item.name}}</option>
+      </select>
+                    <!-- <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"> -->
+                    <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-12">
+                    <button type="submit" class="btn btn-primary" [disabled]="!canAccessPermissionForm.valid">Add</button>
+                    <button type="reset" class="btn btn-danger">Clear</button>
+
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

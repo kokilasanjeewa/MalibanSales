@@ -1,0 +1,49 @@
+
+.invalid-feedback {
+  color: #dc3545;
+  font-size: 95%;
+  display: block;
+  width: 100%;
+  padding: 0px 0px 0px 10px;
+  position: absolute;
+}
+
+.form-group.col-md-12.image {
+  margin-top: 1px;
+}
+
+.is-invalid {
+  background-color: #dc3545;
+}
+.table {
+  box-shadow:1px 4px 6px 7px var(--tabletext)
+}
+thead {
+  background-color: var(--maintheme2);
+  padding: 10px;
+}
+th {
+  color: #ffffff;
+  letter-spacing: 2px;
+  font-weight: 700;
+  padding: 10px;
+  font-size: x-small;
+  text-align: center;
+  font-weight: 700;
+  vertical-align: middle !important;
+  border:1px solid #ffffff;
+}
+
+td {
+  color: #4b4848;
+  letter-spacing: 1px;
+  font-weight: lighter;
+  font-size: x-small;
+  padding: 10px;
+  text-justify: newspaper;
+  vertical-align: middle;
+  text-align: center;
+}
+tr .gray {
+  background-color: #4b4848 !important;
+}

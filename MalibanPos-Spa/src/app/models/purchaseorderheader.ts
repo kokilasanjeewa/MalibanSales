@@ -1,0 +1,40 @@
+import { BaseModel } from './basemodel';
+import { BranchLocation } from './branchlocation';
+import { Payment } from './payment';
+import { PaymentMethod } from './paymentmethod';
+import { PurchaseOrderDetail } from './purchaseorderdetail';
+import { PurchaseRequestDetail } from './purchaserequestdetail';
+import { PurchaseReturnDetail } from './purchasereturndetail';
+import { PurchaseReturnHeader } from './purchasereturnheader';
+import { Supplier } from './supplier';
+
+export interface PurchaseOrderHeader extends BaseModel {
+  purchaseOrderHeaderId: number;
+  purchaseOrderReferenceNo: string;
+  purchaseOrderUid: string;
+  description: string;
+  poDate: string;
+  deliveryDate: string;
+  isProcess: boolean;
+  isDeleted:boolean;
+  quatationNo: string;
+  isComfirm: boolean;
+  isApprove: boolean;
+  purchaseAmount: number;
+  paidAmount: number;
+  purchaseOrderDetails: PurchaseOrderDetail[];
+  branchLocationId: number;
+  branchLocation: BranchLocation;
+  supplierId: number;
+  supplier: Supplier;
+  paymentMethodId: number | null;
+  paymentMethod: PaymentMethod;
+  paymentId?: number | null;
+  payment: Payment;
+  approvedBy: string;
+  authorizedBy: string;
+  purchaseReturnHeaders: PurchaseReturnHeader[];
+  purchaseReturnDetails: PurchaseReturnDetail[];
+  purchaseRequestDetails: PurchaseRequestDetail[];
+  cApprovalType:number;
+}

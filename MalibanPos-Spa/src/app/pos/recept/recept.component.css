@@ -1,0 +1,176 @@
+#invoice-POS {
+    box-shadow: 0 0 1in -0.25in rgba(0, 0, 0, 0.5);
+    margin-left: 0.8mm;
+    margin-right: 0.8mm;
+    width: 76mm;
+    padding: 4.5mm;
+}
+
+#invoice-POS ::selection {
+    background: #f31544;
+    color: #FFF;
+}
+
+#invoice-POS ::moz-selection {
+    background: #f31544;
+    color: #FFF;
+}
+
+#invoice-POS h1 {
+    font-size: 1.5em;
+    color: #222;
+}
+
+#invoice-POS h2 {
+    font-size: 1.5em;
+    color: #222;
+    text-align: left;
+    font-weight: bolder;
+    text-shadow: 2px 2px 4px #ccc;
+}
+
+#invoice-POS h3 {
+    font-size: 1.2em;
+    font-weight: 500;
+    line-height: 2em;
+    text-shadow: 2px 2px 4px #ccc;
+}
+
+#invoice-POS p {
+    font-size: .7em;
+    color: #666;
+    line-height: 1.2em;
+    text-align: center;
+    text-shadow: 2px 2px 4px #ccc;
+}
+
+#invoice-POS #top,
+#invoice-POS #mid,
+#invoice-POS #bot {
+    /* Targets all id with 'col-' */
+    /*   border-bottom: 1px solid #EEE;
+ */
+}
+
+#invoice-POS #top {
+    min-height: 30px;
+}
+
+#invoice-POS #mid {
+    min-height: 30px;
+}
+
+#invoice-POS #bot {
+    min-height: 50px;
+}
+
+#invoice-POS #top .logo {
+    height: 60px;
+    width: 100px;
+    background: url('../../../assets/resource/images/logo/logo.png') no-repeat;
+    background-size: 100px 65px;
+    margin: 0 auto;
+}
+
+#invoice-POS .clientlogo {
+    float: left;
+    height: 60px;
+    width: 60px;
+    background: url(http://michaeltruong.ca/images/client.jpg) no-repeat;
+    background-size: 60px 60px;
+    border-radius: 50px;
+}
+
+#invoice-POS .info {
+    display: block;
+    margin-left: 0;
+}
+
+#invoice-POS .customer {
+    font-size: 0.6em !important;
+    color: #222;
+    text-align: left !important;
+    font-weight: 300;
+    text-shadow: 2px 2px 4px #ccc;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+#invoice-POS .customer span {
+    font-size: 0.6em !important;
+    color: #222;
+    text-align: left !important;
+    font-weight: 100;
+    text-shadow: 2px 2px 4px #ccc;
+    align-items: center;
+    vertical-align: middle;
+}
+
+#invoice-POS .customer .bill {
+    float: right;
+    font-weight: bolder;
+}
+
+#invoice-POS .title {
+    float: center;
+}
+
+#invoice-POS .title p {
+    text-align: right;
+}
+
+#invoice-POS table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#invoice-POS .tabletitle {
+    font-size: .5em;
+    background: #e2e4e5;
+    float: center;
+    text-shadow: 2px 2px 4px #ccc;
+}
+
+#invoice-POS .service {
+    /*   border-bottom: 1px solid #EEE;
+ */
+}
+
+#invoice-POS .service .tableitem {
+    align-items: center;
+    vertical-align: middle;
+}
+
+#invoice-POS .item {
+    width: 24mm;
+    color: rgb(0, 0, 0);
+    font-weight: bolder;
+    font-size: .75rem;
+    /*   border-top: 1px solid #EEE;
+  border-bottom: 1px solid #EEE; */
+}
+
+#invoice-POS .itemtext {
+    font-size: 12px;
+    font-weight: bold;
+}
+
+#invoice-POS #legalcopy {
+    margin-top: 3mm;
+    font-size: 1.1rem;
+}
+
+p,
+a,
+ul,
+li {
+    margin: 0;
+    padding: 0;
+    text-decoration: none !important;
+    color: #000000 !important;
+}
+
+.table td,
+.table th {
+    padding: 5px !important;
+}

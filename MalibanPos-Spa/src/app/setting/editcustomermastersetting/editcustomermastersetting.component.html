@@ -1,0 +1,129 @@
+<!--main container start-->
+<div class="main-container">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a [routerLink]="['/dashboard']">Home</a></li>
+      <li class="breadcrumb-item">
+        <a [routerLink]="['../companymaster']">Company Settings</a>
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">
+        Customer Settings
+      </li>
+    </ol>
+  </nav>
+<!--   <nav aria-label="breadcrumb">
+    <ol class="breadcrumb toolbar">
+      <li class="breadcrumb-item">
+        <a style="cursor: pointer" (click)="cmsAdd()"><i class="fa fa-floppy-o" aria-hidden="true"></i> Save</a>
+      </li>
+      <li class="breadcrumb-item">
+        <a style="cursor: pointer" (click)="cmsAdd()"><i class="fa fa-floppy-o" aria-hidden="true"></i> Save &
+          New</a>
+      </li>
+    </ol>
+  </nav> -->
+  <div class="container-fluid">
+    <div class="row mb-2 mt-2">
+      <div class="col-sm-2">
+        <h6>Customer Settings</h6>
+      </div>
+      <div class="col-sm-4">
+      </div>
+      <div class="col-sm-2">
+      </div>
+      <div class="col-sm-2">
+<!--            <button [disabled]="!addorderListForm.valid" type="submit" class="btn-sm btn-primary btn-rounded btn-icon">
+             <i class="fa fa-envelope-o"></i>
+        </button>
+        <button type="reset" class="btn-sm btn-danger">Clear</button> -->
+      </div>
+      <div class="col-sm-2 text-right align-middle">
+        <button [disabled]="!editCustomerMasterSettingForm.valid" (click)="cmsAdd()" type="submit" class="btn btn-outline-primary btn-sm my-1 mr-3 text-primary">Save</button>
+        <button type="reset" (click)="editCustomerMasterSettingForm.reset()" class="btn btn-outline-danger btn-sm my-1 text-danger">Cancel</button>
+      </div>
+      </div>
+      <hr>
+    <form [formGroup]="editCustomerMasterSettingForm" (ngSubmit)="cmsAdd()">
+      <div class="form-row">
+        <label for="ProductCode" class="col-sm-2 col-form-label col-form-label-sm">Branch<span
+            class="notzerovalue">&nbsp;*</span></label>
+        <div class="form-group col-sm-2">
+          <select [formControlName]="'branchLocationId'" class="form-control" id="exampleFormControlSelect2">
+            <option selected value="" disabled>Please choose a branch..</option>
+            <option *ngFor="let branch of branches  | async" [value]="branch.branchLocationId">
+              {{ branch.branchCode }}
+            </option>
+          </select>
+          <div class="invalid-feedback" *ngIf="f.branchLocationId.touched && f.branchLocationId.hasError('required')">
+            Please choose a branch..
+          </div>
+        </div>
+       </div>
+       <div class="form-row">
+        <label for="customerMasterSettingDescription" class="col-sm-2 col-form-label col-form-label-sm">Description of Setting<span
+            class="notzerovalue">&nbsp;*</span></label>
+        <div class="form-group col-sm-4">
+          <input type="text" class="form-control" [formControlName]="'customerMasterSettingDescription'" id="" placeholder="" />
+          <div *ngIf="f.customerMasterSettingDescription.touched && f.customerMasterSettingDescription.errors" class="invalid-feedback">
+            <div *ngIf="f.customerMasterSettingDescription.hasError('required')">Description of Setting is required</div>
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <label for="ProductCode" class="col-sm-2 col-form-label col-form-label-sm">Customer Category<span
+            class="notzerovalue">&nbsp;*</span></label>
+            <div class="form-group col-sm-2">
+              <select [formControlName]="'customerCategory'" class="form-control" id="exampleFormControlSelect2">
+                <option selected value="" disabled>Please choose a Customer Category..</option>
+                <option *ngFor="let cC of customerCategory" [value]="cC.schemeCode">
+                  {{ cC.scheme }}
+                </option>
+              </select>
+              <div class="invalid-feedback" *ngIf="f.customerCategory.touched && f.customerCategory.hasError('required')">
+                Please choose a Customer Category
+              </div>
+            </div>
+            </div>
+         <div class="form-row">
+        <label for="ProductCode" class="col-sm-2 col-form-label col-form-label-sm">Billing Cycle Start Date<span
+            class="notzerovalue">&nbsp;*</span></label>
+        <div class="form-group col-sm-1">
+          <input min="0" max="31" type="number" step="1" class="form-control" [formControlName]="'billingCycleStartDate'" id="datepicker" placeholder="" />
+          <div *ngIf="f.billingCycleStartDate.touched && f.billingCycleStartDate.errors" class="invalid-feedback">
+            <div *ngIf="f.billingCycleStartDate.hasError('required')">Billing Cycle Start Date is required</div>
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <label for="ProductCode" class="col-sm-2 col-form-label col-form-label-sm">Billing Cycle End Date<span
+            class="notzerovalue">&nbsp;*</span></label>
+        <div class="form-group col-sm-1">
+          <input min="0" max="31" type="number" step="1" class="form-control" [formControlName]="'billingCycleEndDate'" id="" placeholder="" />
+          <div *ngIf="f.billingCycleEndDate.touched && f.billingCycleEndDate.errors" class="invalid-feedback">
+            <div *ngIf="f.billingCycleEndDate.hasError('required')">Billing Cycle End Date is required</div>
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <label for="ProductCode" class="col-sm-2 col-form-label col-form-label-sm">Credit Holding Days<span
+            class="notzerovalue">&nbsp;*</span></label>
+        <div class="form-group col-sm-2">
+          <input min="0" max="31" type="number" class="form-control" [formControlName]="'creditHoldingDays'" id="" placeholder="" />
+          <div *ngIf="f.creditHoldingDays.touched && f.creditHoldingDays.errors" class="invalid-feedback">
+            <div *ngIf="f.creditHoldingDays.hasError('required')">Credit Holding Days is required</div>
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <label for="ProductCode" class="col-sm-2 col-form-label col-form-label-sm">Credit Balance Per Day<span
+            class="notzerovalue">&nbsp;*</span></label>
+        <div class="form-group col-sm-2">
+          <input min="0" step="0.01" type="number" class="form-control" [formControlName]="'creaditBalancePerDay'" id="" placeholder="" />
+          <div *ngIf="f.creaditBalancePerDay.touched && f.creaditBalancePerDay.errors" class="invalid-feedback">
+            <div *ngIf="f.creaditBalancePerDay.hasError('required')">Credit Balance Per Day is required</div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,1372 @@
+/* ##########################################
+#               Default Theme               #
+#       Font :"Montserrat", "sans-serif     #
+#           Color:#F5CB5C Grain Yello       #
+#           Color:242423 Black              #
+#           Color:333533 jet                #
+#           Color:E8EDDF Platinam           #
+#           Color:CFDBD5 Light Gray         #
+#                                           #
+############################################*/
+
+/* ##########################################
+                Html ,Body
+ ############################################
+*/
+
+:root {
+    --maincoloryellow: #f4c613;
+    --maincolorblack: #242423;
+    --maincolorjet: #333533;
+    --maincolorplatinam: #E8EDDF;
+    --maincolorlightgray: #f4f4f4;
+    --maintextcolor: #212226;
+    --maincolorjetlight: rgba(51, 53, 51, 0.9);
+      --mainerrorcolor: #ff1e56;
+      --newthcolour: #3390ef;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    color: var(--maintextcolor);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: "Montserrat", "sans-serif";
+}
+
+p {
+    font-family: "Open Sans", "sans-serif";
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 24px;
+}
+
+section {
+    background: #fff;
+    overflow: hidden;
+}
+
+/* ##########################################
+               preloader
+   ##########################################
+*/
+#preloader {
+    background-color: #fff;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+}
+
+/* preloader gif image
+#status {
+    background-image;url("");
+    background-repeat: no-repeat;
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-top: -100px;
+    margin-left: -100px;
+}*/
+.status {
+    display: inline-block;
+    position: absolute;
+    width: 64px;
+    height: 64px;
+    left: 50%;
+    top: 50%;
+    margin-top: -32px;
+    margin-left: -32px;
+}
+
+.status div {
+    display: inline-block;
+    position: absolute;
+    left: 6px;
+    width: 13px;
+    background: var(--maincoloryellow);
+    animation: lds-facebook 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
+}
+
+.status div:nth-child(1) {
+    left: 6px;
+    animation-delay: -0.24s;
+}
+
+.status div:nth-child(2) {
+    left: 26px;
+    animation-delay: -0.12s;
+}
+
+.status div:nth-child(3) {
+    left: 45px;
+    animation-delay: 0;
+}
+
+@keyframes lds-facebook {
+    0% {
+        top: 6px;
+        height: 51px;
+    }
+
+    50%,
+    100% {
+        top: 19px;
+        height: 26px;
+    }
+}
+
+/* ##########################################
+               Home Section
+   ##########################################
+*/
+#home {
+    background: none;
+    height: 100%;
+}
+
+#home-bg-video {
+
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    position: fixed;
+    min-height: 100%;
+    min-width: 100%;
+    width: auto;
+    height: auto;
+    z-index: -1;
+    background: url('../images/home/Solo.webp') no-repeat;
+    background-size: cover;
+}
+
+#home-overlay {
+    background-color: rgba(0, 0, 0, 0.4);
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+#home-content {
+    width: 100%;
+    height: 100%;
+    display: table;
+}
+
+#home-content-inner {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+#home-heading h1 {
+    color: #fff;
+    font-size: 65px;
+    font-weight: 200;
+    text-transform: uppercase;
+    margin: 0;
+    display: inline-block;
+}
+
+#home-heading h1 span {
+    color: var(--maincoloryellow);
+    font-weight: 400;
+}
+
+#home-text p {
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 100;
+    margin: 8px 0 30px 0;
+    line-height: 2.5rem;
+}
+
+#home-heading-1 {
+    animation-duration: 1.8s;
+    animation-delay: 1s;
+}
+
+#home-heading-2 {
+    animation-duration: 1.8s;
+    animation-delay: 1s;
+}
+
+/* ##########################################
+               Button
+   ##########################################
+*/
+
+.btn-general {
+    font-family: "Montserrat", "sans-serif";
+    border-radius: 20px;
+    font-size: 13px;
+    text-transform: uppercase;
+    margin: 0 6px;
+    padding: 12px 46px 12px 46px;
+    -webkit-transition: all .5s;
+    transition: all .5s;
+}
+
+.btn-home {
+    color: #fff;
+    border: 1px solid #fff;
+}
+
+.btn-home:hover,
+.btn-home:focus {
+    color: #fff;
+    background: var(--maincoloryellow);
+    border: 1px solid var(--maincoloryellow);
+}
+
+.btn-yellow {
+    color: white;
+    background-color: var(--maincoloryellow);
+    border: 1px solid #fff;
+}
+
+.btn-yellow:hover,
+.btn-yellow:focus {
+    color: #fff;
+    background: var(--maintextcolor);
+    border: 1px solid var(--maincoloryellow);
+}
+
+.btn-white {
+    color: var(--maintextcolor);
+    background-color: white;
+    border: 1px solid #fff;
+}
+
+.btn-white:hover,
+.btn-white:focus {
+    color: #fff;
+    background: var(--maincoloryellow);
+    border: 1px solid white;
+}
+
+/* ##########################################
+               Arrow Down
+   ##########################################
+*/
+#arrow-down {
+    position: absolute;
+    color: #fff;
+    bottom: 20px;
+    left: 50%;
+    font-size: 32px;
+    width: 32px;
+    height: 32px;
+    text-align: center;
+    margin-left: -16px;
+    z-index: 1;
+}
+
+#arrow-down:hover,
+#arrow-down:focus {
+    color: var(--maincoloryellow);
+}
+
+/* ##########################################
+               Content Boxes
+   ##########################################
+*/
+.content-box-large {
+    padding: 100px 0;
+}
+
+.content-box-md {
+    padding: 80px 0;
+}
+
+.content-box-sm {
+    padding: 70px 0;
+}
+
+/* ##########################################
+               About Section 1
+   ##########################################
+*/
+
+#about-left {
+    animation-duration: 1.8s;
+    animation-delay: 1s;
+}
+
+#about-right {
+    animation-duration: 1.8s;
+    animation-delay: 1s;
+}
+
+#about-right p:first-child {
+    margin-bottom: 30px;
+}
+
+.horizontal-header h2,
+.vertical-heading h2 {
+    font-size: 42px;
+    font-weight: 100;
+    margin: 0 0 0 35px;
+    line-height: 45px;
+}
+
+.vertical-heading h5 {
+    color: var(--maincoloryellow);
+    word-spacing: 9px;
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: 500;
+    display: inline-block;
+    position: relative;
+    transform: rotate(-90deg);
+    left: -63px;
+    top: 60px;
+}
+
+.about-bottom {}
+
+/* ##########################################
+               About Section 2
+   ##########################################
+*/
+#about-2 {
+    background-color: var(--maincolorlightgray);
+}
+
+
+
+.about-item {
+    background: white;
+    padding: 80px 30px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+}
+
+.about-item i {
+    font-size: 42px;
+    margin: 0;
+}
+
+.about-item h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.about-item hr {
+    width: 42px;
+    height: 3px;
+    background: var(--maincoloryellow);
+    margin: 0 auto;
+    border: none;
+}
+
+.about-item p {
+    margin-top: 20px;
+}
+
+.about-item:hover,
+.about-item:focus {
+    background: var(--maincoloryellow);
+
+}
+
+.about-item:hover i,
+.about-item:focus i,
+.about-item:hover p,
+.about-item:focus p,
+.about-item:hover h3,
+.about-item:focus h3 {
+    color: white;
+}
+
+.about-item:hover i {
+    transition: all 400ms ease-in-out;
+    transform: translateY(-20px);
+}
+
+.about-item:hover hr,
+.about-item:focus hr {
+    background: white;
+
+}
+
+/* smooth transition*/
+.about-item,
+.about-item i,
+.about-item p,
+.about-item h3 {
+    transition: all 400ms ease-in-out;
+}
+
+/*
+@keyframes slideleft {
+    0%,100% {
+        transform: translate3d(0%,0,0);
+    }
+    10%,90% {
+        transform: translate3d(-100%,0,0);
+    }
+}
+@keyframes slideright {
+    0%,100% {
+        transform: translate3d(0%,0,0);
+    }
+    10%,90% {
+        transform: translate3d(200%,0,0);
+    }
+}
+#about-left {
+    transform: translate3d(0,0,0);
+    animation: slideleft 4s 300ms 1 cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+#about-right {
+    transform: translate3d(0,0,0);
+    animation: slideright 4s 300ms 1 cubic-bezier(0.25, 0.46, 0.45, 0.94);
+} */
+/* ##########################################
+               Team Section
+   ##########################################
+*/
+
+ul.social-list {
+    padding: 8px;
+    margin-top: 20px;
+    list-style: none;
+}
+
+ul.social-list li {
+    display: inline-block;
+    padding: 0;
+}
+
+ul.social-list li a {
+    color: white;
+    height: 35px;
+    width: 35px;
+    border: 1px solid white;
+    display: inline-block;
+    line-height: 35px;
+    border-radius: 50%;
+    transition: all 300ms linear;
+}
+
+ul.social-list li:nth-child(1) a:hover {
+    background-color: #3b5998;
+    border-color: #3b5998;
+}
+
+ul.social-list li:nth-child(2) a:hover {
+    background-color: #00acee;
+    border-color: #00acee;
+}
+
+ul.social-list li:nth-child(3) a:hover {
+    background-color: #db4437;
+    border-color: #db4437;
+
+}
+
+#team-left .vertical-heading {
+    min-height: 160px;
+}
+
+.team-member {
+    position: relative;
+    margin: 8px;
+
+}
+
+.team-member-overlay {
+    background-color: var(--maincolorjetlight);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    opacity: 0;
+    transition: all 300ms linear;
+}
+
+.team-member-info {
+    width: 100%;
+    height: 100%;
+    padding: 80px 0px;
+}
+
+.team-member-overlay .team-member-info h6 {
+    color: var(--maincoloryellow);
+    font-size: 1rem;
+    margin: 0;
+}
+
+.team-member-overlay .team-member-info p {
+    color: white;
+}
+
+.team-member:hover .team-member-overlay {
+    opacity: 1;
+}
+
+/* ##########################################
+               Team Skill Section
+   ##########################################
+*/
+#members-progress__bars {}
+
+/*
+.skill h4 {
+    font-size: 16px;
+    margin: 0;
+    padding: 0;
+    margin: 20px 0;
+
+} */
+.skill {
+    margin-bottom: 20px;
+}
+
+.skill h4 {
+    line-height: 67px;
+    margin: 0;
+    font-weight: normal;
+
+}
+
+.skill .progress {
+    height: 1.6rem;
+    background-color: var(--maincolorlightgray);
+    border-radius: 0;
+    overflow: visible;
+}
+
+.skill .progress .progress-bar {
+    background-color: var(--maincoloryellow);
+    position: relative;
+}
+
+.skill .progress .progress-bar span {
+    font-size: 11px;
+    font-weight: 100;
+    font-family: sans-serif;
+    padding: 5px;
+    position: absolute;
+    left: 97%;
+    top: -50px;
+    background: var(--maincolorblack);
+}
+
+.skill .progress .progress-bar span:before {
+    content: "";
+    border-top: 8px solid var(--maincolorblack);
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    position: absolute;
+    bottom: -8px;
+}
+
+/* ##########################################
+               Statement Section
+   ##########################################
+*/
+
+#statement {
+    background: url('../images/tech/DeveloperChallenges.jpg') no-repeat;
+    background-size: cover;
+    background-position: bottom center;
+    background-attachment: fixed;
+}
+
+#statement .content-box-large {
+    background: rgba(0, 0, 0, 0.4);
+}
+
+#tech-statement h3 {
+    color: ghostwhite;
+    font-size: 28px;
+    line-height: 42px;
+    font-weight: 600;
+    text-shadow:2px 2px 2px black;
+
+}
+
+#tech-statement p {
+    color: var(--maincoloryellow);
+    font-size: 14px;
+    font-family: "Raleway";
+    margin-top: 8px;
+    font-weight: 400;
+    text-shadow:2px 2px 2px black;
+
+}
+
+/* ##########################################
+               Service Section
+   ##########################################
+*/
+.horizontal-header {
+    margin-bottom: 80px;
+}
+
+.horizontal-header h5 {
+    color: var(--maincoloryellow);
+    text-transform: uppercase;
+    font-size: 16px;
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+.horizontal-header h2 {
+    margin: 0px;
+}
+
+#service-01 img {
+    margin: 60px 0;
+}
+
+.service {
+    margin: 35px 0;
+}
+
+.service .icon {
+    font-size: 42px;
+    margin: 0;
+    transition: all 400ms linear;
+}
+
+.service:hover .icon {
+    color: var(--maincoloryellow);
+    transform: translateX(-20px);
+
+}
+
+.service h5 {
+    font-size: 12px;
+    color: var(--maincoloryellow);
+    text-transform: uppercase;
+    margin: 0 0 6px 0;
+}
+
+.service:hover h5 {
+    color: var(--maincolorjet);
+}
+
+.service h4 {
+    font-size: 24px;
+    margin: 0 0 8px 0;
+    font-weight: 500;
+}
+
+.service p {
+    line-height: normal;
+    text-align: justify;
+}
+
+/* ##########################################
+               Responsive tabs Section
+   ##########################################
+*/
+.service-02 {
+    background: var(--maincolorlightgray);
+}
+
+#services-tabs ul {
+    margin-bottom: 40px;
+}
+
+#services-tabs ul li {
+    padding: 5px 30px;
+}
+
+#services-tabs ul li a {
+    font-family: "Raleway";
+    font-size: 13px;
+    color: var(--maintextcolor);
+    text-transform: uppercase;
+    font-weight: 400;
+    padding: 0;
+    text-decoration: none;
+}
+
+#services-tabs ul li.r-tabs-state-active a {
+    color: var(--maincoloryellow);
+    font-weight: 700;
+    border-bottom: 3px solid var(--maincoloryellow);
+    padding: 5px;
+    transition: border-color 300ms linear;
+}
+
+.service-tab img {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.service-tab .col-md-6 {
+    padding: 0;
+}
+
+.service-tab .tab-bg {
+    background: #fff;
+    padding: 59px 30px;
+    min-height: 470px;
+}
+
+.service-tab h2 {
+    font-size: 48px;
+    color: #bbb;
+    margin-bottom: 20px;
+    font-weight: 100;
+}
+
+.service-tab h3 {
+    font-size: 29px;
+    margin-bottom: 30px;
+    font-weight: 700;
+}
+
+.service-tab p {
+    line-height: 24px;
+    margin-bottom: 30px;
+}
+
+/* ##########################################
+               Contact Section
+   ##########################################
+*/
+#contact-left p {
+    margin: 25px 0px 20px 0px;
+}
+
+.office ul.office-details {
+    list-style: none;
+    padding: 0;
+}
+
+.office ul.office-details > li {
+    font-family: "Open Sans", sans-serif;
+    font-size: 14px;
+    margin: 12px 0;
+    display: flex;
+}
+
+.office ul.office-details > li > i {
+    font-size: 20px;
+    width: 45px;
+}
+
+#contact-left ul.social-list > li > a {
+    text-align: center;
+    vertical-align: middle;
+    color: black;
+    border: 1px solid black;
+}
+
+#contact-left ul.social-list > li > a:hover {
+    color: white;
+    border: none;
+}
+
+#contact-right {
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    padding: 25px 30px;
+}
+
+#contact-right h4 {
+    font-size: 24px;
+}
+
+#contact-right p {
+    margin-bottom: 25px;
+}
+
+#contact-right form .form-control {
+    font-family: "Open Sans", sans-serif;
+    padding: 10px 15px;
+    font-size: 12px;
+    line-height: 24px;
+}
+
+#contact-right form textarea.form-control {
+    min-height: 160px;
+}
+#contact-right .form-message {
+    margin: 0 auto;
+    font-family: "Open Sans", "sans-serif";
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 24px;
+    padding-bottom: 10px;
+}
+#contact-right .form-message.success {
+        color: var(--maincoloryellow);
+        display:none;
+}
+#contact-right .form-message.error {
+        color: var(--mainerrorcolor);
+            display: none;
+}
+/* ##########################################
+               Portfolio Section
+   ##########################################
+*/
+#portfolio {
+    padding-bottom: 160px;
+}
+
+#portfolio .vertical-heading {
+    margin-bottom: 50px;
+}
+
+.portfolio-item {
+    overflow: hidden;
+    position: relative;
+}
+
+.portfolio-item img {
+    width: 100%;
+    height: auto;
+    transition: transform .5s ease;
+}
+
+.portfolio-item:hover img {
+    transform: scale(1.1);
+}
+
+.portfolio-item__overlay {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(14, 17, 14, 0.5);
+    cursor: zoom-in;
+    opacity: 0;
+    transition: all 400ms ease;
+}
+
+.portfolio-item__overlay .portfolio-item__details {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    transform: translateY(-50%);
+}
+
+.portfolio-item__overlay .portfolio-item__details h3 {
+    color: var(--maincoloryellow);
+    font-size: 30px;
+    margin: 0;
+    padding: 0;
+    text-transform: uppercase;
+    transform: translateY(-20%);
+    transition: all 400ms linear;
+}
+
+.portfolio-item__overlay .portfolio-item__details span {
+    display: inline-block;
+    border-top: 1px solid #e0e0e0;
+    border-bottom: 1px solid #e0e0e0;
+    height: 6px;
+    width: 30px;
+    margin: 11px auto 5px auto;
+}
+
+.portfolio-item__overlay .portfolio-item__details p {
+    font-size: 17px;
+    color: white;
+    text-transform: uppercase;
+    margin: 0;
+    padding: 0;
+}
+
+.portfolio-item:hover .portfolio-item__overlay {
+    opacity: 1;
+}
+
+#portfolio #isotope-filters {
+    margin-bottom: 10px;
+    padding: 20px 25px 20px 0;
+}
+
+#isotope-filters .btn {
+    padding: 0px 30px;
+    cursor: default;
+}
+
+#isotope-filters .btn span {
+    font-family: "Raleway";
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+#isotope-filters .btn.active span {
+    padding: 0 0 5px 0;
+    border-bottom: 3px solid var(--maincoloryellow);
+    color: var(--maincoloryellow);
+}
+
+#isotope-filters .btn:focus span,
+#isotope-filters .btn:focus {
+    box-shadow: none;
+}
+
+.show {
+    display: none;
+}
+
+.hide {
+    display: block;
+}
+
+/* ##########################################
+               Testimonials Section
+   ##########################################
+*/
+#testimonials {
+    background: var(--maincolorlightgray);
+    padding-bottom: 45px;
+    overflow: visible;
+}
+
+#testimonials .vertical-heading {
+    padding: 80px 0px;
+    margin-bottom: 50px;
+}
+
+#testimonial-slider {
+    background: var(--maincoloryellow);
+    padding: 20px 45px 0px 45px;
+    color: white;
+    top: -120px;
+}
+
+.testimonial .row {
+    margin-bottom: 25px;
+}
+
+.testimonial h3 {
+    font-size: 32px;
+    line-height: 35px;
+
+}
+
+.testimonial p {
+    line-height: normal;
+    margin-top: 5px;
+    margin-bottom: 20px;
+}
+
+.testimonial .stars {
+    font-size: 20px;
+    margin: 20px 0px 10px 0px;
+}
+
+.testimonial .author .author-name-des {
+    width: 120px;
+}
+
+.testimonial .author .author-name-des p:nth-child(1) {
+    margin: 0;
+}
+
+/* ##########################################
+               Pricing Section
+   ##########################################
+*/
+.pricing-table {
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
+    padding: 32px 20px;
+    transition: all 400ms linear;
+}
+
+.pricing-table:hover {
+    background: var(--maincoloryellow);
+    color: white;
+}
+
+.pricing-table:hover .type h4 {
+    color: white;
+}
+
+.pricing-table:hover .pricing-btn a {
+    background: white;
+    color: var(--maintextcolor);
+}
+
+.pricing-table.black {
+    background: black;
+    color: white;
+}
+
+.pricing-table.black:hover {
+    background: var(--maincoloryellow);
+}
+
+.pricing-table .type h4 {
+    color: var(--maincoloryellow);
+    font-size: 24px;
+    margin-bottom: 25px;
+    text-align: left;
+}
+
+.pricing-table .price {
+    border-bottom: 1px solid #e0e0e0;
+    border-top: 1px solid #e0e0e0;
+    padding: 24px 0;
+}
+
+.pricing-table .price h2 {
+    font-family: "open sans";
+    font-size: 42px;
+    font-weight: 100;
+    margin: 0 0 0 24px;
+    position: relative;
+}
+
+.pricing-table .price h2 span {
+    font-family: "Raleway";
+}
+
+.pricing-table .price h2 span.dollar {
+    font-size: 18px;
+    font-weight: 300;
+    position: absolute;
+    left: -20px;
+    top: 5px;
+}
+
+.pricing-table .price h2 span.month {
+    font-size: 11px;
+    font-weight: 400;
+    position: absolute;
+    bottom: -10px;
+    right: 20px;
+}
+
+.pricing-table .package {
+    list-style: none;
+    margin: 0;
+    padding: 20px 0px;
+}
+
+.pricing-table .package li {
+    font-family: "open sans";
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 40px;
+}
+
+.pricing-table .package li i {
+    width: 24px;
+}
+
+.pricing-table .price p {
+    line-height: normal;
+    margin: 0;
+    padding: 0;
+    font-weight: 200;
+    text-align: justify;
+}
+
+.pricing-table .pricing-btn a {
+    width: 95%;
+}
+
+/* ##########################################
+               Stars Section
+   ##########################################
+*/
+
+#Stars {
+    background: url('../images/stats/4-habits-of-a-great-business-analyst-1280x720.jpg') no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+#Stars .content-box-md {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.star-item {
+    padding: 25px 50px;
+    background: rgba(61, 68, 68, 0.6);
+    border-radius: 4px;
+    min-height: 170px;
+    transition: all 400ms linear;
+}
+
+.star-item:hover {
+    background: var(--maincoloryellow);
+}
+
+.star-item:hover i {
+    transform: translateY(-20px);
+    color: black;
+}
+
+.star-item i {
+    font-size: 42px;
+    color: #f4c613;
+    margin: 0 0 6px 0;
+    transition: all 400ms linear;
+}
+
+.star-item h3 {
+    font-size: 32px;
+    color: #fff;
+    margin: 5px 0 5px 0;
+}
+
+.star-item p {
+    color: white;
+    font-weight: 600;
+    margin: 0;
+}
+
+.star-item .counters {
+    font-size: 32px;
+    color: #fff;
+    margin: 5px 0 5px 0;
+}
+
+#Star-overlay {
+    background-color: rgba(0, 0, 0, 0.4);
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 999;
+}
+
+/* ##########################################
+               Client Section
+   ##########################################
+*/
+#clients .horizontal-header {
+    margin-bottom: 30px;
+}
+
+#client-lst {
+    padding: 45px 0 0 0;
+}
+
+#client-lst .client {
+    padding: 0 10px;
+    max-width: 150px;
+    margin: 0 auto;
+    vertical-align: middle;
+    line-height: 100px;
+}
+
+#client-lst .client img {
+    display: inline-block !important;
+}
+
+/* ##########################################
+               Bolg Section
+   ##########################################
+*/
+#blog {
+    background: var(--maincolorlightgray);
+}
+
+#blog-left p {
+    margin: 25px 0px;
+}
+
+.blog-post {
+    background: white;
+    padding: 20px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+}
+
+.blog-post h4 {
+    line-height: 40px;
+    margin: 0;
+    font-weight: 700;
+    font-size: 1rem;
+}
+
+.blog-post > p {
+    line-height: 24px;
+    margin: 0;
+    font-weight: 300;
+}
+
+.blog-post a {
+    display: inline-block;
+    margin-top: 25px;
+    text-transform: uppercase;
+    color: var(--maincoloryellow);
+    font-size: 12px;
+    font-weight: 500;
+    transition: all 400ms linear;
+    text-decoration: none;
+}
+
+.blog-post a:hover {
+    color: var(--maincolorblack);
+}
+
+.blog-post .post-meta {
+    border-top: 1px solid #e0e0e0;
+    margin-top: 30px;
+    padding-top: 10px;
+}
+
+.blog-post .post-meta p {
+    font-size: 11px;
+    font-family: "Raleway", sans-serif;
+    line-height: 24px;
+    font-weight: 500;
+    margin: 0;
+}
+
+#blog-btn a {
+    margin: 0;
+}
+
+/* ##########################################
+               Navbar Section
+   ##########################################
+*/
+.navbar {
+    padding: 35px 0 20px 0;
+    transition: all 400ms linear;
+}
+
+.white-nav-top {
+    background: #fff;
+    padding: 5px 0;
+    z-index: 999;
+    -webkit-box-shadow: 0 8px 6px -9px #999;
+    box-shadow: 0 8px 6px -9px #999;
+}
+
+.white-nav-top ul.navbar-nav > li > a {
+    color: var(--maincolorblack);
+}
+
+.white-nav-top ul.navbar-nav > li > a:hover,
+.white-nav-top ul.navbar-nav > li > a:focus {
+    background: none;
+    color: var(--maincoloryellow);
+}
+
+.container-fluid {
+    padding: 0 85px;
+}
+
+.navbar-brand {
+    padding: 13px 15px;
+}
+
+ul.navbar-nav > li {
+    padding: 0 8px 0 8px;
+}
+
+ul.navbar-nav > li > a {
+    font-family: "Raleway", sans-serif;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+ul.navbar-nav > li > a:hover,
+ul.navbar-nav > li > a:focus {
+    background: none;
+    color: var(--maincoloryellow);
+}
+
+.btn-back-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 3px 15px;
+    font-size: 22px;
+    display: none;
+
+}
+
+/*scrool spy ctive css class */
+.white-nav-top ul.navbar-nav > li > a.active {
+    color: var(--maincoloryellow);
+    font-weight: 500;
+}
+
+/* ##########################################
+               Google Map Section
+   ##########################################
+*/
+#map {
+    height: 600px;
+    width: 100%;
+}
+#google-map-section iframe {
+    padding: 0;
+    margin: 0;
+    border: none;
+}
+#google-map-section .row {
+    padding: 0;
+    margin: 0;
+}
+/* ##########################################
+               Footer Section
+   ##########################################
+*/
+footer {
+    background-color: var(--maintextcolor);
+    padding: 30px;
+}
+
+footer p {
+    color: white;
+    line-height: 20px;
+    margin: 0;
+}
+
+footer p span {
+    color: var(--maincoloryellow);
+}
+
+/* ##########################################
+               Scroll Section
+   ##########################################
+*/
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+    background-color: rgba(0, 0, 0, 1);
+    box-shadow: 0 8px 6px -9px #999;
+    opacity: 0.75;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: white;
+    opacity: 0.5;
+    height: 1px;
+}

@@ -1,0 +1,119 @@
+/*##########################################
+             login page
+ ##########################################
+*/
+.login-page {
+  margin: 0 auto;
+  max-width: 30%;
+  margin-top: 40px;
+}
+
+.login-page .form {
+  border: 2px solid #ccc;
+  position: relative;
+  top: 35px;
+  z-index: 1;
+  padding: 30px;
+  text-align: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+  margin: 0 auto;
+}
+
+.login-page .form .formtitle {
+  color: #057dfa;
+  font-weight: 300;
+  font-size: 40px;
+  text-shadow: 3px 2px 3px #ccc;
+}
+
+.login-page .form .formtitle img {
+  height: 100px;
+}
+
+.login-page .form .login-form span.invalid-feedback {
+  color: #dc3545;
+  font-size: 90%;
+  display: block;
+  margin-top: -16px;
+}
+
+.login-page .form input {
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #FFFFFF;
+  height: 32px;
+  box-sizing: border-box;
+  font-size: 14px;
+  border: 1px solid #676767;
+  outline: none;
+  padding-left: 35px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.login-page .form label {
+  float: left;
+  align-items: center;
+  color: #29292a;
+  font-weight: 300;
+  text-shadow: 2px 2px 2px #fff;
+  margin-bottom: 5px;
+  position: absolute;
+}
+
+.login-page .form label i {
+  font-size: 16px;
+  color: #057dfa;
+  padding-right: 5px;
+  position: relative;
+  top: 5px;
+  left: 10px;
+}
+
+.login-page .form input:hover {
+  border: 1px solid #057dfa;
+  box-shadow: 0px 10px 5px -5px rgba(107, 99, 107, 0.5);
+}
+
+.login-page .form button {
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  outline: 0;
+  background: #057dfa;
+  border: 0;
+  height: 32px;
+  padding: 0px 20px;
+  color: #FFFFFF;
+  font-size: 13px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+  border-radius: 4px;
+  box-shadow: 0px 10px 5px -5px rgba(107, 99, 107, 0.5);
+  letter-spacing: 1px;
+}
+
+.login-page .form button:hover,
+.login-page .form button:active,
+.login-page .form button:focus {
+  background: #0492fb;
+  box-shadow: 1px 3px 7px 1px #ccc;
+}
+
+.login-page .form .message {
+  margin: 15px 0 0;
+  color: #c4bcc9;
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+
+.login-page .form .message a {
+  color: #057dfa !important;
+  text-decoration: none;
+}
+
+.login-page .form button.clear {
+  background-color: #e93763;
+  margin-left: 30px;
+}

@@ -1,0 +1,140 @@
+<!--main container start-->
+<div class="main-container">
+  <nav aria-label="breadcrumb" class="d-print-none">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a [routerLink]="['/dashboard']">Home</a></li>
+      <li class="breadcrumb-item">
+        <a [routerLink]="['/report/viewreport']">Report List</a>
+      </li>
+      <li class="breadcrumb-item active">
+        <a [routerLink]="['/report/stock']">Stock Details</a>
+      </li>
+    </ol>
+  </nav>
+  <div class="container-fluid">
+    <h6>Date Wise Stock Details</h6>
+    <form [formGroup]="stockReportForm" (ngSubmit)="stockAdd()" class="d-print-none">
+      <div class="form-row">
+        <!-- <label for="ProductCode" class="col-sm-2 col-form-label col-form-label-sm">From Date<span
+            class="notzerovalue">&nbsp;*</span></label>
+        <div class="form-group col-sm-2">
+          <input type="date" class="form-control" [formControlName]="'frmDate'" id="" placeholder="From Date">
+          <div class="invalid-feedback" *ngIf="f.frmDate.touched && f.frmDate.hasError('required')">
+            From date is required.
+          </div>
+        </div> -->
+        <label for="ProductCode" class="col-sm-2 col-form-label col-form-label-sm">To Date<span
+            class="notzerovalue">&nbsp;*</span></label>
+        <div class="form-group col-sm-2">
+          <input type="date" class="form-control" [formControlName]="'toDate'" id="" placeholder="To Date" />
+          <div class="invalid-feedback" *ngIf="f.toDate.touched && f.toDate.hasError('required')">
+            To date is required.
+          </div>
+        </div>
+        <div class="form-group col-sm-1 mt-1 ml-1">
+          <input  value="" [formControlName]="'summary'" [ngClass]="{ 'is-invalid': f.summary.hasError('required') }"
+          class="custom-checkbox-general" type="checkbox" id="active" />
+        <label for="active">Summary</label>
+        <div class="invalid-feedback" *ngIf="f.summary.hasError('required')">
+          Please click checkbox.
+        </div>
+<!--           <div class="form-check mt-1">
+            <input class="form-check-input" [formControlName]="'summary'" type="checkbox" value="" id="invalidCheck3"
+              [ngClass]="{ 'is-invalid': f.summary.hasError('required') }" />
+            <label class="form-check-label mt-1" for=""> Summary </label>
+            <div class="invalid-feedback" *ngIf="f.summary.hasError('required')">
+              Please click checkbox.
+            </div>
+          </div> -->
+        </div>
+        <div class="form-group col-sm-1 mt-1 ml-1">
+          <input  value="" [formControlName]="'details'" [ngClass]="{ 'is-invalid': f.details.hasError('required') }"
+          class="custom-checkbox-general" type="checkbox" id="details" />
+        <label for="active">Details</label>
+        <div class="invalid-feedback" *ngIf="f.details.hasError('required')">
+          Please click checkbox.
+        </div>
+<!--           <div class="form-check mt-1">
+            <input class="form-check-input" [formControlName]="'details'" type="checkbox" value="" id="invalidCheck3"
+              [ngClass]="{ 'is-invalid': f.details.hasError('required') }" />
+            <label class="form-check-label mt-1" for=""> Details </label>
+            <div class="invalid-feedback" *ngIf="f.details.hasError('required')">
+              Please click checkbox.
+            </div>
+          </div> -->
+        </div>
+        <div class="form-group col-sm-2">
+          <button class="btn btn-outline-primary btn-sm mr-2 text-primary" [disabled]="!stockReportForm.valid"
+            type="submit">
+            View
+          </button>
+          <button class="btn btn-outline-success btn-sm text-success" [disabled]="!stockReportForm.valid" type="button"
+            (click)="stockexcel()">
+            Download
+          </button>
+        </div>
+      </div>
+    </form>
+    <div class="table-responsive-md ml-3">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th class="center">#</th>
+            <th>Product Code</th>
+            <th>Product Name</th>
+            <th>Expiry Date</th>
+            <th>Quantity</th>
+            <th>Cost</th>
+            <th>Retail Price</th>
+            <th>Cost Value</th>
+            <th>Sale Price</th>
+            <th>Sale Value</th>
+            <!--             <th class="text-left">Product Name</th>
+            <th class="center">Quantity</th> -->
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let stock of shopstockDetail; let i = index">
+            <td class="center">{{ i + 1 }}</td>
+            <td class="center">{{ stock.itemCode }}</td>
+            <td class="center">{{ stock.productName }}</td>
+            <td class="center">
+              {{ stock.productExpireDate | date : "mediumDate" }}
+            </td>
+            <td class="center">{{ stock.qty }}</td>
+            <td class="center">{{ stock.cost | currency : "LKR" : "Rs." }}</td>
+            <td class="center">
+              {{ stock.maximumRetailPrice | currency : "LKR" : "Rs." }}
+            </td>
+            <td class="center">
+              {{ stock.costValue | currency : "LKR" : "Rs." }}
+            </td>
+            <td class="center">
+              {{ stock.unitPrice | currency : "LKR" : "Rs." }}
+            </td>
+            <td class="center">
+              {{ stock.saleValue | currency : "LKR" : "Rs." }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="row">
+      <div class="col-md-2 ml-auto">
+        <table class="table table-clear">
+          <tbody>
+            <tr>
+              <td class="left">
+                <strong>Total</strong>
+              </td>
+              <td class="right">
+                <strong>{{ total | number : "1.2-2" }}</strong>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

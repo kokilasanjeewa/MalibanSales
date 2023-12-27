@@ -1,0 +1,57 @@
+import { ApplicationUserRole } from './applicationuserrole';
+import { BranchLocation } from './branchlocation';
+import { City } from './city';
+import { Country } from './country';
+import { District } from './district';
+import { SaleHeader } from './saleheader';
+
+export interface ApplicationUser {
+  id: number;
+  userId:number;
+  uid: string;
+  userName: string;
+  password: string;
+  createdBy: string;
+  modifiedBy: string;
+  regDate: string;
+  systemNumber: string;
+  modifiedDate: string;
+  lastAccessDate: string;
+  lastConnectedDate: string;
+  lastLoginDate: string;
+  dateOfBirth: string;
+  nationId: string;
+  firstName: string;
+  lastName: string;
+  middleName: string;
+  surName: string;
+  address: string;
+  birthPlace: string;
+  profileImageURL: string;
+  contactNumber: string;
+  userRoles: ApplicationUserRole[];
+  branchLocationId: number | null;
+  branchLocation: BranchLocation;
+  saleHeader: SaleHeader[];
+  phoneNumber: string;
+  city: City;
+  district: District;
+  country: Country;
+  cityId: number | null;
+  districtId: number | null;
+  countryId: number | null;
+  ipAddress: string;
+  normalizedUserName: string;
+  email: string;
+  normalizedEmail: string;
+  emailConfirmed: boolean;
+  passwordHash: string;
+  securityStamp: string;
+  concurrencyStamp: string;
+  phoneNumberConfirmed: boolean;
+  twoFactorEnabled: boolean;
+  lockoutEnd: string;
+  lockoutEnabled: boolean;
+  accessFailedCount: number;
+
+}

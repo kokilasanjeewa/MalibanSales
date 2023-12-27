@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29230.47
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maliban.Pos.Api", "Maliban.Pos.Api.csproj", "{F61FC1B6-652D-43E2-B336-80B5D530A429}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		DebugLocal|Any CPU = DebugLocal|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F61FC1B6-652D-43E2-B336-80B5D530A429}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F61FC1B6-652D-43E2-B336-80B5D530A429}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F61FC1B6-652D-43E2-B336-80B5D530A429}.DebugLocal|Any CPU.ActiveCfg = Debug|Any CPU
+		{F61FC1B6-652D-43E2-B336-80B5D530A429}.DebugLocal|Any CPU.Build.0 = Debug|Any CPU
+		{F61FC1B6-652D-43E2-B336-80B5D530A429}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F61FC1B6-652D-43E2-B336-80B5D530A429}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF52CFBD-B7EC-49C9-8BE3-E7A814C823DD}.Debug|Any CPU.ActiveCfg = Debug
+		{EF52CFBD-B7EC-49C9-8BE3-E7A814C823DD}.Debug|Any CPU.Build.0 = Debug
+		{EF52CFBD-B7EC-49C9-8BE3-E7A814C823DD}.Debug|Any CPU.Deploy.0 = Debug
+		{EF52CFBD-B7EC-49C9-8BE3-E7A814C823DD}.DebugLocal|Any CPU.ActiveCfg = DebugLocal
+		{EF52CFBD-B7EC-49C9-8BE3-E7A814C823DD}.DebugLocal|Any CPU.Build.0 = DebugLocal
+		{EF52CFBD-B7EC-49C9-8BE3-E7A814C823DD}.Release|Any CPU.ActiveCfg = Release
+		{EF52CFBD-B7EC-49C9-8BE3-E7A814C823DD}.Release|Any CPU.Build.0 = Release
+		{EF52CFBD-B7EC-49C9-8BE3-E7A814C823DD}.Release|Any CPU.Deploy.0 = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AB7CEB3A-2811-4239-BA82-715221DA704B}
+	EndGlobalSection
+EndGlobal

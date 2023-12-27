@@ -1,0 +1,25 @@
+.breadcrumb {
+  font-size: 14px;
+  background-color: #48a2ff;
+  border: 1px solid #70b4fc;
+  margin: 0;
+  padding: 8px 30px;
+}
+
+.breadcrumb a {
+  font-size: 14px;
+  color: #fff;
+  text-shadow: 2px 2px 4px #000000;
+  text-decoration: none;
+}
+
+.breadcrumb-item::before {
+  color: #fff !important;
+  text-shadow: 2px 2px 4px #000000;
+}
+
+.breadcrumb-item.active {
+  color: #ffffff;
+  font-weight: bolder;
+  text-shadow: 2px 2px 4px #676767;
+}

@@ -1,0 +1,180 @@
+<!--main container start-->
+<div class="main-container">
+  <nav aria-label="breadcrumb" class="d-print-none">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a [routerLink]="['/dashboard']">Home</a></li>
+      <li class="breadcrumb-item">
+        <a [routerLink]="['/report/viewreport']">Report List</a>
+      </li>
+      <li class="breadcrumb-item active">
+        <a [routerLink]="['/report/bincard']">Item Bin Card</a>
+      </li>
+    </ol>
+  </nav>
+  <div class="container-fluid">
+    <h6>Bin Card Report</h6>
+    <form [formGroup]="saleReportForm" (ngSubmit)="saleAdd()" class="d-print-none">
+      <div class="form-row">
+        <label for="ProductCode" class="col-sm-1 col-form-label col-form-label-sm">Item Code<span
+            class="notzerovalue">&nbsp;*</span></label>
+        <div class="form-group col-sm-2">
+          <input type="text" class="form-control" [formControlName]="'itemCode'" id="" placeholder="Item Code" />
+          <div class="invalid-feedback" *ngIf="f.itemCode.touched && f.itemCode.hasError('required')">
+            Item Code is required.
+          </div>
+        </div>
+        <label for="ProductCode" class="col-sm-1 col-form-label col-form-label-sm">From Date<span
+            class="notzerovalue">&nbsp;*</span></label>
+        <div class="form-group col-sm-1">
+          <input type="date" class="form-control" [formControlName]="'frmDate'" id="" placeholder="From Date" />
+          <div class="invalid-feedback" *ngIf="f.frmDate.touched && f.frmDate.hasError('required')">
+            From date is required.
+          </div>
+        </div>
+        <label for="ProductCode" class="col-sm-1 col-form-label col-form-label-sm">To Date<span
+            class="notzerovalue">&nbsp;*</span></label>
+        <div class="form-group col-sm-1">
+          <input type="date" class="form-control" [formControlName]="'toDate'" id="" placeholder="To Date" />
+          <div class="invalid-feedback" *ngIf="f.toDate.touched && f.toDate.hasError('required')">
+            To date is required.
+          </div>
+        </div>
+        <div class="form-group col-sm-1 mt-1 ml-1">
+          <input  [value]="active" [formControlName]="'active'" [ngClass]="{ 'is-invalid': f.active.hasError('required') }"
+          class="custom-checkbox-general" type="checkbox" id="active" />
+        <label for="active">Paid</label>
+        <div class="invalid-feedback" *ngIf="f.active.hasError('required')">
+          Please click checkbox.
+        </div>
+<!--           <div class="form-check mt-1">
+            <input class="form-check-input" [formControlName]="'active'" type="checkbox" [value]="active"
+              id="invalidCheck3" [ngClass]="{ 'is-invalid': f.active.hasError('required') }" />
+            <label class="form-check-label mt-1" for=""> Paid </label>
+            <div class="invalid-feedback" *ngIf="f.active.hasError('required')">
+              Please click checkbox.
+            </div>
+          </div> -->
+        </div>
+        <div class="form-group col-sm-3">
+          <button class="btn btn-outline-primary btn-sm mr-2 text-primary" [disabled]="!saleReportForm.valid"
+            type="submit">
+            View
+          </button>
+          <button class="btn btn-outline-success btn-sm text-success" [disabled]="!saleReportForm.valid" type="button"
+            (click)="bincardexcel()">
+            Download
+          </button>
+        </div>
+      </div>
+    </form>
+    <div class="table-responsive-md ml-3">
+      <table class="table table-striped" border="1">
+        <thead>
+        <tr style="background-color: var(--maintheme2); font-weight: bold">
+          <td rowspan="2" class="center">#</td>
+          <td rowspan="2" class="center">Product Code</td>
+          <td rowspan="2" class="center">Product Name</td>
+          <td rowspan="2" class="center">Type</td>
+          <td colspan="4" class="center" border="1">Receiving</td>
+          <td rowspan="2" class="center">Product Expire Date</td>
+          <td colspan="6" class="center">Issuing</td>
+          <td rowspan="2" class="center">Balance</td>
+        </tr>
+        <tr style="background-color: var(--maintheme2)" border="1">
+          <td class="center">Received Date</td>
+          <td class="center">Unit Price</td>
+          <td class="center">Unit Selling Price</td>
+          <td class="center">Received QTY</td>
+          <td class="center">Employee No</td>
+          <td class="center">Issued Date</td>
+          <td class="center">Unit Price</td>
+          <td class="center">Unit Selling</td>
+          <td class="center">Issuing Qty</td>
+          <td class="center">PaymentType</td>
+        </tr>
+      </thead>
+        <tbody>
+          <tr *ngFor="let sale of saleReportDetails; let i = index">
+            <td class="center">{{ i + 1 }}</td>
+            <td class="center">{{ sale.productCode }}</td>
+            <td class="center">{{ sale.productName }}</td>
+            <td class="center">{{ sale.tType }}</td>
+            <td class="center">
+              {{ sale.receivedDate | date : "mediumDate" }}
+            </td>
+            <td class="center">
+              {{ sale.receivedUnitPrice | currency : "LKR" : "Rs." }}
+            </td>
+            <td class="center">
+              {{ sale.unitSellingprice | currency : "LKR" : "Rs." }}
+            </td>
+            <td class="center">{{ sale.receiveQty }}</td>
+            <td class="center">
+              {{ sale.productExpireDate | date : "mediumDate" }}
+            </td>
+            <td class="center">{{ sale.employeeNo }}</td>
+            <td class="center">{{ sale.issuedDate | date : "mediumDate" }}</td>
+            <td class="center">
+              {{ sale.issuedUnitPrice | currency : "LKR" : "Rs." }}
+            </td>
+            <td class="center">
+              {{ sale.issuedSoldPrice | currency : "LKR" : "Rs." }}
+            </td>
+            <td class="center">{{ sale.issuedQty }}</td>
+            <td class="center">{{ sale.paymentType }}</td>
+            <td class="center">{{ sale.balance }}</td>
+          </tr>
+        </tbody>
+        <!-- <tfoot>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><strong></strong></td>
+            <td>
+              <strong>{{ quantity | number : "1.2-2" }}</strong>
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+        </tfoot> -->
+      </table>
+    </div>
+    <!--   <div class="row">
+            <div class="col-md-4 ml-auto">
+                <table class="table table-clear">
+                    <tbody>
+
+                        <tr>
+                            <td class="left">
+                                <strong>Total Sale</strong>
+                            </td>
+                            <td class="right" style="position: absolute;">
+                                <strong>{{total | number:'1.2-2'}}</strong>
+                            </td>
+                            <td class="left">
+                                <strong></strong>
+                            </td>
+                            <td class="left">
+                                <strong></strong>
+                            </td>
+                            <td class="left">
+                                <strong>Total Stock</strong>
+                            </td>
+                            <td class="right">
+                                <strong>{{totalStock | number:'1.2-2'}}</strong>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div> -->
+  </div>
+</div>

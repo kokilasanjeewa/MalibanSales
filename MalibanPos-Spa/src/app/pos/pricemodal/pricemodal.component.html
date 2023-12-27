@@ -1,0 +1,39 @@
+<div style="height: auto; overflow-y: scroll" id="style-14">
+  <table class="table table-hover">
+    <thead style="padding: 2px !important;background: ghostwhite;color: dodgerblue;">
+      <tr>
+        <th scope="col">No</th>
+        <th scope="col" style="text-align: left">
+          Product Details(Name /Weight /)
+        </th>
+        <th scope="col">Stock Quantity</th>
+        <th scope="col">Expiry Date</th>
+        <th style="padding-right: 2px !important;" scope="col">Sale Price(Rs)</th>
+<!--         <th scope="col">MRP(Rs)</th>
+ -->
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let line of list; let i = index" (click)="addStyle(i)">
+        <td class="center">{{ i + 1 }}</td>
+        <td style="width: auto">
+          <h6 class="product-subtitle">
+            <span style="color: rgb(11, 31, 11);font-weight: bold;">{{
+              line.productName
+            }}</span
+            >
+          </h6>
+          <!--                 <h6 class="product-subtitle">Description:</h6>
+        <h6 class="product-subtitle">Weight:</h6>
+        <h6 class="product-subtitle">Expiry Date:</h6> -->
+        </td>
+        <td class="price">{{ line.dNetQuantity | number: "1.2-3" }}</td>
+        <td class="price">{{ line.productExpireDate  | date: "mediumDate" }}</td>
+        <td class="price">{{ line.dSalePrice | number: "1.2-3" }}</td>
+<!--         <td class="price">{{ line.price.maximumRetailPrice | number: "1.2-3" }}</td>
+ -->
+      </tr>
+    </tbody>
+  </table>
+
+</div>

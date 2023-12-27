@@ -1,0 +1,74 @@
+<!--main container start-->
+<div class="main-container">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a [routerLink]="['/dashboard']">Home</a></li>
+      <li class="breadcrumb-item">
+        <a [routerLink]="['/manage/manageuser']">Manage Users</a>
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">
+        User Permissions
+      </li>
+    </ol>
+  </nav>
+  <!--           <bread-crumb [data]="data" [index]="1"></bread-crumb>
+ -->
+  <div class="container-fluid">
+    <h6>
+      User Permissions
+      <i class="fa fa-plus-circle fa-lg" aria-hidden="true"
+        (click)="openModalWithComponent()"></i>
+    </h6>
+    <table class="table table-md table-hover">
+      <thead>
+        <tr>
+          <th scope="col">No</th>
+          <th scope="col" class="text-center">Role</th>
+          <th scope="col">Menu</th>
+          <th scope="col">Submenu</th>
+          <th scope="col">Submenu Item</th>
+          <th scope="col" class="text-center">AccessControllerName</th>
+          <th scope="col" class="text-center">Allow</th>
+          <th scope="col" class="text-center"
+            *appHasClaim="'CanAccessUserPermissionRemove'">
+            Action
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let role of rolePermissionCustom; let i = index">
+          <td class="center">{{ i + 1 }}</td>
+          <td scope="col" class="text-center">{{ role.roleName }}</td>
+          <td class="center">{{ role.mainMenu }}</td>
+          <td class="center">{{ role.submenu }}</td>
+          <td class="center">{{ role.submenuItem }}</td>
+          <td scope="col" class="text-center">
+            {{ role.accessControllerName }}
+          </td>
+          <td class="text-center">
+            <div>
+              <div class="custom-checkbox">
+                <input type="checkbox" [value]="role.allow" id="invalidCheck3"
+                  (change)="
+                changePermission(
+                  $event.target.value,
+                  role.accessControllerName
+                )
+              " [checked]="role.allow" />
+                <span class="checkmark"></span>
+              </div>
+            </div>
+          </td>
+          <td *appHasClaim="'CanAccessUserPermissionRemove'">
+            <a class (click)="remove(role.id)"
+              *appHasClaim="'CanAccessUserPermissionRemove'">
+              <i style="color: crimson" class="fa fa-trash fa-lg"
+                aria-hidden="true">
+              </i>
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

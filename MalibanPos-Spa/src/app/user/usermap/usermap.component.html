@@ -1,0 +1,93 @@
+<!--main container start-->
+<div class="main-container">
+  <nav aria-label="breadcrumb" class="d-print-none">
+      <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="#">Home</a></li>
+          <li class="breadcrumb-item"><a [routerLink]="['/customer/customerlist']">Cutomer List</a></li>
+          <li class="breadcrumb-item"><a [routerLink]="['/customer/uploadcustomer']">Customer Upload</a></li>
+          <li class="breadcrumb-item active"><a>User Map</a></li>
+      </ol>
+  </nav>
+  <div class="container-fluid">
+    <div class="row mb-1 mt-2">
+    <div class="col-sm-2">
+      <h6>User Map</h6>
+    </div>
+      <div class="col-sm-4"></div>
+      <div class="col-sm-2"></div>
+      <div class="col-sm-2">
+        <!--            <button [disabled]="!addorderListForm.valid" type="submit" class="btn-sm btn-primary btn-rounded btn-icon">
+             <i class="fa fa-envelope-o"></i>
+        </button>
+        <button type="reset" class="btn-sm btn-danger">Clear</button> -->
+      </div>
+      <div class="col-sm-2 text-right align-middle">
+        <button (click)="mapCustomerAdd()" class="btn btn-outline-primary btn-sm mr-3 text-primary" [disabled]="!customerReportForm.valid" type="submit">Add</button>
+        <button class="btn btn-outline-danger btn-sm text-danger" type="reset">Clear</button>
+      <!--  -->
+      </div>
+    </div>
+      <form [formGroup]="customerReportForm" (ngSubmit)="mapCustomerAdd()" class="d-print-none">
+          <div class="form-row">
+                    <label for="Scheme" class="col-sm-1 col-form-label col-form-label-sm">Branch<span
+              class="notzerovalue">&nbsp;*</span></label>
+                    <div class="form-group col-sm-2">
+                        <select [formControlName]="'branchCode'" class="form-control" id="exampleFormControlSelect2">
+                  <option selected value="" disabled>Select a branch..</option>
+                  <option *ngFor="let branch of (branches$ | async)" [value]="branch?.branchLocationId">
+                    {{branch?.branchCode | uppercase}}</option>
+                </select>
+                <div class="invalid-feedback" *ngIf="f.branchCode?.touched && f.branchCode?.hasError('required') ">
+                  Please choose a branch.
+              </div>
+                    </div>
+                    <label for="searchCustomer" class="col-sm-2 col-form-label col-form-label-sm">Customer<span
+                      class="notzerovalue">&nbsp;*</span></label>
+                          <div class="form-group col-sm-2">
+                              <input (keydown.enter)="Customeradd($event)" type="text" class="form-control" [formControlName]="'searchCustomer'" id="" placeholder="Enter EpfNo">
+                              <div class="invalid-feedback" *ngIf="f.searchCustomer.touched && f.searchCustomer.hasError('required')">
+                                Customer is required.
+                              </div>
+                          </div>
+                   </div>
+      </form>
+      <div class=" table-responsive-md ml-3 ">
+          <table class="table table-sm table-striped table-hover">
+              <thead>
+                  <tr>
+                      <th class="center ">#</th>
+                      <th>Branch</th>
+                      <th>BranchMap</th>
+                      <th>Customer Id</th>
+                      <th>Customer Number</th>
+                      <th>Full Name</th>
+                      <th>Scheme</th>
+                      <th>Scheme Code</th>
+                      <th>Credit Limit</th>
+                      <th>Credit Balance</th>
+                      <th>Active</th>
+
+                      <!--             <th class="text-left ">Product Name</th>
+        <th class="center ">Quantity</th> -->
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr *ngFor="let customer of (customers$ | async) ; let i=index ">
+                      <td class="center ">{{i+1}}</td>
+                      <td class="center ">{{customer.location}}</td>
+                      <td class="center ">{{customer.mapLocation}}</td>
+                      <td class="center ">{{customer.mI_Employer_EmployeeId}}</td>
+                      <td class="center ">{{customer.number}}</td>
+                      <td class="center ">{{customer.fullName}}</td>
+                      <td class="center ">{{customer.scheme}}</td>
+                      <td class="center ">{{customer.schemeCode}}</td>
+                      <td class="center ">{{customer.creditLimit}}</td>
+                      <td class="center ">{{customer.creditBalance}}</td>
+                      <td class="center ">{{customer.deleted}}</td>
+
+                  </tr>
+              </tbody>
+          </table>
+      </div>
+  </div>
+</div>
