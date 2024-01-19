@@ -187,7 +187,7 @@ namespace Maliban.Pos.Api.Controllers
     {
       var createProduct = _mapper.Map<Product>(createProductDto);
       createProduct.Vendor = await _context.Vendors.FindAsync(createProductDto.VendorId);
-      if (await _repoWrapper.Product.Product.AnyAsync(p => p.Barcode == createProduct.Barcode))
+      if (await _repoWrapper.Product.Product.AnyAsync(p => p.Barcode == createProductDto.Barcode) || await _repoWrapper.Product.Product.AnyAsync(p => p.ProductName == createProductDto.ProductName))
       {
         return Conflict(new
         {

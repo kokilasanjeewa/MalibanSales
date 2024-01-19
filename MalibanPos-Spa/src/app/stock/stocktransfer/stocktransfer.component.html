@@ -4,10 +4,10 @@
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a [routerLink]="['/dashboard']">Home</a></li>
       <li class="breadcrumb-item">
-        <a [routerLink]="['/stock/stockadjustmentlist']">Stock Transfer List</a>
+        <a [routerLink]="['/stock/stocktransferlist']">Stock Transfer List</a>
       </li>
       <li class="breadcrumb-item active" aria-current="page">
-        <a [routerLink]="['/stock/stockadjustment']">Stock Transfer</a>
+        <a [routerLink]="['/stock/stocktransfer']">Stock Transfer</a>
       </li>
     </ol>
   </nav>
@@ -15,6 +15,247 @@
     <div class="row mb-1 mt-2">
       <div class="col-sm-2">
         <h6>Stock Transfer</h6>
+      </div>
+      <div class="col-sm-4"></div>
+      <div class="col-sm-2"></div>
+      <div class="col-sm-2">
+        <!--<button [disabled]="!addorderListForm.valid" type="submit" class="btn-sm btn-primary btn-rounded btn-icon">
+              <i class="fa fa-envelope-o"></i>
+            </button>
+            <button type="reset" class="btn-sm btn-danger">Clear</button> -->
+      </div>
+      <div class="col-sm-2 text-right align-middle">
+        <button [disabled]="!addPOForm.valid" (click)="stockTransferAdd()" type="submit"
+          class="btn btn-outline-primary btn-sm my-1 mr-3 text-primary">
+          Save
+        </button>
+        <button type="reset" class="btn btn-outline-danger btn-sm my-1 text-danger">
+          Cancel
+        </button>
+      </div>
+    </div>
+    <hr />
+    <form [formGroup]="addPOForm" (ngSubmit)="stockTransferAdd()">
+      <div class="form-group row">
+        <label for="inputEmail3" class="col-sm-3 col-form-label">Stock Transfer Date</label>
+        <div class="col-sm-3">
+          <input readonly type="date" class="form-control" [formControlName]="'stockTransferDate'" id placeholder />
+          <div class="invalid-feedback" *ngIf="
+              f.stockTransferDate.touched &&
+              f.stockTransferDate.hasError('required')
+            ">
+            Transfer Date is required.
+          </div>
+        </div>
+        <label for="inputEmail3" class="col-sm-3 col-form-label">Payment Type</label>
+        <div class="col-sm-3">
+          <select [formControlName]="'paymentMethodId'" class="form-control" id="exampleFormControlSelect2">
+            <option selected value disabled>
+              Please choose a payment type..
+            </option>
+            <option *ngFor="let payment of payments | async" [value]="payment.paymentMethodId">
+              {{ payment.methodType }}
+            </option>
+          </select>
+          <div class="invalid-feedback" *ngIf="
+              f.paymentMethodId.touched &&
+              f.paymentMethodId.hasError('required')
+            ">
+            Please choose a payment type.
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputEmail3" class="col-sm-3 col-form-label">Branch Location</label>
+        <div class="col-sm-3">
+          <select [formControlName]="'branchLocationId'" class="form-control" id="exampleFormControlSelect2"
+            (change)="changeBranch()">
+            <option selected value disabled>Please choose a branch..</option>
+            <option *ngFor="let branch of branches | async" [value]="branch.branchLocationId">
+              {{ branch.branchCode }}
+            </option>
+          </select>
+          <div class="invalid-feedback" *ngIf="
+              f.branchLocationId.touched &&
+              f.branchLocationId.hasError('required')
+            ">
+            Please choose a branch.
+          </div>
+        </div>
+        <label for="inputEmail3" class="col-sm-3 col-form-label">Transfer Branch Location</label>
+        <div class="col-sm-3">
+          <select [formControlName]="'transferbranchLocationId'" class="form-control" id="exampleFormControlSelect2tr">
+            <option selected value disabled>Please choose a branch..</option>
+            <option *ngFor="let branch of transferBranches" [value]="branch.branchLocationId">
+              {{ branch.branchCode }}
+            </option>
+          </select>
+          <div class="invalid-feedback" *ngIf="
+              f.transferbranchLocationId.touched &&
+              f.transferbranchLocationId.hasError('required')
+            ">
+            Please choose a branch.
+          </div>
+        </div>
+      </div>
+    </form>
+    <form [formGroup]="addorderListForm" (ngSubmit)="itemListAdd()">
+      <div class="row mb-3">
+        <div class="col-2">
+          <ng-select [(ngModel)]="selectedProductcode" [formControlName]="'barCode'" (change)="add()"
+            [virtualScroll]="'true'" placeholder="Search/Select Product Code">
+            <ng-option *ngFor="let productDetail of ProductDetails | async" [value]="productDetail.barcode">
+              <span>{{ productDetail.barcode }}</span>
+            </ng-option>
+          </ng-select>
+          <span *ngIf="
+              !addorderListForm.get('barCode').valid &&
+              addorderListForm.get('barCode').touched
+            ">
+            <span class="danger" *ngIf="addorderListForm.get('barCode').errors['required']">Product Code is
+              required</span>
+          </span>
+        </div>
+        <div class="col-3">
+          <input type="text" [formControlName]="'productName'" class="form-control" placeholder="Product Name" />
+        </div>
+        <div class="col-2">
+          <select [formControlName]="'priceId'" class="form-control" id="priceId">
+            <option value [selected]="true" [disabled]="true">Price</option>
+            <option *ngFor="let price of PriceDetails | async" [ngValue]="price.priceId">
+              {{ price.dCostPrice }}
+            </option>
+          </select>
+          <div class="invalid-feedback" *ngIf="f1.priceId.invalid && f1.priceId.touched">
+            <div *ngIf="f1.priceId.errors.required">Select Price.</div>
+          </div>
+        </div>
+        <div class="col-1">
+          <input type="number" [formControlName]="'quantity'" class="form-control" placeholder="Qty" />
+        </div>
+
+        <div class="col-2">
+          <button [disabled]="!addorderListForm.valid" type="submit"
+            class="btn btn-outline-primary btn-sm mr-2 text-primary">
+            Add
+          </button>
+          <button type="reset" class="btn btn-outline-danger btn-sm text-danger">
+            Clear
+          </button>
+        </div>
+      </div>
+    </form>
+
+    <div class="table-responsive-md ml-3">
+      <table class="table table-sm table-striped table-hover">
+        <thead>
+          <tr>
+            <th class="center">#</th>
+            <th class="text-left">Type</th>
+            <th class="text-left">Doc#</th>
+            <th class="text-left">Product Code</th>
+            <th class="text-left">Product Name</th>
+            <th class="right">Expiry Date</th>
+            <th class="center">Quantity</th>
+            <th class="center">Issueing</th>
+            <th class="center">Balance</th>
+            <th class="center">Transfer</th>
+            <th class="center">Stock</th>
+            <th class="center">Unit Price</th>
+            <th class="center">Sale Price</th>
+            <th class="center">MRP</th>
+            <th class="right">Total</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody style="overflow-y: scroll">
+          <tr *ngFor="let line of lines; let i = index">
+            <td class="center">{{ i + 1 }}</td>
+            <td class="text-left">{{ line.cExtRefNum }}</td>
+            <td class="text-left">{{ line.iDocID }}</td>
+            <td class="text-left">{{ line.barcode }}</td>
+            <td class="text-left">{{ line.productName }}</td>
+            <td class="right">
+              {{ line.productExpireDate | date : "mediumDate" }}
+            </td>
+            <td class="right">{{ line.dQuantity }}</td>
+            <td class="right">{{ line.dIssueQuantity }}</td>
+            <td class="right">{{ line.dNetQuantity }}</td>
+            <td class="right">{{ line.dTransferQuantity }}</td>
+            <td class="right">
+              {{
+              line.dQuantity - (line.dTransferQuantity + line.dIssueQuantity)
+              }}
+            </td>
+
+            <td class="right">
+              {{ line.dCostPrice | currency : "LKR" : "Rs." }}
+            </td>
+            <td class="right">
+              {{ line.dSalePrice | currency : "LKR" : "Rs." }}
+            </td>
+            <td class="right">
+              {{ line.maximumRetailPrice | currency : "LKR" : "Rs." }}
+            </td>
+            <td class="right">
+              {{
+              line?.dTransferQuantity * line.dCostPrice
+              | currency : "LKR" : "Rs."
+              }}
+            </td>
+            <td>
+              <i class="fa fa-trash-o" (click)="
+                  confirmDeleteLine(line.stockTransferDetailUid, line.priceId)
+                "></i>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="row">
+      <div class="col-lg-4 col-sm-5 ml-auto">
+        <table class="table table-clear">
+          <tbody>
+            <tr>
+              <td class="right">
+                <strong>Subtotal</strong>
+              </td>
+              <td class="right">{{ subtotal | currency : "LKR" : "Rs." }}</td>
+            </tr>
+            <tr>
+              <td class="left">
+                <strong>Discount (%)</strong>
+              </td>
+              <td class="right">{{ discount | currency : "LKR" : "Rs." }}</td>
+            </tr>
+            <tr>
+              <td class="left">
+                <strong>VAT (15%)</strong>
+              </td>
+              <td class="right">
+                {{ subtotal * 0 | currency : "LKR" : "Rs." }}
+              </td>
+            </tr>
+            <tr>
+              <td class="left">
+                <strong>NBT (2%)</strong>
+              </td>
+              <td class="right">
+                {{ subtotal * 0 | currency : "LKR" : "Rs." }}
+              </td>
+            </tr>
+            <tr>
+              <td class="left">
+                <strong>Total</strong>
+              </td>
+              <td class="right">
+                <strong>{{
+                  total + subtotal * 0 | currency : "LKR" : "Rs."
+                  }}</strong>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>

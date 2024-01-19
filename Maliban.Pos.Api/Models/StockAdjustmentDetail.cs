@@ -58,6 +58,6 @@ namespace Maliban.Pos.Api.Models
 		[StringLength(10, ErrorMessage = "The cApprovalType cannot exceed 10 characters. ")]
 		public cApprovalType cApprovalType { get; set; } = 0;
 		}
-		public enum cApprovalType { Approve=1, Reject=2, Cancel=3 }
+		public enum cApprovalType { Approve=1, Reject=2, Cancel=3,Received=4 }
 
 }

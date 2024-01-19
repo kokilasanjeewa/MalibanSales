@@ -1,0 +1,25 @@
+<div class="cookiesContent" id="cookiesPopup">
+  <button class="close" (click)="close()">✖</button>
+  <p>Stock Transfer Approval</p>
+<!--   <img src="../assets/resource/images/logo/approve.jpeg" alt="solo-svg" />
+ -->  <form class="form-inline" [formGroup]="addApproveForm" (ngSubmit)="onApprove()">
+     <div class="form-group mx-sm-3 mb-2">
+      <label for="cApprovalId" class="from-label from-label-lg mr-3">Approval Type</label>
+      <select
+            [formControlName]="'cApprovalId'"
+            class="form-control form-control-lg"
+            id="cApprovalId"
+          >
+          <option selected  disabled>Select Status</option>
+          <option *ngFor="let cApprovalType of cApprovalTypes"
+            [value]="cApprovalType.id">
+            {{ cApprovalType.name }}
+          </option>
+          </select>
+      <div *ngIf="f.cApprovalId.touched && f.cApprovalId.errors" class="invalid-feedback">
+        <div *ngIf="f.cApprovalId.hasError('required')">Approval is required</div>
+      </div>
+    </div>
+  </form>
+  <button [disabled]="!addApproveForm.valid" (click)=" onApprove()" class="accept" type="submit">Submit</button>
+</div>

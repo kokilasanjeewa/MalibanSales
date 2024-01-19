@@ -49,7 +49,7 @@ namespace Maliban.Pos.Api.Models
         line.Quantity -= quantity;
       }
     }
-        public virtual void ApproveQuantity(Product product, decimal approveQuantity1, decimal adjustmentQuantity1, SupplierPrice supplierPrice, DateTime ProductExpiryDate)
+    public virtual void ApproveQuantity(Product product, decimal approveQuantity1, decimal adjustmentQuantity1, SupplierPrice supplierPrice, DateTime ProductExpiryDate)
         {
             PurchaseOrderDetail line = lineCollection
             .Where(p => p.Product.ProductId == supplierPrice.ProductId && p.SupplierPriceId == supplierPrice.SupplierPriceId && p.ProductExpiryDate == ProductExpiryDate).FirstOrDefault();
@@ -61,7 +61,7 @@ namespace Maliban.Pos.Api.Models
                 //line.cApprovalType = cApprovalType.Approve;
             }
         }
-        public virtual void ApproveStatus(Product product, int approveStatus, decimal adjustmentQuantity1, SupplierPrice supplierPrice, DateTime ProductExpiryDate)
+    public virtual void ApproveStatus(Product product, int approveStatus, decimal adjustmentQuantity1, SupplierPrice supplierPrice, DateTime ProductExpiryDate)
         {
             PurchaseOrderDetail line = lineCollection
             .Where(p => p.Product.ProductId == supplierPrice.ProductId && p.SupplierPriceId == supplierPrice.SupplierPriceId && p.ProductExpiryDate == ProductExpiryDate).FirstOrDefault();
@@ -75,7 +75,7 @@ namespace Maliban.Pos.Api.Models
                     line.cApprovalType = cApprovalType.Reject;
             }
         }
-        public virtual void RemoveLine(Product product, SupplierPrice supplierPrice, DateTime ProductExpiryDate) =>
+    public virtual void RemoveLine(Product product, SupplierPrice supplierPrice, DateTime ProductExpiryDate) =>
     lineCollection.RemoveAll(l => l.Product.ProductId == product.ProductId && l.SupplierPrice.SupplierPriceId==supplierPrice.SupplierPriceId && l.ProductExpiryDate == ProductExpiryDate);
     public virtual void Clear() => lineCollection.Clear();
 

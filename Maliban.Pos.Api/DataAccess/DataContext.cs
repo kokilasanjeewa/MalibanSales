@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel.Design.Serialization;
+using System.Linq;
 using Maliban.Pos.Api.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -65,6 +66,8 @@ namespace Maliban.Pos.Api.DataAccess
                a.Property(x => x.CreatedBy).IsRequired(false);
                a.HasOne(p => p.TransactionDetail).WithMany(cod => cod.SaleDetails).HasForeignKey(s => s.TransactionDetailId).IsRequired().OnDelete(DeleteBehavior.Restrict);
                a.Property(x => x.ModifiedBy).IsRequired(false);
+               a.Property(a => a.Quantity).HasColumnType("decimal(18, 2)");
+               a.Property(a => a.ReturnQuantity).HasColumnType("decimal(18, 2)");
 
 
            });
@@ -118,6 +121,10 @@ namespace Maliban.Pos.Api.DataAccess
                c.HasOne(p => p.CustomerReturnHeader).WithMany(cod => cod.Lines).HasForeignKey(s => s.CustomerReturnHeaderId).IsRequired().OnDelete(DeleteBehavior.Restrict);
                c.HasOne(p => p.CustomerReturnHeader).WithMany(cod => cod.Lines).HasForeignKey(s => s.CustomerReturnHeaderId).IsRequired().OnDelete(DeleteBehavior.Restrict);
                c.HasOne(p => p.Price).WithMany(cod => cod.CustomerReturnDetails).HasForeignKey(s => s.PriceId).IsRequired().OnDelete(DeleteBehavior.Restrict);
+               c.Property(a => a.CurrentQuantity).HasColumnType("decimal(18, 2)");
+               c.Property(a => a.BalanceQuantity).HasColumnType("decimal(18, 2)");
+               c.Property(a => a.ReturnQuantity).HasColumnType("decimal(18, 2)");
+               c.Property(a => a.SaleQuantity).HasColumnType("decimal(18, 2)");
            });
             modelBuilder.Entity<StockIssueDetail>(c =>
            {
@@ -171,6 +178,8 @@ namespace Maliban.Pos.Api.DataAccess
             c.HasKey(a => a.ShopStockId);
             c.HasOne(p => p.Price).WithMany(cod => cod.ShopStocks).HasForeignKey(s => s.ShopStockId).IsRequired().OnDelete(DeleteBehavior.Restrict);
             c.HasQueryFilter(s => s.Active == true);
+            c.Property(a => a.UnitsInStock).HasColumnType("decimal(18, 2)");
+            c.Property(a => a.SaleQuantity).HasColumnType("decimal(18, 2)");
 
         });
             modelBuilder.Entity<PurchaseReturnDetail>(c =>
@@ -178,16 +187,29 @@ namespace Maliban.Pos.Api.DataAccess
             c.HasKey(a => a.PurchaseReturnDetailId);
             /*   c.HasOne(p => p.PurchaseOrderHeader).WithMany(cod => cod.PurchaseReturnDetails).HasForeignKey(s => s.PurchaseOrderHeaderId).IsRequired().OnDelete(DeleteBehavior.Restrict); */
             c.HasOne(p => p.PurchaseReturnHeader).WithMany(cod => cod.Lines).HasForeignKey(s => s.PurchaseReturnHeaderId).IsRequired().OnDelete(DeleteBehavior.Restrict);
+            c.Property(a => a.FreeQuantity).HasColumnType("decimal(18, 2)");
+            c.Property(a => a.ReturnQuantity).HasColumnType("decimal(18, 2)");
+
         });
             modelBuilder.Entity<PurchaseOrderDetail>(c =>
       {
           c.HasKey(a => a.PurchaseOrderDetailId);
           c.HasOne(p => p.PurchaseOrderHeaders).WithMany(pd => pd.PurchaseOrderDetails).HasForeignKey(p => p.PurchaseOrderHeaderId).IsRequired().OnDelete(DeleteBehavior.Restrict);
+          c.Property(a => a.ApproveQuantity).HasColumnType("decimal(18, 2)");
+          c.Property(a => a.BonusQuantity).HasColumnType("decimal(18, 2)");
+          c.Property(a => a.CurrentQuantity).HasColumnType("decimal(18, 2)");
+          c.Property(a => a.FreeQuantity).HasColumnType("decimal(18, 2)");
+          c.Property(a => a.GRNQuantity).HasColumnType("decimal(18, 2)");
+          c.Property(a => a.Quantity).HasColumnType("decimal(18, 2)");
+          c.Property(a => a.ReturnQuantity).HasColumnType("decimal(18, 2)");
       });
             modelBuilder.Entity<GoodReceptNoteDetail>(c =>
       {
           c.HasKey(a => a.GoodReceptNoteDetailId);
           c.HasOne(p => p.SupplierPrice).WithMany(pd => pd.GoodReceptNoteDetails).HasForeignKey(p => p.SupplierPriceId).IsRequired().OnDelete(DeleteBehavior.Restrict);
+          c.Property(a => a.BalanceItemQuantity).HasColumnType("decimal(18, 2)");
+          c.Property(a => a.FreeItemQuantity).HasColumnType("decimal(18, 2)");
+          c.Property(a => a.ItemQuantity).HasColumnType("decimal(18, 2)");
 
       });
             modelBuilder.Entity<GoodReceptNoteHeader>(c =>
@@ -195,6 +217,25 @@ namespace Maliban.Pos.Api.DataAccess
           c.HasKey(a => a.GoodReceptNoteHeaderId);
           c.HasOne(p => p.BranchLocation).WithMany(pd => pd.GoodReceptNoteHeaders).HasForeignKey(p => p.BranchLocationId).IsRequired().OnDelete(DeleteBehavior.Restrict);
       });
+            modelBuilder.Entity<StockTransferDetail>(c =>
+            {
+                c.HasKey(a => a.StockTransferDetailId);
+                c.HasOne(p => p.StockTransferHeader).WithMany(pd => pd.Lines).HasForeignKey(p => p.StockTransferHeaderId).IsRequired().OnDelete(DeleteBehavior.Restrict);
+                c.Property(a => a.dQuantity).HasColumnType("decimal(18, 2)");
+                c.Property(a => a.dIssueQuantity).HasColumnType("decimal(18, 2)");
+                c.Property(a => a.dNetQuantity).HasColumnType("decimal(18, 2)");
+                c.Property(a => a.dTransferQuantity).HasColumnType("decimal(18, 2)");
+                c.Property(a => a.ApproveQuantity).HasColumnType("decimal(18, 2)");
+
+            });
+            modelBuilder.Entity<StockTransferHeader>(c =>
+            {
+                c.HasKey(a => a.StockTransferHeaderId).Metadata.IsPrimaryKey();
+                c.HasOne(p => p.BranchLocation).WithMany(pd => pd.StockTransferHeaders).HasForeignKey(p => p.BranchLocationId).IsRequired().OnDelete(DeleteBehavior.Restrict);
+                c.HasOne(p => p.BranchLocation).WithMany(pd => pd.StockTransferHeaders).HasForeignKey(p => p.TransferBranchLocationId).IsRequired().OnDelete(DeleteBehavior.Restrict);
+                //c.HasOne(p => p.Supplier).WithMany(pd => pd.StockTransferHeaders).HasForeignKey(p => p.SupplierId).IsRequired().OnDelete(DeleteBehavior.Restrict);
+               // c.HasOne(p => p.Supplier).WithMany(pd => pd.StockTransferHeaders).HasForeignKey(p => p.TransferSupplierId).IsRequired().OnDelete(DeleteBehavior.Restrict);
+            });
             modelBuilder.Entity<SupplierPrice>(c =>
       {
           c.HasKey(a => a.SupplierPriceId);
@@ -221,6 +262,8 @@ namespace Maliban.Pos.Api.DataAccess
                     c.HasKey(a => a.StockId);
                     c.HasOne(p => p.Price).WithMany(cod => cod.Stocks).HasForeignKey(s => s.PriceId).IsRequired().OnDelete(DeleteBehavior.Restrict);
                     c.HasOne(p => p.Store).WithMany(cod => cod.Stocks).HasForeignKey(s => s.StockId).IsRequired().OnDelete(DeleteBehavior.Restrict);
+
+
                 });
             modelBuilder.Entity<StockAdjustmentDetail>(c =>
               {
@@ -228,13 +271,31 @@ namespace Maliban.Pos.Api.DataAccess
                   c.HasOne(p => p.StockAdjustmentHeader).WithMany(pd => pd.Lines).HasForeignKey(p => p.StockAdjustmentHeaderId).IsRequired().OnDelete(DeleteBehavior.Restrict);
                   c.HasOne(p => p.Price).WithMany(pd => pd.StockAdjustmentDetails).HasForeignKey(p => p.PriceId).IsRequired().OnDelete(DeleteBehavior.Restrict);
                   c.Property(p => p.CreatedBy).IsRequired(false);
+                  c.Property(a => a.AdjustmentQuantity).HasColumnType("decimal(18, 2)");
+                  c.Property(a => a.CurrentQuantity).HasColumnType("decimal(18, 2)");
+                  c.Property(a => a.ApproveQuantity).HasColumnType("decimal(18, 2)");
+                  c.Property(a => a.PreviousQuantity).HasColumnType("decimal(18, 2)");
+
               });
+            #region
+            /*           modelBuilder.Entity<StockTransferDetail>(c =>
+                        {
+                            c.HasKey(a => a.StockTransferDetailId);
+                            c.HasOne(p => p.Price).WithMany(std => std.StockTransferDetails).HasForeignKey(p => p.PriceId).IsRequired().OnDelete(DeleteBehavior.Restrict);
+
+                        });*/
+            #endregion
             modelBuilder.Entity<TransactionDetail>(c =>
             {
                 c.HasKey(a => a.TransactionDetailId);
                 c.HasOne(p => p.Price).WithMany(cod => cod.TransactionDetails).HasForeignKey(s => s.PriceId).IsRequired().OnDelete(DeleteBehavior.Restrict);
                 c.Property(p => p.dNetValue).HasComputedColumnSql("[dNetQuantity]*[dCostPrice]");
                 c.Property(p => p.dValue).HasComputedColumnSql("[dQuantity]*[dCostPrice]");
+                c.Property(a => a.dQuantity).HasColumnType("decimal(18, 2)");
+                c.Property(a => a.dIssueQuantity).HasColumnType("decimal(18, 2)");
+                c.Property(a => a.dNetQuantity).HasColumnType("decimal(18, 2)");
+                c.Property(a => a.dIN).HasColumnType("decimal(18, 2)");
+                c.Property(a => a.dOUT).HasColumnType("decimal(18, 2)");
                 // c.Property(p => p.dNetValue).HasComputedColumnSql("Store.GetOrderTotal([ID])");
 
             });
@@ -328,6 +389,11 @@ namespace Maliban.Pos.Api.DataAccess
         public DbSet<UserBranchLocation> UserBranchLocations { get; set; }
         public DbSet<MealOrderHeader> MealOrderHeaders { get; set; }
         public DbSet<MealOrderDetail> MealOrderDetails { get; set; }
+        public DbSet<StockTransferHeader> StockTransferHeaders { get; set; }
+        public DbSet<StockTransferDetail> StockTransferDetails { get; set; }
+
+
+
 
     }
 }

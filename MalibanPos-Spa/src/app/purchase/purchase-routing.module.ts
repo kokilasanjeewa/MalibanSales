@@ -13,8 +13,6 @@ import { PurchaseReturnListResolver } from '../_resolvers/purchasereturnlist.res
 import { PurchasereturnlistComponent } from './purchasereturnlist/purchasereturnlist.component';
 import { PurchaseordereditComponent } from './purchaseorderedit/purchaseorderedit.component';
 
-
-
 const routes: Routes = [
   {
     path: 'purchaselist',

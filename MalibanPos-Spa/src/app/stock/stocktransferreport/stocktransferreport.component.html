@@ -1,0 +1,255 @@
+<!--main container start-->
+<div class="main-container">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a [routerLink]="['/dashboard']">Home</a></li>
+      <li class="breadcrumb-item">
+        <a [routerLink]="['/stock/stocktransferlist']">Stock Transfer List</a>
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">
+        <a [routerLink]="['/stock/stocktransfer']">Stock Transfer</a>
+      </li>
+    </ol>
+  </nav>
+  <div class="container-fluid" id="invoice-POS1">
+    <div id="ui-view" data-select2-id="ui-view">
+      <div>
+        <div class="card">
+          <div class="card-header">
+            <strong>Stock Transfer No: </strong>
+            <strong>{{
+              stockTransferHeader?.stockTransferHeaderReferenceNo
+              }}</strong>
+            <a class="btn btn-sm btn-secondary float-right mr-1 d-print-none" href="#"
+              onClick="window.print();return false" data-abc="true">
+              <i class="fa fa-print"></i> Print</a>
+            <a class="btn btn-sm btn-info float-right mr-1 d-print-none" href="#" data-abc="true">
+              <i class="fa fa-save"></i> Save</a>
+          </div>
+          <div class="card-body">
+            <div class="row mb-4">
+              <div class="col-sm-4">
+                <h6 class="mb-3">From:</h6>
+                <div>
+                  <img style="height: 50px" src="../../../assets/resource/images/logo/logo.png" alt="Company Logo" />
+                  <br />
+                  <strong>Company:
+                    {{
+                    stockTransferHeader?.branchLocation?.branchName
+                    }}</strong>
+                </div>
+                <div>
+                  Address: {{ stockTransferHeader?.branchLocation?.address }}
+                </div>
+                <div>Email: {{ "general@maliban.com" }}</div>
+                <div>
+                  Phone:
+                  {{ stockTransferHeader?.branchLocation?.contactNumbers }}
+                </div>
+                <div>
+                  Fax: {{ stockTransferHeader?.branchLocation?.contactNumbers }}
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <h6 class="mb-3">To:</h6>
+                <div>
+                  <strong>Supplier:
+                    {{
+                    stockTransferHeader?.transferBranchLocation?.branchName
+                    }}</strong>
+                </div>
+                <div>
+                  {{ stockTransferHeader?.transferBranchLocation?.address }}
+                </div>
+                <div>
+                  Email:
+                  {{ stockTransferHeader?.transferBranchLocation?.email }}
+                </div>
+                <div>
+                  Phone:
+                  {{
+                  stockTransferHeader?.transferBranchLocation?.contactNumbers
+                  }}
+                </div>
+                <div>
+                  Fax:
+                  {{
+                  stockTransferHeader?.transferBranchLocation?.contactNumbers
+                  }}
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <h6 class="mb-3">Details:</h6>
+                <div>
+                  PO No:<strong>{{
+                    stockTransferHeader?.stockTransferHeaderReferenceNo
+                    }}</strong>
+                </div>
+                <div>
+                  Supplier Invoice:<strong>
+                    {{
+                    stockTransferHeader?.stockTransferHeaderReferenceNo
+                    }}</strong>
+                </div>
+                <div>Date: {{ stockTransferHeader?.createDate | date }}</div>
+                <div>
+                  Delivery Date:
+                  {{ stockTransferHeader?.createDate | date }}
+                </div>
+                <!--<div>VAT: NYC09090390</div><div><strong>SWIFT code: 99 8888 7777 6666 5555</strong></div>-->
+              </div>
+            </div>
+            <div class="table-responsive-sm">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th class="center">#</th>
+                    <th class="text-left">Type</th>
+                    <th class="text-left">Doc#</th>
+                    <th class="text-left">Product Code</th>
+                    <th class="text-left">Product Name</th>
+                    <th class="right">Expiry Date</th>
+                    <th class="text-center">Quantity</th>
+                    <th class="text-center">Issueing</th>
+                    <th class="text-center">Balance</th>
+                    <th class="text-center">Transfer</th>
+                    <th class="text-center">Stock</th>
+                    <th class="text-center">Approve</th>
+                    <th class="center">Unit Price</th>
+                    <th class="center">Sale Price</th>
+                    <th class="center">MRP</th>
+                    <th class="right">Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="
+                      let line of stockTransferHeader?.lines;
+                      let i = index
+                    ">
+                    <td class="center">{{ i + 1 }}</td>
+                    <td class="left">{{ line.cExtRefNum }}</td>
+                    <td class="left">{{ line.cDocNo }}</td>
+                    <td class="left">{{ line.barcode }}</td>
+                    <td class="left">{{ line.productName }}</td>
+                    <td class="right">
+                      {{ line.productExpireDate | date : "mediumDate" }}
+                    </td>
+                    <td class="text-center">{{ line.dQuantity }}</td>
+                    <td class="text-center">{{ line.dIssueQuantity }}</td>
+                    <td class="text-center">{{ line.dNetQuantity }}</td>
+                    <td class="text-center">{{ line.dTransferQuantity }}</td>
+                    <td class="text-center">
+                      {{
+                      line.dQuantity -
+                      (line.dIssueQuantity + line.dTransferQuantity)
+                      }}
+                    </td>
+                    <td class="text-center">{{ line.approveQuantity }}</td>
+                    <td class="right">
+                      Rs.{{ line.dCostPrice | number : "1.3-6" }}
+                    </td>
+                    <td class="right">
+                      Rs.{{ line.dSalePrice | number : "1.3-6" }}
+                    </td>
+                    <td class="right">
+                      Rs.{{ line.maximumRetailPrice | number : "1.3-6" }}
+                    </td>
+                    <td class="right">
+                      {{
+                      line.approveQuantity > 0
+                      ? line.approveQuantity * line?.dCostPrice
+                      : (line.dTransferQuantity * line?.dCostPrice
+                      | currency : "LKR" : "Rs.")
+                      }}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="row">
+              <div class="col-lg-4 col-sm-5 ml-auto">
+                <table class="table table-clear">
+                  <tbody>
+                    <tr>
+                      <td class="left">
+                        <strong>Subtotal</strong>
+                      </td>
+                      <td class="right">
+                        {{
+                        stockTransferHeader?.totalBillAmount
+                        | currency : "Rs. " : "symbol"
+                        }}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="left">
+                        <strong>Discount (%)</strong>
+                      </td>
+                      <td class="right">
+                        {{
+                        stockTransferHeader?.totalDiscountAmount
+                        | currency : "Rs. " : "symbol"
+                        }}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="left">
+                        <strong>VAT (15%)</strong>
+                      </td>
+                      <td class="right">Rs 0.00</td>
+                    </tr>
+                    <tr>
+                      <td class="left">
+                        <strong>NBT (2%)</strong>
+                      </td>
+                      <td class="right">Rs 0.00</td>
+                    </tr>
+                    <tr>
+                      <td class="left">
+                        <strong>Total</strong>
+                      </td>
+                      <td class="right">
+                        <strong>{{
+                          stockTransferHeader?.totalBillAmount -
+                          stockTransferHeader?.totalDiscountAmount
+                          | currency : "Rs. " : "symbol"
+                          }}</strong>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <!--<a class="btn btn-success" href="#" data-abc="true"><i class="fa fa-usd"></i> Proceed to Payment</a> -->
+              </div>
+            </div>
+            <div class="row mt-4">
+              <div class="col-md-4">
+                <h6 class="mb-3">
+                  Prepared By:
+                  {{
+                  stockTransferHeader?.createdBy?.split("@")[0].toUpperCase()
+                  }}
+                </h6>
+              </div>
+              <div class="col-md-4">
+                <h6 class="mb-3">
+                  Approved By:
+                  {{
+                  stockTransferHeader?.approvedBy?.split("@")[0].toUpperCase()
+                  }}
+                </h6>
+              </div>
+              <div class="col-md-4">
+                <h6 class="mb-3 float-left">Authorized Signatory:</h6>
+                <span class="float-left"><img style="height: 62px; width: 142px" *ngIf="stockTransferHeader?.isApprove"
+                    src="../../../assets/resource/images/logo/png_approved_52566.png" alt="Company Logo" /></span>
+                <span class="float-left"><img style="height: 62px; width: 142px" *ngIf="!stockTransferHeader?.isApprove"
+                    src="../../../assets/resource/images/logo/png_rejectedd_52566.png" alt="Company Logo" /></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- <div id="print-foot" class="float-right"><span>Page: </span></div> -->
+      </div>
+    </div>
+  </div>
+</div>

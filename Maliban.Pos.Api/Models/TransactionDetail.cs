@@ -16,24 +16,12 @@ namespace Maliban.Pos.Api.Models
     [Required]
     public decimal dQuantity { get; set; }
     public bool ProductAvailable { get; set; } = true;
-    // [Required]
-    // public int StoreAreaId { get; set; }
-    // public ICollection<StoreArea> StoreArea { get; set; }
     [Required]
     public int BranchLocationId { get; set; }
     public virtual BranchLocation BranchLocation { get; set; }
-    // [Required]
-    // public Int64? StoreId { get; set; }
-    // public virtual Store Store { get; set; }
     [Required]
     public Int64 ProductId { get; set; }
     public virtual Product Product { get; set; }
-    // [Required]
-    // public int? BinId { get; set; }
-    // public virtual Bin Bin { get; set; }
-    // [Required]
-    // public Int64 GoodReceptNoteDetailId { get; set; }
-    // public virtual GoodReceptNoteDetail GoodReceptNoteDetail { get; set; }
     [Required]
     public Int64 PriceId { get; set; }
     public virtual Price Price { get; set; }
@@ -90,7 +78,7 @@ namespace Maliban.Pos.Api.Models
     public ICollection<SaleDetail> SaleDetails { get; set; }
 
     }
-    public enum cDocType { GRN, INV, AIN,AOUT, PRN, SLR }
+    public enum cDocType { GRN, INV, AIN,AOUT, PRN, SLR,STO,STI }
 }
 
 

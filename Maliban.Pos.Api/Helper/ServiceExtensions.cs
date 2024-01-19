@@ -27,7 +27,8 @@ namespace Maliban.Pos.Api.Helper
       services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
       //refactor dapper
       services.AddScoped<ISqlDataAccess, SqlDataAccess>();
-    }
+      services.AddDistributedMemoryCache();
+        }
   }
   
 }

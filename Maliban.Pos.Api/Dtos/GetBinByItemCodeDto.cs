@@ -49,5 +49,6 @@ namespace Maliban.Pos.Api.Dtos
         public decimal tNetQty { get; set; }
         public decimal Balance { get; set; }
         public string PaymentType { get; set; }
+        public string cDocNo { get; set; }
     }
 }

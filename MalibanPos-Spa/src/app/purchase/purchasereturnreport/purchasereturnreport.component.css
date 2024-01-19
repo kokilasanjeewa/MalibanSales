@@ -29,6 +29,9 @@
   background-color: #f0f3f5;
   border-bottom: 1px solid #c8ced3
 }
+.card .card-body strong{
+  color: var(--maintheme4) !important;
+}
 .table td.center,.table th.center {
   text-align: center !important;
 }

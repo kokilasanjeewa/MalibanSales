@@ -13,4 +13,5 @@ export class BranchlocationService {
   getBranchLocatio(Id: any) {
     return this.http.get<BranchLocation>(this.baseUrl + Id);
   }
+
 }

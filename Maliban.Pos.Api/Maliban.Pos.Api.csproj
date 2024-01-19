@@ -37,6 +37,7 @@
     <PackageReference Include="Microsoft.Data.SqlClient" Version="4.0.0" />
     <PackageReference Include="Cronos" Version="0.7.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.1" />
+    <PackageReference Include="System.Text.Json" Version="6.0.0" />
     <Content Update="nlog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

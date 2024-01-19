@@ -11,11 +11,12 @@
   --maintheme:#2882ff;
   --maintheme1:#3d4755;
   --maintheme3sub:#2882ff;
-  --maintheme2:#0a8cd2;
+  --maintheme2:#1374f9;
   --maintheme3:#23B363;
   --maintheme4:#051923;
   --tabletext:#d3d2d2;
-
+  /* --maintheme2:#0a8cd2; */
+  
 }
 html,
 body {
@@ -99,6 +100,7 @@ td.mat-cell,
 td.mat-footer-cell {
     border-bottom: 1px solid #ccc;
     font-size: 14px;
+    text-align: center !important;
 }
 th.mat-header-cell{
   text-align: center !important;

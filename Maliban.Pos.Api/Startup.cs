@@ -256,7 +256,7 @@ namespace Maliban.Pos.Api
                     .AddSqlServer(connectionString: Configuration.GetConnectionString("DefaultConnection"))
                     .AddCheck<DatabaseConnectionCheck>(name: "DataBaseConnectionCheck", tags: new[] { "database." })
                     //.AddCheck<ApiHealthCheck>(name: "ApiHealthCheck", tags: new[] { "api." })
-                    .AddDiskStorageHealthCheck(x => x.AddDrive("C:\\", 10_000), "Check primary disk - warning", HealthStatus.Degraded, tags: new[] { "primary disk." })
+                    .AddDiskStorageHealthCheck(x => x.AddDrive("C:\\", 7_000), "Check primary disk - warning", HealthStatus.Degraded, tags: new[] { "primary disk." })
                     .AddDiskStorageHealthCheck(x => x.AddDrive("C:\\", 2_000), "Check primary disk - error", HealthStatus.Unhealthy, tags: new[] { "primary disk." })
                     .AddDiskStorageHealthCheck(setup =>
                     {

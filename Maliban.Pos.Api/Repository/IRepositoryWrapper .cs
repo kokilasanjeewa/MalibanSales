@@ -18,6 +18,7 @@ namespace Maliban.Pos.Api.Repository
     ISectionRepository Section { get; }
     IPriceRepository Price { get; }
     IStoreRepository Store { get; }
+    IStockTransferRepository StockTransfer { get; }
     IStoreAreaRepository StoreArea { get; }
     IRackRepository Rack { get; }
     IBinRepository Bin { get; }

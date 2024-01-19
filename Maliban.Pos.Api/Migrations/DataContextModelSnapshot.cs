@@ -4445,6 +4445,193 @@ namespace Maliban.Pos.Api.Migrations
                     b.ToTable("StockMovementHeaders");
                 });
 
+            modelBuilder.Entity("Maliban.Pos.Api.Models.StockTransferDetail", b =>
+                {
+                    b.Property<long>("StockTransferDetailId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("Active")
+                        .HasColumnType("bit");
+
+                    b.Property<decimal>("ApproveQuantity")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("Barcode")
+                        .HasColumnName("Barcode")
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
+
+                    b.Property<DateTime>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long>("PriceId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime>("ProductExpireDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long>("ProductId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("ProductName")
+                        .IsRequired()
+                        .HasColumnName("ProductName")
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("StockTransferDetailUid")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<long>("StockTransferHeaderId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("TransactionDetailId")
+                        .HasColumnType("bigint");
+
+                    b.Property<int>("cApprovalType")
+                        .HasColumnType("int")
+                        .HasMaxLength(10);
+
+                    b.Property<string>("cDocNo")
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.Property<int>("cDocType")
+                        .HasColumnType("int")
+                        .HasMaxLength(5);
+
+                    b.Property<string>("cExtRefNum")
+                        .HasColumnType("nvarchar(20)")
+                        .HasMaxLength(20);
+
+                    b.Property<decimal>("dCostPrice")
+                        .IsConcurrencyToken()
+                        .HasColumnType("decimal(18, 2)");
+
+                    b.Property<DateTime>("dDocDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("dIssueQuantity")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("dNetQuantity")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("dQuantity")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("dSalePrice")
+                        .IsConcurrencyToken()
+                        .HasColumnType("decimal(18, 2)");
+
+                    b.Property<decimal>("dTransferQuantity")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<long>("iDocID")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("StockTransferDetailId");
+
+                    b.HasIndex("PriceId");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("StockTransferHeaderId");
+
+                    b.ToTable("StockTransferDetails");
+                });
+
+            modelBuilder.Entity("Maliban.Pos.Api.Models.StockTransferHeader", b =>
+                {
+                    b.Property<long>("StockTransferHeaderId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("Active")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("BranchLocationId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
+
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
+
+                    b.Property<DateTime>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("PaymentMethodId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StockTransferHeaderFactoryId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("StockTransferHeaderReferenceNo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StockTransferHeaderUid")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<long?>("StoreId")
+                        .HasColumnType("bigint");
+
+                    b.Property<decimal?>("TotalBillAmount")
+                        .HasColumnType("decimal(18, 2)");
+
+                    b.Property<decimal>("TotalCost")
+                        .HasColumnType("decimal(18, 2)");
+
+                    b.Property<decimal?>("TotalDiscountAmount")
+                        .HasColumnType("decimal(18, 2)");
+
+                    b.Property<int>("TransferBranchLocationId")
+                        .HasColumnType("int");
+
+                    b.HasKey("StockTransferHeaderId");
+
+                    b.HasIndex("Id");
+
+                    b.HasIndex("PaymentMethodId");
+
+                    b.HasIndex("StoreId");
+
+                    b.HasIndex("TransferBranchLocationId");
+
+                    b.ToTable("StockTransferHeaders");
+                });
+
             modelBuilder.Entity("Maliban.Pos.Api.Models.Store", b =>
                 {
                     b.Property<long>("StoreId")
@@ -6282,6 +6469,52 @@ namespace Maliban.Pos.Api.Migrations
                     b.HasOne("Maliban.Pos.Api.Models.Store", "Store")
                         .WithMany("StockMovementHeaders")
                         .HasForeignKey("StoreId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Maliban.Pos.Api.Models.StockTransferDetail", b =>
+                {
+                    b.HasOne("Maliban.Pos.Api.Models.Price", "Price")
+                        .WithMany("StockTransferDetails")
+                        .HasForeignKey("PriceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Maliban.Pos.Api.Models.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Maliban.Pos.Api.Models.StockTransferHeader", "StockTransferHeader")
+                        .WithMany("Lines")
+                        .HasForeignKey("StockTransferHeaderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Maliban.Pos.Api.Models.StockTransferHeader", b =>
+                {
+                    b.HasOne("Maliban.Pos.Api.Models.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Maliban.Pos.Api.Models.PaymentMethod", "PaymentMethod")
+                        .WithMany()
+                        .HasForeignKey("PaymentMethodId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Maliban.Pos.Api.Models.Store", "Store")
+                        .WithMany()
+                        .HasForeignKey("StoreId");
+
+                    b.HasOne("Maliban.Pos.Api.Models.BranchLocation", "BranchLocation")
+                        .WithMany("StockTransferHeaders")
+                        .HasForeignKey("TransferBranchLocationId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });

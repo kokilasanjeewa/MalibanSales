@@ -10,6 +10,11 @@ import { StockadjustmentdetailComponent } from './stockadjustmentdetail/stockadj
 import { StockAdjustmentDetailResolver } from '../_resolvers/stockadjustmentdetail.resolver';
 import { StockadjustmentapproveComponent } from './stockadjustmentapprove/stockadjustmentapprove.component';
 import { StocktransferComponent } from './stocktransfer/stocktransfer.component';
+import { StocktransferlistComponent } from './stocktransferlist/stocktransferlist.component';
+import { StockTransferListResolver } from '../_resolvers/stocktransferlist.resolver';
+import { StocktransferreportComponent } from './stocktransferreport/stocktransferreport.component';
+import { StocktransferapproveComponent } from './stocktransferapprove/stocktransferapprove.component';
+import { StocktransfereditComponent } from './stocktransferedit/stocktransferedit.component';
 
 
 const routes: Routes = [
@@ -38,6 +43,23 @@ const routes: Routes = [
   {
     path: 'stocktransfer',
     component: StocktransferComponent,
+  },
+  {
+    path: 'stocktransferreport/:stockTransferHeaderId',
+    component: StocktransferreportComponent,
+  },
+  {
+    path: 'stocktransferedit/:stockTransferHeaderId',
+    component: StocktransfereditComponent,
+  },
+  {
+    path: 'stocktransferapprove/:stockTransferHeaderId',
+    component: StocktransferapproveComponent,
+  },
+  {
+    path: 'stocktransferlist',
+    component: StocktransferlistComponent,
+    resolve: { stocktransferlist: StockTransferListResolver }
   },
   {
     path: 'stocklist',

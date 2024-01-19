@@ -2,7 +2,7 @@
 <div class="sidebar d-print-none" id="style-14">
   <div class="sidebar-menu">
     <div class="profile mt-4" *ngIf="loggedIn()">
-      <img src="../assets/resource/images/logo/2.png" alt="" />
+      <img src="../assets/resource/images/logo/2.png" alt />
       <h6 class="welcome">
         {{ authService.decodedToken?.unique_name | titlecase }}
       </h6>
@@ -38,28 +38,9 @@
       <a *appHasClaim="'CanAccessCustomerList'" [routerLink]="['/customer/customerlist']">
         <i class="fa fa-user-circle" aria-hidden="true"></i><span>Customer</span>
       </a>
-  <!--     <a *appHasClaim="'CanAccessConfigureSetting'" [routerLink]="['/setting/companymaster']">
-        <i class="fa fa-cogs" aria-hidden="true"></i><span>Settings</span>
-      </a> -->
-      <!-- <a [routerLink]="['/price/pricelist']"><i class="fa fa-usd" aria-hidden="true"></i>
-              <span>Price</span></a> -->
     </li>
   </div>
   </li>
-  <!--        <li class="item" id="pos" *appHasRole="['User']">
-         <div class="menu-btn">
-           <a [routerLink]="['/pos/order']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-             <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-             <span>PoS<i class="fa fa-chevron-down drop-down"></i></span>
-           </a>
-       <li class="sub-menu">
-         <a [routerLink]="['/pos/order']" *appHasRole="['User']"><i class="fas fa-envelope"></i><span>Order</span></a>
-         <a [routerLink]="['/stock/stocklist']" *appHasRole="['User']"><i class="fa fa-truck"></i><span>Stock
-          List</span></a>
-         <a [routerLink]="['/pos/salereturn']" *appHasRole="['User']"><i class="fas fa-envelope"></i><span>Sale Return</span></a>
-       </li>
-     </div>
-     </li> -->
   <li class="item" id="pos">
     <div class="menu-btn">
       <a routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
@@ -68,17 +49,15 @@
       </a>
 
   <li class="sub-menu">
-    <a [routerLink]="['/pos/order']" *appHasRole="['User']"  ><i class="fa fa-shopping-cart"></i><span>Order</span></a>
-    <a [routerLink]="['/pos/salereturn']" *appHasClaim="'CanAccessAddSaleReturn'" ><i class="fa fa-undo"></i><span>Sale Return</span></a>
-
-    <!--          <a [routerLink]="['/pos/salereturn']" *appHasRole="['User']"><i class="fa fa-truck"></i><span>Sale
-             Return</span></a> -->
+    <a [routerLink]="['/pos/order']" *appHasRole="['User']"><i class="fa fa-shopping-cart"></i><span>Order</span></a>
+    <a [routerLink]="['/pos/salereturn']" *appHasClaim="'CanAccessAddSaleReturn'"><i class="fa fa-undo"></i><span>Sale
+        Return</span></a>
   </li>
 </div>
 </li>
 <li class="item" id="stock">
   <div class="menu-btn">
-    <a  routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+    <a routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
       <i class="fa fa-th" aria-hidden="true"></i>
       <span>Stock<i class="fa fa-chevron-down drop-down"></i></span>
     </a>
@@ -90,6 +69,9 @@
   <a [routerLink]="['/stock/stockadjustmentlist']" *appHasClaim="'CanAccessStockAdjustmentList'">
     <i class="fa fa-list" aria-hidden="true"></i>
     <span>Stock Adjustment List</span></a>
+  <a [routerLink]="['/stock/stocktransferlist']" *appHasClaim="'CanAccessStockTransferList'">
+    <i class="fa fa-list" aria-hidden="true"></i>
+    <span>Stock Transfer List</span></a>
 </li>
 </div>
 </li>
@@ -100,16 +82,16 @@
       <span>Purchase<i class="fa fa-chevron-down drop-down"></i></span>
     </a>
 <li class="sub-menu">
-<!--   <a [routerLink]="['/request/requestlist']"><i class="fa fa-truck"></i><span>Request</span></a>
- -->  <a [routerLink]="['/purchase/purchaseorderlist']" *appHasClaim="'CanAccessPurchaseOrderList'"><i class="fa fa-first-order" aria-hidden="true"></i><span>Order</span></a>
-  <a [routerLink]="['/purchase/purchasereturnlist']" *appHasClaim="'CanAccessPurchaseReturnList'"><i class="fa fa-undo"></i><span>Return</span></a>
+  <a [routerLink]="['/purchase/purchaseorderlist']" *appHasClaim="'CanAccessPurchaseOrderList'"><i
+      class="fa fa-first-order" aria-hidden="true"></i><span>Order</span></a>
+  <a [routerLink]="['/purchase/purchasereturnlist']" *appHasClaim="'CanAccessPurchaseReturnList'"><i
+      class="fa fa-undo"></i><span>Return</span></a>
 </li>
 </div>
 </li>
 <li class="item" id="grn">
   <div class="menu-btn">
-<!--     routerLink="/grn/grnlist"
- -->    <a routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+    <a routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
       <i class="fa fa-book" aria-hidden="true"></i>
       <span>Receipt<i class="fa fa-chevron-down drop-down"></i></span>
     </a>
@@ -119,40 +101,22 @@
 </li>
 </div>
 </li>
-<!--      <li class="item" id="store" *appHasRole="['Administrator', 'Manager']">
-       <div class="menu-btn">
-         <a [routerLink]="['/purchase/purchaselist']">
-           <i class="fa fa-cubes" aria-hidden="true"></i>
-           <span>Store<i class="fa fa-chevron-down drop-down"></i></span></a>
-     <li class="sub-menu">
-       <a href="#"><i class="fas fa-lock" *appHasRole="['Administrator', 'Manager']"></i><span>Password</span></a>
-       <a href="#"><i class="fas fa-language" *appHasRole="['Administrator', 'Manager']"></i><span>Language</span></a>
-     </li>
-     </div>
-     </li> -->
-<!--       <li class="item" id="customer">
-            <div class="menu-btn">
-                <a [routerLink]="['/customer/customerlist']">
-                    <i class="fa fa-user-circle" aria-hidden="true"></i><span>Customer</span>
-                </a>
-            </div>
-        </li> -->
-         <li class="item" id="setting" *appHasRole="['GlobalAdministrator']">
-          <div class="menu-btn">
-            <a routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-              <i class="fa fa-cogs" aria-hidden="true"></i>
-              <span>Settings<i class="fa fa-chevron-down drop-down"></i></span>
-            </a>
-        <li class="sub-menu">
-               <a [routerLink]="['/setting/companymasterlist']">
-            <i class="fa fa-cog" aria-hidden="true"></i><span>Company Setting</span>
-          </a>
-          <a [routerLink]="['/setting/customermasterlist']">
-            <i class="fa fa-cog" aria-hidden="true"></i><span>Customer Setting</span>
-          </a>
-        </li>
-      </div>
-      </li>
+<li class="item" id="setting" *appHasRole="['GlobalAdministrator']">
+  <div class="menu-btn">
+    <a routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+      <i class="fa fa-cogs" aria-hidden="true"></i>
+      <span>Settings<i class="fa fa-chevron-down drop-down"></i></span>
+    </a>
+<li class="sub-menu">
+  <a [routerLink]="['/setting/companymasterlist']">
+    <i class="fa fa-cog" aria-hidden="true"></i><span>Company Setting</span>
+  </a>
+  <a [routerLink]="['/setting/customermasterlist']">
+    <i class="fa fa-cog" aria-hidden="true"></i><span>Customer Setting</span>
+  </a>
+</li>
+</div>
+</li>
 <li class="item" id="about">
   <div class="menu-btn">
     <a [routerLink]="['/report/viewreport']">

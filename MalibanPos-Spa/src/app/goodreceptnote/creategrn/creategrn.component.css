@@ -15,7 +15,7 @@
   background-color: #dc3545;
 }
 .table {
-  box-shadow: 1px 4px 6px 7px var(--tabletext);
+  box-shadow: 3px 5px 5px 1px var(--tabletext);
 }
 thead {
   background-color: var(--maintheme2);

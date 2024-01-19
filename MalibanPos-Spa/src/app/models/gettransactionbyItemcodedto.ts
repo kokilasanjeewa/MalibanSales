@@ -68,4 +68,6 @@ export interface GetBinByItemCodeDto extends BaseModel {
   tNetQty: number;
   balance: number;
   paymentType:string;
+  cDocNo: string;
+
 }

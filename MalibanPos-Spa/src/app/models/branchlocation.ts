@@ -10,5 +10,6 @@ export interface BranchLocation extends BaseModel {
   contactNumbers: string;
   longitude: string;
   latitude: string;
+  email:string|null;
 }
 
