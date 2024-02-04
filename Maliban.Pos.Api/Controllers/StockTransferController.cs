@@ -60,16 +60,19 @@ namespace Maliban.Pos.Api.Controllers
         [MapToApiVersion("1.1")]
         public async Task<IActionResult> GetStockTransferHeader([FromQuery] bool status, int stockTransferHeaderId)
         {
-            var stockTransferHeaders = await _context.StockTransferHeaders.Where(p => p.StockTransferHeaderId == stockTransferHeaderId).Include(b => b.BranchLocation).Include(p => p.Lines).FirstOrDefaultAsync();
-            var transferBranch = await _context.BranchLocations.Where(p => p.BranchLocationId == stockTransferHeaders.TransferBranchLocationId).FirstOrDefaultAsync();
-            stockTransferHeaders.TransferBranchLocation = transferBranch;
-            stockTransferHeaders.TotalDiscountAmount = 0;
-            stockTransferHeaders.TotalBillAmount = stockTransferHeaders.Lines.Sum(l => l.ApproveQuantity > 0 ? l.ApproveQuantity * l.dCostPrice : l.dTransferQuantity * l.dCostPrice);
-            stockTransferHeaders.TotalCost = stockTransferHeaders.Lines.Sum(l => l.ApproveQuantity > 0 ? l.ApproveQuantity * l.dCostPrice : l.dTransferQuantity * l.dCostPrice);
+            var stockTransferHeader = await _context.StockTransferHeaders.Where(p => p.StockTransferHeaderId == stockTransferHeaderId).Include(b => b.BranchLocation).Include(p => p.Lines).FirstOrDefaultAsync();
+            var transferBranch = await _context.BranchLocations.Where(p => p.BranchLocationId == stockTransferHeader.TransferBranchLocationId).AsNoTracking().FirstOrDefaultAsync();
+            stockTransferHeader.TransferBranchLocation = transferBranch;
+            stockTransferHeader.BranchLocation = null;
+            stockTransferHeader.BranchLocation = _context.BranchLocations.Where(s => s.BranchLocationId == stockTransferHeader.BranchLocationId).AsNoTracking().FirstOrDefault();
+            stockTransferHeader.TransferBranchLocation = transferBranch;
+            stockTransferHeader.TotalDiscountAmount = 0;
+            stockTransferHeader.TotalBillAmount = stockTransferHeader.Lines.Sum(l => l.ApproveQuantity > 0 ? l.ApproveQuantity * l.dCostPrice : l.dTransferQuantity * l.dCostPrice);
+            stockTransferHeader.TotalCost = stockTransferHeader.Lines.Sum(l => l.ApproveQuantity > 0 ? l.ApproveQuantity * l.dCostPrice : l.dTransferQuantity * l.dCostPrice);
 
-            if (stockTransferHeaders != null)
+            if (stockTransferHeader != null)
             {
-                return Ok(stockTransferHeaders);
+                return Ok(stockTransferHeader);
             }
             return NoContent();
         }
@@ -362,14 +365,21 @@ namespace Maliban.Pos.Api.Controllers
 
                             foreach (var item in stockTransferHeader.Lines.ToList())
                             {
-                                var price = await _context.Prices.AsNoTracking().FirstOrDefaultAsync(p => p.PriceId == item.PriceId);
-                                Price priceTransfer = new Price();
+                                var price = await _context.Prices.FirstOrDefaultAsync(p => p.PriceId == item.PriceId);
                                 var product = await _context.Products.FirstOrDefaultAsync(sp => sp.ProductId == item.ProductId);
-                                price.PriceId = 0;
-                                price.PriceUid = Guid.NewGuid().ToString();
-                                priceTransfer.BranchLocationId = stockTransferHeader.TransferBranchLocationId;
-                                priceTransfer.CreatedBy = transferHeaderDto.createdBy;
-                                priceTransfer = price;
+
+                                Price priceTransfer = new Price
+                                {
+                                    UnitPrice = price.UnitPrice,
+                                    MaximumRetailPrice = price.MaximumRetailPrice,
+                                    ModifiedUnitPrice = price.ModifiedUnitPrice,
+                                    SalePrice = price.SalePrice,
+                                    Product = product,
+                                    ProductId = product.ProductId,
+                                    BranchLocationId = stockTransferHeader.TransferBranchLocationId,
+                                    DiscountPrecentage = price.DiscountPrecentage,
+                                    CreatedBy = transferHeaderDto.createdBy
+                                };
                                 await _repoWrapper.Price.CreateAsync(priceTransfer);
                                 _context.SaveChanges();
                                 TransactionDetail transactionDetail = new TransactionDetail
@@ -387,9 +397,9 @@ namespace Maliban.Pos.Api.Controllers
                                     Product = product,
                                     Barcode = product.Barcode,
                                     ProductName = product.ProductName,
-                                    iDocID = stockTransferHeader.StockTransferHeaderId,
+                                    iDocID = item.StockTransferDetailId,
                                     cDocType = cDocType.STI,
-                                    cDocNo = "STI" + stockTransferHeader.StockTransferHeaderId,
+                                    cDocNo = "STI" + item.StockTransferDetailId,
                                     ProductId = product.ProductId,
                                     PriceId = priceTransfer.PriceId,
                                     Price = priceTransfer,
@@ -503,7 +513,7 @@ namespace Maliban.Pos.Api.Controllers
             }
             if ((int)stocktransferHeaderDto.cApprovalType == 3 && entity.IsApprove == true && entity.IsProcess == true)
             {
-                return BadRequest("You've unable to cancel po with id '" + entity.StockTransferHeaderReferenceNo);
+                return BadRequest("You've unable to cancel st with the id '" + entity.StockTransferHeaderReferenceNo);
             }
             var strategy = _context.Database.CreateExecutionStrategy();
             await strategy.ExecuteAsync(async () =>
@@ -514,22 +524,59 @@ namespace Maliban.Pos.Api.Controllers
                     {
                         _context.StockTransferHeaders.Update(entity);
                         var entities = await _context.StockTransferDetails.Where(p => p.StockTransferHeaderId == stocktransferHeaderDto.StockTransferHeaderId).ToListAsync();
-                        foreach (var entitydetail in entities)
-                        {
-                            entitydetail.cApprovalType = stocktransferHeaderDto.cApprovalType;
-                            if (entitydetail.cApprovalType == cApprovalType.Approve)
+                        if (stocktransferHeaderDto.cApprovalType == cApprovalType.Approve)
+                        { 
+                            foreach (var entitydetail in entities)
                             {
-                                entitydetail.ApproveQuantity = entitydetail.dTransferQuantity;
+                                entitydetail.cApprovalType = stocktransferHeaderDto.cApprovalType;
+                                if (entitydetail.cApprovalType == cApprovalType.Approve)
+                                {
+                                    entitydetail.ApproveQuantity = entitydetail.dTransferQuantity;
 
-                            }
-                            if (_context.Entry(entitydetail).Properties.Any(property => property.IsModified))
-                            {
-                                // Update changes if any of the properties have been modified.
-                                _context.Entry(entitydetail).CurrentValues.SetValues(entitydetail);
-                                _context.Entry(entitydetail).State = EntityState.Modified;
+                                }
+                                if (_context.Entry(entitydetail).Properties.Any(property => property.IsModified))
+                                {
+                                    // Update changes if any of the properties have been modified.
+                                    _context.Entry(entitydetail).CurrentValues.SetValues(entitydetail);
+                                    _context.Entry(entitydetail).State = EntityState.Modified;
+                                }
                             }
                         }
+                        if(stocktransferHeaderDto.cApprovalType == cApprovalType.Reject)
+                        {
+                            foreach (var item in entities.ToList())
+                            {
+                                var itemCode = await _context.Products.Where(s => s.ProductId == item.ProductId).FirstOrDefaultAsync<Product>();
 
+                                var updateTransaction = await _context.TransactionDetails.Where(t => t.TransactionDetailId == item.TransactionDetailId && t.dQuantity - t.dIssueQuantity > 0).FirstOrDefaultAsync();
+                                if (updateTransaction.dQuantity - updateTransaction.dIssueQuantity >= item.dTransferQuantity)
+                                {
+                                    updateTransaction.dIssueQuantity -= item.dTransferQuantity;
+                                    _context.TransactionDetails.Update(updateTransaction);
+                                    _context.SaveChanges();
+                                }
+                                logger.Information("{\"BranchLocationId\":" + updateTransaction.BranchLocationId + ",\"Barcode\":\"" + updateTransaction.Barcode +
+                                    "\",\"ProductId\":" + updateTransaction.ProductId + ",\"PriceId\":" + updateTransaction.PriceId + ",\"dQuantity\":" + updateTransaction.dQuantity +
+                                    ",\"dIssueQuantity\":" + updateTransaction.dIssueQuantity + ",\"StockTransferHeaderId\":" + stocktransferHeaderDto.StockTransferHeaderId + ",\"dTransferQuantity\":" + item.dTransferQuantity + ",\"RejectQuantity\":" + item.dTransferQuantity +
+                                    ",\"TransactionDetailId\":" + updateTransaction.TransactionDetailId + ",\"CreateDate\":\"" + DateTime.Now.ToString() + "\"},");
+
+                            }
+                            foreach (var item in entities.ToList())
+                            {
+
+                                var removeTransaction = await _context.TransactionDetails.Where(t => t.iDocID == item.StockTransferDetailId && t.cDocType== cDocType.STO).FirstOrDefaultAsync();
+                                if (removeTransaction != null)
+                                {
+                                    _context.TransactionDetails.Remove(removeTransaction);
+                                    _context.SaveChanges();
+                                }
+                                logger.Information("{\"BranchLocationId\":" + removeTransaction.BranchLocationId + ",\"Barcode\":\"" + removeTransaction.Barcode +
+                                    "\",\"ProductId\":" + removeTransaction.ProductId + ",\"PriceId\":" + removeTransaction.PriceId + ",\"dQuantity\":" + removeTransaction.dQuantity +
+                                    ",\"dIssueQuantity\":" + removeTransaction.dIssueQuantity + ",\"StockTransferHeaderId\":" + stocktransferHeaderDto.StockTransferHeaderId + ",\"dTransferQuantity\":" + item.dTransferQuantity + ",\"RejectQuantity\":" + item.dTransferQuantity +
+                                    ",\"TransactionDetailId\":" + removeTransaction.TransactionDetailId + ",\"CreateDate\":\"" + DateTime.Now.ToString() + "\"},");
+
+                            }
+                        }
                         // Update changes if any of the properties have been modified.
                         await _context.SaveChangesAsync();
                         transaction.Commit();

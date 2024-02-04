@@ -203,6 +203,9 @@ export class StocktransferComponent implements OnInit {
       this.show = false;
     }
   }
+  changePrice(stock:number){
+
+  }
   ngOnDestroy(): void {
     this.destroyed$.next();
     this.destroyed$.complete();
@@ -244,11 +247,11 @@ export class StocktransferComponent implements OnInit {
   }
   getBranches(){
     this.commonService.getList('Common', 'getallbranch').subscribe(data => {
-      const mapBranches=this.commonService.getMapUserBranchLocations().length >0 ?  this.commonService.getMapUserBranchLocations() : this.commonService.getUserBranchLocationId();
+      const mapBranches=this.commonService.getMapUserBranchLocations().length >0 ?  this.commonService.getMapUserBranchLocations() : [];
       const branches = mapBranches.length >1 ?
       data.filter(array => mapBranches.some(filter => filter == array.branchLocationId))
-      : data.filter(d => d.branchLocationId==this.commonService.getUserBranchLocationId());
-      this.transferBranches =branches;
+      : 0
+      this.transferBranches =branches.filter(a => a.branchLocationId!=this.commonService.getUserBranchLocationId());
     });
   }
 }

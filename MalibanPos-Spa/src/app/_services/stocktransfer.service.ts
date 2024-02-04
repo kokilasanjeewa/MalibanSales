@@ -122,6 +122,7 @@ export interface PriceDetail {
   dSalePrice: number;
   dCostPrice: number;
   maximumRetailPrice: number;
+  dStockQty:number;
 }
 export interface StockTransferDetail extends BaseModel {
   stockTransferDetailId: number;
@@ -180,4 +181,25 @@ export interface StockTransferHeader extends BaseModel {
   receivedBy: string;
 
 }
-
+export interface GetStockTransferByDateRangeDto extends BaseModel {
+  stockTransferDetailId: number;
+  productCode: string;
+  productName: string;
+  transferBranch: string;
+  cDocNo: string;
+  StockTransferHeaderReferenceNo: string;
+  transferDate: string;
+  transferUnitPrice: number;
+  transferSellingPrice: number;
+  transferQty: number;
+  productExpireDate: string;
+  receiveBranch: string;
+  receiveDate: string;
+  receiveBy: string;
+  transferBy: string;
+  receiveUnitPrice: number;
+  receiveSellingprice: number;
+  receiveQty: number;
+  paymentType: string;
+  balance: number;
+}

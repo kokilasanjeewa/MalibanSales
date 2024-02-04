@@ -148,5 +148,7 @@ namespace Maliban.Pos.Api.Repository
         public decimal dSalePrice { get; set; }
         public decimal dCostPrice { get; set; }
         public decimal MaximumRetailPrice { get; set; }
+        public decimal dStockQty { get; set; }
+        
     }
 }

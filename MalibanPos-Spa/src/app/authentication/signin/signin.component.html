@@ -1,46 +1,36 @@
-  <div class="login-page">
-    <div class="form">
-      <div class="formtitle">
-        <div>
-          <img src="../../../assets/resource//images//logo/logo.png" />
-        </div>
-        <p>SignIn</p>
-      </div>
-      <form class="login-form" [formGroup]="loginForm" (ngSubmit)="login()" novalidate>
 
-        <div class="group-form">
-          <label for=""><i class="fa fa-user-circle"></i></label>
-          <input type="email" [formControlName]="'username'" placeholder="User Name" />
-          <span class="invalid-feedback" *ngIf="f.username.hasError('required') && f.username.touched ">Username is
-            required</span>
-          <span class="invalid-feedback" *ngIf="f.username.hasError('email') && f.username.touched ">Username is
-            invalid</span>
-        </div>
-        <div class="group-form">
-          <label for=""><i class="fa fa-key"></i></label>
-          <input type="password" [formControlName]="'password'" placeholder="Password" />
-          <span class="invalid-feedback" *ngIf="f.password.hasError('required') && f.password.touched">Password is
-            required</span>
-          <span class="invalid-feedback" *ngIf="f.password.hasError('minlength') && f.password.touched">Password must be
-            at lease 6 characters</span>
-          <span class="invalid-feedback" *ngIf="f.password.hasError('maxlength') && f.password.touched">Password cannot
-            exceed 20 characters</span>
-        </div>
-        <button type="submit" [disabled]="!loginForm.valid" (click)="clickButton()">login</button>
-        <button class="clear" type="reset">Clear</button>
-
-        <p class="message">Not registered? <a routerLink="/authentication/signup">SignUp an account </a></p>
-      </form>
+<div class="login-page">
+  <div class="form">
+    <div class="d-flex justify-content-center">
+      <img class="login-image" src="../../../assets/resource//images//logo/logo.png" />
     </div>
+    <div class="formtitle">
+      <p>Sign In </p>
+    </div>
+    <form class="login-form" [formGroup]="loginForm" (ngSubmit)="login()" novalidate>
+      <div class="group-form">
+        <label for=""><i class="fa fa-user-circle"></i></label>
+        <input type="email" [formControlName]="'username'" placeholder="User Name" />
+        <span class="invalid-feedback" *ngIf="f.username.hasError('required') && f.username.touched">Username is
+          required</span>
+        <span class="invalid-feedback" *ngIf="f.username.hasError('email') && f.username.touched">Username is
+          invalid</span>
+      </div>
+      <div class="group-form">
+        <label for=""><i class="fa fa-key"></i></label>
+        <input type="password" [formControlName]="'password'" placeholder="Password" />
+        <span class="invalid-feedback" *ngIf="f.password.hasError('required') && f.password.touched">Password is
+          required</span>
+        <span class="invalid-feedback" *ngIf="f.password.hasError('minlength') && f.password.touched">Password must be
+          at lease 6 characters</span>
+        <span class="invalid-feedback" *ngIf="f.password.hasError('maxlength') && f.password.touched">Password cannot
+          exceed 20 characters</span>
+      </div>
+      <button type="submit" [disabled]="!loginForm.valid" (click)="clickButton()">
+        login
+      </button>
+     <button class="clear" type="reset">Clear</button>
+       <p class="message">Not registered? <a routerLink="/authentication/signup">SignUp an account </a></p>
+    </form>
   </div>
-  <!--
-https://www.carlrippon.com/integrating-validation-in-angular-2-and-asp-net-core/
-
-<p>
-
-    Form Valid: {{ loginForm.valid }} Form Touched: {{ loginForm.touched }} Form
-    Dirty: {{ loginForm.dirty }} Form Value: {{ loginForm.value | json }}
-    Status: {{ loginForm.status }} Form Value: {{ loginForm.value | json }}
-
-</p>
--->
+</div>

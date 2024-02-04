@@ -33,7 +33,7 @@ namespace Maliban.Pos.Api.Models
         [Column(TypeName = "decimal(18, 2)")]// maliban 18,2
         [DisplayFormat(DataFormatString = "{0:C}")]
         public decimal? TotalBillAmount { get; set; } = 0;
-        public virtual Store? Store { get; set; }
+        public virtual Store Store { get; set; }
         [Required]
         public int BranchLocationId { get; set; }
         [ForeignKey("BranchLocationId")]

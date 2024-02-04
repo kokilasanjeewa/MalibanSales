@@ -38,6 +38,7 @@ export class StocktransferlistComponent implements OnInit, AfterViewInit,OnDestr
     'transfer',
     'transferType',
     'paymentMethod',
+    'receivedBy',
     'approvedBy',
     'authorizedBy',
     'action',

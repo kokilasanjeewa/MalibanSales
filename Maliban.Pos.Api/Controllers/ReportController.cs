@@ -133,6 +133,27 @@ namespace Maliban.Pos.Api.Controllers
 						//log error
 						return StatusCode(500, ex.Message);
 					}
+				case "Stock Transfer":
+					try
+					{
+						using (var connection = _dpContext.CreateConnection())
+						{
+							var getStockTransferByDateRange = "sp_GetStockTransferByDateRange";
+							var parameters = new DynamicParameters();
+							parameters.Add("Locationid", branchLocationId, DbType.Int32);
+							parameters.Add("Cfdate", userParams.FromDate.Date, DbType.Date);
+							parameters.Add("Ctdate", userParams.ToDate.Date, DbType.Date);
+							var getStockTransfers = (await connection.QueryAsync<GetStockTransferByDateRangeDto>(getStockTransferByDateRange, parameters, commandType: CommandType.StoredProcedure)
+							.ConfigureAwait(false)).AsList();
+							return Ok(getStockTransfers.ToList());
+						}
+
+					}
+					catch (Exception ex)
+					{
+						//log error
+						return StatusCode(500, ex.Message);
+					}
 				case "Purchase Order List":
                     try {
 						using (var connection = _dpContext.CreateConnection())
@@ -2310,6 +2331,189 @@ namespace Maliban.Pos.Api.Controllers
 							return File(content, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "SalesDetailsByCustomer.xlsx");
 						}
 					};
+				case "Stock Transfer":
+					try
+					{
+						using (var connection = _dpContext.CreateConnection())
+						{
+							var getStockTransferByDateRange = "sp_GetStockTransferByDateRange";
+							var parameters = new DynamicParameters();
+							parameters.Add("Locationid", branchLocationId, DbType.Int32);
+							parameters.Add("Cfdate", userParams.FromDate.Date, DbType.Date);
+							parameters.Add("Ctdate", userParams.ToDate.Date, DbType.Date);
+							var getexcelStockTransfers = (await connection.QueryAsync<GetStockTransferByDateRangeDto>(getStockTransferByDateRange, parameters, commandType: CommandType.StoredProcedure)
+							.ConfigureAwait(false)).AsList();
+							using (var workbook = new XLWorkbook())
+							{
+								var worksheet = workbook.Worksheets.Add("Stock Transfer");
+								var currentRow = 6;
+								var range = worksheet.Range("A1:R1");
+								range.Value = $"{branch.BranchName}";
+								range.Merge().Style.Font.SetBold().Font.FontSize = 18;
+								range.Merge().Style.Font.FontColor = XLColor.Black;
+								range.Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+								range.Style.Font.Bold = true;
+								var range3 = worksheet.Range("A2:R2");
+								range3.Value = $"No: {branch.Address}.";
+								range3.Merge().Style.Font.SetBold().Font.FontSize = 16;
+								range3.Merge().Style.Font.FontColor = XLColor.Black;
+								range3.Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+								range3.Style.Font.Bold = true;
+								var range2 = worksheet.Range("A3:R3");
+								range2.Value = "Stock Transfer :" + userParams.Id.ToString();
+								range2.Merge().Style.Font.SetBold().Font.FontSize = 15;
+								range2.Merge().Style.Font.FontColor = XLColor.White;
+								range2.Style.Fill.BackgroundColor = XLColor.DodgerBlue;
+								range2.Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+								var range1 = worksheet.Range("A4:R4");
+								range1.Value = $"Month Of {userParams.ToDate.ToString("MMMM")} : {userParams.FromDate.ToString("dd MMMM yyyy")} - {userParams.ToDate.ToString("dd MMMM yyyy")}  ";
+								range1.Merge().Style.Font.FontColor = XLColor.Black;
+								range1.Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+								range1.Style.Font.Bold = true;
+								worksheet.Cell(1, 3).Style.Fill.BackgroundColor = XLColor.AirForceBlue;
+								worksheet.Cell(1, 3).MergedRange();
+								worksheet.Cell(currentRow, 1).Value = "S No:";
+								worksheet.Cell(currentRow, 1).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+								worksheet.Cell(currentRow, 1).Style.Font.Bold = true;
+								worksheet.Cell(currentRow, 2).Value = "DocNo";
+								worksheet.Cell(currentRow, 2).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+								worksheet.Cell(currentRow, 2).Style.Font.Bold = true;
+								worksheet.Cell(currentRow, 3).Value = "Stock Transfer Reference No";
+								worksheet.Cell(currentRow, 3).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+								worksheet.Cell(currentRow, 3).Style.Font.Bold = true;
+								worksheet.Cell(currentRow, 4).Value = "Product Code";
+								worksheet.Cell(currentRow, 4).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+								worksheet.Cell(currentRow, 4).Style.Font.Bold = true;
+								worksheet.Column("A").Width = 10;
+								worksheet.Column("B").Width = 20;
+								worksheet.Column("C").Width = 20;
+								worksheet.Column("D").Width = 20;
+								worksheet.Column("E").Width = 20;
+								worksheet.Column("F").Width = 15;
+								worksheet.Column("G").Width = 15;
+								worksheet.Column("H").Width = 15;
+								worksheet.Column("I").Width = 15;
+								worksheet.Column("J").Width = 15;
+								worksheet.Column("K").Width = 15;
+								worksheet.Column("L").Width = 15;
+								worksheet.Column("M").Width = 15;
+								worksheet.Column("N").Width = 15;
+								worksheet.Column("O").Width = 15;
+								worksheet.Column("P").Width = 15;
+								worksheet.Column("Q").Width = 15;
+								worksheet.Column("R").Width = 15;
+								worksheet.Cell(currentRow, 5).Value = "Product Name";
+								worksheet.Cell(currentRow, 5).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+								worksheet.Cell(currentRow, 5).Style.Font.Bold = true;
+								worksheet.Cell(currentRow, 6).Value = "Transfer Branch";
+								worksheet.Cell(currentRow, 6).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+								worksheet.Cell(currentRow, 6).Style.Font.Bold = true;
+								worksheet.Cell(currentRow, 7).Value = "Transfer Date";
+								worksheet.Cell(currentRow, 7).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+								worksheet.Cell(currentRow, 7).Style.Font.Bold = true;
+								worksheet.Cell(currentRow, 8).Value = "Transfer Unit Price";
+								worksheet.Cell(currentRow, 8).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+								worksheet.Cell(currentRow, 8).Style.Font.Bold = true;
+								worksheet.Cell(currentRow, 9).Value = "Transfer Selling Price";
+								worksheet.Cell(currentRow, 9).Style.Font.Bold = true;
+								worksheet.Cell(currentRow, 9).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+								worksheet.Cell(currentRow, 10).Value = "Transfer Qty";
+								worksheet.Cell(currentRow, 10).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+								worksheet.Cell(currentRow, 10).Style.Font.Bold = true;
+								worksheet.Cell(currentRow, 11).Value = "Expire Date";
+								worksheet.Cell(currentRow, 11).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+								worksheet.Cell(currentRow, 11).Style.Font.Bold = true;
+								worksheet.Cell(currentRow, 12).Value = "Receive Branch";
+								worksheet.Cell(currentRow, 12).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+								worksheet.Cell(currentRow, 12).Style.Font.Bold = true;
+								worksheet.Cell(currentRow, 13).Value = "Receive Date";
+								worksheet.Cell(currentRow, 13).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+								worksheet.Cell(currentRow, 13).Style.Font.Bold = true;
+								worksheet.Cell(currentRow, 14).Value = "Receive Unit Price";
+								worksheet.Cell(currentRow, 14).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+								worksheet.Cell(currentRow, 14).Style.Font.Bold = true;
+								worksheet.Cell(currentRow, 15).Value = "Receive Selling Price";
+								worksheet.Cell(currentRow, 15).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+								worksheet.Cell(currentRow, 15).Style.Font.Bold = true;
+								worksheet.Cell(currentRow, 16).Value = "Receive Qty";
+								worksheet.Cell(currentRow, 16).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+								worksheet.Cell(currentRow, 16).Style.Font.Bold = true;
+								worksheet.Cell(currentRow, 17).Value = "Payment Type";
+								worksheet.Cell(currentRow, 17).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+								worksheet.Cell(currentRow, 17).Style.Font.Bold = true;
+								worksheet.Cell(currentRow, 18).Value = "Balance";
+								worksheet.Cell(currentRow, 18).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+								worksheet.Cell(currentRow, 18).Style.Font.Bold = true;
+								CultureInfo siLk = new CultureInfo("si-LK");
+								int count = 1;
+								foreach (var sale in getexcelStockTransfers.OrderBy(d => d.StockTransferDetailId))
+								{
+									currentRow++;
+									worksheet.Cell(currentRow, 1).Value = count;
+									worksheet.Cell(currentRow, 1).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+									worksheet.Cell(currentRow, 2).Value = sale.cDocNo.ToString();
+									worksheet.Cell(currentRow, 2).SetDataType(XLDataType.Text);
+									worksheet.Cell(currentRow, 2).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+									worksheet.Cell(currentRow, 3).Value = sale.StockTransferHeaderReferenceNo.ToString();
+									worksheet.Cell(currentRow, 3).SetDataType(XLDataType.Text);
+									worksheet.Cell(currentRow, 3).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+									worksheet.Cell(currentRow, 4).Value = sale.ProductCode.ToString();
+									worksheet.Cell(currentRow, 4).SetDataType(XLDataType.Text);
+									worksheet.Cell(currentRow, 4).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+									worksheet.Cell(currentRow, 5).Value = sale.ProductName;
+									worksheet.Cell(currentRow, 5).SetDataType(XLDataType.Text);
+									worksheet.Cell(currentRow, 6).Value = sale.TransferBranch;
+									worksheet.Cell(currentRow, 6).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+									worksheet.Cell(currentRow, 7).Value = sale.TransferDate;
+									worksheet.Cell(currentRow, 7).SetDataType(XLDataType.DateTime);
+									worksheet.Cell(currentRow, 8).Value = sale.TransferUnitPrice;
+									worksheet.Cell(currentRow, 8).SetDataType(XLDataType.Number);
+									worksheet.Cell(currentRow, 8).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+									worksheet.Cell(currentRow, 9).Value = sale.TransferSellingPrice;
+									worksheet.Cell(currentRow, 9).SetDataType(XLDataType.Number);
+									worksheet.Cell(currentRow, 9).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+									worksheet.Cell(currentRow, 10).Value = sale.TransferQty;
+									worksheet.Cell(currentRow, 10).SetDataType(XLDataType.Number);
+									worksheet.Cell(currentRow, 10).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+									worksheet.Cell(currentRow, 11).Value = sale.ProductExpireDate;
+									worksheet.Cell(currentRow, 11).SetDataType(XLDataType.DateTime);
+									worksheet.Cell(currentRow, 11).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+									worksheet.Cell(currentRow, 12).Value = sale.ReceiveBranch;
+									worksheet.Cell(currentRow, 12).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+									worksheet.Cell(currentRow, 13).Value = sale.ReceiveDate;
+									worksheet.Cell(currentRow, 13).SetDataType(XLDataType.DateTime);
+									worksheet.Cell(currentRow, 13).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+									worksheet.Cell(currentRow, 14).Value = sale.ReceiveUnitPrice;
+									worksheet.Cell(currentRow, 14).SetDataType(XLDataType.Number);
+									worksheet.Cell(currentRow, 14).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+									worksheet.Cell(currentRow, 15).Value = sale.ReceiveSellingprice;
+									worksheet.Cell(currentRow, 15).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+									worksheet.Cell(currentRow, 15).SetDataType(XLDataType.Number);
+									worksheet.Cell(currentRow, 16).Value = sale.ReceiveQty;
+									worksheet.Cell(currentRow, 16).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+									worksheet.Cell(currentRow, 16).SetDataType(XLDataType.Number);
+									worksheet.Cell(currentRow, 17).Value = sale.PaymentType;
+									worksheet.Cell(currentRow, 17).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+									worksheet.Cell(currentRow, 18).Value = sale.Balance;
+									worksheet.Cell(currentRow, 18).SetDataType(XLDataType.Number);
+									worksheet.Cell(currentRow, 18).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+									count++;
+								}
+								using (var stream = new MemoryStream())
+								{
+									workbook.SaveAs(stream);
+									var content = stream.ToArray();
+									return File(content, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "StockTransferReport.xlsx");
+								}
+							};
+						}
+
+					}
+					catch (Exception ex)
+					{
+						//log error
+						return StatusCode(500, ex.Message);
+					}
 				case "Item Wise Bin Card":
 					try
 					{
