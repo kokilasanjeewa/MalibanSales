@@ -19,7 +19,7 @@ namespace Maliban.Pos.Api.Models
         [Required]
         public string StockTransferHeaderReferenceNo { get; set; }
         [Required]
-        public ICollection<StockTransferDetail> Lines { get; set; }
+        public ICollection<StockTransferDetail>  Lines { get; set; }
         [Required]
         [DataType(DataType.Currency)]
         [Column(TypeName = "decimal(18, 2)")]// maliban 18,2
@@ -76,8 +76,8 @@ namespace Maliban.Pos.Api.Models
 
 }
 /*        [Required]
-        public int SupplierId { get; set; }*/
-/*        [ForeignKey("SupplierId")]
+        public int SupplierId { get; set; }
+        [ForeignKey("SupplierId")]
         public virtual Supplier Supplier { get; set; }
         [ForeignKey("TransferSupplierId")]
         public virtual Supplier TransferSupplier { get; set; }

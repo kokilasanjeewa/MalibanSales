@@ -359,7 +359,7 @@ namespace Maliban.Pos.Api.Controllers
 
             // object convert to string
             //string value = JsonConvert.SerializeObject(cart1);
-  
+
             return Ok(cart1);
         }
         /// <summary>
@@ -582,7 +582,7 @@ namespace Maliban.Pos.Api.Controllers
             int result;
             IList<string> errorList = new List<string>();
             IList<SaleLunchByEmployee> users = new List<SaleLunchByEmployee>();
-   
+
             foreach (var user in users)
             {
                 var branch = await _repoWrapper.BranchLocation.FindByCondition(b => b.BranchLocationId == createUploadExcelDto.BranchLocationId).FirstOrDefaultAsync();
@@ -684,7 +684,7 @@ namespace Maliban.Pos.Api.Controllers
             pj.Print(@"\\Kokila-LAP\EPSON TM-U220 Receipt");
             return Ok();
         }
- 
+
         /// <summary>
         /// You can call checkout method.Please make sure Saleitem details already exists in the list
         /// </summary> 
@@ -701,7 +701,7 @@ namespace Maliban.Pos.Api.Controllers
             //get session data
             Sale cart1 = GetSale();
             // object to string
-           // string value = JsonConvert.SerializeObject(cart1);
+            // string value = JsonConvert.SerializeObject(cart1);
             // string set to cache,the name is cart1
             //  cache.SetString("cart1", value);
             var saleitem = _mapper.Map<CustomerReturnHeader>(createSaleItemDto);
@@ -881,31 +881,33 @@ namespace Maliban.Pos.Api.Controllers
         public async Task<IActionResult> GetReturnDetails(int? saleHeaderId, int branchlocationId)
         {
             var saleHeader = await _context.SaleHeaders.Where(h => h.SaleHeaderId == saleHeaderId && h.BranchLocationId == branchlocationId && (h.PaymentId == 1 ? h.Paid == false : h.Paid == true)).Select(c => new { c.BranchLocationId, c.PaymentId }).FirstOrDefaultAsync();
-            var receiptDetails = await _context.SaleDetails.Where(h => h.SaleHeaderId == saleHeaderId && (saleHeader.PaymentId == 1 ? h.Paid == false : h.Paid == true) && h.Quantity - h.ReturnQuantity > 0).Select(c => new { c.SaleDetailId, c.Quantity, itemPrice = c.Price.SalePrice, CostPrice = c.Price.ModifiedUnitPrice, Total = c.Quantity * c.Price.SalePrice, c.Product, c.Price, c.ReturnQuantity, c.ProductExpireDate, c.TransactionDetailId }).ToListAsync();
-
-            //var query12 = (from b in _context.SaleDetails.Where(h => h.SaleHeaderId == saleHeaderId)
-            //                 select new { Total = _context.SaleReturnTotalAmount(b.SaleHeaderId) }).Distinct();
-            if (receiptDetails.Count > 0 && saleHeader != null)
+            if (saleHeader != null)
             {
-                foreach (var item in receiptDetails)
+                var receiptDetails = await _context.SaleDetails.Where(h => h.SaleHeaderId == saleHeaderId && (saleHeader.PaymentId == 1 ? h.Paid == false : h.Paid == true) && h.Quantity - h.ReturnQuantity > 0).Select(c => new { c.SaleDetailId, c.Quantity, itemPrice = c.Price.SalePrice, CostPrice = c.Price.ModifiedUnitPrice, Total = c.Quantity * c.Price.SalePrice, c.Product, c.Price, c.ReturnQuantity, c.ProductExpireDate, c.TransactionDetailId }).ToListAsync();
+
+                //var query12 = (from b in _context.SaleDetails.Where(h => h.SaleHeaderId == saleHeaderId)
+                //                 select new { Total = _context.SaleReturnTotalAmount(b.SaleHeaderId) }).Distinct();
+                if (receiptDetails.Count > 0)
                 {
-                    decimal stockQty = _repoWrapper.TransactionDetail.FindByCondition(t => t.TransactionDetailId == item.TransactionDetailId).Select(c => c.dQuantity - c.dIssueQuantity).FirstOrDefault();
-                    cart.AddItem(item.Product, item.Quantity - item.ReturnQuantity, item.Price, stockQty, true, 0, item.ProductExpireDate, item.TransactionDetailId);
-                    SaveCart(cart);
+                    foreach (var item in receiptDetails)
+                    {
+                        decimal stockQty = _repoWrapper.TransactionDetail.FindByCondition(t => t.TransactionDetailId == item.TransactionDetailId).Select(c => c.dQuantity - c.dIssueQuantity).FirstOrDefault();
+                        cart.AddItem(item.Product, item.Quantity - item.ReturnQuantity, item.Price, stockQty, true, 0, item.ProductExpireDate, item.TransactionDetailId);
+                        SaveCart(cart);
+                    }
+                    Sale cart1 = GetSale();
+                    // object to string
+                    // string value = JsonConvert.SerializeObject(cart1);
+                    // string set to cache the name is cart1
+                    //   cache.SetString("cart1", value);
+                    // get customer information from external database
+                    //var cust = await GetCustomersInfo();
+                    // retrun the cart1 object
+                    return Ok(new { cart1, paymentType = saleHeader.PaymentId });
                 }
-                Sale cart1 = GetSale();
-                // object to string
-               // string value = JsonConvert.SerializeObject(cart1);
-                // string set to cache the name is cart1
-                //   cache.SetString("cart1", value);
-                // get customer information from external database
-                //var cust = await GetCustomersInfo();
-                // retrun the cart1 object
-                return Ok(new { cart1, paymentType = saleHeader.PaymentId });
             }
 
-
-            return BadRequest("Please check your Order number.");
+            return BadRequest("Please check your Order number or payment status.");
         }
         // GET api/values
         [HttpGet]

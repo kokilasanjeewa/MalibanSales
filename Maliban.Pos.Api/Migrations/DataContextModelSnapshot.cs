@@ -996,7 +996,7 @@ namespace Maliban.Pos.Api.Migrations
                         .HasColumnType("decimal(18, 2)");
 
                     b.Property<decimal?>("BalanceQuantity")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18, 2)");
 
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("datetime2");
@@ -1007,7 +1007,7 @@ namespace Maliban.Pos.Api.Migrations
                         .HasMaxLength(100);
 
                     b.Property<decimal?>("CurrentQuantity")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18, 2)");
 
                     b.Property<string>("CustomerReturnDetailUid")
                         .IsRequired()
@@ -1036,13 +1036,13 @@ namespace Maliban.Pos.Api.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<decimal>("ReturnQuantity")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18, 2)");
 
                     b.Property<long>("SaleDetailId")
                         .HasColumnType("bigint");
 
                     b.Property<decimal>("SaleQuantity")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18, 2)");
 
                     b.Property<long>("TransactionDetailId")
                         .HasColumnType("bigint");
@@ -1272,7 +1272,7 @@ namespace Maliban.Pos.Api.Migrations
 
                     b.Property<decimal?>("BalanceItemQuantity")
                         .IsRequired()
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18, 2)");
 
                     b.Property<int?>("BatchNumber")
                         .IsRequired()
@@ -1290,7 +1290,7 @@ namespace Maliban.Pos.Api.Migrations
                         .HasMaxLength(100);
 
                     b.Property<decimal>("FreeItemQuantity")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18, 2)");
 
                     b.Property<string>("GoodReceptNoteDetailUid")
                         .HasColumnType("nvarchar(max)");
@@ -1313,7 +1313,7 @@ namespace Maliban.Pos.Api.Migrations
                         .HasColumnType("bit");
 
                     b.Property<decimal>("ItemQuantity")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18, 2)");
 
                     b.Property<string>("ModifiedBy")
                         .HasColumnType("nvarchar(100)")
@@ -2059,138 +2059,43 @@ namespace Maliban.Pos.Api.Migrations
                     b.ToTable("MainMenus");
                 });
 
-            modelBuilder.Entity("Maliban.Pos.Api.Models.MealOrderDetail", b =>
+            modelBuilder.Entity("Maliban.Pos.Api.Models.MealOrder_Header", b =>
                 {
-                    b.Property<long>("MealOrderDetailId")
+                    b.Property<int>("mohid")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
+                        .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<bool>("Active")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime>("CreateDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("CreatedBy")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("MealOrderDetailUid")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<long>("MealOrderHeaderId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("ModifiedBy")
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
-
-                    b.Property<DateTime>("ModifiedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<long>("PriceId")
-                        .HasColumnType("bigint");
-
-                    b.Property<long>("ProductId")
-                        .HasColumnType("bigint");
-
-                    b.Property<byte[]>("RowVersion")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("rowversion");
-
-                    b.HasKey("MealOrderDetailId");
-
-                    b.HasIndex("MealOrderHeaderId");
-
-                    b.HasIndex("PriceId");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("MealOrderDetails");
-                });
-
-            modelBuilder.Entity("Maliban.Pos.Api.Models.MealOrderHeader", b =>
-                {
-                    b.Property<long>("MealOrderHeaderId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<bool>("Active")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime>("BookDateFrom")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("BookDateTo")
-                        .HasColumnType("datetime2");
 
                     b.Property<int>("BranchLocationId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("CreateDate")
+                    b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("CreatedBy")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
-
-                    b.Property<string>("EmployeeCode")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(5)")
-                        .HasMaxLength(5);
-
-                    b.Property<int>("Id")
+                    b.Property<int>("CreatedSystem")
                         .HasColumnType("int");
 
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
+                    b.Property<int>("CreatedUserId")
+                        .HasColumnType("int");
 
                     b.Property<int>("MI_Employer_EmployeeId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("MealOrderCreateDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("MealOrderHeaderUid")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("MealOrderTimeStamp")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("MealType")
+                    b.Property<int>("MealTypeId")
                         .HasColumnType("int");
 
-                    b.Property<string>("ModifiedBy")
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
-
-                    b.Property<DateTime>("ModifiedDate")
+                    b.Property<DateTime>("RequestDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("PaymentId")
+                    b.Property<int?>("SaleDetailId")
                         .HasColumnType("int");
 
-                    b.HasKey("MealOrderHeaderId");
+                    b.Property<bool>("bActive")
+                        .HasColumnType("bit");
 
-                    b.HasIndex("BranchLocationId");
+                    b.HasKey("mohid");
 
-                    b.HasIndex("Id");
-
-                    b.HasIndex("MI_Employer_EmployeeId");
-
-                    b.HasIndex("PaymentId");
-
-                    b.ToTable("MealOrderHeaders");
+                    b.ToTable("MealOrder_Headers");
                 });
 
             modelBuilder.Entity("Maliban.Pos.Api.Models.MonthEndProcessDetail", b =>
@@ -2757,10 +2662,10 @@ namespace Maliban.Pos.Api.Migrations
                         .HasColumnType("decimal(18, 2)");
 
                     b.Property<decimal>("ApproveQuantity")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18, 2)");
 
                     b.Property<decimal?>("BonusQuantity")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18, 2)");
 
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("datetime2");
@@ -2771,13 +2676,13 @@ namespace Maliban.Pos.Api.Migrations
 
                     b.Property<decimal?>("CurrentQuantity")
                         .IsRequired()
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18, 2)");
 
                     b.Property<decimal?>("FreeQuantity")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18, 2)");
 
                     b.Property<decimal?>("GRNQuantity")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18, 2)");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -2807,10 +2712,10 @@ namespace Maliban.Pos.Api.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<decimal>("Quantity")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18, 2)");
 
                     b.Property<decimal?>("ReturnQuantity")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18, 2)");
 
                     b.Property<long>("SupplierPriceId")
                         .HasColumnType("bigint");
@@ -3115,7 +3020,7 @@ namespace Maliban.Pos.Api.Migrations
                         .HasMaxLength(100);
 
                     b.Property<decimal>("FreeQuantity")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18, 2)");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -3147,7 +3052,7 @@ namespace Maliban.Pos.Api.Migrations
                         .HasColumnType("decimal(18, 2)");
 
                     b.Property<decimal>("ReturnQuantity")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18, 2)");
 
                     b.Property<decimal>("SubTotal")
                         .HasColumnType("decimal(18, 2)");
@@ -3626,10 +3531,10 @@ namespace Maliban.Pos.Api.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<decimal>("Quantity")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18, 2)");
 
                     b.Property<decimal>("ReturnQuantity")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18, 2)");
 
                     b.Property<byte[]>("RowVersion")
                         .IsConcurrencyToken()
@@ -3867,7 +3772,7 @@ namespace Maliban.Pos.Api.Migrations
                         .HasColumnType("int");
 
                     b.Property<decimal>("SaleQuantity")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18, 2)");
 
                     b.Property<string>("ShopStockUid")
                         .IsRequired()
@@ -3880,7 +3785,7 @@ namespace Maliban.Pos.Api.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<decimal>("UnitsInStock")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18, 2)");
 
                     b.HasKey("ShopStockId");
 
@@ -3977,10 +3882,10 @@ namespace Maliban.Pos.Api.Migrations
                         .HasColumnType("bit");
 
                     b.Property<decimal>("AdjustmentQuantity")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18, 2)");
 
                     b.Property<decimal>("ApproveQuantity")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18, 2)");
 
                     b.Property<string>("Barcode")
                         .IsRequired()
@@ -3998,7 +3903,7 @@ namespace Maliban.Pos.Api.Migrations
                         .HasMaxLength(100);
 
                     b.Property<decimal?>("CurrentQuantity")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18, 2)");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -4011,7 +3916,7 @@ namespace Maliban.Pos.Api.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<decimal?>("PreviousQuantity")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18, 2)");
 
                     b.Property<long>("PriceId")
                         .HasColumnType("bigint");
@@ -4456,7 +4361,7 @@ namespace Maliban.Pos.Api.Migrations
                         .HasColumnType("bit");
 
                     b.Property<decimal>("ApproveQuantity")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18, 2)");
 
                     b.Property<string>("Barcode")
                         .HasColumnName("Barcode")
@@ -4527,20 +4432,20 @@ namespace Maliban.Pos.Api.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<decimal>("dIssueQuantity")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18, 2)");
 
                     b.Property<decimal>("dNetQuantity")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18, 2)");
 
                     b.Property<decimal>("dQuantity")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18, 2)");
 
                     b.Property<decimal>("dSalePrice")
                         .IsConcurrencyToken()
                         .HasColumnType("decimal(18, 2)");
 
                     b.Property<decimal>("dTransferQuantity")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18, 2)");
 
                     b.Property<long>("iDocID")
                         .HasColumnType("bigint");
@@ -4566,6 +4471,14 @@ namespace Maliban.Pos.Api.Migrations
                     b.Property<bool>("Active")
                         .HasColumnType("bit");
 
+                    b.Property<string>("ApprovedBy")
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
+
+                    b.Property<string>("AuthorizedBy")
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
+
                     b.Property<int>("BranchLocationId")
                         .HasColumnType("int");
 
@@ -4577,10 +4490,22 @@ namespace Maliban.Pos.Api.Migrations
                         .HasColumnType("nvarchar(100)")
                         .HasMaxLength(100);
 
+                    b.Property<DateTime>("DateReceived")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("Id")
                         .HasColumnType("int");
 
+                    b.Property<bool>("IsApprove")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsComfirm")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsProcess")
                         .HasColumnType("bit");
 
                     b.Property<string>("ModifiedBy")
@@ -4592,6 +4517,10 @@ namespace Maliban.Pos.Api.Migrations
 
                     b.Property<int>("PaymentMethodId")
                         .HasColumnType("int");
+
+                    b.Property<string>("ReceivedBy")
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
 
                     b.Property<int>("StockTransferHeaderFactoryId")
                         .HasColumnType("int");
@@ -4618,6 +4547,14 @@ namespace Maliban.Pos.Api.Migrations
 
                     b.Property<int>("TransferBranchLocationId")
                         .HasColumnType("int");
+
+                    b.Property<int>("cApprovalType")
+                        .HasColumnType("int")
+                        .HasMaxLength(10);
+
+                    b.Property<int>("cDocType")
+                        .HasColumnType("int")
+                        .HasMaxLength(5);
 
                     b.HasKey("StockTransferHeaderId");
 
@@ -5219,13 +5156,13 @@ namespace Maliban.Pos.Api.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<decimal>("dIN")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18, 2)");
 
                     b.Property<decimal>("dIssueQuantity")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18, 2)");
 
                     b.Property<decimal>("dNetQuantity")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18, 2)");
 
                     b.Property<decimal>("dNetValue")
                         .IsConcurrencyToken()
@@ -5234,10 +5171,10 @@ namespace Maliban.Pos.Api.Migrations
                         .HasComputedColumnSql("[dNetQuantity]*[dCostPrice]");
 
                     b.Property<decimal>("dOUT")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18, 2)");
 
                     b.Property<decimal>("dQuantity")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18, 2)");
 
                     b.Property<decimal>("dSalePrice")
                         .IsConcurrencyToken()
@@ -5823,54 +5760,6 @@ namespace Maliban.Pos.Api.Migrations
                     b.HasOne("Maliban.Pos.Api.Models.MI_Employer_Employee", "MI_Employer_Employee")
                         .WithMany()
                         .HasForeignKey("MI_Employer_EmployeeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Maliban.Pos.Api.Models.MealOrderDetail", b =>
-                {
-                    b.HasOne("Maliban.Pos.Api.Models.MealOrderHeader", "MealOrderHeader")
-                        .WithMany("Lines")
-                        .HasForeignKey("MealOrderHeaderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Maliban.Pos.Api.Models.Price", "Price")
-                        .WithMany()
-                        .HasForeignKey("PriceId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Maliban.Pos.Api.Models.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Maliban.Pos.Api.Models.MealOrderHeader", b =>
-                {
-                    b.HasOne("Maliban.Pos.Api.Models.BranchLocation", "BranchLocation")
-                        .WithMany()
-                        .HasForeignKey("BranchLocationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Maliban.Pos.Api.Models.ApplicationUser", "ApplicationUser")
-                        .WithMany()
-                        .HasForeignKey("Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Maliban.Pos.Api.Models.MI_Employer_Employee", "MI_Employer_Employee")
-                        .WithMany()
-                        .HasForeignKey("MI_Employer_EmployeeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Maliban.Pos.Api.Models.Payment", "Payment")
-                        .WithMany()
-                        .HasForeignKey("PaymentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -6490,7 +6379,7 @@ namespace Maliban.Pos.Api.Migrations
                     b.HasOne("Maliban.Pos.Api.Models.StockTransferHeader", "StockTransferHeader")
                         .WithMany("Lines")
                         .HasForeignKey("StockTransferHeaderId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 

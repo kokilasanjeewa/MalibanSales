@@ -234,7 +234,7 @@ namespace Maliban.Pos.Api.DataAccess
                 c.HasOne(p => p.BranchLocation).WithMany(pd => pd.StockTransferHeaders).HasForeignKey(p => p.BranchLocationId).IsRequired().OnDelete(DeleteBehavior.Restrict);
                 c.HasOne(p => p.BranchLocation).WithMany(pd => pd.StockTransferHeaders).HasForeignKey(p => p.TransferBranchLocationId).IsRequired().OnDelete(DeleteBehavior.Restrict);
                 //c.HasOne(p => p.Supplier).WithMany(pd => pd.StockTransferHeaders).HasForeignKey(p => p.SupplierId).IsRequired().OnDelete(DeleteBehavior.Restrict);
-               // c.HasOne(p => p.Supplier).WithMany(pd => pd.StockTransferHeaders).HasForeignKey(p => p.TransferSupplierId).IsRequired().OnDelete(DeleteBehavior.Restrict);
+                // c.HasOne(p => p.Supplier).WithMany(pd => pd.StockTransferHeaders).HasForeignKey(p => p.TransferSupplierId).IsRequired().OnDelete(DeleteBehavior.Restrict);
             });
             modelBuilder.Entity<SupplierPrice>(c =>
       {
@@ -387,8 +387,11 @@ namespace Maliban.Pos.Api.DataAccess
         public DbSet<MonthEndProcessHeader> MonthEndProcessHeaders { get; set; }
         public DbSet<MI_Employer_Map> MI_Employer_Maps { get; set; }
         public DbSet<UserBranchLocation> UserBranchLocations { get; set; }
-        public DbSet<MealOrderHeader> MealOrderHeaders { get; set; }
-        public DbSet<MealOrderDetail> MealOrderDetails { get; set; }
+
+        //  public DbSet<MealOrderHeader> MealOrderHeaders { get; set; }
+        // public DbSet<MealOrderDetail> MealOrderDetails { get; set; }
+        public DbSet<MealOrder_Header> MealOrder_Headers { get; set; }
+
         public DbSet<StockTransferHeader> StockTransferHeaders { get; set; }
         public DbSet<StockTransferDetail> StockTransferDetails { get; set; }
 
