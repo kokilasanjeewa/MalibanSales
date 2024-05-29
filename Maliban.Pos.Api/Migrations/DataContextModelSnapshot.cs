@@ -592,6 +592,61 @@ namespace Maliban.Pos.Api.Migrations
                     b.ToTable("CalculationMasters");
                 });
 
+            modelBuilder.Entity("Maliban.Pos.Api.Models.CardtMethod", b =>
+                {
+                    b.Property<int>("CardMethodId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("Active")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("BranchLocationId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CardDescription")
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
+
+                    b.Property<string>("CardMethodUid")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CardName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
+
+                    b.Property<DateTime>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("PaymentMethodId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("ServiceCharge")
+                        .HasColumnType("decimal(18, 2)");
+
+                    b.HasKey("CardMethodId");
+
+                    b.ToTable("CardtMethods");
+                });
+
             modelBuilder.Entity("Maliban.Pos.Api.Models.Category", b =>
                 {
                     b.Property<int>("CategoryId")
@@ -2061,9 +2116,9 @@ namespace Maliban.Pos.Api.Migrations
 
             modelBuilder.Entity("Maliban.Pos.Api.Models.MealOrder_Header", b =>
                 {
-                    b.Property<int>("mohid")
+                    b.Property<long>("mohid")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
+                        .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("BranchLocationId")
@@ -2087,8 +2142,8 @@ namespace Maliban.Pos.Api.Migrations
                     b.Property<DateTime>("RequestDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("SaleDetailId")
-                        .HasColumnType("int");
+                    b.Property<long?>("SaleDetailId")
+                        .HasColumnType("bigint");
 
                     b.Property<bool>("bActive")
                         .HasColumnType("bit");

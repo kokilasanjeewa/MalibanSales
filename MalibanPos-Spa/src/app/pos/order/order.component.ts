@@ -113,6 +113,7 @@ export class OrderComponent implements OnInit, AfterViewInit, OnDestroy {
   paymentType: number = 1;
   public connected: boolean = true;
   private destroyed$ = new Subject();
+  cardType:number=0;
   //#endregion variable
 
   constructor(
@@ -151,10 +152,10 @@ export class OrderComponent implements OnInit, AfterViewInit, OnDestroy {
     });
     this.bsModalRef.content.updateErrorAdd.subscribe((data) => {});
   }
-  openModalWithCashComponent() {
+  openModalWithCashComponent(amount: number) {
     this.bsModalRef = this.modalService.show(CheckoutcashmodalComponent, {
-      initialState: null,
-      class: "gray modal-md modal-dialog-centered",
+      initialState: amount,
+      class: "gray modal-lg modal-dialog-centered",
       backdrop: true,
       ignoreBackdropClick: false,
       animated: false,
@@ -165,6 +166,7 @@ export class OrderComponent implements OnInit, AfterViewInit, OnDestroy {
         next: (data) => {
           console.log(data.paymentReferenceId);
           this.paymentReferenceId = data.paymentReferenceId;
+          this.cardType=data.cardType;
           this.checkoutCash();
         },
         error: () => {},
@@ -659,6 +661,7 @@ export class OrderComponent implements OnInit, AfterViewInit, OnDestroy {
     formData.append("id", this.commonService.getUserId());
     formData.append("paymentId", 2);
     formData.append("paymentReferenceId", this.paymentReferenceId);
+    formData.append("cardType", this.cardType);
 
     if (this.count == 0 && this.customer.epfNo == "") {
       this.toastrService.error("Please check with order details");

@@ -230,7 +230,7 @@
                   <div *appHasClaim="'CanAccessCheckoutHNB'">
                     <button [(ngModel)]="checkdisable" ngDefaultControl
                       *ngIf="!isReadonly && paymentType == 2"
-                      type="button" (click)="openModalWithCashComponent()"
+                      type="button" (click)="openModalWithCashComponent(total)"
                       class="btn btn-primary cash"
                       [disabled]="isReadonly" [disabled]="checkdisable"
                       [ngClass]="{ clear: checkdisable }">

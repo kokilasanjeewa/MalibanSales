@@ -394,6 +394,7 @@ namespace Maliban.Pos.Api.DataAccess
 
         public DbSet<StockTransferHeader> StockTransferHeaders { get; set; }
         public DbSet<StockTransferDetail> StockTransferDetails { get; set; }
+        public DbSet<CardtMethod> CardtMethods { get; set; }
 
 
 

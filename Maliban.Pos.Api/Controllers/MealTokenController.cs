@@ -56,8 +56,9 @@ namespace Maliban.Pos.Api.Controllers
         /// You can call checkout method.Please make sure Saleitem details already exists in the list
         /// </summary> 
         /// <param name="check-out/mobilesaleheader"></param> 
+        [AllowAnonymous]
         [HttpPost("check-out/mobilesaleheader")]
-        public async Task<IActionResult> CreateSaleMobileHeader([FromForm] CreateMealOrderMobileHeaderDto createMealOrderMobile)
+        public async Task<IActionResult> CreateSaleMobileHeader([FromBody] CreateMealOrderMobileHeaderDto createMealOrderMobile)
         {
             if (!ModelState.IsValid)
             {
@@ -76,6 +77,10 @@ namespace Maliban.Pos.Api.Controllers
                 {
                     var product = await _repoWrapper.Product.FindByCondition(p => p.ProductId == createMealOrderMobile.ProductId).FirstOrDefaultAsync();
                     var getAvailableStock = _db.LoadData<CartItemList, dynamic>("dbo.sp_GetSalesByFIFO", new { xBranchlocation = createMealOrderMobile.BranchLocationId, xBarcode = product.Barcode, xQty = quantity }).Result.AsQueryable();
+                    if(getAvailableStock.Count()==0)
+                    {
+                        return BadRequest("Please contact welfare officer.Please GRN lunch token.");
+                    }
                     foreach (var item in getAvailableStock)
                     {
                         decimal stockQty = await _repoWrapper.ShopStock.StockDetailQuantityAsync(product.ProductId, createMealOrderMobile.BranchLocationId, item.dSalePrice, item.dCostPrice);
@@ -239,6 +244,12 @@ namespace Maliban.Pos.Api.Controllers
                                     }
                                     //update Mi_Employee table credit balance stop
 
+                                    //update MealOrder_Headers table 
+                                    //exsitmealOrderHeader.isConfirm=true;
+                                    exsitmealOrderHeader.SaleDetailId = saleitem.Lines.Select(l => l.SaleDetailId).FirstOrDefault();
+                                    _context.MealOrder_Headers.Update(exsitmealOrderHeader);
+                                    _context.SaveChanges();
+
                                 }
 
                                 transaction.Commit();
@@ -254,7 +265,7 @@ namespace Maliban.Pos.Api.Controllers
                             }
                         });
 
-                        return Ok(new { lineCollection, SaleHeader = saleitem.SaleHeaderId });
+                        return Ok(new { SaleDetailId=saleitem.Lines.Select(c => c.SaleDetailId).FirstOrDefault(), SaleHeaderId = saleitem.SaleHeaderId });
 
                     }
                 }

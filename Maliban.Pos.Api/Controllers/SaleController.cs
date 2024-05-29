@@ -416,10 +416,19 @@ namespace Maliban.Pos.Api.Controllers
                 string numbers = match.Groups[2].Value;
                 saleitem.EmployeeCode = numbers.TrimStart(new Char[] { '0' });
             }
-
             saleitem.PaymentId = createSaleItemDto.PaymentId;
             saleitem.CreatedBy = createSaleItemDto.CreatedBy;
-            saleitem.TotalAmount = cart1.ComputeGrandTotalValue;
+            decimal ComputeGrandTotalValue = cart1.ComputeGrandTotalValue;
+            if (createSaleItemDto.cardType > 0)
+            {
+                var servicePrecentage = await _context.CardtMethods.Where(b => b.CardMethodId == createSaleItemDto.cardType).Select(c => c.ServiceCharge).FirstOrDefaultAsync();
+                if(servicePrecentage >0)
+                {
+                    ComputeGrandTotalValue = ComputeGrandTotalValue * (1 + (servicePrecentage / 100));
+                }
+            }
+            saleitem.TotalAmount = ComputeGrandTotalValue;
+            saleitem.CardMethodId = createSaleItemDto.cardType;
             saleitem.Id = createSaleItemDto.Id;
 
             var branch = await _repoWrapper.BranchLocation.FindByCondition(b => b.BranchLocationId == createSaleItemDto.BranchLocationId).FirstOrDefaultAsync();
@@ -431,7 +440,7 @@ namespace Maliban.Pos.Api.Controllers
 
             if (createSaleItemDto.PaymentId == 1)
             {
-                saleitem.CreditBalance = customer.CreditBalance + cart1.ComputeGrandTotalValue;
+                saleitem.CreditBalance = customer.CreditBalance + ComputeGrandTotalValue;
                 saleitem.PreviousAmount = customer.CreditBalance;
             }
             saleitem.MI_Employer_EmployeeId = customer.MI_Employer_EmployeeId;
@@ -440,14 +449,14 @@ namespace Maliban.Pos.Api.Controllers
             {
                 saleitem.Paid = true;
                 saleitem.PaymentReferenceId = createSaleItemDto.PaymentReferenceId;
-                saleitem.CashBalance = customer.CashBalance + cart1.ComputeGrandTotalValue;
+                saleitem.CashBalance = customer.CashBalance + ComputeGrandTotalValue;
                 saleitem.PreviousCashAmount = customer.CashBalance;
             }
-            if (createSaleItemDto.PaymentId == 1 && (customer.CreditBalance + cart1.ComputeGrandTotalValue > customer.CreditLimit))
+            if (createSaleItemDto.PaymentId == 1 && (customer.CreditBalance + ComputeGrandTotalValue > customer.CreditLimit))
             {
                 return BadRequest("Please check your credit limit.");
             }
-            if (createSaleItemDto.PaymentId == 2 && (customer.CashBalance + cart1.ComputeGrandTotalValue > customer.CashLimit))
+            if (createSaleItemDto.PaymentId == 2 && (customer.CashBalance + ComputeGrandTotalValue > customer.CashLimit))
             {
                 return BadRequest("Please check your cash limit.");
             }
@@ -537,12 +546,12 @@ namespace Maliban.Pos.Api.Controllers
                                     if (createSaleItemDto.PaymentId == 1)
                                     {
                                         updateemployeebalance.PreviousCreditBalance = updateemployeebalance.CreditBalance;
-                                        updateemployeebalance.CreditBalance += cart1.ComputeGrandTotalValue;
+                                        updateemployeebalance.CreditBalance += ComputeGrandTotalValue;
                                     }
                                     if (createSaleItemDto.PaymentId == 2)
                                     {
                                         updateemployeebalance.PreviousCashBalance = updateemployeebalance.CashBalance;
-                                        updateemployeebalance.CashBalance += cart1.ComputeGrandTotalValue;
+                                        updateemployeebalance.CashBalance += ComputeGrandTotalValue;
                                     }
 
                                     _context.MI_Employer_Employees.Update(updateemployeebalance);

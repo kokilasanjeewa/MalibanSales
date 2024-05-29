@@ -6,10 +6,6 @@ using System.Data.SqlClient;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using ClosedXML.Excel;
@@ -17,7 +13,6 @@ using Dapper;
 using Maliban.Pos.Api.DataAccess;
 using Maliban.Pos.Api.Dtos;
 using Maliban.Pos.Api.Helper;
-using Maliban.Pos.Api.Helpers;
 using Maliban.Pos.Api.Models;
 using Maliban.Pos.Api.Repository;
 using Maliban.Pos.Api.Service;
@@ -1471,13 +1466,13 @@ namespace Maliban.Pos.Api.Controllers
 						range3.Merge().Style.Font.FontColor = XLColor.Black;
 						range3.Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
 						range3.Style.Font.Bold = true;
-						var range2 = worksheet.Range("A3:I3");
+						var range2 = worksheet.Range("A3:J3");
 						range2.Value = "Date Wise SaleD etails Summary";
 						range2.Merge().Style.Font.SetBold().Font.FontSize = 15;
 						range2.Merge().Style.Font.FontColor = XLColor.White;
 						range2.Style.Fill.BackgroundColor = XLColor.DodgerBlue;
 						range2.Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
-						var range1 = worksheet.Range("A4:I4");
+						var range1 = worksheet.Range("A4:J4");
 						range1.Value = $"Month Of {userParams.ToDate.ToString("MMMM")} : {userParams.FromDate.ToString("dd MMMM yyyy")} - {userParams.ToDate.ToString("dd MMMM yyyy")} ";
 						range1.Merge().Style.Font.FontColor = XLColor.Black;
 						range1.Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
@@ -1499,6 +1494,7 @@ namespace Maliban.Pos.Api.Controllers
 						worksheet.Column("G").Width = 15;
 						worksheet.Column("H").Width = 15;
 						worksheet.Column("I").Width = 15;
+                        worksheet.Column("J").Width = 15;
 						worksheet.Cell(currentRow, 3).Value = "ProductName";
 						worksheet.Cell(currentRow, 3).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
 						worksheet.Cell(currentRow, 3).Style.Font.Bold = true;
@@ -1508,18 +1504,25 @@ namespace Maliban.Pos.Api.Controllers
 						worksheet.Cell(currentRow, 5).Value = "QTY";
 						worksheet.Cell(currentRow, 5).Style.Font.Bold = true;
 						worksheet.Cell(currentRow, 5).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
-						worksheet.Cell(currentRow, 6).Value = "SalePrice";
-						worksheet.Cell(currentRow, 6).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
-						worksheet.Cell(currentRow, 6).Style.Font.Bold = true;
-						worksheet.Cell(currentRow, 7).Value = "SaleValue";
+
+                        worksheet.Cell(currentRow, 6).Value = "Retail Price";
+                        worksheet.Cell(currentRow, 6).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+                        worksheet.Cell(currentRow, 6).Style.Font.Bold = true;
+
+
+
+                        worksheet.Cell(currentRow, 7).Value = "SalePrice";
 						worksheet.Cell(currentRow, 7).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
 						worksheet.Cell(currentRow, 7).Style.Font.Bold = true;
-						worksheet.Cell(currentRow, 8).Value = "Cost";
+						worksheet.Cell(currentRow, 8).Value = "SaleValue";
 						worksheet.Cell(currentRow, 8).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
 						worksheet.Cell(currentRow, 8).Style.Font.Bold = true;
-						worksheet.Cell(currentRow, 9).Value = "Stock Value";
+						worksheet.Cell(currentRow, 9).Value = "Cost";
 						worksheet.Cell(currentRow, 9).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
 						worksheet.Cell(currentRow, 9).Style.Font.Bold = true;
+						worksheet.Cell(currentRow, 10).Value = "Stock Value";
+						worksheet.Cell(currentRow, 10).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+						worksheet.Cell(currentRow, 10).Style.Font.Bold = true;
 						CultureInfo siLk = new CultureInfo("si-LK");
 						int count = 1;
 						foreach (var sale in saleIQ28.OrderBy(d => d.SaleHeaderId))
@@ -1533,18 +1536,20 @@ namespace Maliban.Pos.Api.Controllers
 							worksheet.Cell(currentRow, 3).Value = sale.ProductName;
 							worksheet.Cell(currentRow, 4).Value = sale.ProductExpireDate.Date;
 							worksheet.Cell(currentRow, 5).Value = sale.QTY;
-							//   worksheet.Cell(currentRow, 5).Value = stock.Cost.ToString("C", siLk);
-							//    worksheet.Cell(currentRow, 6).Value = stock.CostValue.ToString("C", siLk);
-							//    worksheet.Cell(currentRow, 6).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
-							// worksheet.Cell(currentRow, 7).Value = stock.UnitPrice.ToString("C", siLk);
-							worksheet.Cell(currentRow, 6).Value = sale.CashPrice;
-							worksheet.Cell(currentRow, 6).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
-							//  worksheet.Cell(currentRow, 8).Value = stock.SaleValue.ToString("C", siLk);
-							worksheet.Cell(currentRow, 7).Value = sale.SaleValue;
+                            //   worksheet.Cell(currentRow, 5).Value = stock.Cost.ToString("C", siLk);
+                            //    worksheet.Cell(currentRow, 6).Value = stock.CostValue.ToString("C", siLk);
+                            //    worksheet.Cell(currentRow, 6).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+                            //worksheet.Cell(currentRow, 7).Value = stock.UnitPrice.ToString("C", siLk);
+                            worksheet.Cell(currentRow, 6).Value = sale.MaximumRetailPrice;
+                            worksheet.Cell(currentRow, 6).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+                            worksheet.Cell(currentRow, 7).Value = sale.CashPrice;
 							worksheet.Cell(currentRow, 7).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
-							worksheet.Cell(currentRow, 8).Value = sale.Cost;
-							worksheet.Cell(currentRow, 9).Value = sale.StockValue;
-							worksheet.Cell(currentRow, 9).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+							//worksheet.Cell(currentRow, 8).Value = stock.SaleValue.ToString("C", siLk);
+							worksheet.Cell(currentRow, 8).Value = sale.SaleValue;
+							worksheet.Cell(currentRow, 8).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+							worksheet.Cell(currentRow, 9).Value = sale.Cost;
+							worksheet.Cell(currentRow, 10).Value = sale.StockValue;
+							worksheet.Cell(currentRow, 10).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
 							count++;
 						}
 						using (var stream = new MemoryStream())
@@ -2985,25 +2990,25 @@ namespace Maliban.Pos.Api.Controllers
 							{
 								var worksheet = workbook.Worksheets.Add("Date Wise Lunch Packet Summary");
 								var currentRow = 6;
-								var range = worksheet.Range("A1:I1");
+								var range = worksheet.Range("A1:K1");
 								range.Value = $"{branch.BranchName}";
 								range.Merge().Style.Font.SetBold().Font.FontSize = 18;
 								range.Merge().Style.Font.FontColor = XLColor.Black;
 								range.Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
 								range.Style.Font.Bold = true;
-								var range3 = worksheet.Range("A2:I2");
+								var range3 = worksheet.Range("A2:K2");
 								range3.Value = $"No: {branch.Address}.";
 								range3.Merge().Style.Font.SetBold().Font.FontSize = 16;
 								range3.Merge().Style.Font.FontColor = XLColor.Black;
 								range3.Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
 								range3.Style.Font.Bold = true;
-								var range2 = worksheet.Range("A3:I3");
+								var range2 = worksheet.Range("A3:K3");
 								range2.Value = "Date Wise Lunch Packet Summary :" + userParams.Id.ToString();
 								range2.Merge().Style.Font.SetBold().Font.FontSize = 15;
 								range2.Merge().Style.Font.FontColor = XLColor.White;
 								range2.Style.Fill.BackgroundColor = XLColor.DodgerBlue;
 								range2.Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
-								var range1 = worksheet.Range("A4:I4");
+								var range1 = worksheet.Range("A4:K4");
 								range1.Value = $"Month Of {userParams.ToDate.ToString("MMMM")} : {userParams.FromDate.ToString("dd MMMM yyyy")} - {userParams.ToDate.ToString("dd MMMM yyyy")}  ";
 								range1.Merge().Style.Font.FontColor = XLColor.Black;
 								range1.Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
@@ -3017,7 +3022,9 @@ namespace Maliban.Pos.Api.Controllers
 								worksheet.Column("G").Width = 15;
 								worksheet.Column("H").Width = 15;
 								worksheet.Column("I").Width = 15;
-								worksheet.Cell(1, 3).Style.Fill.BackgroundColor = XLColor.AirForceBlue;
+                                worksheet.Column("J").Width = 15;
+                                worksheet.Column("K").Width = 15;
+                                worksheet.Cell(1, 3).Style.Fill.BackgroundColor = XLColor.AirForceBlue;
 								worksheet.Cell(1, 3).MergedRange();
 								worksheet.Cell(currentRow, 1).Value = "S No:";
 								worksheet.Cell(currentRow, 1).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
@@ -3034,18 +3041,27 @@ namespace Maliban.Pos.Api.Controllers
 								worksheet.Cell(currentRow, 5).Value = "Scheme";
 								worksheet.Cell(currentRow, 5).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
 								worksheet.Cell(currentRow, 5).Style.Font.Bold = true;
-								worksheet.Cell(currentRow, 6).Value = "ProductName";
-								worksheet.Cell(currentRow, 6).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
-								worksheet.Cell(currentRow, 6).Style.Font.Bold = true;
-								worksheet.Cell(currentRow, 7).Value = "QTY";
-								worksheet.Cell(currentRow, 7).Style.Font.Bold = true;
-								worksheet.Cell(currentRow, 7).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
-								worksheet.Cell(currentRow, 8).Value = "SalePrice";
+
+                                worksheet.Cell(currentRow, 6).Value = "Job Title";
+                                worksheet.Cell(currentRow, 6).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+                                worksheet.Cell(currentRow, 6).Style.Font.Bold = true;
+
+                                worksheet.Cell(currentRow, 7).Value = "Department";
+                                worksheet.Cell(currentRow, 7).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+                                worksheet.Cell(currentRow, 7).Style.Font.Bold = true;
+
+                                worksheet.Cell(currentRow, 8).Value = "ProductName";
 								worksheet.Cell(currentRow, 8).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
 								worksheet.Cell(currentRow, 8).Style.Font.Bold = true;
-								worksheet.Cell(currentRow, 9).Value = "SaleValue";
-								worksheet.Cell(currentRow, 9).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+								worksheet.Cell(currentRow, 9).Value = "QTY";
 								worksheet.Cell(currentRow, 9).Style.Font.Bold = true;
+								worksheet.Cell(currentRow, 9).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+								worksheet.Cell(currentRow, 10).Value = "SalePrice";
+								worksheet.Cell(currentRow, 10).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+								worksheet.Cell(currentRow, 10).Style.Font.Bold = true;
+								worksheet.Cell(currentRow, 11).Value = "SaleValue";
+								worksheet.Cell(currentRow, 11).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+								worksheet.Cell(currentRow, 11).Style.Font.Bold = true;
 								 worksheet.Cell(lunchPackSalesSummary.Count + 7, 10).Value = lunchPackSalesSummary.Sum(s => s.SalePrice*s.Total);
 								worksheet.Cell(lunchPackSalesSummary.Count + 7, 10).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
 
@@ -3066,16 +3082,24 @@ namespace Maliban.Pos.Api.Controllers
 									worksheet.Cell(currentRow, 4).SetDataType(XLDataType.Text);
 									worksheet.Cell(currentRow, 5).Value = sale.Scheme;
 									worksheet.Cell(currentRow, 5).SetDataType(XLDataType.Text);
-									worksheet.Cell(currentRow, 6).Value = sale.ProductName;
-									worksheet.Cell(currentRow, 6).SetDataType(XLDataType.Text);
-									worksheet.Cell(currentRow, 7).Value = sale.Total;
-									worksheet.Cell(currentRow, 7).SetDataType(XLDataType.Number);
-									worksheet.Cell(currentRow, 8).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
-									worksheet.Cell(currentRow, 8).Value = sale.SalePrice;
-									worksheet.Cell(currentRow, 8).SetDataType(XLDataType.Number);
-									worksheet.Cell(currentRow, 9).Value = sale.Total* sale.SalePrice;
+
+
+                                    worksheet.Cell(currentRow, 6).Value = sale.JobTitle;
+                                    worksheet.Cell(currentRow, 6).SetDataType(XLDataType.Text);
+
+                                    worksheet.Cell(currentRow, 7).Value = sale.hrODescription;
+                                    worksheet.Cell(currentRow, 7).SetDataType(XLDataType.Text);
+
+                                    worksheet.Cell(currentRow, 8).Value = sale.ProductName;
+									worksheet.Cell(currentRow, 8).SetDataType(XLDataType.Text);
+									worksheet.Cell(currentRow, 9).Value = sale.Total;
 									worksheet.Cell(currentRow, 9).SetDataType(XLDataType.Number);
-									worksheet.Cell(currentRow, 9).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+									worksheet.Cell(currentRow, 10).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+									worksheet.Cell(currentRow, 10).Value = sale.SalePrice;
+									worksheet.Cell(currentRow, 10).SetDataType(XLDataType.Number);
+									worksheet.Cell(currentRow, 11).Value = sale.Total* sale.SalePrice;
+									worksheet.Cell(currentRow, 11).SetDataType(XLDataType.Number);
+									worksheet.Cell(currentRow, 11).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
 								   count++;
 								}
 								using (var stream = new MemoryStream())
@@ -3280,7 +3304,7 @@ namespace Maliban.Pos.Api.Controllers
 		public string ProductName { get; set; }
 		[Display(Name = "Cash Price")]
 		public Decimal CashPrice { get; set; }
-		[Display(Name = "Quantity")]
+        [Display(Name = "Quantity")]
 		public decimal QTY { get; set; }
 		[Display(Name = "Sale Value")]
 		public Decimal SaleValue { get; set; }
@@ -3434,8 +3458,12 @@ namespace Maliban.Pos.Api.Controllers
 		public string FullName { get; set; }
 		public string Scheme { get; set; }
 		public string Number { get; set; }
+		public string JobTitle { get; set; }
 
-	}
+		public string hrODescription { get; set; }
+
+
+    }
 	public class SaleSummaryReportDetail
 	{
 		public Int64 SaleHeaderId { get; set; }

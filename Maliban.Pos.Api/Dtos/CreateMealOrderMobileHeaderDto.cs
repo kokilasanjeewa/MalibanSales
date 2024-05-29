@@ -18,6 +18,7 @@ namespace Maliban.Pos.Api.Dtos
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Book Date From")]
         public DateTime ConfirmDateFrom { get; set; } = DateTime.Now.Date;
+        [Required]
         public string CreatedBy { get; set; }
         [Required]
         public int PaymentId { get; set; } = 1;
