@@ -139,12 +139,14 @@ namespace Maliban.Pos.Api.Controllers
         public async Task<IActionResult> ChangePassword([FromForm] UserForChangePasswordDto userForChangePasswordDto)
         {
             var user = await _userManager.FindByIdAsync(userForChangePasswordDto.UserId);
-            var resetpassword = await _userManager.ResetPasswordAsync(user, Uri.UnescapeDataString(userForChangePasswordDto.Token), userForChangePasswordDto.Password);
+            var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+
+            var resetpassword = await _userManager.ResetPasswordAsync(user, Uri.UnescapeDataString(token), userForChangePasswordDto.Password);
             if (resetpassword.Succeeded)
             {
-                return Ok();
+                return Ok("Password Reset Successfully.");
             }
-            return Unauthorized("Reset password unsuccessfully");
+            return BadRequest(resetpassword.Errors);
         }
         /// <summary>
         /// User confirm email with a specific username and password.
