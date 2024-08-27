@@ -96,7 +96,8 @@ namespace Maliban.Pos.Api.Helper
       CreateMap<CustomerMasterSetting, CustomerMasterSettingListDto>();
       CreateMap<UpdateCustomerMasterSettingDto, CustomerMasterSetting>();
       CreateMap<CreateMealOrderHeaderDto, MealOrderHeader>().ForMember(dest => dest.MealType, opt => opt.MapFrom(src => (MealType)src.MealTypeId));
-       
+      CreateMap<CreateStockTransferHeaderDto, StockTransferHeader>();
+
         }
     }
 }

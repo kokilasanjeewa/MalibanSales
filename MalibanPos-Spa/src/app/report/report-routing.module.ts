@@ -23,6 +23,7 @@ import { DatewisesaledetailsummaryComponent } from './datewisesaledetailsummary/
 import { ItemwisemovingnonmovingstockComponent } from './itemwisemovingnonmovingstock/itemwisemovingnonmovingstock.component';
 import { ExpirationstockComponent } from './expirationstock/expirationstock.component';
 import { PurchaseorderfilterlistComponent } from './purchaseorderfilterlist/purchaseorderfilterlist.component';
+import { StocktransferComponent } from './stocktransfer/stocktransfer.component';
 
 
 const routes: Routes = [
@@ -117,6 +118,11 @@ const routes: Routes = [
   {
     path:'purchaseorderfilterlist',
     component: PurchaseorderfilterlistComponent,
+  },
+  {
+    path:'stocktransfer',
+    component: StocktransferComponent,
+
   },
   {
     path: '**',

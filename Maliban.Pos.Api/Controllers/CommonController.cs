@@ -124,11 +124,26 @@ namespace Maliban.Pos.Api.Controllers
 			}
 			return Ok(grns);
 		}
-		/// <summary>
-		/// Get All Branches 
-		/// </summary>
-		/// <param name="getallstockadjustment"></param>
-		[HttpGet("getallstockadjustment", Name = "GetAllStockAdjustment")]
+        /// <summary>
+        /// Get All Card Type 
+        /// </summary>
+        /// <param name="getallcardtype"></param>
+        [HttpGet("getallcardtype", Name = "GetAllCardType")]
+        [MapToApiVersion("1.1")]
+        public IActionResult GetAllCardType(bool status, int? branchLocationId)
+        {
+            var grns = _context.CardtMethods.Where(b => b.IsDeleted == status && b.BranchLocationId == branchLocationId).Select(c => new { ServiceCharge = c.ServiceCharge, CardName = c.CardName, CardMethodId = c.CardMethodId }).ToList();
+            if (grns.Count() == 0)
+            {
+                return NotFound("Don't have any Card Type.");
+            }
+            return Ok(grns);
+        }
+        /// <summary>
+        /// Get All Branches 
+        /// </summary>
+        /// <param name="getallstockadjustment"></param>
+        [HttpGet("getallstockadjustment", Name = "GetAllStockAdjustment")]
 		[MapToApiVersion("1.1")]
 		public IActionResult GetAllStockAdjustment(bool status, int? branchLocationId, DateTime fromDate, DateTime toDate)
 		{

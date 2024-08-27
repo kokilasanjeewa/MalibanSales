@@ -106,6 +106,8 @@ namespace Maliban.Pos.Api.Models
         public decimal CashLimit { get; set; } = 0;
         [StringLength(12)]
         public string PaymentReferenceId { get; set; }
+        public int CardMethodId { get; set; } = 0;
+
     }
 
 }

@@ -30,9 +30,10 @@ import { ItemwisemovingnonmovingstockComponent } from './itemwisemovingnonmoving
 import { NgSelectModule } from '@ng-select/ng-select';
 import { ExpirationstockComponent } from './expirationstock/expirationstock.component';
 import { PurchaseorderfilterlistComponent } from './purchaseorderfilterlist/purchaseorderfilterlist.component';
+import { StocktransferComponent } from './stocktransfer/stocktransfer.component';
 
 @NgModule({
-  declarations: [ViewreportComponent, CustomerComponent, StockComponent, SaleComponent, PurchasereturnComponent, PurchaseorderComponent, GoodreceiptnoteComponent, StockadjestmentComponent, SalereturnComponent, SalesummaryComponent, SupplierlistComponent, SalesummarybycustomerComponent, SalesdetailsbycustomerComponent, BincardComponent, CustomerunpaidComponent, ReceiptdetailsbydaterangeComponent, ItemwisesaledetailsbydaterangeComponent, DatewiselunchpacketsummaryComponent,StockdatewiseComponent, DatewisesaledetailsummaryComponent, ItemwisemovingnonmovingstockComponent, ExpirationstockComponent, PurchaseorderfilterlistComponent],
+  declarations: [ViewreportComponent, CustomerComponent, StockComponent, SaleComponent, PurchasereturnComponent, PurchaseorderComponent, GoodreceiptnoteComponent, StockadjestmentComponent, SalereturnComponent, SalesummaryComponent, SupplierlistComponent, SalesummarybycustomerComponent, SalesdetailsbycustomerComponent, BincardComponent, CustomerunpaidComponent, ReceiptdetailsbydaterangeComponent, ItemwisesaledetailsbydaterangeComponent, DatewiselunchpacketsummaryComponent,StockdatewiseComponent, DatewisesaledetailsummaryComponent, ItemwisemovingnonmovingstockComponent, ExpirationstockComponent, PurchaseorderfilterlistComponent, StocktransferComponent],
   imports: [
     CommonModule,
     ReportRoutingModule,

@@ -6,4 +6,6 @@ export interface LunchPackSalesSummary {
   fullName: string;
   scheme: string;
   number: string;
+  jobTitle: string;
+  hrODescription: string;
 }

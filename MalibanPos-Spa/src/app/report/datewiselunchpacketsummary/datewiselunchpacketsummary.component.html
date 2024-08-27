@@ -76,6 +76,8 @@
             <th>Number#</th>
             <th>FullName</th>
             <th>Scheme</th>
+            <th>JobTitle</th>
+            <th>Department</th>
             <th>ProductName</th>
             <th>QTY</th>
             <th>SalePrice</th>
@@ -91,6 +93,8 @@
             <td class="center">{{ sale.number }}</td>
             <td class="center">{{ sale.fullName }}</td>
             <td class="center">{{ sale.scheme }}</td>
+            <td class="center">{{ sale.jobTitle }}</td>
+            <td class="center">{{ sale.hrODescription }}</td>
             <td class="center">{{ sale.productName }}</td>
             <td class="center">{{ sale.total }}</td>
             <td class="center">{{ sale.salePrice | number : "1.2-2" }}</td>

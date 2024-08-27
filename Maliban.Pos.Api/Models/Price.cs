@@ -79,6 +79,8 @@ namespace Maliban.Pos.Api.Models
     public byte[] RowVersion { get; set; }
     [JsonIgnore]
     public virtual ICollection<StockAdjustmentDetail> StockAdjustmentDetails { get; set; }
-
-  }
+    [JsonIgnore]
+    public virtual ICollection<StockTransferDetail> StockTransferDetails { get; set; }
+ 
+    }
 }

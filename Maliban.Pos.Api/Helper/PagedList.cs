@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Maliban.Pos.Api.Models;
 
 namespace Maliban.Pos.Api.Helper
 {
@@ -34,5 +35,5 @@ namespace Maliban.Pos.Api.Helper
       var items = source.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToList();
       return new PagedList<T>(items, count, pageNumber, pageSize);
     }
-  }
+    }
 }

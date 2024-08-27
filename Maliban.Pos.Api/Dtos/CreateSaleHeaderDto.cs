@@ -49,5 +49,6 @@ namespace Maliban.Pos.Api.Dtos
     public ICollection<SaleDetail> Lines { get; set; }
     public string CreatedBy { get; set; }
     public string PaymentReferenceId { get; set; }
+    public int cardType { get; set; } = 0;
     }
 }

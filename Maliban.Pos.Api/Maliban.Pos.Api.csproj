@@ -4,6 +4,8 @@
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
     <UserSecretsId>505d99b6-07a7-45ae-809f-a83460d2b3e1</UserSecretsId>
       <ServerGarbageCollection>true</ServerGarbageCollection>
+      <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+      <DockerfileContext>.</DockerfileContext>
   </PropertyGroup>
   <ItemGroup>
     <!--<PackageReference Include="AspNetCore.HealthChecks.Network" Version="3.1.2" /> -->
@@ -15,6 +17,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.4" />
     <PackageReference Include="Microsoft.Extensions.Caching.SqlConfig.Tools" Version="2.0.2" />
    <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="3.1.12" />
+   <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.19.6" />
     <PackageReference Include="NLog.Extensions.Logging" Version="1.6.2" />
     <PackageReference Include="MailKit" Version="2.7.0" />
     <!--<PackageReference Include="Microsoft.AspNetCore.App" />-->
@@ -37,6 +40,8 @@
     <PackageReference Include="Microsoft.Data.SqlClient" Version="4.0.0" />
     <PackageReference Include="Cronos" Version="0.7.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.1" />
+    <!--<PackageReference Include="System.Text.Json" Version="5.0.2" />-->
+    <PackageReference Include="System.Text.Json" Version="6.0.0" />
     <Content Update="nlog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

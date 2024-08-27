@@ -74,5 +74,7 @@ namespace Maliban.Pos.Api.Models
     [Required]
     public int BranchLocationId { get; set; }
     public virtual BranchLocation BranchLocation { get; set; }
-  }
+    //public virtual ICollection<StockTransferHeader> StockTransferHeaders { get; set; }
+
+    }
 }

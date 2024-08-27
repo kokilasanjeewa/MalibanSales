@@ -10,31 +10,39 @@ import { PaginatedResult } from '../models/pagination';
 import { Shopstock } from '../models/shopstock';
 import { TransactionDetail } from '../models/transactiondetail';
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ShopstockService {
   baseUrl = environment.apiUrl + 'Stock/';
-  constructor(
-    private http: HttpClient,
-    private commonService: CommonService
-  ) { }
+  constructor(private http: HttpClient, private commonService: CommonService) {}
   getShopStocks(
     status = true,
     pageNumber = 1,
     pageSize = 5
   ): Observable<PaginatedResult<Shopstock[]>> {
     const token = localStorage.getItem('token');
-    const paginatedResult: PaginatedResult<Shopstock[]> = new PaginatedResult<Shopstock[]>();
+    const paginatedResult: PaginatedResult<Shopstock[]> = new PaginatedResult<
+      Shopstock[]
+    >();
     const url = this.baseUrl + 'getallstocks';
     return this.http
       .get<Shopstock[]>(url, {
         observe: 'response',
-        headers: new HttpHeaders({ 'Content-Type': 'application/json', Authorization: 'Bearer ' + token, 'BranchLocationId': this.commonService.getUserBranchLocationId().toString() }),
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + token,
+          BranchLocationId: this.commonService
+            .getUserBranchLocationId()
+            .toString(),
+        }),
         params: new HttpParams()
           .set('status', String(status))
           .set('PageNumber', pageNumber.toString())
           .set('PageSize', pageSize.toString())
-          .set('BranchLocationId', this.commonService.getUserBranchLocationId().toString()),
+          .set(
+            'BranchLocationId',
+            this.commonService.getUserBranchLocationId().toString()
+          ),
       })
       .pipe(
         //  tap((_) => console.log('fetched suppliers')),
@@ -44,11 +52,13 @@ export class ShopstockService {
         map((response) => {
           paginatedResult.result = response.body;
           if (response.headers.get('Pagination') != null) {
-            paginatedResult.pagination = JSON.parse(response.headers.get('Pagination'));
+            paginatedResult.pagination = JSON.parse(
+              response.headers.get('Pagination')
+            );
             console.log(paginatedResult.result);
           }
           return paginatedResult;
-        }),
+        })
       );
   }
   getStockDetails(
@@ -57,17 +67,27 @@ export class ShopstockService {
     pageSize = 5
   ): Observable<PaginatedResult<TransactionDetail[]>> {
     const token = localStorage.getItem('token');
-    const paginatedResult: PaginatedResult<TransactionDetail[]> = new PaginatedResult<TransactionDetail[]>();
+    const paginatedResult: PaginatedResult<TransactionDetail[]> =
+      new PaginatedResult<TransactionDetail[]>();
     const url = this.baseUrl + 'getallstockdetails';
     return this.http
       .get<TransactionDetail[]>(url, {
         observe: 'response',
-        headers: new HttpHeaders({ 'Content-Type': 'application/json', Authorization: 'Bearer ' + token, 'BranchLocationId': this.commonService.getUserBranchLocationId().toString() }),
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + token,
+          BranchLocationId: this.commonService
+            .getUserBranchLocationId()
+            .toString(),
+        }),
         params: new HttpParams()
           .set('status', String(status))
           .set('PageNumber', pageNumber.toString())
           .set('PageSize', pageSize.toString())
-          .set('BranchLocationId', this.commonService.getUserBranchLocationId().toString()),
+          .set(
+            'BranchLocationId',
+            this.commonService.getUserBranchLocationId().toString()
+          ),
       })
       .pipe(
         //  tap((_) => console.log('fetched suppliers')),
@@ -77,11 +97,13 @@ export class ShopstockService {
         map((response) => {
           paginatedResult.result = response.body;
           if (response.headers.get('Pagination') != null) {
-            paginatedResult.pagination = JSON.parse(response.headers.get('Pagination'));
+            paginatedResult.pagination = JSON.parse(
+              response.headers.get('Pagination')
+            );
             console.log(paginatedResult.result);
           }
           return paginatedResult;
-        }),
+        })
       );
   }
 

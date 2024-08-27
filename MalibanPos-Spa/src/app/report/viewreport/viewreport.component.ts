@@ -97,6 +97,9 @@ export class ViewreportComponent implements OnInit {
         case "Purchase Order List":
           this.router.navigate(["/report/purchaseorderfilterlist"]);
           break;
+        case "Stock Transfer":
+          this.router.navigate(["/report/stocktransfer"]);
+          break;
       }
     }
   }

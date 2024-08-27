@@ -14,8 +14,14 @@ import { IconSpacerModule } from '../iconspacer.module';
 import { StockadjustmentapproveComponent } from './stockadjustmentapprove/stockadjustmentapprove.component';
 import { StockadjustmentconfirmComponent } from './stockadjustmentconfirm/stockadjustmentconfirm.component';
 import { StocktransferComponent } from './stocktransfer/stocktransfer.component';
+import { StocktransferlistComponent } from './stocktransferlist/stocktransferlist.component';
+import { StocktransferreportComponent } from './stocktransferreport/stocktransferreport.component';
+import { StocktransferapproveComponent } from './stocktransferapprove/stocktransferapprove.component';
+import { StocktransfereditComponent } from './stocktransferedit/stocktransferedit.component';
+import { StocktransferapprovemodelComponent } from './stocktransferapprovemodel/stocktransferapprovemodel.component';
+import { StocktransferreceivemodelComponent } from './stocktransferreceivemodel/stocktransferreceivemodel.component';
 @NgModule({
-  declarations: [AddstockComponent, StocklistComponent, StockadjustmentComponent, StockadjustmentlistComponent, StockadjustmentdetailComponent, StockadjustmentapproveComponent, StockadjustmentconfirmComponent, StocktransferComponent],
+  declarations: [AddstockComponent, StocklistComponent, StockadjustmentComponent, StockadjustmentlistComponent, StockadjustmentdetailComponent, StockadjustmentapproveComponent, StockadjustmentconfirmComponent, StocktransferComponent, StocktransferlistComponent, StocktransferreportComponent, StocktransferapproveComponent, StocktransfereditComponent, StocktransferapprovemodelComponent, StocktransferreceivemodelComponent],
   imports: [
     CommonModule,
     StockRoutingModule,

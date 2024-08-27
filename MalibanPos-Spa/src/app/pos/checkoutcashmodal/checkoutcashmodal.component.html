@@ -1,15 +1,29 @@
 <div class="cookiesContent" id="cookiesPopup">
   <button class="close" (click)="close()">✖</button>
-  <img src="../assets/resource/images/logo/Web-Logo-4.png" alt="solo-svg" />
-  <p>PAY WITH SOLO AT</p>
+  <img src="../assets/resource/images/logo/card.jpg" alt="solo-svg" />
   <form class="form-inline" [formGroup]="addPaymentForm" (ngSubmit)="onAddPay()">
-     <div class="form-group mx-sm-3 mb-2">
-      <label for="paymentReferenceId" class="sr-only">Payment Reference#</label>
-      <input [formControlName]="'paymentReferenceId'" [(ngModel)]="paidpaymentReferenceId" type="text" class="form-control form-control-lg" id="paymentReferenceId" placeholder="Payment Reference#">
-      <div *ngIf="f.paymentReferenceId.touched && f.paymentReferenceId.errors" class="invalid-feedback">
-        <div *ngIf="f.paymentReferenceId.hasError('required')">Payment Reference is required</div>
-        <div *ngIf="f.paymentReferenceId.hasError('minlength')">At least 12 characters</div>
-        <div *ngIf="f.paymentReferenceId.hasError('maxlength')">Max 12 characters</div>
+      <div class="form-group mx-sm-2 mb-2">
+        <label for="cardType" class="my-1 mr-2">Card</label>
+        <select [(ngModel)]="cardType" class="form-control" placeholder="Card Type" [formControlName]="'cardType'"
+            aria-label="cardType" (change)="changePayment()">
+            <option *ngFor="let cardType of cardTypeList | async" [value]="cardType.cardMethodId">
+              {{cardType.cardName}}({{ cardType.serviceCharge }})
+            </option>
+          </select>
+      </div>
+      <div class="form-group mx-sm-2 mb-2">
+        <input [formControlName]="'paymentReferenceId'" [(ngModel)]="paidpaymentReferenceId" type="text" class="form-control" id="paymentReferenceId" placeholder="Payment Reference#">
+        <div *ngIf="f.paymentReferenceId.touched && f.paymentReferenceId.errors" class="invalid-feedback">
+          <div *ngIf="f.paymentReferenceId.hasError('required')">Payment Reference is required</div>
+          <div *ngIf="f.paymentReferenceId.hasError('minlength')">At least 12 characters</div>
+          <div *ngIf="f.paymentReferenceId.hasError('maxlength')">Max 12 characters</div>
+        </div>
+      </div>
+    <div class="form-group mx-sm-2 mb-2">
+      <label for="totalAmount" class="my-1 mr-2">Total</label>
+      <input [formControlName]="'totalAmount'" type="text" [(ngModel)]="totalAmount" type="text" class="form-control" id="totalAmount" placeholder="Total Amount" readonly>
+      <div *ngIf="f.totalAmount.touched && f.totalAmount.errors" class="invalid-feedback">
+        <div *ngIf="f.totalAmount.hasError('required')">Total is required</div>
       </div>
     </div>
   </form>

@@ -4,8 +4,8 @@
 */
 .login-page {
   margin: 0 auto;
-  max-width: 30%;
-  margin-top: 40px;
+  max-width: 27%;
+  margin-top: 30px;
 }
 
 .login-page .form {
@@ -20,13 +20,13 @@
 }
 
 .login-page .form .formtitle {
-  color: #057dfa;
+  color: var(--maintheme2);
   font-weight: 300;
-  font-size: 40px;
+  font-size: 25px;
   text-shadow: 3px 2px 3px #ccc;
 }
 
-.login-page .form .formtitle img {
+img.login-image {
   height: 100px;
 }
 
@@ -83,6 +83,7 @@
   background: #057dfa;
   border: 0;
   height: 32px;
+  width: 120px;
   padding: 0px 20px;
   color: #FFFFFF;
   font-size: 13px;

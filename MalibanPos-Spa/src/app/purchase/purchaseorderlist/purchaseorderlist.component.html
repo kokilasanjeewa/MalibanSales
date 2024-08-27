@@ -164,15 +164,21 @@
                       <td
                         mat-cell
                         *matCellDef="let row"
-                        [ngSwitch]="row?.isApprove"
+                        [ngSwitch]="row?.cApprovalType"
                       >
                         <span
                           style="color: #20c854"
-                          *ngSwitchCase="true"
+                          *ngSwitchCase="1"
                           class="fa"
                           aria-hidden="true"
                           >Approved</span
                         >
+                        <span
+                          style="color: #e23c1b"
+                          *ngSwitchCase="2"
+                          class="fa"
+                          aria-hidden="true"
+                          >Reject</span>
                         <span
                           style="color: #e23c1b"
                           *ngSwitchDefault
@@ -238,7 +244,7 @@
                           <i
                             class="fa fa-pencil-square-o fa-lg"
                             aria-hidden="true"
-                            *ngIf="!row?.isProcess && !row?.isApprove"
+                            *ngIf="!row?.isProcess && !row?.isApprove && row?.cApprovalType==0"
                           ></i>
                         </a>
                         <a
@@ -262,7 +268,7 @@
                             title="approval"
                             class="fa fa-unlock-alt"
                             aria-hidden="true"
-                            *ngIf="!row?.isApprove"
+                            *ngIf="!row?.isProcess && !row?.isApprove && row?.cApprovalType==0"
                           ></i>
                       </button>
                         <!-- <a

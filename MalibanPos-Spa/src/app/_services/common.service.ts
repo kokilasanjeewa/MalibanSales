@@ -145,7 +145,7 @@ export class CommonService {
     this.decodedToken = this.jwtHelper.decodeToken(token);
     return JSON.parse(this.decodedToken.MapBranchLocations) as number[];
   }
-   public getBranches():BranchLocation[]{
+   public getBranches1():BranchLocation[]{
     let branch: any;
     this.getList('Common', 'getallbranch').subscribe(data => {
       const mapBranches=this.getMapUserBranchLocations().length >0 ?  this.getMapUserBranchLocations() : this.getUserBranchLocationId();

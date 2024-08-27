@@ -33,6 +33,9 @@ strong{
   background-color: #1d536e;
   border-bottom: 1px solid #c8ced3
 }
+.card .card-body strong{
+  color: var(--maintheme4) !important;
+}
 /*** Print sample ***/
 
 /* defaults  for screen */

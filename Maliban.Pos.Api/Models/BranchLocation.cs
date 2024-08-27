@@ -39,6 +39,8 @@ namespace Maliban.Pos.Api.Models
     public virtual ICollection<Supplier> Suppliers { get; set; }
     public ICollection<SupplierProduct> SupplierProducts { get; set; }
     public ICollection<GoodReceptNoteHeader> GoodReceptNoteHeaders { get; set; }
+    public virtual ICollection<StockTransferHeader> StockTransferHeaders { get; set; }
 
-  }
+
+    }
 }

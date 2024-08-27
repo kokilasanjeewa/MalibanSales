@@ -7,6 +7,7 @@ using Maliban.Pos.Api.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Distributed;
 
 namespace Maliban.Pos.Api.Repository
 {
@@ -63,7 +64,10 @@ namespace Maliban.Pos.Api.Repository
         private ISortHelper<SupplierPrice> _supplierpriceSortHelper;
         private ISortHelper<ApplicationUser> _userSortHelper;
         private UserManager<ApplicationUser> _userManager;
-        public RepositoryWrapper(DataContext ctx, UserManager<ApplicationUser> userManager, ISortHelper<Supplier> supplierSortHelper, ISortHelper<ApplicationUser> userSortHelper, ISortHelper<ShopStock> stockSortHelper, ISortHelper<PurchaseRequestHeader> purchaserequestHeaderSortHelper, ISortHelper<PurchaseRequestDetail> purchaserequestDetailSortHelper, ISortHelper<PurchaseReturnHeader> purchasereturnHeaderSortHelper, ISortHelper<PurchaseReturnDetail> purchasereturnDetailSortHelper, ISortHelper<PurchaseOrderHeader> purchaseOrderSortHelper, ISortHelper<PurchaseOrderDetail> purchaseorderDetailSortHelper, ISortHelper<GoodReceptNoteDetail> goodreceiptDetailSortHelper, ISortHelper<GoodReceptNoteHeader> goodreceiptSortHelper, ISortHelper<SupplierPrice> supplierpriceSortHelper, IHttpContextAccessor httpContextAccessor, ILog logger)
+        private IStockTransferRepository _stockTransfer;
+        private readonly ISqlDataAccess _db;
+        private readonly IDistributedCache _cache;
+        public RepositoryWrapper(DataContext ctx, UserManager<ApplicationUser> userManager, ISortHelper<Supplier> supplierSortHelper, ISortHelper<ApplicationUser> userSortHelper, ISortHelper<ShopStock> stockSortHelper, ISortHelper<PurchaseRequestHeader> purchaserequestHeaderSortHelper, ISortHelper<PurchaseRequestDetail> purchaserequestDetailSortHelper, ISortHelper<PurchaseReturnHeader> purchasereturnHeaderSortHelper, ISortHelper<PurchaseReturnDetail> purchasereturnDetailSortHelper, ISortHelper<PurchaseOrderHeader> purchaseOrderSortHelper, ISortHelper<PurchaseOrderDetail> purchaseorderDetailSortHelper, ISortHelper<GoodReceptNoteDetail> goodreceiptDetailSortHelper, ISortHelper<GoodReceptNoteHeader> goodreceiptSortHelper, ISortHelper<SupplierPrice> supplierpriceSortHelper, IHttpContextAccessor httpContextAccessor, ILog logger,ISqlDataAccess db,IDistributedCache cache)
         {
             _context = ctx;
             _userManager = userManager;
@@ -81,6 +85,8 @@ namespace Maliban.Pos.Api.Repository
             _supplierpriceSortHelper = supplierpriceSortHelper;
             _httpContextAccessor = httpContextAccessor;
             this.logger = logger;
+            _db = db;
+            _cache = cache;
 
         }
         public IReportRepository Report
@@ -117,6 +123,18 @@ namespace Maliban.Pos.Api.Repository
                 }
 
                 return _customerMasterSetting;
+            }
+        }
+        public IStockTransferRepository StockTransfer
+        {
+            get
+            {
+                if (_stockTransfer == null)
+                {
+                    _stockTransfer = new EFStockTransferRepository(_context,_cache,_db);
+                }
+
+                return _stockTransfer;
             }
         }
         public ISupplierPriceRepository SupplierPrice

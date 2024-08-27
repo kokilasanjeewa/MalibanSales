@@ -372,6 +372,10 @@ namespace Maliban.Pos.Api.Controllers
             var count = await _context.PurchaseOrderHeaders.Where(c => c.BranchLocationId == createPurchaseOrderHeaderDto.BranchLocationId).CountAsync() + 1;
             var branchCode = await _context.BranchLocations.Where(u => u.BranchLocationId == createPurchaseOrderHeaderDto.BranchLocationId).Select(c => new { c.BranchCode }).FirstOrDefaultAsync();
             saleitem.PurchaseOrderReferenceNo = branchCode.BranchCode.Trim().ToString() + (DateTime.Now.Year.ToString()) + (count.ToString());
+           if(await _context.PurchaseOrderHeaders.AnyAsync(p => p.PurchaseOrderReferenceNo== branchCode.BranchCode.Trim().ToString() + (DateTime.Now.Year.ToString()) + (count.ToString())))
+            {
+                return BadRequest("PurchaseOrderReferenceNo already exsits.");
+            }
             saleitem.PurchaseAmount = cart1.ComputeGrandTotalValue.Value;
             saleitem.Id = createPurchaseOrderHeaderDto.Id;
             List<PurchaseOrderDetail> lineCollection = new List<PurchaseOrderDetail>();
