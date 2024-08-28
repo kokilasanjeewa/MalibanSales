@@ -3,24 +3,32 @@
   "WorkspaceRootPath": "D:\\GitHub\\MalibanSales\\Maliban.Pos.Api\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{F61FC1B6-652D-43E2-B336-80B5D530A429}|Maliban.Pos.Api.csproj|d:\\github\\malibansales\\maliban.pos.api\\controllers\\commoncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F61FC1B6-652D-43E2-B336-80B5D530A429}|Maliban.Pos.Api.csproj|solutionrelative:controllers\\commoncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F61FC1B6-652D-43E2-B336-80B5D530A429}|Maliban.Pos.Api.csproj|d:\\github\\malibansales\\maliban.pos.api\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{F61FC1B6-652D-43E2-B336-80B5D530A429}|Maliban.Pos.Api.csproj|solutionrelative:appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F61FC1B6-652D-43E2-B336-80B5D530A429}|Maliban.Pos.Api.csproj|d:\\github\\malibansales\\maliban.pos.api\\controllers\\salecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F61FC1B6-652D-43E2-B336-80B5D530A429}|Maliban.Pos.Api.csproj|solutionrelative:controllers\\salecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F61FC1B6-652D-43E2-B336-80B5D530A429}|Maliban.Pos.Api.csproj|d:\\github\\malibansales\\maliban.pos.api\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F61FC1B6-652D-43E2-B336-80B5D530A429}|Maliban.Pos.Api.csproj|solutionrelative:controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F61FC1B6-652D-43E2-B336-80B5D530A429}|Maliban.Pos.Api.csproj|d:\\github\\malibansales\\maliban.pos.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{F61FC1B6-652D-43E2-B336-80B5D530A429}|Maliban.Pos.Api.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F61FC1B6-652D-43E2-B336-80B5D530A429}|Maliban.Pos.Api.csproj|d:\\github\\malibansales\\maliban.pos.api\\helper\\databaseconnectioncheck .cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F61FC1B6-652D-43E2-B336-80B5D530A429}|Maliban.Pos.Api.csproj|solutionrelative:helper\\databaseconnectioncheck .cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F61FC1B6-652D-43E2-B336-80B5D530A429}|Maliban.Pos.Api.csproj|d:\\github\\malibansales\\maliban.pos.api\\dataaccess\\datacontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F61FC1B6-652D-43E2-B336-80B5D530A429}|Maliban.Pos.Api.csproj|solutionrelative:dataaccess\\datacontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F61FC1B6-652D-43E2-B336-80B5D530A429}|Maliban.Pos.Api.csproj|d:\\github\\malibansales\\maliban.pos.api\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{F61FC1B6-652D-43E2-B336-80B5D530A429}|Maliban.Pos.Api.csproj|solutionrelative:appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{F61FC1B6-652D-43E2-B336-80B5D530A429}|Maliban.Pos.Api.csproj|d:\\github\\malibansales\\maliban.pos.api\\controllers\\commoncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F61FC1B6-652D-43E2-B336-80B5D530A429}|Maliban.Pos.Api.csproj|solutionrelative:controllers\\commoncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F61FC1B6-652D-43E2-B336-80B5D530A429}|Maliban.Pos.Api.csproj|d:\\github\\malibansales\\maliban.pos.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{F61FC1B6-652D-43E2-B336-80B5D530A429}|Maliban.Pos.Api.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{F61FC1B6-652D-43E2-B336-80B5D530A429}|Maliban.Pos.Api.csproj|d:\\github\\malibansales\\maliban.pos.api\\controllers\\salecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F61FC1B6-652D-43E2-B336-80B5D530A429}|Maliban.Pos.Api.csproj|solutionrelative:controllers\\salecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F61FC1B6-652D-43E2-B336-80B5D530A429}|Maliban.Pos.Api.csproj|d:\\github\\malibansales\\maliban.pos.api\\controllers\\reportcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -33,10 +41,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{F61FC1B6-652D-43E2-B336-80B5D530A429}|Maliban.Pos.Api.csproj|d:\\github\\malibansales\\maliban.pos.api\\repository\\efshopstockrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F61FC1B6-652D-43E2-B336-80B5D530A429}|Maliban.Pos.Api.csproj|solutionrelative:repository\\efshopstockrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F61FC1B6-652D-43E2-B336-80B5D530A429}|Maliban.Pos.Api.csproj|d:\\github\\malibansales\\maliban.pos.api\\helper\\databaseconnectioncheck .cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F61FC1B6-652D-43E2-B336-80B5D530A429}|Maliban.Pos.Api.csproj|solutionrelative:helper\\databaseconnectioncheck .cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F61FC1B6-652D-43E2-B336-80B5D530A429}|Maliban.Pos.Api.csproj|d:\\github\\malibansales\\maliban.pos.api\\controllers\\grncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -62,7 +66,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 12,
           "Children": [
             {
               "$type": "Bookmark",
@@ -74,7 +78,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
+              "Title": "AuthController.cs",
+              "DocumentMoniker": "D:\\GitHub\\MalibanSales\\Maliban.Pos.Api\\Controllers\\AuthController.cs",
+              "RelativeDocumentMoniker": "Controllers\\AuthController.cs",
+              "ToolTip": "D:\\GitHub\\MalibanSales\\Maliban.Pos.Api\\Controllers\\AuthController.cs",
+              "RelativeToolTip": "Controllers\\AuthController.cs",
+              "ViewState": "AQIAAEUAAAAAAAAAAAAuwJUAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-28T06:45:16.876Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "CommonController.cs",
               "DocumentMoniker": "D:\\GitHub\\MalibanSales\\Maliban.Pos.Api\\Controllers\\CommonController.cs",
               "RelativeDocumentMoniker": "Controllers\\CommonController.cs",
@@ -87,7 +104,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 6,
               "Title": "SaleController.cs",
               "DocumentMoniker": "D:\\GitHub\\MalibanSales\\Maliban.Pos.Api\\Controllers\\SaleController.cs",
               "RelativeDocumentMoniker": "Controllers\\SaleController.cs",
@@ -100,7 +117,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 7,
               "Title": "ReportController.cs",
               "DocumentMoniker": "D:\\GitHub\\MalibanSales\\Maliban.Pos.Api\\Controllers\\ReportController.cs",
               "RelativeDocumentMoniker": "Controllers\\ReportController.cs",
@@ -108,11 +125,12 @@
               "RelativeToolTip": "Controllers\\ReportController.cs",
               "ViewState": "AQIAADcAAAAAAAAAAAAgwBYAAAAkAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-15T17:57:07.84Z"
+              "WhenOpened": "2024-05-15T17:57:07.84Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 8,
               "Title": "MealTokenController.cs",
               "DocumentMoniker": "D:\\GitHub\\MalibanSales\\Maliban.Pos.Api\\Controllers\\MealTokenController.cs",
               "RelativeDocumentMoniker": "Controllers\\MealTokenController.cs",
@@ -120,11 +138,12 @@
               "RelativeToolTip": "Controllers\\MealTokenController.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAD8AAAANAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-03T10:19:45.334Z"
+              "WhenOpened": "2024-04-03T10:19:45.334Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 10,
               "Title": "GrnController.cs",
               "DocumentMoniker": "D:\\GitHub\\MalibanSales\\Maliban.Pos.Api\\Controllers\\GrnController.cs",
               "RelativeDocumentMoniker": "Controllers\\GrnController.cs",
@@ -132,11 +151,12 @@
               "RelativeToolTip": "Controllers\\GrnController.cs",
               "ViewState": "AQIAAMMBAAAAAAAAAAAUwAcCAAAkAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-03T10:36:58.805Z"
+              "WhenOpened": "2024-04-03T10:36:58.805Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 11,
               "Title": "GoodReceptNote.cs",
               "DocumentMoniker": "D:\\GitHub\\MalibanSales\\Maliban.Pos.Api\\Models\\GoodReceptNote.cs",
               "RelativeDocumentMoniker": "Models\\GoodReceptNote.cs",
@@ -144,23 +164,25 @@
               "RelativeToolTip": "Models\\GoodReceptNote.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAIAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-03T10:36:58.753Z"
+              "WhenOpened": "2024-04-03T10:36:58.753Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 2,
               "Title": "appsettings.json",
               "DocumentMoniker": "D:\\GitHub\\MalibanSales\\Maliban.Pos.Api\\appsettings.json",
               "RelativeDocumentMoniker": "appsettings.json",
               "ToolTip": "D:\\GitHub\\MalibanSales\\Maliban.Pos.Api\\appsettings.json",
               "RelativeToolTip": "appsettings.json",
-              "ViewState": "AQIAAAYAAAAAAAAAAAAAACMAAAAVAAAA",
+              "ViewState": "AQIAABsAAAAAAAAAAAAAAA4AAAAEAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-04-03T10:39:40.513Z"
+              "WhenOpened": "2024-04-03T10:39:40.513Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 9,
               "Title": "EFShopStockRepository.cs",
               "DocumentMoniker": "D:\\GitHub\\MalibanSales\\Maliban.Pos.Api\\Repository\\EFShopStockRepository.cs",
               "RelativeDocumentMoniker": "Repository\\EFShopStockRepository.cs",
@@ -168,47 +190,51 @@
               "RelativeToolTip": "Repository\\EFShopStockRepository.cs",
               "ViewState": "AQIAAKUBAAAAAAAAAAAMwMABAAAIAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-05T08:22:40.571Z"
+              "WhenOpened": "2024-04-05T08:22:40.571Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "DataContext.cs",
               "DocumentMoniker": "D:\\GitHub\\MalibanSales\\Maliban.Pos.Api\\DataAccess\\DataContext.cs",
               "RelativeDocumentMoniker": "DataAccess\\DataContext.cs",
               "ToolTip": "D:\\GitHub\\MalibanSales\\Maliban.Pos.Api\\DataAccess\\DataContext.cs",
               "RelativeToolTip": "DataAccess\\DataContext.cs",
-              "ViewState": "AQIAAHUBAAAAAAAAAAAmwIwBAAAuAAAA",
+              "ViewState": "AQIAAA0AAAAAAAAAAIA4wBYAAAAIAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-03T11:14:11.638Z"
+              "WhenOpened": "2024-04-03T11:14:11.638Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
               "Title": "appsettings.Development.json",
               "DocumentMoniker": "D:\\GitHub\\MalibanSales\\Maliban.Pos.Api\\appsettings.Development.json",
               "RelativeDocumentMoniker": "appsettings.Development.json",
               "ToolTip": "D:\\GitHub\\MalibanSales\\Maliban.Pos.Api\\appsettings.Development.json",
               "RelativeToolTip": "appsettings.Development.json",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "ViewState": "AQIAAAkAAAAAAAAAAAAAAAgAAAAPAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-05-27T02:35:56.636Z"
+              "WhenOpened": "2024-05-27T02:35:56.636Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 3,
               "Title": "DatabaseConnectionCheck .cs",
               "DocumentMoniker": "D:\\GitHub\\MalibanSales\\Maliban.Pos.Api\\Helper\\DatabaseConnectionCheck .cs",
               "RelativeDocumentMoniker": "Helper\\DatabaseConnectionCheck .cs",
               "ToolTip": "D:\\GitHub\\MalibanSales\\Maliban.Pos.Api\\Helper\\DatabaseConnectionCheck .cs",
               "RelativeToolTip": "Helper\\DatabaseConnectionCheck .cs",
-              "ViewState": "AQIAAAwAAAAAAAAAAAAMwB8AAAAQAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAB8AAAAQAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-05T08:30:04.407Z"
+              "WhenOpened": "2024-04-05T08:30:04.407Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 13,
               "Title": "PurchaseOrder.cs",
               "DocumentMoniker": "D:\\GitHub\\MalibanSales\\Maliban.Pos.Api\\Models\\PurchaseOrder.cs",
               "RelativeDocumentMoniker": "Models\\PurchaseOrder.cs",
@@ -216,11 +242,12 @@
               "RelativeToolTip": "Models\\PurchaseOrder.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAUwBMAAAASAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-04T22:17:17.068Z"
+              "WhenOpened": "2024-04-04T22:17:17.068Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 12,
               "Title": "PurchaseOrderController.cs",
               "DocumentMoniker": "D:\\GitHub\\MalibanSales\\Maliban.Pos.Api\\Controllers\\PurchaseOrderController.cs",
               "RelativeDocumentMoniker": "Controllers\\PurchaseOrderController.cs",
@@ -228,7 +255,8 @@
               "RelativeToolTip": "Controllers\\PurchaseOrderController.cs",
               "ViewState": "AQIAAI0AAAAAAAAAAADwv6UAAAAQAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-03T10:36:58.744Z"
+              "WhenOpened": "2024-04-03T10:36:58.744Z",
+              "EditorCaption": ""
             }
           ]
         }
